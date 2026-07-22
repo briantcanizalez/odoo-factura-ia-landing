@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Servicios adicionales · Odoo Factura IA</title>
+<meta name="description" content="Servicios adicionales de Odoo Factura IA: carga de productos y servicios, carga de clientes y proveedores, capacitación en vivo, soporte especial y diseño de landing page para tu negocio." />
+
+<meta property="og:title" content="Servicios adicionales · Odoo Factura IA" />
+<meta property="og:description" content="Potencia tu sistema: carga de productos, clientes y proveedores, capacitación en vivo, soporte especial y landing page para tu negocio." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_SV" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- META PIXEL · Odoo Factura IA -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+</script>
+
+<style>
+:root{
+  --bg:#050507;--surface:#0B0B12;--surface-2:#10101A;
+  --morado:#5216E7;--morado-hover:#6B21A8;--morado-oscuro:#2D1B69;--azul-morado:#1E1B4B;
+  --morado-suave:rgba(82,22,231,.14);--morado-borde:rgba(124,88,236,.28);--lavanda:#DFD2FF;
+  --amarillo:#FFDD00;
+  --txt:#FFFFFF;--txt-2:#C7CBD4;--txt-3:#8B90A0;
+  --linea:rgba(255,255,255,.07);--linea-hover:rgba(223,210,255,.30);--glass:rgba(255,255,255,.035);
+  --r-lg:24px;--r-md:16px;--r-sm:10px;--max:1200px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  --s2:8px;--s3:16px;--s4:24px;--s5:32px;--s6:48px;--s7:64px;--s8:96px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--txt);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:var(--font)}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:24px;padding-right:24px}
+
+.bg{position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(58% 42% at 50% -6%, rgba(82,22,231,.20), transparent 70%),
+    radial-gradient(40% 34% at 100% 30%, rgba(82,22,231,.07), transparent 70%),
+    radial-gradient(46% 38% at 0% 70%, rgba(82,22,231,.08), transparent 70%),
+    var(--bg);}
+.bg::after{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 1px,transparent 1px 72px),
+             repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 72px);
+  -webkit-mask-image:radial-gradient(72% 60% at 50% 0%,#000 30%,transparent 100%);
+          mask-image:radial-gradient(72% 60% at 50% 0%,#000 30%,transparent 100%);}
+
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;border-bottom:1px solid transparent;transition:background .3s var(--ease),border-color .3s var(--ease)}
+header.scrolled{background:rgba(5,5,7,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--linea)}
+.logo{display:flex;align-items:center}
+.logo img{height:34px;width:auto}
+@media(max-width:640px){.logo img{height:28px}}
+.head-right{display:flex;align-items:center;gap:16px}
+.head-link{display:none;font-size:14px;font-weight:600;color:var(--txt-2);transition:color .2s}
+.head-link:hover{color:#fff}
+@media(min-width:760px){.head-link{display:inline}}
+.head-cta{display:inline-flex;font-weight:700;font-size:13.5px;color:#111;background:var(--amarillo);padding:9px 18px;border-radius:99px;transition:transform .15s var(--ease),box-shadow .2s}
+.head-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(255,221,0,.28)}
+.burger{display:none;width:44px;height:44px;border:1px solid var(--linea);border-radius:12px;background:var(--glass);cursor:pointer;place-items:center;color:#fff;flex:0 0 auto}
+.burger svg{width:22px;height:22px}
+.burger .cls{display:none}
+.burger.is-open .bar{display:none}
+.burger.is-open .cls{display:block}
+.mobile-menu{position:fixed;top:66px;left:12px;right:12px;z-index:99;display:flex;flex-direction:column;gap:3px;
+  background:rgba(10,9,16,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--linea);border-radius:18px;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.6);
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
+.mobile-menu a,.mobile-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;
+  padding:15px 16px;border-radius:12px;font-size:16px;font-weight:600;color:#fff;background:transparent;border:0;cursor:pointer;font-family:var(--font)}
+.mobile-menu a:active,.mobile-menu a:hover{background:var(--glass)}
+.mobile-menu .m-cta{background:var(--amarillo);color:#111;font-weight:800;justify-content:center;margin-top:6px}
+@media(max-width:759px){.burger{display:grid}.head-link,.head-cta{display:none!important}}
+@media(min-width:760px){.mobile-menu{display:none!important}}
+body.menu-open{overflow:hidden}
+
+/* BOTONES */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:15px;cursor:pointer;letter-spacing:.02em;
+  padding:14px 26px;border-radius:14px;border:0;transition:transform .16s var(--ease),box-shadow .2s var(--ease),background .2s,border-color .2s}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn-amarillo{background:var(--amarillo);color:#111;box-shadow:0 6px 24px rgba(255,221,0,.22)}
+.btn-amarillo:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,221,0,.38)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
+.btn-ghost:hover{border-color:rgba(223,210,255,.5);background:rgba(223,210,255,.05)}
+.btn svg{width:19px;height:19px}
+
+/* HERO */
+.hero{position:relative;padding:150px 0 40px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lavanda);margin-bottom:14px}
+.eyebrow::before,.eyebrow::after{content:"";width:22px;height:1px;background:var(--morado-borde)}
+.hero h1{font-weight:800;letter-spacing:-.035em;line-height:1.05;font-size:clamp(34px,5.4vw,56px);margin-bottom:18px}
+.hero h1 .grad{background:linear-gradient(92deg,#fff 10%,var(--lavanda) 60%,#A78BFA 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{font-size:clamp(16px,2vw,19px);color:var(--txt-2);max-width:620px;margin:0 auto 30px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+
+/* NAV RÁPIDA (chips a cada servicio) */
+.svc-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:var(--s6)}
+.svc-nav a{font-size:13px;font-weight:600;color:var(--txt-2);background:var(--glass);border:1px solid var(--linea);padding:9px 16px;border-radius:99px;transition:border-color .2s,color .2s,transform .15s}
+.svc-nav a:hover{border-color:var(--linea-hover);color:#fff;transform:translateY(-2px)}
+
+/* SERVICIO (bloque alterno) */
+section{padding:clamp(64px,7vw,96px) 0;position:relative}
+.svc{display:grid;grid-template-columns:1fr;gap:var(--s6);align-items:center}
+@media(min-width:960px){.svc{grid-template-columns:1fr 1fr}.svc.rev .svc-body{order:2}}
+.svc-body .tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lavanda);margin-bottom:12px}
+.svc-body h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(25px,3.2vw,34px);line-height:1.15;margin-bottom:14px}
+.svc-body>p{color:var(--txt-2);font-size:16px;margin-bottom:22px}
+.svc-feats{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:26px}
+.svc-feats li{position:relative;padding-left:28px;font-size:14.5px;color:var(--txt-2)}
+.svc-feats li svg{position:absolute;left:0;top:3px;width:17px;height:17px;color:var(--amarillo)}
+.svc-feats li b{color:#fff;font-weight:700}
+.price-tag{display:flex;align-items:baseline;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.price-tag .from{font-size:13px;color:var(--txt-3)}
+.price-tag .big{font-size:34px;font-weight:800;letter-spacing:-.03em}
+.price-tag .unit{font-size:14px;color:var(--txt-3)}
+.price-tag .iva{font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--lavanda);border:1px solid var(--morado-borde);border-radius:99px;padding:2px 8px;align-self:center}
+
+/* MEDIA / CARDS del servicio */
+.svc-media{position:relative}
+.card{background:linear-gradient(170deg,var(--surface-2),var(--surface));border:1px solid var(--morado-borde);border-radius:var(--r-lg);
+  padding:30px;box-shadow:0 30px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)}
+.card .ico-lg{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--morado-suave);border:1px solid var(--morado-borde);margin-bottom:20px}
+.card .ico-lg svg{width:28px;height:28px;color:var(--lavanda)}
+.card h3{font-size:18px;font-weight:700;margin-bottom:14px}
+.rowlist{display:flex;flex-direction:column;gap:0}
+.rowlist .row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--linea)}
+.rowlist .row:last-child{border-bottom:0}
+.rowlist .row span{font-size:14px;color:var(--txt-2)}
+.rowlist .row b{font-size:15px;font-weight:700;white-space:nowrap}
+.rowlist .row b em{font-style:normal;color:var(--amarillo)}
+.note{font-size:12px;color:var(--txt-3);margin-top:16px;line-height:1.5}
+.note.free{color:var(--amarillo);font-weight:600}
+
+/* CALCULADORA */
+.calc{background:linear-gradient(170deg,rgba(82,22,231,.20),var(--surface) 62%);border:1px solid var(--morado-borde);
+  border-radius:var(--r-lg);padding:30px;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.calc h3{font-size:18px;font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.calc .csub{font-size:13px;color:var(--txt-3);margin-bottom:22px}
+.calc label{display:block;font-size:13px;font-weight:600;color:var(--txt-2);margin-bottom:8px}
+.calc .field{display:flex;align-items:center;gap:12px;background:var(--bg);border:1px solid var(--linea);border-radius:var(--r-md);padding:6px 6px 6px 18px;transition:border-color .2s}
+.calc .field:focus-within{border-color:var(--morado-borde)}
+.calc input{flex:1;background:transparent;border:0;outline:0;color:#fff;font-family:var(--font);font-size:22px;font-weight:700;width:100%;min-width:0;-moz-appearance:textfield}
+.calc input::-webkit-outer-spin-button,.calc input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.calc .stepbtns{display:flex;gap:6px}
+.calc .stepbtns button{width:40px;height:40px;border-radius:10px;border:1px solid var(--linea);background:var(--glass);color:#fff;font-size:20px;cursor:pointer;transition:background .2s,border-color .2s}
+.calc .stepbtns button:hover{background:var(--morado-suave);border-color:var(--morado-borde)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chips button{font-size:12px;font-weight:600;color:var(--txt-2);background:var(--glass);border:1px solid var(--linea);padding:7px 12px;border-radius:99px;cursor:pointer;transition:border-color .2s,color .2s}
+.chips button:hover{border-color:var(--linea-hover);color:#fff}
+.calc-out{margin-top:22px;padding-top:20px;border-top:1px dashed var(--morado-borde)}
+.calc-out .line{display:flex;justify-content:space-between;font-size:13.5px;color:var(--txt-2);padding:5px 0}
+.calc-out .line.tot{margin-top:8px;padding-top:14px;border-top:1px solid var(--linea);align-items:baseline}
+.calc-out .line.tot .lbl{font-size:14px;font-weight:700;color:#fff}
+.calc-out .line.tot .val{font-size:30px;font-weight:800;letter-spacing:-.03em;color:var(--amarillo);font-variant-numeric:tabular-nums}
+.calc-out .line b{color:#fff;font-weight:700;font-variant-numeric:tabular-nums}
+.calc .disc{font-size:11px;color:var(--txt-3);margin-top:14px;line-height:1.5}
+.calc .btn{width:100%;margin-top:20px}
+
+/* separador */
+.sep{height:1px;max-width:520px;margin:0 auto;background:linear-gradient(90deg,transparent,rgba(223,210,255,.16),transparent)}
+
+/* CTA final */
+.final-card{position:relative;text-align:center;border-radius:28px;padding:64px 32px;overflow:hidden;
+  background:radial-gradient(60% 90% at 50% 120%,rgba(82,22,231,.35),transparent 70%),var(--surface);border:1px solid var(--morado-borde)}
+.final-card h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(26px,3.6vw,38px);margin-bottom:14px}
+.final-card p{color:var(--txt-2);max-width:520px;margin:0 auto var(--s5);font-size:16.5px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--linea);padding:var(--s6) 0;margin-top:var(--s7)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+.foot-logo img{height:38px;width:auto;margin-bottom:4px}
+footer .muted{color:var(--txt-3);font-size:13px;line-height:1.7}
+footer a.wa{display:inline-flex;align-items:center;gap:8px;color:var(--txt-2);font-weight:600;font-size:14px;transition:color .2s}
+footer a.wa:hover{color:var(--amarillo)}
+footer a.wa svg{width:17px;height:17px}
+
+/* FAB */
+.fab{position:fixed;bottom:22px;right:22px;z-index:90;width:56px;height:56px;border-radius:50%;background:#25D366;
+  display:grid;place-items:center;box-shadow:0 10px 28px rgba(37,211,102,.4);transition:transform .18s var(--ease)}
+.fab:hover{transform:scale(1.07)}
+.fab svg{width:29px;height:29px;color:#fff}
+
+/* reveals */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+@media(max-width:640px){.hero{padding:120px 0 30px}.card,.calc{padding:24px}.final-card{padding:48px 22px}}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <a class="logo" href="index.html" aria-label="Odoo Factura IA"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="eager" fetchpriority="high" decoding="async" /></a>
+  <div class="head-right">
+    <a class="head-link" href="index.html">Planes</a>
+    <a class="head-link" href="consiti-ai.html">Consiti AI</a>
+    <a class="head-link" href="faq.html">Preguntas</a>
+    <button class="head-cta" data-svc="Consulta general" data-wa>Escríbenos</button>
+    <button class="burger" id="burger" aria-label="Menú" aria-expanded="false">
+      <svg class="bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      <svg class="cls" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Navegación">
+  <a href="index.html">Planes</a>
+  <a href="consiti-ai.html">Consiti AI</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="faq.html">Preguntas</a>
+  <button class="m-cta" data-svc="Consulta general" data-wa>Escríbenos por WhatsApp</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Servicios adicionales</p>
+    <h1>Potencia tu sistema con <span class="grad">servicios a tu medida</span></h1>
+    <p class="sub">Más allá de tu plan de facturación: cargamos tus productos, clientes y proveedores, te capacitamos en vivo, te damos soporte especial y hasta te creamos la landing page de tu negocio.</p>
+    <div class="hero-cta">
+      <a class="btn btn-amarillo" href="#productos">Ver servicios
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <button class="btn btn-ghost" data-svc="Consulta general" data-wa>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp directo
+      </button>
+    </div>
+    <nav class="svc-nav">
+      <a href="#productos">Carga de productos</a>
+      <a href="#datos">Clientes y proveedores</a>
+      <a href="#capacitacion">Capacitación en vivo</a>
+      <a href="#soporte">Soporte especial</a>
+      <a href="#landing">Landing page</a>
+    </nav>
+  </div>
+</section>
+
+<!-- 1. CARGA DE PRODUCTOS + CALCULADORA -->
+<section id="productos">
+  <div class="wrap svc reveal">
+    <div class="svc-body">
+      <span class="tag">Carga de productos y servicios</span>
+      <h2>Sube tu catálogo completo sin digitarlo tú</h2>
+      <p>Nos encargamos de cargar todos tus productos y servicios al sistema. Tú te enfocas en vender.</p>
+      <ul class="svc-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> <b>Desde $50 + IVA</b> por los primeros 500 productos</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Cada producto adicional: <b>$0.05</b></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Cada variante (color, sabor, tamaño, capacidad) cuenta como un producto</li>
+      </ul>
+      <div class="price-tag">
+        <span class="from">Desde</span><span class="big">$50</span><span class="unit">/ 500 productos</span><span class="iva">+ IVA</span>
+      </div>
+      <button class="btn btn-amarillo" data-svc="Carga de productos" data-wa>Solicitar carga de productos</button>
+    </div>
+
+    <div class="svc-media">
+      <div class="calc" aria-label="Calculadora de carga de productos">
+        <h3>Calcula tu carga</h3>
+        <p class="csub">Escribe cuántos productos tienes (contando variantes) y te damos un aproximado.</p>
+        <label for="qty">Cantidad de productos</label>
+        <div class="field">
+          <input id="qty" type="number" min="0" step="1" value="500" inputmode="numeric" />
+          <div class="stepbtns">
+            <button type="button" id="minus" aria-label="Menos">−</button>
+            <button type="button" id="plus" aria-label="Más">+</button>
+          </div>
+        </div>
+        <div class="chips">
+          <button type="button" data-q="500">500</button>
+          <button type="button" data-q="1000">1,000</button>
+          <button type="button" data-q="2500">2,500</button>
+          <button type="button" data-q="5000">5,000</button>
+        </div>
+        <div class="calc-out">
+          <div class="line"><span>Base (500 incluidos)</span><b id="o-base">$50.00</b></div>
+          <div class="line"><span id="o-adic-lbl">Adicionales (0 × $0.05)</span><b id="o-adic">$0.00</b></div>
+          <div class="line"><span>IVA (13%)</span><b id="o-iva">$6.50</b></div>
+          <div class="line tot"><span class="lbl">Total aproximado</span><span class="val" id="o-total">$56.50</span></div>
+        </div>
+        <p class="disc">Estimado referencial con IVA incluido. El precio final se confirma al revisar tu catálogo.</p>
+        <button class="btn btn-amarillo" id="calc-cta" data-svc="Carga de productos (calculadora)" data-wa>Cotizar esta cantidad</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 2. CARGA DE CLIENTES Y PROVEEDORES -->
+<section id="datos">
+  <div class="wrap svc rev reveal">
+    <div class="svc-body">
+      <span class="tag">Carga de clientes y proveedores</span>
+      <h2>Tu base de datos lista desde el día uno</h2>
+      <p>Cargamos por ti la base de datos de tus clientes y la de tus proveedores. Te damos una plantilla en Excel; tú la llenas y nosotros la subimos.</p>
+      <ul class="svc-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Carga de <b>base de clientes</b></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Carga de <b>base de proveedores</b></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Te entregamos una <b>plantilla en Excel</b> para llenar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Proceso listo en <b>1 día hábil</b></li>
+      </ul>
+      <button class="btn btn-amarillo" data-svc="Carga de clientes y proveedores" data-wa>Solicitar carga de datos</button>
+    </div>
+    <div class="svc-media">
+      <div class="card">
+        <div class="ico-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Cómo funciona</h3>
+        <div class="rowlist">
+          <div class="row"><span>1 · Te enviamos la plantilla Excel</span><b><em>Gratis</em></b></div>
+          <div class="row"><span>2 · Tú la llenas y nos la compartes</span><b>Cliente</b></div>
+          <div class="row"><span>3 · Cargamos todo al sistema</span><b><em>1 día hábil</em></b></div>
+        </div>
+        <p class="note">El cliente es responsable de compartir el documento debidamente lleno. El tiempo de carga cuenta desde que recibimos la plantilla completa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 3. CAPACITACIÓN EN VIVO -->
+<section id="capacitacion">
+  <div class="wrap svc reveal">
+    <div class="svc-body">
+      <span class="tag">Capacitación en vivo</span>
+      <h2>Un asesor te capacita cuando lo necesites</h2>
+      <p>¿Necesitas capacitación extra para tu equipo? Un asesor te acompaña en vivo, en línea o presencial.</p>
+      <ul class="svc-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> <b>$50 / hora</b> por Google Meet</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> <b>$100 / hora</b> presencial</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> La presencial está sujeta a zona, viáticos, número de personas y tema propuesto</li>
+      </ul>
+      <button class="btn btn-amarillo" data-svc="Capacitación en vivo" data-wa>Agendar capacitación</button>
+    </div>
+    <div class="svc-media">
+      <div class="card">
+        <div class="ico-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z" stroke-linecap="round" stroke-linejoin="round"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+        <h3>Tarifas de capacitación</h3>
+        <div class="rowlist">
+          <div class="row"><span>Por Google Meet (en línea)</span><b><em>$50</em> / hora</b></div>
+          <div class="row"><span>Presencial *</span><b><em>$100</em> / hora</b></div>
+        </div>
+        <p class="note free">✓ La capacitación inicial del onboarding y los cursos grabados son GRATIS.</p>
+        <p class="note">* Sujeto a análisis de zonas permitidas, viáticos, cantidad de personas a recibir y tema propuesto. Aplica solo cuando el cliente lo requiere de forma adicional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 4. SOPORTE ESPECIAL -->
+<section id="soporte">
+  <div class="wrap svc rev reveal">
+    <div class="svc-body">
+      <span class="tag">Soporte especial</span>
+      <h2>Un asesor dedicado para tus dudas</h2>
+      <p>Contrata horas de soporte especial y tendrás un asesor de ventas dedicado para cualquier duda y consulta sobre tu operación.</p>
+      <ul class="svc-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Asesor de ventas <b>dedicado</b> para tu cuenta</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Atención de <b>dudas y consultas</b> cuando lo necesites</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Horas de soporte a la medida de tu negocio</li>
+      </ul>
+      <button class="btn btn-amarillo" data-svc="Soporte especial" data-wa>Cotizar horas de soporte</button>
+    </div>
+    <div class="svc-media">
+      <div class="card">
+        <div class="ico-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.73 21a2 2 0 01-3.46 0" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Ideal si necesitas</h3>
+        <div class="rowlist">
+          <div class="row"><span>Acompañamiento en temporada alta</span><b><em>✓</em></b></div>
+          <div class="row"><span>Resolver dudas sin esperas</span><b><em>✓</em></b></div>
+          <div class="row"><span>Un contacto directo asignado</span><b><em>✓</em></b></div>
+        </div>
+        <p class="note">Las horas se cotizan según tu necesidad. Escríbenos y armamos el paquete que te sirve.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- 5. LANDING PAGE -->
+<section id="landing">
+  <div class="wrap svc reveal">
+    <div class="svc-body">
+      <span class="tag">Diseño de landing page</span>
+      <h2>La página web de tu negocio, lista para vender</h2>
+      <p>Creamos la landing page de tu negocio con el mismo nivel de esta página. Tú eliges tu dominio y nosotros nos encargamos de todo lo demás.</p>
+      <ul class="svc-feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> <b>Creación completa</b> de tu landing page</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Incluye <b>hosting</b> y <b>dominio personalizado</b> a elegir por ti</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> El precio de creación <b>no incluye</b> el costo del dominio</li>
+      </ul>
+      <button class="btn btn-amarillo" data-svc="Diseño de landing page" data-wa>Quiero mi landing page</button>
+    </div>
+    <div class="svc-media">
+      <div class="card">
+        <div class="ico-lg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Cómo se cobra</h3>
+        <div class="rowlist">
+          <div class="row"><span>Creación completa (pago único)</span><b><em>$100</em> + IVA</b></div>
+          <div class="row"><span>Se suma a tu cuota mensual</span><b><em>+$20</em> / mes</b></div>
+          <div class="row"><span>Hosting + dominio personalizado</span><b><em>Incluido</em></b></div>
+        </div>
+        <p class="note">El pago único de $100 + IVA cubre la creación completa. El valor del dominio se paga aparte según la extensión que elijas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="wrap reveal">
+  <div class="final-card">
+    <p class="eyebrow">¿Listo para potenciar tu sistema?</p>
+    <h2>Cuéntanos qué necesitas</h2>
+    <p>Escríbenos por WhatsApp y armamos el servicio adicional perfecto para tu negocio. Tu asesor te espera.</p>
+    <button class="btn btn-amarillo" data-svc="CTA final servicios" data-wa>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Hablar con un asesor
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="lazy" decoding="async" /></div>
+      <p class="muted">La plataforma SaaS de facturación electrónica<br/>más rápida de El Salvador.<br/>Un producto de Grupo Consiti S.A. de C.V.</p>
+    </div>
+    <div style="text-align:right">
+      <a href="index.html" class="wa" style="color:var(--txt-2)">← Volver a planes</a>
+      <p class="muted" style="margin-top:14px">© <span id="year"></span> Grupo Consiti. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a class="fab" href="#" data-svc="Botón flotante" data-wa aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* CONFIG */
+const WHATSAPP_NUMBER = "50372559059";
+const PIXEL_ID        = "27890392917235121";
+const IVA             = 0.13;
+const BASE_PRECIO     = 50;   // primeros 500 productos
+const BASE_INCLUIDOS  = 500;
+const EXTRA_UNIT      = 0.05; // por producto adicional
+
+try { fbq('init', PIXEL_ID); fbq('track', 'PageView'); } catch(e) {}
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const header = document.getElementById('site-header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 24), {passive:true});
+
+// ---- Menú móvil ----
+(function(){
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  if(!burger || !menu) return;
+  function setOpen(o){
+    menu.classList.toggle('open', o);
+    burger.classList.toggle('is-open', o);
+    burger.setAttribute('aria-expanded', o);
+    document.body.classList.toggle('menu-open', o);
+  }
+  burger.addEventListener('click', ()=>setOpen(!menu.classList.contains('open')));
+  menu.querySelectorAll('a,button').forEach(el=>el.addEventListener('click', ()=>setOpen(false)));
+  addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); });
+})();
+
+// ---- Calculadora de productos ----
+const money = n => '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const qtyInput = document.getElementById('qty');
+let lastQty = 500;
+function calcular(){
+  let q = parseInt(qtyInput.value, 10);
+  if (isNaN(q) || q < 0) q = 0;
+  lastQty = q;
+  const adic = Math.max(0, q - BASE_INCLUIDOS);
+  const subtotal = BASE_PRECIO + adic * EXTRA_UNIT;
+  const iva = subtotal * IVA;
+  const total = subtotal + iva;
+  document.getElementById('o-base').textContent = money(BASE_PRECIO);
+  document.getElementById('o-adic-lbl').textContent = `Adicionales (${adic.toLocaleString('en-US')} × $0.05)`;
+  document.getElementById('o-adic').textContent = money(adic * EXTRA_UNIT);
+  document.getElementById('o-iva').textContent = money(iva);
+  document.getElementById('o-total').textContent = money(total);
+}
+qtyInput.addEventListener('input', calcular);
+document.getElementById('plus').addEventListener('click', ()=>{ qtyInput.value = (parseInt(qtyInput.value,10)||0) + 100; calcular(); });
+document.getElementById('minus').addEventListener('click', ()=>{ qtyInput.value = Math.max(0,(parseInt(qtyInput.value,10)||0) - 100); calcular(); });
+document.querySelectorAll('.chips button').forEach(b=>b.addEventListener('click', ()=>{ qtyInput.value = b.dataset.q; calcular(); }));
+calcular();
+
+// ---- CTAs a WhatsApp + Lead ----
+function irAWhatsApp(servicio, extra){
+  let msg;
+  if (servicio === 'Carga de productos (calculadora)'){
+    const adic = Math.max(0, lastQty - BASE_INCLUIDOS);
+    const subtotal = BASE_PRECIO + adic * EXTRA_UNIT;
+    const total = subtotal * (1 + IVA);
+    msg = `Hola, quiero cotizar la carga de ${lastQty.toLocaleString('en-US')} productos en Odoo Factura IA (aprox. ${money(total)} con IVA). ¿Me ayudan?`;
+  } else if (['Consulta general','Botón flotante','CTA final servicios'].includes(servicio)){
+    msg = 'Hola, quiero información sobre los servicios adicionales de Odoo Factura IA.';
+  } else {
+    msg = `Hola, me interesa el servicio de ${servicio} de Odoo Factura IA. ¿Me dan más información?`;
+  }
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  try { fbq('track','Lead',{content_name:servicio,content_category:'Servicios adicionales'}); } catch(e){}
+  window.open(url,'_blank','noopener');
+}
+document.querySelectorAll('[data-wa]').forEach(el=>{
+  el.addEventListener('click', ev=>{ ev.preventDefault(); irAWhatsApp(el.dataset.svc || 'Consulta general'); });
+});
+
+// ---- Reveals ----
+if ('IntersectionObserver' in window){
+  const ro = new IntersectionObserver((es)=>{ es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target);} }); }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+}
+</script>
+</body>
+</html>

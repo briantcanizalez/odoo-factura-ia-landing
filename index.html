@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Planes · Odoo Factura IA — Facturación electrónica con IA en El Salvador</title>
+<meta name="description" content="Factura más rápido con Inteligencia Artificial. Autorizados por el Ministerio de Hacienda, Partner de Odoo y Google Cloud. Más de 3,500 empresas en El Salvador. Implementación en menos de 24 horas." />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Planes · Odoo Factura IA" />
+<meta property="og:description" content="La plataforma SaaS de facturación electrónica más rápida de El Salvador. Más de 3,500 empresas confían en nosotros. Implementación en menos de 24 horas." />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_SV" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- ============================================================
+     META PIXEL  ·  Odoo Factura IA
+     ============================================================ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+</script>
+
+<style>
+/* =====================================================================
+   DESIGN TOKENS · regla 60-30-10: negro 60 · morado 30 · amarillo 10
+   ===================================================================== */
+:root{
+  /* 60% — negros */
+  --bg:#050507;
+  --surface:#0B0B12;
+  --surface-2:#10101A;
+  /* 30% — morados estructurales */
+  --morado:#5216E7;
+  --morado-suave:rgba(82,22,231,.14);
+  --morado-borde:rgba(124,88,236,.28);
+  --morado-oscuro:#2D1B69;
+  --lavanda:#DFD2FF;
+  /* 10% — amarillo: SOLO conversión */
+  --amarillo:#FFDD00;
+  /* texto */
+  --txt:#FFFFFF;
+  --txt-2:#C7CBD4;
+  --txt-3:#8B90A0;
+  /* líneas y vidrio */
+  --linea:rgba(255,255,255,.07);
+  --linea-hover:rgba(223,210,255,.30);
+  /* sistema */
+  --r-lg:24px; --r-md:16px; --r-sm:10px;
+  --max:1200px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  /* escala de espaciado (8pt) */
+  --s2:8px; --s3:16px; --s4:24px; --s5:32px; --s6:48px; --s7:64px; --s8:96px; --s9:128px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--txt);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font-family:var(--font)}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:24px;padding-right:24px}
+
+/* ============ ATMÓSFERA GLOBAL (sin filter:blur — barato y fluido) ============ */
+.bg{
+  position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(58% 42% at 50% -6%, rgba(82,22,231,.20), transparent 70%),
+    radial-gradient(40% 34% at 100% 38%, rgba(82,22,231,.07), transparent 70%),
+    radial-gradient(46% 38% at 0% 74%,  rgba(82,22,231,.08), transparent 70%),
+    var(--bg);
+}
+/* retícula fina que se desvanece — da textura sin ruido */
+.bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.022) 0 1px, transparent 1px 72px),
+    repeating-linear-gradient(0deg,  rgba(255,255,255,.022) 0 1px, transparent 1px 72px);
+  -webkit-mask-image:radial-gradient(72% 60% at 50% 0%, #000 30%, transparent 100%);
+          mask-image:radial-gradient(72% 60% at 50% 0%, #000 30%, transparent 100%);
+}
+
+/* =====================================================================
+   HEADER
+   ===================================================================== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;
+  border-bottom:1px solid transparent;
+  transition:background .3s var(--ease), border-color .3s var(--ease);
+}
+header.scrolled{
+  background:rgba(5,5,7,.78);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:var(--linea);
+}
+.logo{display:flex;align-items:center}
+.logo img{height:34px;width:auto}
+@media(max-width:640px){.logo img{height:28px}}
+.head-right{display:flex;align-items:center;gap:18px}
+.cobrand{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--txt-3)}
+.cobrand img{height:26px;width:auto;opacity:.85}
+.cobrand span{display:none}
+@media(min-width:760px){.cobrand span{display:inline}}
+.head-cta{
+  display:none;font-weight:700;font-size:13.5px;color:#111;background:var(--amarillo);
+  padding:9px 18px;border-radius:99px;transition:transform .15s var(--ease), box-shadow .2s;
+}
+.head-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(255,221,0,.28)}
+@media(min-width:960px){.head-cta{display:inline-flex}}
+@media(min-width:760px){.head-svc{display:inline!important}}
+.head-svc:hover{color:#fff}
+/* menú móvil */
+.burger{display:none;width:44px;height:44px;border:1px solid var(--gris-linea);border-radius:12px;background:var(--glass);cursor:pointer;place-items:center;color:#fff;flex:0 0 auto}
+.burger svg{width:22px;height:22px}
+.burger .cls{display:none}
+.burger.is-open .bar{display:none}
+.burger.is-open .cls{display:block}
+.mobile-menu{position:fixed;top:66px;left:12px;right:12px;z-index:99;display:flex;flex-direction:column;gap:3px;
+  background:rgba(10,9,16,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--gris-linea);border-radius:18px;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.6);
+  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease)}
+.mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
+.mobile-menu a,.mobile-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;
+  padding:15px 16px;border-radius:12px;font-size:16px;font-weight:600;color:#fff;background:transparent;border:0;cursor:pointer;font-family:var(--font)}
+.mobile-menu a:active,.mobile-menu a:hover{background:var(--glass)}
+.mobile-menu .m-cta{background:var(--amarillo);color:#111;font-weight:800;justify-content:center;margin-top:6px}
+@media(max-width:759px){
+  .burger{display:grid}
+  .head-svc,.head-cta,.cobrand{display:none!important}
+}
+@media(min-width:760px){.mobile-menu{display:none!important}}
+body.menu-open{overflow:hidden}
+
+/* =====================================================================
+   HERO — pantalla completa, con momentum hacia abajo
+   ===================================================================== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:112px 0 0;
+}
+.hero-grid{
+  display:grid;grid-template-columns:1fr;gap:var(--s6);align-items:center;
+  flex:1;
+}
+@media(min-width:1000px){.hero-grid{grid-template-columns:1.08fr .92fr}}
+
+/* social proof arriba del H1 */
+.proof-pill{
+  display:inline-flex;align-items:center;gap:12px;
+  background:var(--surface);border:1px solid var(--linea);
+  padding:8px 16px 8px 8px;border-radius:99px;margin-bottom:var(--s4);
+}
+.avatars{display:flex}
+.avatars span{
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);
+  display:grid;place-items:center;font-size:10.5px;font-weight:700;color:#fff;
+  background:linear-gradient(140deg,var(--morado),var(--morado-oscuro));
+}
+.avatars span:nth-child(2){background:linear-gradient(140deg,#6B21A8,#2D1B69);margin-left:-8px}
+.avatars span:nth-child(3){background:linear-gradient(140deg,#4316B8,#1E1B4B);margin-left:-8px}
+.proof-pill b{font-size:13px;font-weight:700}
+.proof-pill b em{font-style:normal;color:var(--amarillo)}
+.proof-pill i{font-style:normal;font-size:12.5px;color:var(--txt-3)}
+
+h1{
+  font-weight:800;letter-spacing:-.035em;line-height:1.04;
+  font-size:clamp(38px,6vw,66px);
+  margin-bottom:var(--s4);
+}
+h1 .grad{
+  background:linear-gradient(92deg,#fff 10%,var(--lavanda) 55%,#A78BFA 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+/* trazo (firma del logo) que se dibuja al cargar */
+.draw{position:relative;white-space:nowrap}
+.draw::after{
+  content:"";position:absolute;left:-1.5%;right:-3.5%;bottom:-.34em;height:.46em;
+  background:url('assets/firma.png') center/100% 100% no-repeat;
+  transform:scaleX(0);transform-origin:left center;
+  animation:draw .85s var(--ease) .5s forwards;
+}
+@keyframes draw{to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.draw::after{animation:none;transform:scaleX(1)}}
+
+.hero sub-copy{display:block}
+.sub{font-size:clamp(16px,2vw,19px);color:var(--txt-2);max-width:540px;margin-bottom:var(--s5)}
+.sub b{color:var(--txt);font-weight:600}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:var(--s5)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:800;font-size:15.5px;cursor:pointer;letter-spacing:.02em;
+  padding:16px 30px;border-radius:14px;border:0;
+  transition:transform .16s var(--ease), box-shadow .2s var(--ease), background .2s, border-color .2s;
+}
+.btn:active{transform:translateY(1px) scale(.98)}
+.btn-amarillo{background:var(--amarillo);color:#111;box-shadow:0 6px 24px rgba(255,221,0,.22)}
+.btn-amarillo:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,221,0,.38)}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
+.btn-ghost:hover{border-color:rgba(223,210,255,.5);background:rgba(223,210,255,.05)}
+.btn svg{width:19px;height:19px}
+
+.hero-checks{display:flex;flex-wrap:wrap;gap:10px 24px}
+.hero-checks .c{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-3)}
+.hero-checks .c svg{width:15px;height:15px;color:var(--lavanda);flex:0 0 auto}
+
+/* ---- feed en vivo (columna derecha) ---- */
+.live{
+  position:relative;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border:1px solid var(--morado-borde);
+  border-radius:var(--r-lg);
+  padding:24px 24px 18px;
+  box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(82,22,231,.06), 0 0 90px rgba(82,22,231,.10);
+}
+.live-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.live-head .t{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--txt-3)}
+.pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.live-head .hoy{font-size:11.5px;color:var(--txt-3)}
+.live-head .hoy b{color:var(--amarillo);font-weight:800}
+.feed{display:flex;flex-direction:column;gap:9px;min-height:280px}
+.frow{
+  display:flex;align-items:center;gap:12px;
+  background:rgba(255,255,255,.025);border:1px solid var(--linea);
+  border-radius:var(--r-sm);padding:11px 14px;
+  opacity:1;transform:none;
+  transition:opacity .5s var(--ease), transform .5s var(--ease);
+}
+.frow.enter{opacity:0;transform:translateY(-8px)}
+.frow .fi{
+  width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;
+  background:var(--morado-suave);border:1px solid var(--morado-borde);
+}
+.frow .fi svg{width:16px;height:16px;color:var(--lavanda)}
+.frow .fx{flex:1;min-width:0}
+.frow .fx b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.frow .fx span{font-size:11px;color:var(--txt-3)}
+.frow .ok{font-size:10.5px;font-weight:800;letter-spacing:.04em;color:#4ade80;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.25);padding:3px 8px;border-radius:99px;white-space:nowrap}
+.live-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--linea);font-size:11px;color:var(--txt-3)}
+.live-foot b{color:var(--txt-2)}
+
+/* ---- indicador de scroll + ticker: el "imán" hacia abajo ---- */
+.hero-bottom{margin-top:var(--s7)}
+.scroll-cue{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--txt-3);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  margin-bottom:var(--s4);
+}
+.scroll-cue .chev{width:22px;height:22px;color:var(--amarillo);animation:bob 1.6s var(--ease) infinite}
+@keyframes bob{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(7px);opacity:.4}}
+@media(prefers-reduced-motion:reduce){.scroll-cue .chev{animation:none}}
+
+.ticker{
+  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
+  overflow:hidden;padding:15px 0;position:relative;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+}
+.ticker-track{display:flex;gap:0;width:max-content;animation:tick 34s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
+.tk{display:flex;align-items:center;gap:10px;padding:0 28px;font-size:13px;font-weight:600;color:var(--txt-3);white-space:nowrap}
+.tk svg{width:15px;height:15px;color:var(--lavanda);flex:0 0 auto}
+.tk b{color:var(--txt-2);font-weight:700}
+
+/* =====================================================================
+   SECCIONES — ritmo vertical consistente
+   ===================================================================== */
+section{padding:clamp(76px,8vw,112px) 0;position:relative}
+.sec-head{max-width:680px;margin:0 auto var(--s6);text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lavanda);
+  margin-bottom:14px;
+}
+.eyebrow::before,.eyebrow::after{content:"";width:22px;height:1px;background:var(--morado-borde)}
+h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(28px,3.6vw,42px);line-height:1.12}
+.sec-sub{color:var(--txt-2);font-size:16.5px;margin-top:14px}
+
+/* ---------- STATS con contadores ---------- */
+.stats{padding:var(--s8) 0 var(--s4)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:var(--r-lg);overflow:hidden}
+@media(min-width:860px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);text-align:center;padding:34px 16px}
+.stat .n{font-size:clamp(30px,3.6vw,42px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.stat .n .acc{color:var(--amarillo)}
+.stat .l{font-size:13px;color:var(--txt-3);margin-top:6px}
+
+/* ---------- BENTO BENEFICIOS (asimetría deliberada 2+3) ---------- */
+.bento{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:880px){
+  .bento{grid-template-columns:repeat(6,1fr)}
+  .bento .b-lg{grid-column:span 3}
+  .bento .b-sm{grid-column:span 2}
+}
+.bcard{
+  position:relative;overflow:hidden;
+  background:var(--surface);border:1px solid var(--linea);
+  border-radius:var(--r-lg);padding:30px 28px;
+  transition:transform .25s var(--ease), border-color .25s var(--ease);
+}
+.bcard:hover{transform:translateY(-4px);border-color:var(--linea-hover)}
+.bcard::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s var(--ease);
+  background:radial-gradient(340px 180px at 20% 0%, var(--morado-suave), transparent 70%);
+  pointer-events:none;
+}
+.bcard:hover::before{opacity:1}
+.bcard .ico{
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:var(--morado-suave);border:1px solid var(--morado-borde);margin-bottom:18px;
+}
+.bcard .ico svg{width:22px;height:22px;color:var(--lavanda)}
+.bcard h3{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.bcard p{font-size:14.5px;color:var(--txt-3)}
+.bcard .mini-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.bcard .mini-tags span{
+  font-size:11.5px;font-weight:600;color:var(--txt-2);
+  background:rgba(255,255,255,.04);border:1px solid var(--linea);
+  padding:5px 11px;border-radius:99px;
+}
+
+/* ---------- ONBOARDING: timeline simétrico ---------- */
+.onb-grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:960px){.onb-grid{grid-template-columns:1fr 1fr}}
+.onb-left{
+  background:linear-gradient(170deg, rgba(82,22,231,.16), var(--surface) 62%);
+  border:1px solid var(--morado-borde);border-radius:var(--r-lg);padding:34px 30px;
+  display:flex;flex-direction:column;
+}
+.onb-left h3{font-size:clamp(20px,2.2vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:12px}
+.onb-left h3 em{font-style:normal;color:var(--amarillo)}
+.onb-left>p{color:var(--txt-2);font-size:15px;margin-bottom:24px}
+.курс{display:none}
+.cursos{display:grid;gap:12px;margin-top:auto}
+.curso{
+  display:flex;gap:14px;align-items:center;
+  background:rgba(5,5,7,.5);border:1px solid var(--linea);border-radius:var(--r-md);padding:16px 18px;
+}
+.curso .ci{
+  width:38px;height:38px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
+  background:var(--morado-suave);border:1px solid var(--morado-borde);
+}
+.curso .ci svg{width:18px;height:18px;color:var(--lavanda)}
+.curso b{display:block;font-size:14.5px}
+.curso span{font-size:12.5px;color:var(--txt-3)}
+.curso .chip{margin-left:auto;font-size:10.5px;font-weight:800;color:#111;background:var(--amarillo);padding:4px 10px;border-radius:99px;white-space:nowrap}
+
+.timeline{position:relative;display:flex;flex-direction:column;gap:12px}
+.tl-step{
+  position:relative;display:flex;gap:16px;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--linea);border-radius:var(--r-md);
+  padding:20px;
+  transition:border-color .25s var(--ease), transform .25s var(--ease);
+}
+.tl-step:hover{border-color:var(--linea-hover);transform:translateX(4px)}
+.tl-num{
+  flex:0 0 auto;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid var(--morado-borde);background:var(--morado-suave);
+  color:var(--lavanda);font-weight:800;font-size:14px;
+}
+.tl-step b{display:block;font-size:15.5px;margin-bottom:3px}
+.tl-step span{font-size:13.5px;color:var(--txt-3)}
+.tl-step .free-tag{display:inline-block;font-size:10px;font-weight:800;color:#111;background:var(--amarillo);border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+
+/* ---------- PLANES ---------- */
+#planes{
+  background:
+    radial-gradient(56% 44% at 50% 8%, rgba(82,22,231,.13), transparent 70%);
+}
+.billing-toggle{
+  display:flex;align-items:center;margin:calc(-1 * var(--s3)) auto var(--s6);
+  background:var(--surface);border:1px solid var(--linea);border-radius:99px;
+  padding:5px;width:max-content;
+}
+.billing-toggle button{
+  font-weight:700;font-size:14px;cursor:pointer;border:0;
+  padding:10px 24px;border-radius:99px;background:transparent;color:var(--txt-3);
+  transition:background .25s var(--ease), color .25s;display:flex;align-items:center;gap:8px;
+}
+.billing-toggle button.active{background:var(--morado);color:#fff}
+.billing-toggle .save{font-size:11px;font-weight:800;background:var(--amarillo);color:#111;padding:2px 8px;border-radius:99px}
+
+.grid-planes{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
+@media(min-width:640px){.grid-planes{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.grid-planes{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1200px){.grid-planes{grid-template-columns:repeat(5,1fr);gap:14px}}
+.plan{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--linea);
+  border-radius:var(--r-lg);padding:26px 20px 20px;
+  transition:transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.plan:hover{transform:translateY(-5px);border-color:var(--linea-hover)}
+.plan.featured{
+  background:linear-gradient(175deg, rgba(82,22,231,.20), var(--surface) 68%);
+  border-color:var(--morado-borde);
+  box-shadow:0 20px 60px rgba(82,22,231,.18);
+}
+.plan.featured:hover{border-color:rgba(255,221,0,.55)}
+.plan .badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--amarillo);color:#111;font-size:10.5px;font-weight:800;letter-spacing:.07em;
+  text-transform:uppercase;padding:5px 13px;border-radius:99px;white-space:nowrap;
+}
+.plan .pname{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.plan .pnote{font-size:12.5px;color:var(--lavanda);min-height:34px;margin-top:3px}
+.plan .price{margin:14px 0 2px;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.plan .price .cur{font-size:16px;font-weight:700;color:var(--txt-2)}
+.plan .price .amt{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.plan .price .per{font-size:13px;color:var(--txt-3)}
+.plan .iva{
+  font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--lavanda);
+  border:1px solid var(--morado-borde);border-radius:99px;padding:2px 8px;align-self:center;
+}
+.plan .bill-note{font-size:11.5px;color:var(--amarillo);min-height:17px;font-weight:600;margin-top:2px}
+.plan .impl{font-size:12.5px;color:var(--txt-3);margin:8px 0 16px;padding-bottom:14px;border-bottom:1px solid var(--linea)}
+.plan .impl b{color:var(--txt-2);font-weight:600}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;flex:1}
+.plan li{position:relative;padding-left:25px;font-size:13px;color:var(--txt-2);line-height:1.5}
+.plan li svg{position:absolute;left:0;top:3px;width:15px;height:15px;color:var(--amarillo)}
+.plan li b{font-weight:700;color:#fff;white-space:nowrap}
+.plan li.hl{font-weight:600;color:#fff}
+.plan li.no{color:var(--txt-3);opacity:.7}
+.plan li.no svg{color:var(--txt-3)}
+.plan .li-note{font-size:10.5px;color:var(--txt-3);margin:-8px 0 16px;line-height:1.45;padding-left:2px}
+.plan .btn{width:100%;font-size:14px;padding:13px 16px;letter-spacing:.08em}
+.plan .btn-plan{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
+.plan .btn-plan:hover{border-color:var(--morado);background:var(--morado-suave)}
+.plan.featured .btn-plan{background:var(--amarillo);color:#111;border:0;box-shadow:0 6px 22px rgba(255,221,0,.25)}
+.plan.featured .btn-plan:hover{box-shadow:0 10px 30px rgba(255,221,0,.4);transform:translateY(-2px)}
+.planes-foot{text-align:center;margin-top:var(--s6);font-size:13.5px;color:var(--txt-3)}
+
+/* ---------- TESTIMONIOS (marquee continuo, como el ticker del hero) ---------- */
+.carousel{
+  position:relative;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+}
+.car-track{display:flex;width:max-content;animation:scroll-testi 55s linear infinite}
+.carousel:hover .car-track{animation-play-state:paused}
+@keyframes scroll-testi{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.car-track{animation:none}}
+.tcard{
+  flex:0 0 clamp(290px,80vw,360px);margin-right:20px;
+  background:var(--surface);border:1px solid var(--linea);border-radius:var(--r-lg);
+  padding:28px 26px;display:flex;flex-direction:column;gap:14px;white-space:normal;
+}
+.tcard .qi{width:26px;height:26px;color:var(--morado-borde)}
+.tcard .stars{color:var(--amarillo);font-size:13px;letter-spacing:2.5px}
+.tcard p{font-size:14.5px;color:var(--txt-2);flex:1}
+.tcard .who{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--linea)}
+.tcard .av{
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;
+  background:linear-gradient(140deg,var(--morado),var(--morado-oscuro));color:#fff;flex:0 0 auto;
+}
+.tcard .who b{display:block;font-size:13.5px}
+.tcard .who span{font-size:12px;color:var(--txt-3)}
+
+/* ---------- PARTNERS ---------- */
+.partners-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.partners-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.partners-grid{grid-template-columns:repeat(4,1fr)}}
+.partner{
+  text-align:center;padding:34px 22px;border-radius:var(--r-lg);
+  background:var(--surface);border:1px solid var(--linea);
+  transition:border-color .25s var(--ease), transform .25s var(--ease);
+}
+.partner:hover{border-color:var(--linea-hover);transform:translateY(-4px)}
+.partner .pi{
+  width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:grid;place-items:center;
+  background:var(--morado-suave);border:1px solid var(--morado-borde);
+}
+.partner .pi svg{width:24px;height:24px;color:var(--lavanda)}
+.partner .pi img{width:28px;height:auto}
+/* badges oficiales de partner (traen fondo blanco) */
+.partner .pbadge{
+  width:150px;height:96px;margin:0 auto 18px;border-radius:14px;
+  background:#fff;display:flex;align-items:center;justify-content:center;
+  padding:6px;overflow:hidden;
+}
+.partner .pbadge img{max-height:100%;max-width:100%;width:auto;object-fit:contain}
+.partner b{display:block;font-size:15.5px;margin-bottom:6px}
+.partner span{font-size:13px;color:var(--txt-3)}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:760px;margin:0 auto}
+details{
+  border:1px solid var(--linea);border-radius:var(--r-md);
+  padding:0 22px;margin-bottom:10px;background:var(--surface);
+  transition:border-color .25s var(--ease);
+}
+details[open]{border-color:var(--morado-borde)}
+summary{
+  list-style:none;cursor:pointer;padding:19px 0;font-weight:600;font-size:15.5px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+summary::-webkit-details-marker{display:none}
+summary .plus{transition:transform .25s var(--ease);color:var(--lavanda);font-size:20px;line-height:1;flex:0 0 auto}
+details[open] summary .plus{transform:rotate(45deg);color:var(--amarillo)}
+details p{padding:0 0 20px;color:var(--txt-3);font-size:14.5px}
+
+/* ---------- CTA FINAL ---------- */
+.final-card{
+  position:relative;text-align:center;border-radius:28px;padding:70px 32px;overflow:hidden;
+  background:
+    radial-gradient(60% 90% at 50% 120%, rgba(82,22,231,.35), transparent 70%),
+    var(--surface);
+  border:1px solid var(--morado-borde);
+}
+.final-card h2{margin-bottom:14px}
+.final-card p{color:var(--txt-2);max-width:540px;margin:0 auto var(--s5);font-size:16.5px}
+.final-meta{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:var(--s4);font-size:12.5px;color:var(--txt-3)}
+.final-meta span{display:flex;align-items:center;gap:7px}
+.final-meta svg{width:14px;height:14px;color:var(--lavanda)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--linea);padding:var(--s6) 0;margin-top:var(--s7)}
+.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
+.foot-logo img{height:38px;width:auto;margin-bottom:4px}
+footer .muted{color:var(--txt-3);font-size:13px;line-height:1.7}
+footer a.wa{display:inline-flex;align-items:center;gap:8px;color:var(--txt-2);font-weight:600;font-size:14px;transition:color .2s}
+footer a.wa:hover{color:var(--amarillo)}
+footer a.wa svg{width:17px;height:17px}
+
+/* ---------- FLOATING WHATSAPP ---------- */
+.fab{
+  position:fixed;bottom:22px;right:22px;z-index:90;
+  width:56px;height:56px;border-radius:50%;background:#25D366;
+  display:grid;place-items:center;box-shadow:0 10px 28px rgba(37,211,102,.4);
+  transition:transform .18s var(--ease);
+}
+.fab:hover{transform:scale(1.07)}
+.fab svg{width:29px;height:29px;color:#fff}
+
+/* ---------- REVEALS con stagger ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease), transform .65s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease), transform .55s var(--ease)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.0s}
+.stagger.in>*:nth-child(2){transition-delay:.07s}
+.stagger.in>*:nth-child(3){transition-delay:.14s}
+.stagger.in>*:nth-child(4){transition-delay:.21s}
+.stagger.in>*:nth-child(5){transition-delay:.28s}
+.stagger.in>*:nth-child(6){transition-delay:.35s}
+@media(prefers-reduced-motion:reduce){
+  .reveal,.stagger>*{opacity:1;transform:none;transition:none}
+}
+
+@media(max-width:640px){
+  section{padding:88px 0}
+  .hero{padding-top:96px}
+  .final-card{padding:52px 22px}
+  .sec-head{margin-bottom:var(--s6)}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header">
+  <a class="logo" href="#" aria-label="Odoo Factura IA"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="eager" fetchpriority="high" decoding="async" /></a>
+  <div class="head-right">
+    <div class="cobrand">
+      <span>Un producto de</span>
+      <img src="assets/consiti-isotipo.svg" alt="Grupo Consiti" loading="eager" fetchpriority="high" decoding="async" />
+    </div>
+    <a href="consiti-ai.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Consiti AI</a>
+    <a href="servicios.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Servicios</a>
+    <a href="faq.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Preguntas</a>
+    <a class="head-cta" href="#planes">Ver planes</a>
+    <button class="burger" id="burger" aria-label="Menú" aria-expanded="false">
+      <svg class="bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      <svg class="cls" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Navegación">
+  <a href="#planes">Planes</a>
+  <a href="consiti-ai.html">Consiti AI</a>
+  <a href="servicios.html">Servicios</a>
+  <a href="faq.html">Preguntas</a>
+  <button class="m-cta" data-plan="Consulta general" data-wa>Escríbenos por WhatsApp</button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="padding-bottom:0">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="proof-pill">
+        <div class="avatars"><span>MR</span><span>CM</span><span>SL</span></div>
+        <div><b><em>+3,500 empresas</em> facturan con nosotros</b><br/><i>en todo El Salvador</i></div>
+      </div>
+      <h1>Factura más rápido con <span class="grad draw">Inteligencia Artificial</span></h1>
+      <p class="sub">La plataforma de facturación electrónica <b>más rápida del país</b>. Autorizados por Hacienda, Partner de Odoo y Google Cloud. Tu sistema queda listo <b>en menos de 24 horas</b>.</p>
+      <div class="hero-cta">
+        <a class="btn btn-amarillo" href="#planes">Ver planes y precios
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="btn btn-ghost" data-plan="Consulta general" data-price="0" data-wa>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp directo
+        </button>
+      </div>
+      <div class="hero-checks">
+        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Autorizados por Hacienda</div>
+        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte siempre GRATIS</div>
+        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Respaldo en tiempo real 24/7</div>
+      </div>
+    </div>
+
+    <!-- Feed de facturación en vivo -->
+    <div class="live" aria-hidden="true">
+      <div class="live-head">
+        <span class="t"><span class="pulse"></span> Facturación en vivo</span>
+        <span class="hoy">Hoy: <b id="hoy-count">312</b> DTEs</span>
+      </div>
+      <div class="feed" id="feed"></div>
+      <div class="live-foot">
+        <span>Transmisión directa a Hacienda</span>
+        <b>~1.8 s por DTE</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- Imán de scroll: cue + ticker -->
+  <div class="hero-bottom">
+    <div class="scroll-cue">
+      <span>Descubre por qué</span>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track" id="ticker-track">
+        <!-- se duplica por JS -->
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <b>Autorizados</b> por el Ministerio de Hacienda</span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg> <b>Partner oficial</b> de Odoo</span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a4.5 4.5 0 100-9 6 6 0 00-11.6-1.5A4 4 0 006 19h11.5z"/></svg> <b>Partner</b> de Google Cloud</span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Implementación <b>en menos de 24h</b></span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h8m-8 4h5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Soporte de dudas <b>siempre GRATIS</b></span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg> Respaldo en tiempo real <b>24/7</b></span>
+        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3z"/></svg> <b>+3,500 empresas</b> en El Salvador</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<div class="stats wrap">
+  <div class="stats-grid stagger" data-stagger>
+    <div class="stat"><div class="n"><span class="acc">+</span><span data-count="3500">0</span></div><div class="l">empresas en todo el país</div></div>
+    <div class="stat"><div class="n">&lt;<span data-count="24">0</span><span class="acc">h</span></div><div class="l">implementación garantizada</div></div>
+    <div class="stat"><div class="n"><span data-count="99.9" data-dec="1">0</span><span class="acc">%</span></div><div class="l">disponibilidad en Google Cloud</div></div>
+    <div class="stat"><div class="n">24/7</div><div class="l">respaldo de tu información</div></div>
+  </div>
+</div>
+
+<!-- ================= BENEFICIOS (bento) ================= -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Por qué Odoo Factura IA</p>
+    <h2>Todo lo que tu facturación necesita</h2>
+    <p class="sec-sub">Sin digitación manual, sin miedo a perder información, sin costos ocultos.</p>
+  </div>
+  <div class="bento stagger" data-stagger>
+    <div class="bcard b-lg">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 00-4 12.7V17a2 2 0 002 2h4a2 2 0 002-2v-2.3A7 7 0 0012 2z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22h6" stroke-linecap="round"/></svg></div>
+      <h3>Compras procesadas con IA</h3>
+      <p>Carga los JSON de tus diferentes proveedores y nuestra IA procesa tus facturas de compra automáticamente. Cero digitación manual, cero errores de tipeo.</p>
+      <div class="mini-tags"><span>JSON multi-proveedor</span><span>Procesamiento automático</span><span>Sin digitación</span></div>
+    </div>
+    <div class="bcard b-lg">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round"/></svg></div>
+      <h3>Respaldo en tiempo real, 24/7</h3>
+      <p>Tu información se respalda en tiempo real las 24 horas. ¿Perdiste tu equipo o se dañó? Todos tus datos están disponibles en el momento en que los solicites.</p>
+      <div class="mini-tags"><span>Tiempo real</span><span>Disponible siempre</span><span>Google Cloud</span></div>
+    </div>
+    <div class="bcard b-sm">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Cumplimiento total</h3>
+      <p>Autorizados por Hacienda. Firma digital incluida y DTEs transmitidos en tiempo real.</p>
+    </div>
+    <div class="bcard b-sm">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Listo en menos de 24h</h3>
+      <p>Tu sistema queda funcionando en menos de 24 horas, con la gestión ante Hacienda incluida.</p>
+    </div>
+    <div class="bcard b-sm">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h8m-8 4h5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h3>Soporte siempre GRATIS</h3>
+      <p>Respuestas inmediatas y la mejor tasa de resolución de problemas del mercado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ONBOARDING ================= -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Onboarding exclusivo</p>
+    <h2>Los únicos con acompañamiento total</h2>
+    <p class="sec-sub">Desde que adquieres tu plan no estás solo: un gestor de cuenta te acompaña en todo el proceso y te capacita totalmente GRATIS.</p>
+  </div>
+  <div class="onb-grid stagger" data-stagger>
+    <div class="onb-left">
+      <h3>Tu gestor de cuenta + <em>2 cursos grabados incluidos</em></h3>
+      <p>Te guía paso a paso, configura contigo y te entrena sin costo. Y para aprender a tu ritmo:</p>
+      <div class="cursos">
+        <div class="curso">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 20 12 6 21 6 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><b>Curso completo · 15 capítulos</b><span>Formato largo, todo el sistema a profundidad</span></div>
+          <span class="chip">GRATIS</span>
+        </div>
+        <div class="curso">
+          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><b>Curso puntual · 15 capítulos</b><span>Formato corto, respuestas directas del día a día</span></div>
+          <span class="chip">GRATIS</span>
+        </div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-step"><div class="tl-num">1</div><div><b>Contratas tu plan</b><span>Nos escribes por WhatsApp y eliges el plan ideal para tu negocio.</span></div></div>
+      <div class="tl-step"><div class="tl-num">2</div><div><b>Implementación en menos de 24h</b><span>Configuramos todo y gestionamos tu autorización ante Hacienda.</span></div></div>
+      <div class="tl-step"><div class="tl-num">3</div><div><b>Onboarding con tu gestor<span class="free-tag">GRATIS</span></b><span>Te capacita y te acompaña en cada paso del proceso.</span></div></div>
+      <div class="tl-step"><div class="tl-num">4</div><div><b>Facturas sin preocuparte</b><span>Soporte gratuito de dudas y consultas, con respuestas inmediatas.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANES ================= -->
+<section id="planes">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Planes y precios</p>
+      <h2>Elige el plan que factura por ti</h2>
+      <p class="sec-sub">Todos incluyen DTEs, gestión ante Hacienda, firma digital, respaldo en tiempo real y soporte gratuito.</p>
+    </div>
+
+    <div class="billing-toggle" role="tablist" aria-label="Ciclo de facturación">
+      <button id="bt-mensual" class="active" type="button">Mensual</button>
+      <button id="bt-anual" type="button">Anual <span class="save">hasta −15%</span></button>
+    </div>
+
+    <div class="grid-planes stagger" data-stagger>
+
+      <!-- STARTER -->
+      <div class="plan" data-plan-name="Starter" data-monthly="14.99" data-annual="0.05">
+        <div class="pname">Starter</div>
+        <div class="pnote">Documentos esenciales</div>
+        <div class="price"><span class="cur">$</span><span class="amt">14.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
+        <div class="bill-note"></div>
+        <div class="impl">Implementación <b>$40 + IVA</b> · <b>30</b> DTEs/mes</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Consumidor final (ventas y compras)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Crédito fiscal (ventas y compras)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Notas de crédito</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Solo nombre registrado en Hacienda <span style="opacity:.7">(sin logo)</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por correo</li>
+          <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" stroke-linejoin="round"/></svg> Anexos de IVA y libros contables</li>
+          <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" stroke-linejoin="round"/></svg> Exportación, sujeto excluido y retención</li>
+        </ul>
+        <button class="btn btn-plan" data-wa>CONTRATAR</button>
+      </div>
+
+      <!-- PROFESSIONAL -->
+      <div class="plan featured" data-plan-name="Professional" data-monthly="24.99" data-annual="0.05">
+        <div class="badge">★ Más vendido</div>
+        <div class="pname">Professional</div>
+        <div class="pnote">Contabilidad completa</div>
+        <div class="price"><span class="cur">$</span><span class="amt">24.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
+        <div class="bill-note"></div>
+        <div class="impl">Implementación <b>$50 + IVA</b> · <b>100</b> DTEs/mes</div>
+        <ul>
+          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Starter, y además:</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Logo en el encabezado del DTE</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Anexos de IVA y libros en PDF y Excel</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Factura de exportación y sujeto excluido</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por WhatsApp <span style="opacity:.7">(horario de oficina)</span></li>
+        </ul>
+        <button class="btn btn-plan" data-wa>CONTRATAR</button>
+      </div>
+
+      <!-- ADVANCED -->
+      <div class="plan" data-plan-name="Advanced" data-monthly="34.99" data-annual="0.10">
+        <div class="pname">Advanced</div>
+        <div class="pnote">Compras automáticas con IA</div>
+        <div class="price"><span class="cur">$</span><span class="amt">34.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
+        <div class="bill-note"></div>
+        <div class="impl">Implementación <b>$60 + IVA</b> · <b>500</b> DTEs/mes</div>
+        <ul>
+          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Professional, y además:</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Carga de compras con JSON en automático</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por WhatsApp y llamada telefónica</li>
+        </ul>
+        <button class="btn btn-plan" data-wa>CONTRATAR</button>
+      </div>
+
+      <!-- DELUXE -->
+      <div class="plan" data-plan-name="Deluxe" data-monthly="54.99" data-annual="0.10">
+        <div class="pname">Deluxe</div>
+        <div class="pnote">Elige tu módulo</div>
+        <div class="price"><span class="cur">$</span><span class="amt">54.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
+        <div class="bill-note"></div>
+        <div class="impl">Implementación <b>$70 + IVA</b> · <b>1,000</b> DTEs/mes</div>
+        <ul>
+          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Advanced, y además:</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 módulo a elección: POS, Inventario, Compras, Cotizaciones o CRM</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Módulo adicional: <b>$30 + IVA</b> (activación)</li>
+        </ul>
+        <div class="li-note">*La configuración de cada módulo se cotiza por separado.</div>
+        <button class="btn btn-plan" data-wa>CONTRATAR</button>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="plan" data-plan-name="Enterprise" data-monthly="150" data-annual="0.15">
+        <div class="pname">Enterprise</div>
+        <div class="pnote">Persona dedicada a tu sistema</div>
+        <div class="price"><span class="cur">$</span><span class="amt">150</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
+        <div class="bill-note"></div>
+        <div class="impl">Implementación <b>$100 + IVA</b> · DTEs <b>ilimitados</b></div>
+        <ul>
+          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Deluxe, y además:</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Una persona dedicada a tu sistema</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Te ayuda siempre que lo necesites <span style="opacity:.7">(horario de oficina)</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> DTEs ilimitados</li>
+        </ul>
+        <button class="btn btn-plan" data-wa>CONTRATAR</button>
+      </div>
+
+    </div>
+    <p class="planes-foot">Precios en USD + IVA. La implementación se paga una sola vez. ¿No sabes cuál elegir? Escríbenos y te asesoramos gratis.</p>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIOS ================= -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Testimonios</p>
+      <h2>Dueños de negocios que ya facturan con nosotros</h2>
+    </div>
+    <div class="carousel" id="carousel">
+      <div class="car-track" id="car-track">
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>Antes tardaba toda una tarde digitando facturas de compras. Ahora cargo los JSON de mis proveedores y la IA hace todo. Es otra vida.</p>
+          <div class="who"><div class="av">MR</div><div><b>María R.</b><span>Farmacia · San Salvador</span></div></div>
+        </div>
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>Se me dañó la computadora y pensé que había perdido todo. Les escribí y en minutos tenía toda mi información disponible. El respaldo es real.</p>
+          <div class="who"><div class="av">CM</div><div><b>Carlos M.</b><span>Ferretería · Santa Ana</span></div></div>
+        </div>
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>El gestor de cuenta me acompañó desde el día uno y me capacitó gratis. En menos de 24 horas ya estaba facturando con Hacienda.</p>
+          <div class="who"><div class="av">SL</div><div><b>Sandra L.</b><span>Restaurante · San Miguel</span></div></div>
+        </div>
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>Los cursos grabados son oro. Cuando entra alguien nuevo al negocio, le paso los capítulos cortos y en una tarde ya sabe facturar.</p>
+          <div class="who"><div class="av">JA</div><div><b>José A.</b><span>Distribuidora · Soyapango</span></div></div>
+        </div>
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>Cada vez que tengo una duda escribo al soporte y me responden al momento, sin costo. Nunca me han dejado con un problema sin resolver.</p>
+          <div class="who"><div class="av">KP</div><div><b>Karla P.</b><span>Boutique · Santa Tecla</span></div></div>
+        </div>
+
+        <div class="tcard">
+          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
+          <div class="stars">★★★★★</div>
+          <p>Probé otros sistemas y ninguno se compara. Somos una clínica con bastante movimiento y los DTEs salen solos, en tiempo real.</p>
+          <div class="who"><div class="av">RG</div><div><b>Roberto G.</b><span>Clínica · La Libertad</span></div></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARTNERS ================= -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Respaldados por los grandes</p>
+    <h2>Partners oficiales, autorizados en el país</h2>
+  </div>
+  <div class="partners-grid stagger" data-stagger>
+    <div class="partner">
+      <div class="pbadge"><img src="assets/odoo-partner.png" alt="Odoo Ready Partner" loading="lazy" decoding="async" /></div>
+      <b>Partner de Odoo</b>
+      <span>Construido sobre el ERP más usado del mundo, con respaldo oficial.</span>
+    </div>
+    <div class="partner">
+      <div class="pbadge"><img src="assets/google-partner.png" alt="Google Cloud Partner" loading="lazy" decoding="async" /></div>
+      <b>Partner de Google Cloud</b>
+      <span>99.9% de disponibilidad y respaldo de tu información en tiempo real.</span>
+    </div>
+    <div class="partner">
+      <div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <b>Autorizados por Hacienda</b>
+      <span>Transmisión de DTEs certificada ante el Ministerio de Hacienda.</span>
+    </div>
+    <div class="partner">
+      <div class="pi"><img src="assets/consiti-isotipo.svg" alt="Grupo Consiti" /></div>
+      <b>Grupo Consiti</b>
+      <span>Firma salvadoreña de tecnología con más de 3,500 empresas atendidas.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="wrap">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2>Lo que todo negocio pregunta</h2>
+  </div>
+  <div class="faq reveal">
+    <details>
+      <summary>¿Están autorizados por el Ministerio de Hacienda? <span class="plus">+</span></summary>
+      <p>Sí. Estamos autorizados por el Ministerio de Hacienda de El Salvador y transmitimos los DTEs de forma automática y en tiempo real. La firma digital viene incluida.</p>
+    </details>
+    <details>
+      <summary>¿En cuánto tiempo queda funcionando? <span class="plus">+</span></summary>
+      <p>En menos de 24 horas. Nos encargamos de la configuración y la gestión ante Hacienda, y tu gestor de cuenta inicia el onboarding de inmediato.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa si pierdo mi computadora o se daña? <span class="plus">+</span></summary>
+      <p>Nada se pierde. Tu información se respalda en tiempo real las 24 horas del día. En cualquier momento puedes solicitarla y la tendremos disponible.</p>
+    </details>
+    <details>
+      <summary>¿La capacitación y el soporte tienen costo? <span class="plus">+</span></summary>
+      <p>No. Tu gestor de cuenta te capacita totalmente GRATIS y además recibes dos capacitaciones grabadas de 15 capítulos cada una (formato largo y formato corto). El soporte de dudas y consultas siempre es gratuito, con respuestas inmediatas.</p>
+    </details>
+    <details>
+      <summary>¿Qué pasa si emito más DTEs de los que incluye mi plan? <span class="plus">+</span></summary>
+      <p>Puedes subir de plan en cualquier momento. Te ayudamos a elegir el que mejor se ajuste al volumen de tu negocio; escríbenos por WhatsApp y lo revisamos juntos.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="wrap">
+  <div class="final-card reveal">
+    <p class="eyebrow">Más de 3,500 empresas ya lo hicieron</p>
+    <h2>Empieza a facturar en menos de 24 horas</h2>
+    <p>Escríbenos por WhatsApp, elige tu plan y deja el papeleo en nuestras manos. Tu gestor de cuenta te espera.</p>
+    <button class="btn btn-amarillo" data-plan="CTA final" data-price="0" data-wa>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      CONTRATAR
+    </button>
+    <div class="final-meta">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sin permanencia forzada</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Capacitación GRATIS</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte inmediato</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="lazy" decoding="async" /></div>
+      <p class="muted" style="margin-top:10px">La plataforma SaaS de facturación electrónica<br/>más rápida de El Salvador.<br/>Un producto de Grupo Consiti S.A. de C.V.</p>
+    </div>
+    <div style="text-align:right">
+      <a class="wa" href="#" data-plan="Footer" data-price="0" data-wa>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp: 7255-9059
+      </a>
+      <p class="muted" style="margin-top:14px">© <span id="year"></span> Grupo Consiti. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= FLOATING WHATSAPP ================= -->
+<a class="fab" href="#" data-plan="Botón flotante" data-price="0" data-wa aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN
+   ===================================================================== */
+const WHATSAPP_NUMBER = "50372559059";       // WhatsApp destino (+503 7255-9059)
+const PIXEL_ID        = "27890392917235121"; // Dataset/pixel de Meta (Odoo Factura IA)
+// El descuento anual es por-plan (atributo data-annual en cada tarjeta): Starter/Pro 5%, Advanced/Deluxe 10%, Enterprise 15%
+/* ===================================================================== */
+
+// ---- Meta Pixel ----
+try { fbq('init', PIXEL_ID); fbq('track', 'PageView'); } catch(e) {}
+
+// ---- Año ----
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ---- Header scrolled ----
+const header = document.getElementById('site-header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 24), {passive:true});
+
+// ---- Menú móvil (toggle) ----
+(function(){
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobile-menu');
+  if(!burger || !menu) return;
+  function setOpen(o){
+    menu.classList.toggle('open', o);
+    burger.classList.toggle('is-open', o);
+    burger.setAttribute('aria-expanded', o);
+    document.body.classList.toggle('menu-open', o);
+  }
+  burger.addEventListener('click', ()=>setOpen(!menu.classList.contains('open')));
+  menu.querySelectorAll('a,button').forEach(el=>el.addEventListener('click', ()=>setOpen(false)));
+  addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); });
+})();
+
+// ---- Ticker: duplicar contenido para loop infinito ----
+(function(){
+  const t = document.getElementById('ticker-track');
+  t.innerHTML += t.innerHTML;
+})();
+
+// ---- Feed en vivo ----
+(function(){
+  const feed = document.getElementById('feed');
+  const hoy = document.getElementById('hoy-count');
+  const negocios = [
+    ['Farmacia El Carmen','San Salvador'],['Ferretería La Central','Santa Ana'],
+    ['Distribuidora JR','Soyapango'],['Clínica Santa María','San Miguel'],
+    ['Restaurante El Portal','Santa Tecla'],['Boutique Karla','Merliot'],
+    ['Autorepuestos Díaz','Sonsonate'],['Panadería San José','Apopa'],
+    ['Óptica Visión','San Salvador'],['Veterinaria Patitas','Antiguo Cuscatlán']
+  ];
+  const tipos = ['Factura','Crédito Fiscal','Factura','Factura','Crédito Fiscal'];
+  let n = 2041, count = 312;
+  const docSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6M9 15l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function row(){
+    const [neg] = [negocios[Math.floor(Math.random()*negocios.length)]];
+    const tipo = tipos[Math.floor(Math.random()*tipos.length)];
+    n += Math.floor(Math.random()*7)+1;
+    const el = document.createElement('div');
+    el.className = 'frow enter';
+    el.innerHTML = `<div class="fi">${docSVG}</div><div class="fx"><b>${neg[0]}</b><span>${tipo} · DTE-01-${n} · ${neg[1]}</span></div><span class="ok">✓ Aceptado</span>`;
+    return el;
+  }
+  // 5 filas iniciales
+  for(let i=0;i<5;i++){ const r=row(); r.classList.remove('enter'); feed.appendChild(r); }
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced){
+    setInterval(()=>{
+      const r = row();
+      feed.prepend(r);
+      requestAnimationFrame(()=>requestAnimationFrame(()=>r.classList.remove('enter')));
+      while(feed.children.length > 5) feed.removeChild(feed.lastChild);
+      count++; hoy.textContent = count.toLocaleString();
+    }, 3400);
+  }
+})();
+
+// ---- Contadores animados ----
+(function(){
+  const els = document.querySelectorAll('[data-count]');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function animate(el){
+    const target = parseFloat(el.dataset.count);
+    const dec = parseInt(el.dataset.dec||'0');
+    if(reduced){ el.textContent = target.toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec}); return; }
+    const dur = 1400, t0 = performance.now();
+    function frame(t){
+      const p = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-p,3);
+      el.textContent = (target*e).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});
+      if(p<1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  const io = new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); }
+  }),{threshold:.6});
+  els.forEach(el=>io.observe(el));
+})();
+
+// ---- Toggle Mensual / Anual (con animación de conteo) ----
+let billing = 'mensual';
+const btM = document.getElementById('bt-mensual');
+const btA = document.getElementById('bt-anual');
+function fmt(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/\.00$/,''); }
+function discFor(card){ return parseFloat(card.dataset.annual || '0'); }
+function precioAnual(m, d){ return m * 12 * (1 - d); }
+// anima el número desde su valor actual hasta el nuevo (sube o baja)
+function animNum(el, to, dur = 700){
+  const from = parseFloat(el.textContent.replace(/,/g,'')) || 0;
+  el.dataset.target = to; // fuente de verdad
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(to - from) < .005){
+    el.textContent = fmt(to); return;
+  }
+  const t0 = performance.now();
+  function frame(t){
+    if (parseFloat(el.dataset.target) !== to) return; // otro toggle tomó el control
+    const p = Math.min(1, (t - t0) / dur);
+    const e = 1 - Math.pow(1 - p, 3); // ease-out
+    el.textContent = fmt(from + (to - from) * e);
+    if (p < 1) requestAnimationFrame(frame); else el.textContent = fmt(to);
+  }
+  requestAnimationFrame(frame);
+  // fallback: garantiza el valor final aunque el navegador pause los frames
+  setTimeout(()=>{ if (parseFloat(el.dataset.target) === to) el.textContent = fmt(to); }, dur + 120);
+}
+function renderPrices(){
+  document.querySelectorAll('.plan').forEach(card => {
+    const m = parseFloat(card.dataset.monthly);
+    const amt  = card.querySelector('.amt');
+    const per  = card.querySelector('.per');
+    const note = card.querySelector('.bill-note');
+    const d = discFor(card);
+    if (billing === 'anual'){
+      animNum(amt, precioAnual(m, d));
+      per.textContent = '/año';
+      note.textContent = `Equivale a $${fmt(m * (1 - d))}/mes · ahorras ${Math.round(d*100)}%`;
+    } else {
+      animNum(amt, m);
+      per.textContent = '/mes';
+      note.textContent = '';
+    }
+  });
+  btM.classList.toggle('active', billing==='mensual');
+  btA.classList.toggle('active', billing==='anual');
+}
+btM.addEventListener('click', ()=>{ if(billing!=='mensual'){ billing='mensual'; renderPrices(); } });
+btA.addEventListener('click', ()=>{ if(billing!=='anual'){ billing='anual';  renderPrices(); } });
+renderPrices();
+
+// ---- CTAs a WhatsApp + evento Lead ----
+function irAWhatsApp(plan, price, disc){
+  const anual = billing === 'anual';
+  const ciclo = anual ? ` (pago anual con ${Math.round((disc||0)*100)}% de descuento)` : '';
+  const precioTxt = (price && Number(price) > 0)
+    ? ` de $${fmt(Number(price))} + IVA ${anual ? 'al año' : 'al mes'}`
+    : '';
+  const msg = ['Consulta general','CTA final','Footer','Botón flotante'].includes(plan)
+    ? 'Hola, quiero información sobre Odoo Factura IA para mi negocio.'
+    : `Hola, quiero CONTRATAR el plan ${plan}${precioTxt}${ciclo} de Odoo Factura IA.`;
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  try {
+    fbq('track', 'Lead', {
+      content_name: plan,
+      content_category: 'Plan Facturación',
+      value: Number(price) || 0,
+      currency: 'USD',
+      billing_cycle: billing
+    });
+  } catch(e) {}
+  window.open(url, '_blank', 'noopener');
+}
+document.querySelectorAll('[data-wa]').forEach(el => {
+  el.addEventListener('click', (ev) => {
+    ev.preventDefault();
+    const card = el.closest('.plan');
+    const plan  = card ? card.dataset.planName : (el.dataset.plan || 'Consulta general');
+    const d = card ? discFor(card) : 0;
+    let price = card ? parseFloat(card.dataset.monthly) : Number(el.dataset.price) || 0;
+    if (card && billing === 'anual') price = precioAnual(price, d);
+    irAWhatsApp(plan, price, d);
+  });
+});
+
+// ---- ViewContent al ver planes ----
+const planesSec = document.getElementById('planes');
+if (planesSec && 'IntersectionObserver' in window){
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        try { fbq('track','ViewContent',{content_name:'Sección Planes',content_category:'Pricing'}); } catch(err){}
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:.3});
+  io.observe(planesSec);
+}
+
+// ---- Testimonios: marquee continuo (duplicar para loop sin costura) ----
+(function(){
+  const track = document.getElementById('car-track');
+  if(!track) return;
+  track.innerHTML += track.innerHTML; // 2 copias -> translateX(-50%) hace loop perfecto
+})();
+
+// ---- Reveals + stagger ----
+if ('IntersectionObserver' in window){
+  const ro = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target);} });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal, [data-stagger]').forEach(el=>ro.observe(el));
+} else {
+  document.querySelectorAll('.reveal, [data-stagger]').forEach(el=>el.classList.add('in'));
+}
+</script>
+</body>
+</html>
