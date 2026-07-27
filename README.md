@@ -64,12 +64,10 @@ Ejemplo: para dejar Deluxe en $59.99/mes con 10% anual → `data-monthly="59.99"
 
 ## Configuración
 
-En cada HTML, al inicio del `<script>` final:
+- **`WHATSAPP_NUMBER`** — número destino de los CTA (formato internacional sin `+`, ej. `50372559059`). Está en el `<script>` final de cada página.
+- **Pixel de Meta** — el ID del Pixel vive en el snippet del `<head>` de cada página, en **dos lugares**: `fbq('init', '…')` y el `<img>` del `<noscript>` de respaldo. `PageView` se dispara ahí. Los eventos `Lead` (cada CTA a WhatsApp) y `ViewContent` (sección Planes) se disparan desde el `<script>` final.
 
-- **`WHATSAPP_NUMBER`** — número destino de los CTA (formato internacional sin `+`, ej. `50372559059`).
-- **`PIXEL_ID`** — dataset/pixel de Meta.
-
-> Nota: ambos valores están **repetidos en las 4 páginas**. Si cambian, actualizar en los 4 archivos.
+> Nota: estos valores están **repetidos en las 4 páginas**. Si cambian, actualizar en los 4 archivos (y el ID del Pixel en sus 2 lugares por página).
 
 ## Deploy
 
@@ -85,4 +83,4 @@ Al ser estático y sin dependencias, la migración es directa:
 
 1. Copiar todos los archivos versionados al nuevo repo.
 2. En Vercel, crear/enlazar el proyecto al nuevo repo de GitHub (framework: *Other*, sin build command, output = raíz).
-3. Verificar el dominio de producción y que el `PIXEL_ID` sea el correcto de la empresa.
+3. Verificar el dominio de producción y que el **ID del Pixel de Meta** sea el correcto de la empresa (en el `<head>`: `fbq('init', …)` y el `<noscript>`).

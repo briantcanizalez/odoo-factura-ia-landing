@@ -29,7 +29,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27890392917235121');
+fbq('track', 'PageView');
 </script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
 
 <style>
 :root{
@@ -424,8 +428,7 @@ footer a.back:hover{color:var(--amarillo)}
 
 <script>
 const WHATSAPP_NUMBER = "50372559059";
-const PIXEL_ID        = "27890392917235121";
-try { fbq('init', PIXEL_ID); fbq('track', 'PageView'); } catch(e) {}
+// Meta Pixel: init + PageView se disparan en el <head>. Aquí solo eventos (Lead).
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const header = document.getElementById('site-header');

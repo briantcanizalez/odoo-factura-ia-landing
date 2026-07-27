@@ -32,7 +32,11 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27890392917235121');
+fbq('track', 'PageView');
 </script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
 
 <style>
 /* =====================================================================
@@ -1141,12 +1145,10 @@ footer a.wa svg{width:17px;height:17px}
    CONFIGURACIÓN
    ===================================================================== */
 const WHATSAPP_NUMBER = "50372559059";       // WhatsApp destino (+503 7255-9059)
-const PIXEL_ID        = "27890392917235121"; // Dataset/pixel de Meta (Odoo Factura IA)
 // El descuento anual es por-plan (atributo data-annual en cada tarjeta): Starter/Pro 5%, Advanced/Deluxe 10%, Enterprise 15%
 /* ===================================================================== */
 
-// ---- Meta Pixel ----
-try { fbq('init', PIXEL_ID); fbq('track', 'PageView'); } catch(e) {}
+// ---- Meta Pixel: init + PageView se disparan en el <head>. Aquí solo eventos (Lead, ViewContent). ----
 
 // ---- Año ----
 document.getElementById('year').textContent = new Date().getFullYear();
