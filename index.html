@@ -120,10 +120,12 @@ header.scrolled{
 .cobrand span{display:none}
 @media(min-width:760px){.cobrand span{display:inline}}
 .head-cta{
-  display:none;font-weight:700;font-size:13.5px;color:#111;background:var(--amarillo);
-  padding:9px 18px;border-radius:99px;transition:transform .15s var(--ease), box-shadow .2s;
+  display:none;align-items:center;gap:8px;border:0;cursor:pointer;
+  font-weight:800;font-size:13.5px;color:#fff;background:#25D366;
+  padding:9px 18px;border-radius:99px;transition:transform .15s var(--ease), box-shadow .2s, background .2s;
 }
-.head-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(255,221,0,.28)}
+.head-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(37,211,102,.4);background:#20bd5a}
+.head-cta svg{width:16px;height:16px}
 @media(min-width:960px){.head-cta{display:inline-flex}}
 @media(min-width:760px){.head-svc{display:inline!important}}
 .head-svc:hover{color:#fff}
@@ -219,6 +221,9 @@ h1 .grad{
 .btn-amarillo:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,221,0,.38)}
 .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
 .btn-ghost:hover{border-color:rgba(223,210,255,.5);background:rgba(223,210,255,.05)}
+/* WhatsApp — verde reconocible, todo click convierte */
+.btn-wa{background:#25D366;color:#fff;box-shadow:0 6px 24px rgba(37,211,102,.30)}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(37,211,102,.48);background:#20bd5a}
 .btn svg{width:19px;height:19px}
 
 .hero-checks{display:flex;flex-wrap:wrap;gap:10px 24px}
@@ -571,6 +576,18 @@ footer a.wa{display:inline-flex;align-items:center;gap:8px;color:var(--txt-2);fo
 footer a.wa:hover{color:var(--amarillo)}
 footer a.wa svg{width:17px;height:17px}
 
+/* ---------- BANDA CTA ENTRE SECCIONES ---------- */
+.cta-band{
+  display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;
+  background:linear-gradient(120deg, rgba(37,211,102,.10), var(--surface) 60%);
+  border:1px solid var(--morado-borde);border-radius:var(--r-lg);
+  padding:26px 30px;
+}
+.cta-band .ct-txt b{display:block;font-size:clamp(18px,2.2vw,22px);font-weight:800;letter-spacing:-.01em}
+.cta-band .ct-txt span{font-size:14.5px;color:var(--txt-3)}
+.cta-band .btn{flex:0 0 auto}
+@media(max-width:640px){.cta-band{padding:24px 22px;justify-content:center;text-align:center}.cta-band .btn{width:100%}}
+
 /* ---------- FLOATING WHATSAPP ---------- */
 .fab{
   position:fixed;bottom:22px;right:22px;z-index:90;
@@ -580,6 +597,20 @@ footer a.wa svg{width:17px;height:17px}
 }
 .fab:hover{transform:scale(1.07)}
 .fab svg{width:29px;height:29px;color:#fff}
+
+/* ---------- BARRA FIJA MÓVIL (siempre visible) ---------- */
+.wa-bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:95;display:none;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));
+  background:rgba(5,5,7,.94);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-top:1px solid var(--linea);
+}
+.wa-bar .btn{width:100%;padding:14px 20px}
+@media(max-width:759px){
+  .wa-bar{display:block}
+  .fab{display:none}
+  body{padding-bottom:74px}
+}
 
 /* ---------- REVEALS con stagger ---------- */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease), transform .65s var(--ease)}
@@ -616,10 +647,14 @@ footer a.wa svg{width:17px;height:17px}
       <span>Un producto de</span>
       <img src="assets/consiti-isotipo.svg" alt="Grupo Consiti" loading="eager" fetchpriority="high" decoding="async" />
     </div>
+    <a href="#planes" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Planes</a>
     <a href="consiti-ai.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Consiti AI</a>
     <a href="servicios.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Servicios</a>
     <a href="faq.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Preguntas</a>
-    <a class="head-cta" href="#planes">Ver planes</a>
+    <button class="head-cta" data-plan="Header" data-price="0" data-wa aria-label="Escríbenos por WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escríbenos
+    </button>
     <button class="burger" id="burger" aria-label="Menú" aria-expanded="false">
       <svg class="bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
       <svg class="cls" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
@@ -645,13 +680,13 @@ footer a.wa svg{width:17px;height:17px}
       <h1>Factura más rápido con<br><span class="grad draw">Inteligencia Artificial</span></h1>
       <p class="sub">La plataforma de facturación electrónica <b>más rápida del país</b>. Autorizados por Hacienda, Partner de Odoo y Google Cloud. Tu sistema queda listo <b>en menos de 24 horas</b>.</p>
       <div class="hero-cta">
-        <a class="btn btn-amarillo" href="#planes">Ver planes y precios
+        <button class="btn btn-wa" data-plan="Hero" data-price="0" data-wa>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Escríbenos por WhatsApp
+        </button>
+        <a class="btn btn-ghost" href="#planes">Ver planes y precios
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <button class="btn btn-ghost" data-plan="Consulta general" data-price="0" data-wa>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp directo
-        </button>
       </div>
       <div class="hero-checks">
         <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Autorizados por Hacienda</div>
@@ -740,6 +775,17 @@ footer a.wa svg{width:17px;height:17px}
       <h3>Soporte siempre GRATIS</h3>
       <p>Respuestas inmediatas y la mejor tasa de resolución de problemas del mercado.</p>
     </div>
+  </div>
+
+  <div class="cta-band reveal" style="margin-top:var(--s6)">
+    <div class="ct-txt">
+      <b>¿Listo para dejar de digitar facturas?</b>
+      <span>Te asesoramos gratis y sin compromiso. Respuesta al momento.</span>
+    </div>
+    <button class="btn btn-wa" data-plan="Banda beneficios" data-price="0" data-wa>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escríbenos por WhatsApp
+    </button>
   </div>
 </section>
 
@@ -961,6 +1007,17 @@ footer a.wa svg{width:17px;height:17px}
 
       </div>
     </div>
+
+    <div class="cta-band reveal" style="margin-top:var(--s6)">
+      <div class="ct-txt">
+        <b>Únete a las +3,500 empresas que ya facturan con nosotros</b>
+        <span>Escríbenos y empieza a facturar en menos de 24 horas.</span>
+      </div>
+      <button class="btn btn-wa" data-plan="Banda testimonios" data-price="0" data-wa>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Escríbenos por WhatsApp
+      </button>
+    </div>
   </div>
 </section>
 
@@ -1062,6 +1119,14 @@ footer a.wa svg{width:17px;height:17px}
     </div>
   </div>
 </footer>
+
+<!-- ================= BARRA FIJA MÓVIL ================= -->
+<div class="wa-bar">
+  <button class="btn btn-wa" data-plan="Barra móvil" data-price="0" data-wa>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Escríbenos por WhatsApp
+  </button>
+</div>
 
 <!-- ================= FLOATING WHATSAPP ================= -->
 <a class="fab" href="#" data-plan="Botón flotante" data-price="0" data-wa aria-label="WhatsApp">
@@ -1219,13 +1284,13 @@ btA.addEventListener('click', ()=>{ if(billing!=='anual'){ billing='anual';  ren
 renderPrices();
 
 // ---- CTAs a WhatsApp + evento Lead ----
-function irAWhatsApp(plan, price, disc){
+function irAWhatsApp(plan, price, disc, generic){
   const anual = billing === 'anual';
   const ciclo = anual ? ` (pago anual con ${Math.round((disc||0)*100)}% de descuento)` : '';
   const precioTxt = (price && Number(price) > 0)
     ? ` de $${fmt(Number(price))} + IVA ${anual ? 'al año' : 'al mes'}`
     : '';
-  const msg = ['Consulta general','CTA final','Footer','Botón flotante'].includes(plan)
+  const msg = generic
     ? 'Hola, quiero información sobre Odoo Factura IA para mi negocio.'
     : `Hola, quiero CONTRATAR el plan ${plan}${precioTxt}${ciclo} de Odoo Factura IA.`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -1248,7 +1313,7 @@ document.querySelectorAll('[data-wa]').forEach(el => {
     const d = card ? discFor(card) : 0;
     let price = card ? parseFloat(card.dataset.monthly) : Number(el.dataset.price) || 0;
     if (card && billing === 'anual') price = precioAnual(price, d);
-    irAWhatsApp(plan, price, d);
+    irAWhatsApp(plan, price, d, !card);
   });
 });
 
