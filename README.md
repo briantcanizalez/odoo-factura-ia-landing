@@ -1,6 +1,6 @@
 # Odoo Factura IA — Landing
 
-Sitio de marketing de **Odoo Factura IA** (Grupo Consiti S.A. de C.V.), la plataforma SaaS de facturación electrónica más rápida de El Salvador.
+Sitio de marketing de **Odoo Factura IA** (Grupo Consiti S.A. de C.V.), la plataforma de facturación electrónica más fácil y rápida de El Salvador.
 
 **Producción:** https://odoo-factura-ia-landing.vercel.app
 
