@@ -160,13 +160,12 @@ body.menu-open{overflow:hidden}
    ===================================================================== */
 .hero{
   position:relative;
-  min-height:100svh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:112px 0 0;
+  display:flex;flex-direction:column;
+  /* content-driven: alto = contenido + padding (sin 100vh, sin vacíos en pantallas grandes) */
+  padding:clamp(120px,14vh,160px) 0 0;
 }
 .hero-grid{
   display:grid;grid-template-columns:1fr;gap:var(--s6);align-items:center;
-  flex:1;
 }
 @media(min-width:1000px){.hero-grid{grid-template-columns:1.08fr .92fr}}
 
