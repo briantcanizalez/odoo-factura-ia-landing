@@ -404,6 +404,17 @@ footer a.back:hover{color:var(--amarillo)}
 <script>
 const WHATSAPP_NUMBER = "50372559059";
 // Meta Pixel: init + PageView se disparan en el <head>. Aquí solo eventos (Lead).
+
+// ---- Meta CAPI (server-side) con dedup por eventID ----
+function getCookie(n){ const m=document.cookie.match('(^|;)\\s*'+n+'=([^;]+)'); return m?decodeURIComponent(m.pop()):''; }
+function newEventId(){ try{ return crypto.randomUUID(); }catch(e){ return 'ev-'+Date.now()+'-'+Math.random().toString(16).slice(2); } }
+function sendCAPI(eventName, eventId, customData){
+  try{
+    fetch('/api/capi', { method:'POST', keepalive:true, headers:{'content-type':'application/json'},
+      body: JSON.stringify({ event_name:eventName, event_id:eventId, event_source_url:location.href,
+        fbp:getCookie('_fbp'), fbc:getCookie('_fbc'), custom_data:customData||{} }) }).catch(function(){});
+  }catch(e){}
+}
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const header = document.getElementById('site-header');
@@ -428,7 +439,10 @@ addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 2
 function irAWhatsApp(ctx){
   const msg = 'Hola, quiero saber más sobre Consiti AI (procesamiento de compras y anexos de IVA con inteligencia artificial).';
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-  try { fbq('track','Lead',{content_name:ctx||'Consiti AI',content_category:'Consiti AI'}); } catch(e){}
+  const eventId = newEventId();
+  const cd = { content_name:ctx||'Consiti AI', content_category:'Consiti AI' };
+  try { fbq('track','Lead', cd, { eventID: eventId }); } catch(e){}
+  sendCAPI('Lead', eventId, cd);
   window.open(url,'_blank','noopener');
 }
 document.querySelectorAll('[data-wa]').forEach(el=>{

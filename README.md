@@ -31,6 +31,8 @@ HTML/CSS/JS **estático, sin build ni dependencias**. Un solo archivo por págin
 │   ├── firma.png             # Trazo animado del hero
 │   ├── odoo-partner.png      # Badge Odoo Ready Partner
 │   └── google-partner.png    # Badge Google Cloud Partner
+├── api/
+│   └── capi.js           # Endpoint Meta Conversions API (serverless, server-side)
 ├── vercel.json           # cleanUrls (URLs sin .html)
 ├── .gitignore
 └── README.md
@@ -68,6 +70,22 @@ Ejemplo: para dejar Deluxe en $59.99/mes con 10% anual → `data-monthly="59.99"
 - **Pixel de Meta** — el ID del Pixel vive en el snippet del `<head>` de cada página, en **dos lugares**: `fbq('init', '…')` y el `<img>` del `<noscript>` de respaldo. `PageView` se dispara ahí. Los eventos `Lead` (cada CTA a WhatsApp) y `ViewContent` (sección Planes) se disparan desde el `<script>` final.
 
 > Nota: estos valores están **repetidos en las 4 páginas**. Si cambian, actualizar en los 4 archivos (y el ID del Pixel en sus 2 lugares por página).
+
+## Conversions API (CAPI · server-side)
+
+Además del Pixel del navegador, los eventos se envían **desde el servidor** vía `api/capi.js`, con **deduplicación por `event_id`** (el mismo ID va al Pixel y a CAPI, así Meta no cuenta doble). Esto mejora mucho la señal frente a iOS/bloqueadores/cookies.
+
+**Flujo:** cada CTA genera un `eventID` → dispara `fbq('track','Lead', …, {eventID})` (navegador) y `POST /api/capi` (servidor) con el mismo ID + `_fbp`/`_fbc` para *match quality*.
+
+**Se activa configurando variables de entorno en Vercel** (Settings → Environment Variables). **Nunca en el repo:**
+
+| Variable | Valor |
+|----------|-------|
+| `META_PIXEL_ID` | `27890392917235121` |
+| `META_CAPI_TOKEN` | Token de acceso de Meta (secreto) |
+| `META_TEST_EVENT_CODE` | *(opcional)* código de "Probar eventos" |
+
+Sin estas variables, `api/capi.js` responde no-op y el sitio sigue funcionando (solo con el Pixel del navegador). Tras configurarlas, **redeploy** y CAPI queda activo.
 
 ## Deploy
 

@@ -1150,6 +1150,17 @@ const WHATSAPP_NUMBER = "50372559059";       // WhatsApp destino (+503 7255-9059
 
 // ---- Meta Pixel: init + PageView se disparan en el <head>. Aquí solo eventos (Lead, ViewContent). ----
 
+// ---- Meta CAPI (server-side) con dedup por eventID ----
+function getCookie(n){ const m=document.cookie.match('(^|;)\\s*'+n+'=([^;]+)'); return m?decodeURIComponent(m.pop()):''; }
+function newEventId(){ try{ return crypto.randomUUID(); }catch(e){ return 'ev-'+Date.now()+'-'+Math.random().toString(16).slice(2); } }
+function sendCAPI(eventName, eventId, customData){
+  try{
+    fetch('/api/capi', { method:'POST', keepalive:true, headers:{'content-type':'application/json'},
+      body: JSON.stringify({ event_name:eventName, event_id:eventId, event_source_url:location.href,
+        fbp:getCookie('_fbp'), fbc:getCookie('_fbc'), custom_data:customData||{} }) }).catch(function(){});
+  }catch(e){}
+}
+
 // ---- Año ----
 document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -1299,15 +1310,16 @@ function irAWhatsApp(plan, price, disc, generic){
     ? 'Hola, quiero información sobre Odoo Factura IA para mi negocio.'
     : `Hola, quiero CONTRATAR el plan ${plan}${precioTxt}${ciclo} de Odoo Factura IA.`;
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-  try {
-    fbq('track', 'Lead', {
-      content_name: plan,
-      content_category: 'Plan Facturación',
-      value: Number(price) || 0,
-      currency: 'USD',
-      billing_cycle: billing
-    });
-  } catch(e) {}
+  const eventId = newEventId();
+  const cd = {
+    content_name: plan,
+    content_category: 'Plan Facturación',
+    value: Number(price) || 0,
+    currency: 'USD',
+    billing_cycle: billing
+  };
+  try { fbq('track', 'Lead', cd, { eventID: eventId }); } catch(e) {}
+  sendCAPI('Lead', eventId, cd);
   window.open(url, '_blank', 'noopener');
 }
 document.querySelectorAll('[data-wa]').forEach(el => {
@@ -1328,7 +1340,9 @@ if (planesSec && 'IntersectionObserver' in window){
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{
       if(e.isIntersecting){
-        try { fbq('track','ViewContent',{content_name:'Sección Planes',content_category:'Pricing'}); } catch(err){}
+        var vcId = newEventId();
+        try { fbq('track','ViewContent',{content_name:'Sección Planes',content_category:'Pricing'}, {eventID:vcId}); } catch(err){}
+        sendCAPI('ViewContent', vcId, {content_name:'Sección Planes',content_category:'Pricing'});
         io.unobserve(e.target);
       }
     });
