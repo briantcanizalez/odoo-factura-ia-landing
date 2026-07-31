@@ -1,1287 +1,1318 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es-SV">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Planes · Odoo Factura IA — Facturación electrónica con IA en El Salvador</title>
-<meta name="description" content="Factura más rápido con Inteligencia Artificial. Autorizados por el Ministerio de Hacienda, Partner de Odoo y Google Cloud. Más de 3,500 empresas en El Salvador. Implementación en menos de 24 horas." />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facturación Electrónica DTE El Salvador · desde $14.99 al mes · Grupo Consiti</title>
+<meta name="description" content="Facturación electrónica DTE en El Salvador desde $14.99 al mes. Fácil de usar, soporte que contesta el mismo día y una empresa de 12 años detrás. Actualización a la Normativa DTE 2.0 incluida antes del 1 de diciembre de 2026.">
+<link rel="canonical" href="https://facturaia.consiti.com/">
+<meta name="theme-color" content="#0A0616">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_SV">
+<meta property="og:title" content="Facturación Electrónica DTE El Salvador · desde $14.99 al mes">
+<meta property="og:description" content="Emitís tu factura en tres clics. Soporte que contesta el mismo día y una empresa con 12 años de operación detrás.">
+<meta property="og:url" content="https://facturaia.consiti.com/">
+<!-- ASSET: og:image 1200x630 -->
+<meta property="og:image" content="/assets/og-facturaia.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
-<!-- Open Graph -->
-<meta property="og:title" content="Planes · Odoo Factura IA" />
-<meta property="og:description" content="La plataforma SaaS de facturación electrónica más rápida de El Salvador. Más de 3,500 empresas confían en nosotros. Implementación en menos de 24 horas." />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="es_SV" />
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-<!-- ============================================================
-     META PIXEL  ·  Odoo Factura IA
-     ============================================================ -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-/* =====================================================================
-   DESIGN TOKENS · regla 60-30-10: negro 60 · morado 30 · amarillo 10
-   ===================================================================== */
 :root{
-  /* 60% — negros */
-  --bg:#050507;
-  --surface:#0B0B12;
-  --surface-2:#10101A;
-  /* 30% — morados estructurales */
-  --morado:#5216E7;
-  --morado-suave:rgba(82,22,231,.14);
-  --morado-borde:rgba(124,88,236,.28);
-  --morado-oscuro:#2D1B69;
-  --lavanda:#DFD2FF;
-  /* 10% — amarillo: SOLO conversión */
-  --amarillo:#FFDD00;
-  /* texto */
-  --txt:#FFFFFF;
-  --txt-2:#C7CBD4;
-  --txt-3:#8B90A0;
-  /* líneas y vidrio */
-  --linea:rgba(255,255,255,.07);
-  --linea-hover:rgba(223,210,255,.30);
-  /* sistema */
-  --r-lg:24px; --r-md:16px; --r-sm:10px;
-  --max:1200px;
-  --font:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  /* escala de espaciado (8pt) */
-  --s2:8px; --s3:16px; --s4:24px; --s5:32px; --s6:48px; --s7:64px; --s8:96px; --s9:128px;
-  --ease:cubic-bezier(.22,.61,.36,1);
+  --violeta:#5216E7;
+  --violeta-hi:#8B62FF;
+  --tinta:#140A2E;
+  --nube:#F6F4FF;
+  --papel:#FFFFFF;
+  --noche:#0A0616;
+  --sello:#0E9F63;
+  --alerta:#C2410C;
+  --alerta-vivo:#FF8A00;
+  --amarillo:#F2D64B;
+  --gris:#544D6B;          /* oscurecido para lectura en celular a plena luz */
+  --gris-2:#6E6786;
+  --linea:rgba(20,10,46,.12);
+  --linea-osc:rgba(255,255,255,.15);
+  --wa:#25D366;
+  --display:'Archivo',system-ui,sans-serif;
+  --texto:'Instrument Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --max:1180px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--txt);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-a{color:inherit;text-decoration:none}
-img,svg{display:block;max-width:100%}
-button{font-family:var(--font)}
-.wrap{max-width:var(--max);margin:0 auto;padding-left:24px;padding-right:24px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.06;letter-spacing:-.025em;font-weight:800}
+h1{font-size:clamp(2.3rem,5.4vw,4.1rem)}
+h2{font-size:clamp(1.8rem,3.8vw,2.7rem)}
+h3{font-size:1.15rem;letter-spacing:-.015em;font-weight:700}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+section{padding:82px 0}
+@media(max-width:700px){section{padding:58px 0}}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--violeta);margin-bottom:13px;display:block}
+.dark .eyebrow{color:var(--violeta-hi)}
+.lede{color:var(--gris);font-size:1.08rem;max-width:60ch;margin-top:15px}
+.dark{background:var(--tinta);color:#fff}
+.dark .lede{color:rgba(255,255,255,.78)}
+.center{text-align:center}
+.center .lede{margin-left:auto;margin-right:auto}
 
-/* ============ ATMÓSFERA GLOBAL (sin filter:blur — barato y fluido) ============ */
-.bg{
-  position:fixed;inset:0;z-index:-2;pointer-events:none;
-  background:
-    radial-gradient(58% 42% at 50% -6%, rgba(82,22,231,.20), transparent 70%),
-    radial-gradient(40% 34% at 100% 38%, rgba(82,22,231,.07), transparent 70%),
-    radial-gradient(46% 38% at 0% 74%,  rgba(82,22,231,.08), transparent 70%),
-    var(--bg);
+/* ============ MARCADOR DE ASSET PARA EL DISEÑADOR ============ */
+.asset{
+  border:2px dashed var(--alerta-vivo);border-radius:16px;background:
+    repeating-linear-gradient(45deg,rgba(255,138,0,.07),rgba(255,138,0,.07) 10px,transparent 10px,transparent 20px);
+  padding:24px;position:relative
 }
-/* retícula fina que se desvanece — da textura sin ruido */
-.bg::after{
-  content:"";position:absolute;inset:0;
-  background:
-    repeating-linear-gradient(90deg, rgba(255,255,255,.022) 0 1px, transparent 1px 72px),
-    repeating-linear-gradient(0deg,  rgba(255,255,255,.022) 0 1px, transparent 1px 72px);
-  -webkit-mask-image:radial-gradient(72% 60% at 50% 0%, #000 30%, transparent 100%);
-          mask-image:radial-gradient(72% 60% at 50% 0%, #000 30%, transparent 100%);
+.asset-tag{
+  display:inline-block;background:var(--alerta-vivo);color:#2B1500;
+  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;padding:5px 10px;border-radius:5px;margin-bottom:14px
+}
+.asset h4{font-family:var(--mono);font-size:.86rem;letter-spacing:0;color:#7C3E00;margin-bottom:10px;font-weight:700}
+.asset ul{margin:0;padding-left:18px;font-family:var(--mono);font-size:.76rem;line-height:1.85;color:#7C3E00}
+.asset.ratio-43{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:center}
+.asset.ratio-169{aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center}
+.dark .asset h4,.dark .asset ul{color:#FFC781}
+.dark .asset{background:repeating-linear-gradient(45deg,rgba(255,138,0,.1),rgba(255,138,0,.1) 10px,transparent 10px,transparent 20px)}
+@media(max-width:600px){.asset{padding:18px}.asset ul{font-size:.7rem}.asset.ratio-43,.asset.ratio-169{aspect-ratio:auto}}
+/* dato que Rafa debe confirmar antes de publicar */
+.rev{border-bottom:2px dotted var(--alerta-vivo);cursor:help}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;padding:15px 26px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-wa{background:var(--wa);color:#04371A;box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-v{background:var(--violeta);color:#fff;box-shadow:0 8px 24px rgba(82,22,231,.26)}
+.btn-v:hover{background:#4712C7}
+.btn-ghost{background:transparent;color:var(--tinta);border-color:var(--linea)}
+.btn-ghost:hover{border-color:var(--violeta);color:var(--violeta)}
+.dark .btn-ghost{color:#fff;border-color:var(--linea-osc)}
+.btn-sm{padding:11px 19px;font-size:.88rem}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--violeta-hi);outline-offset:3px;border-radius:6px}
+.horario{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--gris-2);margin-top:14px}
+.dark .horario{color:rgba(255,255,255,.55)}
+
+/* ============ NAV con menú móvil ============ */
+header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea-osc)}
+.nav-in{display:flex;align-items:center;gap:24px;height:70px}
+.mark{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.mark b{font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.03em;color:#fff}
+.mark b i{font-style:normal;color:var(--violeta-hi)}
+.mark span{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+.mark-logo{height:30px;width:auto;display:block}
+@media(max-width:600px){.mark-logo{height:26px}}
+.nav-links{display:flex;gap:24px;margin-left:auto;font-size:.93rem;font-weight:500}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.72)}
+.nav-links a:hover{color:#fff}
+.nav-links a.precio-nav{color:var(--amarillo);font-weight:600}
+.burger{display:none;margin-left:auto;background:transparent;border:1px solid var(--linea-osc);border-radius:10px;padding:9px 11px;cursor:pointer}
+.burger svg{display:block;color:#fff}
+.drawer{display:none;background:var(--noche);border-bottom:1px solid var(--linea-osc);padding:8px 22px 20px}
+.drawer.abierto{display:block}
+.drawer a{display:block;padding:14px 0;color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;border-bottom:1px solid var(--linea-osc)}
+.drawer .btn{width:100%;margin-top:18px}
+@media(max-width:940px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-in .btn{display:none}
 }
 
-/* =====================================================================
-   HEADER
-   ===================================================================== */
-header{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 28px;
-  border-bottom:1px solid transparent;
-  transition:background .3s var(--ease), border-color .3s var(--ease);
-}
-header.scrolled{
-  background:rgba(5,5,7,.78);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom-color:var(--linea);
-}
-.logo{display:flex;align-items:center}
-.logo img{height:34px;width:auto}
-@media(max-width:640px){.logo img{height:28px}}
-.head-right{display:flex;align-items:center;gap:18px}
-.cobrand{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--txt-3)}
-.cobrand img{height:26px;width:auto;opacity:.85}
-.cobrand span{display:none}
-@media(min-width:760px){.cobrand span{display:inline}}
-.head-cta{
-  display:none;font-weight:700;font-size:13.5px;color:#111;background:var(--amarillo);
-  padding:9px 18px;border-radius:99px;transition:transform .15s var(--ease), box-shadow .2s;
-}
-.head-cta:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(255,221,0,.28)}
-@media(min-width:960px){.head-cta{display:inline-flex}}
-@media(min-width:760px){.head-svc{display:inline!important}}
-.head-svc:hover{color:#fff}
-/* menú móvil */
-.burger{display:none;width:44px;height:44px;border:1px solid var(--gris-linea);border-radius:12px;background:var(--glass);cursor:pointer;place-items:center;color:#fff;flex:0 0 auto}
-.burger svg{width:22px;height:22px}
-.burger .cls{display:none}
-.burger.is-open .bar{display:none}
-.burger.is-open .cls{display:block}
-.mobile-menu{position:fixed;top:66px;left:12px;right:12px;z-index:99;display:flex;flex-direction:column;gap:3px;
-  background:rgba(10,9,16,.98);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  border:1px solid var(--gris-linea);border-radius:18px;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.6);
-  opacity:0;transform:translateY(-10px);pointer-events:none;transition:opacity .25s var(--ease),transform .25s var(--ease)}
-.mobile-menu.open{opacity:1;transform:none;pointer-events:auto}
-.mobile-menu a,.mobile-menu button{display:flex;align-items:center;justify-content:space-between;width:100%;text-align:left;
-  padding:15px 16px;border-radius:12px;font-size:16px;font-weight:600;color:#fff;background:transparent;border:0;cursor:pointer;font-family:var(--font)}
-.mobile-menu a:active,.mobile-menu a:hover{background:var(--glass)}
-.mobile-menu .m-cta{background:var(--amarillo);color:#111;font-weight:800;justify-content:center;margin-top:6px}
-@media(max-width:759px){
-  .burger{display:grid}
-  .head-svc,.head-cta,.cobrand{display:none!important}
-}
-@media(min-width:760px){.mobile-menu{display:none!important}}
-body.menu-open{overflow:hidden}
-
-/* =====================================================================
-   HERO — pantalla completa, con momentum hacia abajo
-   ===================================================================== */
-.hero{
-  position:relative;
-  min-height:100svh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:112px 0 0;
-}
-.hero-grid{
-  display:grid;grid-template-columns:1fr;gap:var(--s6);align-items:center;
-  flex:1;
-}
-@media(min-width:1000px){.hero-grid{grid-template-columns:1.08fr .92fr}}
-
-/* social proof arriba del H1 */
-.proof-pill{
-  display:inline-flex;align-items:center;gap:12px;
-  background:var(--surface);border:1px solid var(--linea);
-  padding:8px 16px 8px 8px;border-radius:99px;margin-bottom:var(--s4);
-}
-.avatars{display:flex}
-.avatars span{
-  width:28px;height:28px;border-radius:50%;border:2px solid var(--bg);
-  display:grid;place-items:center;font-size:10.5px;font-weight:700;color:#fff;
-  background:linear-gradient(140deg,var(--morado),var(--morado-oscuro));
-}
-.avatars span:nth-child(2){background:linear-gradient(140deg,#6B21A8,#2D1B69);margin-left:-8px}
-.avatars span:nth-child(3){background:linear-gradient(140deg,#4316B8,#1E1B4B);margin-left:-8px}
-.proof-pill b{font-size:13px;font-weight:700}
-.proof-pill b em{font-style:normal;color:var(--amarillo)}
-.proof-pill i{font-style:normal;font-size:12.5px;color:var(--txt-3)}
-
-h1{
-  font-weight:800;letter-spacing:-.035em;line-height:1.08;
-  font-size:clamp(25px,6.4vw,66px);
-  text-wrap:balance;
-  margin-bottom:var(--s4);
-}
-h1 .grad{
-  background:linear-gradient(92deg,#fff 10%,var(--lavanda) 55%,#A78BFA 90%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-/* trazo (firma del logo) que se dibuja al cargar */
+/* ============ HERO ============ */
+.hero{position:relative;overflow:hidden;background:var(--noche);color:#fff;padding:66px 0 72px}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(760px 460px at 12% 2%,rgba(82,22,231,.36),transparent 66%),radial-gradient(600px 400px at 94% 92%,rgba(139,98,255,.2),transparent 68%)}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:74px 74px;mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%);-webkit-mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%);transform:translateY(var(--py,0));will-change:transform}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center}
+@media(max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+.social{display:inline-flex;align-items:center;gap:13px;padding:9px 20px 9px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--linea-osc)}
+.avatares{display:flex}
+.avatares span{width:32px;height:32px;border-radius:50%;margin-right:-10px;background:linear-gradient(160deg,var(--violeta-hi),var(--violeta));border:2px solid var(--noche);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.58rem;font-weight:700;color:#fff}
+.social-txt{font-size:.88rem;line-height:1.35;color:rgba(255,255,255,.7)}
+.social-txt b{display:block;color:#fff;font-weight:600}
+.social-txt b em{font-style:normal;color:var(--amarillo);font-weight:700}
+.hero h1{margin-top:26px}
+.grad{background:linear-gradient(94deg,#F4EFFF 4%,#C0A8FF 48%,#8B62FF 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* trazo amarillo (firma de marca) que se dibuja solo al cargar */
 .draw{position:relative;white-space:nowrap}
 .draw::after{
-  content:"";position:absolute;left:-1.5%;right:-3.5%;bottom:-.34em;height:.46em;
+  content:"";position:absolute;left:-1.5%;right:-3.5%;bottom:-.30em;height:.42em;
   background:url('assets/firma.png') center/100% 100% no-repeat;
   transform:scaleX(0);transform-origin:left center;
-  animation:draw .85s var(--ease) .5s forwards;
+  animation:draw .85s cubic-bezier(.22,1,.36,1) .5s forwards;
 }
 @keyframes draw{to{transform:scaleX(1)}}
-@media(prefers-reduced-motion:reduce){.draw::after{animation:none;transform:scaleX(1)}}
+.hero-sub{color:rgba(255,255,255,.8);font-size:1.12rem;max-width:50ch;margin-top:20px}
+.hero-sub b{color:#fff;font-weight:600}
+.precio-ancla{display:flex;align-items:baseline;gap:10px;margin-top:26px;flex-wrap:wrap}
+.precio-ancla .p{font-family:var(--mono);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:-.04em}
+.precio-ancla .t{font-size:.92rem;color:rgba(255,255,255,.65)}
+.precio-ancla a{color:var(--amarillo);font-size:.9rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(242,214,75,.45)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.plazo-hero{display:inline-flex;align-items:flex-start;gap:11px;margin-top:24px;padding:13px 19px;border-radius:14px;background:rgba(255,138,0,.11);border:1px solid rgba(255,138,0,.34);font-size:.9rem;color:rgba(255,255,255,.8);text-decoration:none;line-height:1.5}
+.plazo-hero b{font-family:var(--mono);color:var(--alerta-vivo);font-size:.88rem;white-space:nowrap}
+.plazo-hero:hover{background:rgba(255,138,0,.17)}
 
-.hero sub-copy{display:block}
-.sub{font-size:clamp(16px,2vw,19px);color:var(--txt-2);max-width:540px;margin-bottom:var(--s5)}
-.sub b{color:var(--txt);font-weight:600}
+/* ============ FRANJA ============ */
+.franja{border-bottom:1px solid var(--linea);background:var(--nube)}
+.franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
+.franja-in span{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:500;color:var(--tinta)}
+.franja-in svg{flex:0 0 15px;width:15px;height:15px;color:var(--sello)}
 
-.hero-cta{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:var(--s5)}
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  font-weight:800;font-size:15.5px;cursor:pointer;letter-spacing:.02em;
-  padding:16px 30px;border-radius:14px;border:0;
-  transition:transform .16s var(--ease), box-shadow .2s var(--ease), background .2s, border-color .2s;
-}
-.btn:active{transform:translateY(1px) scale(.98)}
-.btn-amarillo{background:var(--amarillo);color:#111;box-shadow:0 6px 24px rgba(255,221,0,.22)}
-.btn-amarillo:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,221,0,.38)}
-.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
-.btn-ghost:hover{border-color:rgba(223,210,255,.5);background:rgba(223,210,255,.05)}
-.btn svg{width:19px;height:19px}
+/* ============ QUÉ ES ============ */
+.queEs-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:48px;align-items:center}
+@media(max-width:920px){.queEs-grid{grid-template-columns:1fr;gap:32px}}
+.simple{list-style:none;padding:0;margin:24px 0 0}
+.simple li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--linea)}
+.simple li:last-child{border-bottom:none}
+.simple .n{font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--violeta);flex:0 0 26px;padding-top:3px}
+.simple b{font-family:var(--display);font-size:1rem;display:block}
+.simple p{font-size:.94rem;color:var(--gris);margin-top:3px;line-height:1.5}
+.glosario{margin-top:26px;padding:18px 20px;border-radius:14px;background:var(--nube);border-left:4px solid var(--violeta);font-size:.95rem;line-height:1.6;color:var(--gris)}
+.glosario b{color:var(--tinta)}
 
-.hero-checks{display:flex;flex-wrap:wrap;gap:10px 24px}
-.hero-checks .c{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--txt-3)}
-.hero-checks .c svg{width:15px;height:15px;color:var(--lavanda);flex:0 0 auto}
+/* ============ CALCULADORA DE PLAN ============ */
+.calc{background:var(--nube)}
+.calc-box{background:var(--papel);border:1px solid var(--linea);border-radius:22px;padding:32px;margin-top:34px;box-shadow:0 24px 60px -36px rgba(20,10,46,.3)}
+@media(max-width:600px){.calc-box{padding:22px}}
+.calc-preg{font-family:var(--display);font-weight:700;font-size:1.16rem;margin-bottom:18px}
+.opciones{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:900px){.opciones{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.opciones{grid-template-columns:1fr}}
+.opciones button{
+  font-family:var(--texto);font-size:.94rem;font-weight:600;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:14px;
+  padding:16px 12px;cursor:pointer;text-align:center;line-height:1.35;transition:all .16s
+}
+.opciones button small{display:block;font-family:var(--mono);font-size:.66rem;font-weight:400;color:var(--gris-2);margin-top:5px}
+.opciones button:hover{border-color:var(--violeta-hi)}
+.opciones button.on{background:var(--violeta);border-color:var(--violeta);color:#fff}
+.opciones button.on small{color:rgba(255,255,255,.75)}
+.resultado{display:none;margin-top:26px;padding-top:26px;border-top:1px solid var(--linea)}
+.resultado.ver{display:block;animation:sube .4s ease both}
+@keyframes sube{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.res-grid{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}
+@media(max-width:760px){.res-grid{grid-template-columns:1fr;gap:18px}}
+.res-plan{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violeta)}
+.res-nombre{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:-.03em;margin-top:6px}
+.res-detalle{font-size:.95rem;color:var(--gris);margin-top:8px;line-height:1.55}
+.res-precio{text-align:right}
+@media(max-width:760px){.res-precio{text-align:left}}
+.res-precio .p{font-family:var(--mono);font-weight:700;font-size:2.5rem;letter-spacing:-.05em;line-height:1;color:var(--violeta)}
+.res-precio .m{font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:7px}
+.res-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:22px}
 
-/* ---- feed en vivo (columna derecha) ---- */
-.live{
-  position:relative;
-  background:linear-gradient(180deg,var(--surface-2),var(--surface));
-  border:1px solid var(--morado-borde);
-  border-radius:var(--r-lg);
-  padding:24px 24px 18px;
-  box-shadow:0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(82,22,231,.06), 0 0 90px rgba(82,22,231,.10);
-}
-.live-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.live-head .t{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--txt-3)}
-.pulse{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}70%{box-shadow:0 0 0 9px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
-.live-head .hoy{font-size:11.5px;color:var(--txt-3)}
-.live-head .hoy b{color:var(--amarillo);font-weight:800}
-.feed{display:flex;flex-direction:column;gap:9px;min-height:280px}
-.frow{
-  display:flex;align-items:center;gap:12px;
-  background:rgba(255,255,255,.025);border:1px solid var(--linea);
-  border-radius:var(--r-sm);padding:11px 14px;
-  opacity:1;transform:none;
-  transition:opacity .5s var(--ease), transform .5s var(--ease);
-}
-.frow.enter{opacity:0;transform:translateY(-8px)}
-.frow .fi{
-  width:32px;height:32px;border-radius:9px;flex:0 0 auto;display:grid;place-items:center;
-  background:var(--morado-suave);border:1px solid var(--morado-borde);
-}
-.frow .fi svg{width:16px;height:16px;color:var(--lavanda)}
-.frow .fx{flex:1;min-width:0}
-.frow .fx b{display:block;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.frow .fx span{font-size:11px;color:var(--txt-3)}
-.frow .ok{font-size:10.5px;font-weight:800;letter-spacing:.04em;color:#4ade80;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.25);padding:3px 8px;border-radius:99px;white-space:nowrap}
-.live-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--linea);font-size:11px;color:var(--txt-3)}
-.live-foot b{color:var(--txt-2)}
+/* ============ PRODUCTO ============ */
+.prod-fila{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:52px}
+.prod-fila:nth-child(even) .prod-txt{order:2}
+@media(max-width:900px){.prod-fila{grid-template-columns:1fr;gap:26px;margin-top:40px}.prod-fila:nth-child(even) .prod-txt{order:0}}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--nube);color:var(--violeta)}
 
-/* ---- indicador de scroll + ticker: el "imán" hacia abajo ---- */
-.hero-bottom{margin-top:var(--s7)}
-.scroll-cue{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:var(--txt-3);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-  margin-bottom:var(--s4);
-}
-.scroll-cue .chev{width:22px;height:22px;color:var(--amarillo);animation:bob 1.6s var(--ease) infinite}
-@keyframes bob{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(7px);opacity:.4}}
-@media(prefers-reduced-motion:reduce){.scroll-cue .chev{animation:none}}
+/* ============ CONTADORES ============ */
+.conta{background:var(--tinta);color:#fff}
+.conta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.conta-grid{grid-template-columns:1fr;gap:32px}}
+.conta-list{list-style:none;padding:0;margin:22px 0 0}
+.conta-list li{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--linea-osc);font-size:.98rem;line-height:1.5}
+.conta-list li:last-child{border-bottom:none}
+.conta-list svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:#3DD68C}
+.referido{margin-top:26px;padding:22px;border-radius:16px;background:rgba(139,98,255,.14);border:1px solid rgba(139,98,255,.4)}
+.referido h4{font-family:var(--display);font-size:1.06rem;font-weight:700;margin-bottom:8px}
+.referido p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.55}
 
-.ticker{
-  border-top:1px solid var(--linea);border-bottom:1px solid var(--linea);
-  overflow:hidden;padding:15px 0;position:relative;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
-}
-.ticker-track{display:flex;gap:0;width:max-content;animation:tick 34s linear infinite}
-.ticker:hover .ticker-track{animation-play-state:paused}
-@keyframes tick{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.ticker-track{animation:none}}
-.tk{display:flex;align-items:center;gap:10px;padding:0 28px;font-size:13px;font-weight:600;color:var(--txt-3);white-space:nowrap}
-.tk svg{width:15px;height:15px;color:var(--lavanda);flex:0 0 auto}
-.tk b{color:var(--txt-2);font-weight:700}
+/* ============ EMPRESA DETRÁS ============ */
+.cifras{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--linea);border-radius:16px;overflow:hidden;margin-top:34px}
+@media(max-width:760px){.cifras{grid-template-columns:1fr 1fr}}
+.cifras div{padding:28px 22px;border-right:1px solid var(--linea)}
+.cifras div:last-child{border-right:none}
+@media(max-width:760px){.cifras div:nth-child(2n){border-right:none}.cifras div:nth-child(-n+2){border-bottom:1px solid var(--linea)}}
+.cifras .n{font-family:var(--mono);font-weight:700;font-size:2.05rem;letter-spacing:-.045em;color:var(--violeta);line-height:1}
+.cifras .l{font-size:.87rem;color:var(--gris);margin-top:9px;line-height:1.45}
+.preguntas{margin-top:44px;border:1px solid var(--linea);border-radius:20px;overflow:hidden}
+.preguntas-cab{padding:24px 26px;background:var(--nube);border-bottom:1px solid var(--linea)}
+.preguntas-cab h3{font-size:1.2rem}
+.preguntas-cab p{font-size:.94rem;color:var(--gris);margin-top:7px;line-height:1.55}
+.preguntas ol{list-style:none;counter-reset:q;padding:0;margin:0}
+.preguntas li{counter-increment:q;display:flex;gap:16px;padding:20px 26px;border-bottom:1px solid var(--linea)}
+.preguntas li:last-child{border-bottom:none}
+.preguntas li:before{content:counter(q);font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--violeta);background:var(--nube);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;margin-top:2px}
+.preguntas b{font-family:var(--display);font-size:1rem;display:block;font-weight:700}
+.preguntas .resp{font-size:.93rem;color:var(--gris);margin-top:5px;line-height:1.55}
+.preguntas .resp em{font-style:normal;color:var(--sello);font-weight:600}
+.escrito{margin-top:24px;padding:22px 24px;border-radius:14px;background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--amarillo);font-size:1rem;line-height:1.65;color:var(--gris)}
+.escrito b{color:var(--tinta);font-weight:600}
 
-/* =====================================================================
-   SECCIONES — ritmo vertical consistente
-   ===================================================================== */
-section{padding:clamp(76px,8vw,112px) 0;position:relative}
-.sec-head{max-width:680px;margin:0 auto var(--s6);text-align:center}
-.eyebrow{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lavanda);
-  margin-bottom:14px;
-}
-.eyebrow::before,.eyebrow::after{content:"";width:22px;height:1px;background:var(--morado-borde)}
-h2{font-weight:800;letter-spacing:-.03em;font-size:clamp(28px,3.6vw,42px);line-height:1.12}
-.sec-sub{color:var(--txt-2);font-size:16.5px;margin-top:14px}
+/* ============ FEED compacto ============ */
+.vivo{margin-top:44px;background:var(--nube);border:1px solid var(--linea);border-radius:20px;padding:22px}
+.vivo-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:15px}
+.vivo-head .t{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--tinta)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--sello);animation:latido 2.4s ease-in-out infinite}
+@keyframes latido{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+.demo{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--alerta);border:1px solid rgba(194,65,12,.4);background:rgba(255,138,0,.11);padding:3px 7px;border-radius:5px}
+.vivo-head .c{font-family:var(--mono);font-size:.76rem;color:var(--gris-2)}
+.vivo-head .c b{color:var(--tinta)}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+@media(max-width:820px){.feed{grid-template-columns:1fr}.feed>*:nth-child(n+3){display:none}}
+.dte{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:12px;background:var(--papel);border:1px solid var(--linea);animation:entra .5s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.dte-txt{flex:1;min-width:0}
+.dte-txt b{font-family:var(--display);font-weight:700;font-size:.92rem;display:block}
+.dte-txt span{font-family:var(--mono);font-size:.68rem;color:var(--gris-2);display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sello-ok{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(14,159,99,.11);border:1px solid rgba(14,159,99,.3);font-size:.72rem;font-weight:600;color:var(--sello)}
 
-/* ---------- STATS con contadores ---------- */
-.stats{padding:var(--s8) 0 var(--s4)}
-.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:var(--r-lg);overflow:hidden}
-@media(min-width:860px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
-.stat{background:var(--surface);text-align:center;padding:34px 16px}
-.stat .n{font-size:clamp(30px,3.6vw,42px);font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
-.stat .n .acc{color:var(--amarillo)}
-.stat .l{font-size:13px;color:var(--txt-3);margin-top:6px}
+/* ============ NORMATIVA ============ */
+.norma{background:var(--noche);color:#fff;position:relative;overflow:hidden}
+.norma:before{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 85% 10%,rgba(255,138,0,.13),transparent 65%);pointer-events:none}
+.norma .wrap{position:relative;z-index:2}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(255,138,0,.13);border:1px solid rgba(255,138,0,.38);font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--alerta-vivo)}
+.norma-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;margin-top:22px}
+@media(max-width:900px){.norma-grid{grid-template-columns:1fr;gap:32px}}
+.reloj{font-family:var(--mono);font-weight:700;font-size:clamp(2.6rem,7vw,4.4rem);letter-spacing:-.05em;line-height:1;color:#fff}
+.reloj small{display:block;font-family:var(--texto);font-size:.94rem;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.6);margin-top:10px}
+.incluido{margin-top:24px;padding:20px 22px;border-radius:14px;background:rgba(14,159,99,.14);border:1px solid rgba(61,214,140,.34);font-size:.98rem;line-height:1.6;color:rgba(255,255,255,.85)}
+.incluido b{color:#3DD68C}
+details.tecnico{margin-top:22px;border:1px solid var(--linea-osc);border-radius:14px;background:rgba(255,255,255,.04)}
+details.tecnico summary{padding:16px 20px;cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:.96rem;display:flex;align-items:center;gap:10px}
+details.tecnico summary::-webkit-details-marker{display:none}
+details.tecnico summary:after{content:"+";margin-left:auto;font-family:var(--mono);font-size:1.3rem;color:var(--violeta-hi);font-weight:400}
+details.tecnico[open] summary:after{content:"–"}
+details.tecnico .cuerpo{padding:0 20px 20px}
+details.tecnico ul{margin:0;padding-left:20px;font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.7)}
+details.tecnico code{font-family:var(--mono);font-size:.84rem;color:var(--violeta-hi)}
 
-/* ---------- BENTO BENEFICIOS (asimetría deliberada 2+3) ---------- */
-.bento{display:grid;gap:16px;grid-template-columns:1fr}
-@media(min-width:880px){
-  .bento{grid-template-columns:repeat(6,1fr)}
-  .bento .b-lg{grid-column:span 3}
-  .bento .b-sm{grid-column:span 2}
-}
-.bcard{
-  position:relative;overflow:hidden;
-  background:var(--surface);border:1px solid var(--linea);
-  border-radius:var(--r-lg);padding:30px 28px;
-  transition:transform .25s var(--ease), border-color .25s var(--ease);
-}
-.bcard:hover{transform:translateY(-4px);border-color:var(--linea-hover)}
-.bcard::before{
-  content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s var(--ease);
-  background:radial-gradient(340px 180px at 20% 0%, var(--morado-suave), transparent 70%);
-  pointer-events:none;
-}
-.bcard:hover::before{opacity:1}
-.bcard .ico{
-  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
-  background:var(--morado-suave);border:1px solid var(--morado-borde);margin-bottom:18px;
-}
-.bcard .ico svg{width:22px;height:22px;color:var(--lavanda)}
-.bcard h3{font-size:18px;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
-.bcard p{font-size:14.5px;color:var(--txt-3)}
-.bcard .mini-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.bcard .mini-tags span{
-  font-size:11.5px;font-weight:600;color:var(--txt-2);
-  background:rgba(255,255,255,.04);border:1px solid var(--linea);
-  padding:5px 11px;border-radius:99px;
-}
+/* ============ MIGRACIÓN ============ */
+.migra{background:var(--nube)}
+.migra-card{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:36px;display:grid;grid-template-columns:1.35fr .65fr;gap:38px;align-items:center;margin-top:30px}
+@media(max-width:860px){.migra-card{grid-template-columns:1fr;gap:24px;padding:26px}}
+.pasos-migra{list-style:none;padding:0;margin:18px 0 0;font-size:.96rem}
+.pasos-migra li{display:flex;gap:11px;padding:8px 0;color:var(--gris)}
+.pasos-migra svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:var(--sello)}
 
-/* ---------- ONBOARDING: timeline simétrico ---------- */
-.onb-grid{display:grid;gap:16px;grid-template-columns:1fr}
-@media(min-width:960px){.onb-grid{grid-template-columns:1fr 1fr}}
-.onb-left{
-  background:linear-gradient(170deg, rgba(82,22,231,.16), var(--surface) 62%);
-  border:1px solid var(--morado-borde);border-radius:var(--r-lg);padding:34px 30px;
-  display:flex;flex-direction:column;
-}
-.onb-left h3{font-size:clamp(20px,2.2vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:12px}
-.onb-left h3 em{font-style:normal;color:var(--amarillo)}
-.onb-left>p{color:var(--txt-2);font-size:15px;margin-bottom:24px}
-.курс{display:none}
-.cursos{display:grid;gap:12px;margin-top:auto}
-.curso{
-  display:flex;gap:14px;align-items:center;
-  background:rgba(5,5,7,.5);border:1px solid var(--linea);border-radius:var(--r-md);padding:16px 18px;
-}
-.curso .ci{
-  width:38px;height:38px;border-radius:10px;flex:0 0 auto;display:grid;place-items:center;
-  background:var(--morado-suave);border:1px solid var(--morado-borde);
-}
-.curso .ci svg{width:18px;height:18px;color:var(--lavanda)}
-.curso b{display:block;font-size:14.5px}
-.curso span{font-size:12.5px;color:var(--txt-3)}
-.curso .chip{margin-left:auto;font-size:10.5px;font-weight:800;color:#111;background:var(--amarillo);padding:4px 10px;border-radius:99px;white-space:nowrap}
+/* ============ PASOS ============ */
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--linea)}
+@media(max-width:860px){.pasos{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pasos{grid-template-columns:1fr}}
+.paso{padding:24px 22px 24px 0;border-right:1px solid var(--linea)}
+.paso:last-child{border-right:none}
+.paso .num{font-family:var(--mono);font-size:.7rem;color:var(--violeta);letter-spacing:.14em;margin-bottom:12px}
+.paso p{font-size:.92rem;color:var(--gris);margin-top:7px;line-height:1.5}
 
-.timeline{position:relative;display:flex;flex-direction:column;gap:12px}
-.tl-step{
-  position:relative;display:flex;gap:16px;align-items:flex-start;
-  background:var(--surface);border:1px solid var(--linea);border-radius:var(--r-md);
-  padding:20px;
-  transition:border-color .25s var(--ease), transform .25s var(--ease);
-}
-.tl-step:hover{border-color:var(--linea-hover);transform:translateX(4px)}
-.tl-num{
-  flex:0 0 auto;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
-  border:1.5px solid var(--morado-borde);background:var(--morado-suave);
-  color:var(--lavanda);font-weight:800;font-size:14px;
-}
-.tl-step b{display:block;font-size:15.5px;margin-bottom:3px}
-.tl-step span{font-size:13.5px;color:var(--txt-3)}
-.tl-step .free-tag{display:inline-block;font-size:10px;font-weight:800;color:#111;background:var(--amarillo);border-radius:99px;padding:2px 8px;margin-left:8px;vertical-align:2px}
+/* ============ TABLA DE PLANES ============ */
+.tabla-wrap{margin-top:32px;border:1px solid var(--linea);border-radius:18px;overflow:auto;background:var(--papel);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+th,td{padding:14px 16px;text-align:center;border-bottom:1px solid var(--linea)}
+thead th{background:var(--nube);font-family:var(--display);font-weight:700;font-size:.95rem;position:sticky;top:0}
+thead th.reco{background:var(--violeta);color:#fff}
+tbody th{text-align:left;font-family:var(--texto);font-weight:500;font-size:.9rem;color:var(--gris);position:sticky;left:0;background:var(--papel);min-width:220px;border-right:1px solid var(--linea)}
+td.reco{background:rgba(82,22,231,.05);font-weight:600}
+.tp{font-family:var(--mono);font-weight:700;font-size:1.2rem;letter-spacing:-.04em;display:block}
+.tp small{font-family:var(--texto);font-size:.7rem;font-weight:400;color:var(--gris-2);letter-spacing:0}
+.si{color:var(--sello);font-weight:700}
+.no{color:#B9B3C8}
+.scroll-hint{display:none;font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:10px;text-align:center}
+@media(max-width:820px){.scroll-hint{display:block}}
+.nota-planes{margin-top:22px;padding:20px 22px;background:var(--nube);border:1px solid var(--linea);border-radius:14px;font-size:.92rem;color:var(--gris);line-height:1.65}
+.nota-planes b{color:var(--tinta)}
 
-/* ---------- PLANES ---------- */
-#planes{
-  background:
-    radial-gradient(56% 44% at 50% 8%, rgba(82,22,231,.13), transparent 70%);
-}
-.billing-toggle{
-  display:flex;align-items:center;margin:calc(-1 * var(--s3)) auto var(--s6);
-  background:var(--surface);border:1px solid var(--linea);border-radius:99px;
-  padding:5px;width:max-content;
-}
-.billing-toggle button{
-  font-weight:700;font-size:14px;cursor:pointer;border:0;
-  padding:10px 24px;border-radius:99px;background:transparent;color:var(--txt-3);
-  transition:background .25s var(--ease), color .25s;display:flex;align-items:center;gap:8px;
-}
-.billing-toggle button.active{background:var(--morado);color:#fff}
-.billing-toggle .save{font-size:11px;font-weight:800;background:var(--amarillo);color:#111;padding:2px 8px;border-radius:99px}
+/* ============ TESTIMONIOS ============ */
+.tst{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+@media(max-width:900px){.tst{grid-template-columns:1fr}}
 
-.grid-planes{display:grid;grid-template-columns:1fr;gap:16px;align-items:stretch}
-@media(min-width:640px){.grid-planes{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.grid-planes{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1200px){.grid-planes{grid-template-columns:repeat(5,1fr);gap:14px}}
-.plan{
-  position:relative;display:flex;flex-direction:column;
-  background:var(--surface);border:1px solid var(--linea);
-  border-radius:var(--r-lg);padding:26px 20px 20px;
-  transition:transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
-}
-.plan:hover{transform:translateY(-5px);border-color:var(--linea-hover)}
-.plan.featured{
-  background:linear-gradient(175deg, rgba(82,22,231,.20), var(--surface) 68%);
-  border-color:var(--morado-borde);
-  box-shadow:0 20px 60px rgba(82,22,231,.18);
-}
-.plan.featured:hover{border-color:rgba(255,221,0,.55)}
-.plan .badge{
-  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
-  background:var(--amarillo);color:#111;font-size:10.5px;font-weight:800;letter-spacing:.07em;
-  text-transform:uppercase;padding:5px 13px;border-radius:99px;white-space:nowrap;
-}
-.plan .pname{font-size:18px;font-weight:800;letter-spacing:-.01em}
-.plan .pnote{font-size:12.5px;color:var(--lavanda);min-height:34px;margin-top:3px}
-.plan .price{margin:14px 0 2px;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
-.plan .price .cur{font-size:16px;font-weight:700;color:var(--txt-2)}
-.plan .price .amt{font-size:36px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
-.plan .price .per{font-size:13px;color:var(--txt-3)}
-.plan .iva{
-  font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--lavanda);
-  border:1px solid var(--morado-borde);border-radius:99px;padding:2px 8px;align-self:center;
-}
-.plan .bill-note{font-size:11.5px;color:var(--amarillo);min-height:17px;font-weight:600;margin-top:2px}
-.plan .impl{font-size:12.5px;color:var(--txt-3);margin:8px 0 16px;padding-bottom:14px;border-bottom:1px solid var(--linea)}
-.plan .impl b{color:var(--txt-2);font-weight:600}
-.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;flex:1}
-.plan li{position:relative;padding-left:25px;font-size:13px;color:var(--txt-2);line-height:1.5}
-.plan li svg{position:absolute;left:0;top:3px;width:15px;height:15px;color:var(--amarillo)}
-.plan li b{font-weight:700;color:#fff;white-space:nowrap}
-.plan li.hl{font-weight:600;color:#fff}
-.plan li.no{color:var(--txt-3);opacity:.7}
-.plan li.no svg{color:var(--txt-3)}
-.plan .li-note{font-size:10.5px;color:var(--txt-3);margin:-8px 0 16px;line-height:1.45;padding-left:2px}
-.plan .btn{width:100%;font-size:14px;padding:13px 16px;letter-spacing:.08em}
-.plan .btn-plan{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.16)}
-.plan .btn-plan:hover{border-color:var(--morado);background:var(--morado-suave)}
-.plan.featured .btn-plan{background:var(--amarillo);color:#111;border:0;box-shadow:0 6px 22px rgba(255,221,0,.25)}
-.plan.featured .btn-plan:hover{box-shadow:0 10px 30px rgba(255,221,0,.4);transform:translateY(-2px)}
-.planes-foot{text-align:center;margin-top:var(--s6);font-size:13.5px;color:var(--txt-3)}
+/* ============ FAQ ============ */
+.faq{max-width:840px;margin:34px auto 0}
+.faq details{border-bottom:1px solid var(--linea);padding:3px 0}
+.faq summary{cursor:pointer;list-style:none;padding:19px 40px 19px 0;position:relative;font-family:var(--display);font-weight:700;font-size:1.02rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:6px;top:16px;font-family:var(--mono);font-size:1.4rem;color:var(--violeta);font-weight:400;transition:transform .2s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{padding:0 20px 21px 0;color:var(--gris);font-size:.97rem;line-height:1.65}
 
-/* ---------- TESTIMONIOS (marquee continuo, como el ticker del hero) ---------- */
-.carousel{
-  position:relative;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-          mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
-}
-.car-track{display:flex;width:max-content;animation:scroll-testi 55s linear infinite}
-.carousel:hover .car-track{animation-play-state:paused}
-@keyframes scroll-testi{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.car-track{animation:none}}
-.tcard{
-  flex:0 0 clamp(290px,80vw,360px);margin-right:20px;
-  background:var(--surface);border:1px solid var(--linea);border-radius:var(--r-lg);
-  padding:28px 26px;display:flex;flex-direction:column;gap:14px;white-space:normal;
-}
-.tcard .qi{width:26px;height:26px;color:var(--morado-borde)}
-.tcard .stars{color:var(--amarillo);font-size:13px;letter-spacing:2.5px}
-.tcard p{font-size:14.5px;color:var(--txt-2);flex:1}
-.tcard .who{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--linea)}
-.tcard .av{
-  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;
-  background:linear-gradient(140deg,var(--morado),var(--morado-oscuro));color:#fff;flex:0 0 auto;
-}
-.tcard .who b{display:block;font-size:13.5px}
-.tcard .who span{font-size:12px;color:var(--txt-3)}
+/* ============ CIERRE / FOOTER ============ */
+.cierre{background:linear-gradient(155deg,var(--violeta) 0%,#340B96 100%);color:#fff;text-align:center}
+.cierre .lede{color:rgba(255,255,255,.85);margin:15px auto 0}
+.cierre-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.cierre .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.cierre .horario{color:rgba(255,255,255,.7)}
+footer{background:var(--noche);color:rgba(255,255,255,.65);padding:52px 0 28px;font-size:.9rem}
+.foot-grid{display:flex;flex-wrap:wrap;gap:38px;justify-content:space-between}
+footer a{color:rgba(255,255,255,.75);text-decoration:none;display:block;padding:4px 0}
+footer a:hover{color:#fff}
+.foot-col h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:500;margin-bottom:9px}
+.legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--linea-osc);font-size:.77rem;color:rgba(255,255,255,.45);line-height:1.7}
 
-/* ---------- PARTNERS ---------- */
-.partners-grid{display:grid;grid-template-columns:1fr;gap:16px}
-@media(min-width:640px){.partners-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.partners-grid{grid-template-columns:repeat(4,1fr)}}
-.partner{
-  text-align:center;padding:34px 22px;border-radius:var(--r-lg);
-  background:var(--surface);border:1px solid var(--linea);
-  transition:border-color .25s var(--ease), transform .25s var(--ease);
-}
-.partner:hover{border-color:var(--linea-hover);transform:translateY(-4px)}
-.partner .pi{
-  width:50px;height:50px;margin:0 auto 16px;border-radius:14px;display:grid;place-items:center;
-  background:var(--morado-suave);border:1px solid var(--morado-borde);
-}
-.partner .pi svg{width:24px;height:24px;color:var(--lavanda)}
-.partner .pi img{width:28px;height:auto}
-/* badges oficiales de partner (traen fondo blanco) */
-.partner .pbadge{
-  width:150px;height:96px;margin:0 auto 18px;border-radius:14px;
-  background:#fff;display:flex;align-items:center;justify-content:center;
-  padding:6px;overflow:hidden;
-}
-.partner .pbadge img{max-height:100%;max-width:100%;width:auto;object-fit:contain}
-.partner b{display:block;font-size:15.5px;margin-bottom:6px}
-.partner span{font-size:13px;color:var(--txt-3)}
+/* ============ WA flotante ============ */
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:80;display:flex;align-items:center;gap:10px;padding:13px 20px 13px 15px;border-radius:999px;background:var(--wa);color:#04371A;font-family:var(--display);font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.42)}
+@media(max-width:600px){.wa-float{padding:14px;gap:0}.wa-float span{display:none}}
 
-/* ---------- FAQ ---------- */
-.faq{max-width:760px;margin:0 auto}
-details{
-  border:1px solid var(--linea);border-radius:var(--r-md);
-  padding:0 22px;margin-bottom:10px;background:var(--surface);
-  transition:border-color .25s var(--ease);
-}
-details[open]{border-color:var(--morado-borde)}
-summary{
-  list-style:none;cursor:pointer;padding:19px 0;font-weight:600;font-size:15.5px;
-  display:flex;justify-content:space-between;align-items:center;gap:16px;
-}
-summary::-webkit-details-marker{display:none}
-summary .plus{transition:transform .25s var(--ease);color:var(--lavanda);font-size:20px;line-height:1;flex:0 0 auto}
-details[open] summary .plus{transform:rotate(45deg);color:var(--amarillo)}
-details p{padding:0 0 20px;color:var(--txt-3);font-size:14.5px}
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.draw::after{transform:scaleX(1)}html{scroll-behavior:auto}}
 
-/* ---------- DTE 2.0 ---------- */
-.dte2-card{
-  position:relative;border-radius:28px;padding:56px 48px;overflow:hidden;
-  background:
-    radial-gradient(70% 120% at 0% 0%, rgba(82,22,231,.28), transparent 60%),
-    var(--surface);
-  border:1px solid var(--morado-borde);
-  display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;
-}
-.dte2-tag{display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:999px;background:var(--morado-suave);border:1px solid var(--morado-borde);color:var(--lavanda);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
-.dte2-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--amarillo);animation:dte2-pulse 1.6s infinite}
-@keyframes dte2-pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.dte2-left h2{margin-bottom:14px}
-.dte2-left p{color:var(--txt-2);font-size:16px;max-width:560px}
-.dte2-note{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--txt-2);font-weight:600}
-.dte2-note svg{width:15px;height:15px;color:var(--amarillo)}
-.dte2-list{display:flex;flex-direction:column;gap:14px}
-.dte2-item{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--linea)}
-.dte2-item svg{width:18px;height:18px;color:var(--lavanda);flex:0 0 auto;margin-top:3px}
-.dte2-item b{font-size:14px;display:block}
-.dte2-item span{font-size:12.5px;color:var(--txt-3)}
-@media(max-width:900px){.dte2-card{grid-template-columns:1fr;padding:44px 26px;gap:32px}}
-@media(prefers-reduced-motion:reduce){.dte2-tag .dot{animation:none}}
-
-/* ---------- CTA FINAL ---------- */
-.final-card{
-  position:relative;text-align:center;border-radius:28px;padding:70px 32px;overflow:hidden;
-  background:
-    radial-gradient(60% 90% at 50% 120%, rgba(82,22,231,.35), transparent 70%),
-    var(--surface);
-  border:1px solid var(--morado-borde);
-}
-.final-card h2{margin-bottom:14px}
-.final-card p{color:var(--txt-2);max-width:540px;margin:0 auto var(--s5);font-size:16.5px}
-.final-meta{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:var(--s4);font-size:12.5px;color:var(--txt-3)}
-.final-meta span{display:flex;align-items:center;gap:7px}
-.final-meta svg{width:14px;height:14px;color:var(--lavanda)}
-
-/* ---------- FOOTER ---------- */
-footer{border-top:1px solid var(--linea);padding:var(--s6) 0;margin-top:var(--s7)}
-.foot-grid{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
-@media(max-width:640px){.foot-grid{flex-direction:column;text-align:center;justify-content:center}.foot-grid>div{text-align:center!important;width:100%}.foot-logo img{margin-left:auto;margin-right:auto}.foot-grid .muted br{display:none}}
-.foot-logo img{height:38px;width:auto;margin-bottom:4px}
-footer .muted{color:var(--txt-3);font-size:13px;line-height:1.7}
-footer a.wa{display:inline-flex;align-items:center;gap:8px;color:var(--txt-2);font-weight:600;font-size:14px;transition:color .2s}
-footer a.wa:hover{color:var(--amarillo)}
-footer a.wa svg{width:17px;height:17px}
-
-/* ---------- FLOATING WHATSAPP ---------- */
-.fab{
-  position:fixed;bottom:22px;right:22px;z-index:90;
-  width:56px;height:56px;border-radius:50%;background:#25D366;
-  display:grid;place-items:center;box-shadow:0 10px 28px rgba(37,211,102,.4);
-  transition:transform .18s var(--ease);
-}
-.fab:hover{transform:scale(1.07)}
-.fab svg{width:29px;height:29px;color:#fff}
-
-/* ---------- REVEALS con stagger ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .65s var(--ease), transform .65s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.stagger>*{opacity:0;transform:translateY(18px);transition:opacity .55s var(--ease), transform .55s var(--ease)}
-.stagger.in>*{opacity:1;transform:none}
-.stagger.in>*:nth-child(1){transition-delay:.0s}
-.stagger.in>*:nth-child(2){transition-delay:.07s}
-.stagger.in>*:nth-child(3){transition-delay:.14s}
-.stagger.in>*:nth-child(4){transition-delay:.21s}
-.stagger.in>*:nth-child(5){transition-delay:.28s}
-.stagger.in>*:nth-child(6){transition-delay:.35s}
-@media(prefers-reduced-motion:reduce){
-  .reveal,.stagger>*{opacity:1;transform:none;transition:none}
-}
-
-@media(max-width:640px){
-  section{padding:88px 0}
-  .hero{padding-top:96px}
-  .final-card{padding:52px 22px}
-  .sec-head{margin-bottom:var(--s6)}
-}
+/* ============ animaciones extra ============ */
+.btn:hover{transform:translateY(-2px)}
+.opciones button:hover{transform:translateY(-2px)}
+/* entrada escalonada: "cómo funciona" (3 pasos) */
+.simple li{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease}
+.rv.in .simple li{opacity:1;transform:none}
+.rv.in .simple li:nth-child(2){transition-delay:.12s}
+.rv.in .simple li:nth-child(3){transition-delay:.24s}
+/* entrada escalonada: "cómo arranca" (4 pasos) */
+.pasos.rv{transform:none}
+.pasos.rv .paso{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.pasos.rv.in .paso{opacity:1;transform:none}
+.pasos.rv.in .paso:nth-child(2){transition-delay:.12s}
+.pasos.rv.in .paso:nth-child(3){transition-delay:.24s}
+.pasos.rv.in .paso:nth-child(4){transition-delay:.36s}
+@media(prefers-reduced-motion:reduce){.simple li,.pasos.rv .paso{opacity:1!important;transform:none!important}}
 </style>
 </head>
 <body>
 
-<div class="bg" aria-hidden="true"></div>
-
-<!-- ================= HEADER ================= -->
-<header id="site-header">
-  <a class="logo" href="#" aria-label="Odoo Factura IA"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="eager" fetchpriority="high" decoding="async" /></a>
-  <div class="head-right">
-    <div class="cobrand">
-      <span>Un producto de</span>
-      <img src="assets/consiti-isotipo.svg" alt="Grupo Consiti" loading="eager" fetchpriority="high" decoding="async" />
-    </div>
-    <a href="consiti-ai.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Consiti AI</a>
-    <a href="servicios.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Servicios</a>
-    <a href="faq.html" style="display:none;font-size:14px;font-weight:600;color:var(--txt-2)" class="head-svc">Preguntas</a>
-    <a class="head-cta" href="#planes">Ver planes</a>
-    <button class="burger" id="burger" aria-label="Menú" aria-expanded="false">
-      <svg class="bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
-      <svg class="cls" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#top"><img class="mark-logo" src="assets/factura-ia-logo.svg" alt="Factura IA"><span>de Grupo Consiti</span></a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a class="precio-nav" href="#precio">Precios desde $14.99</a>
+      <a href="#contadores">Para contadores</a>
+      <a href="#cambiar">Cambiar de proveedor</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" data-wa="nav" href="#">Escribinos</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
   </div>
+  <div class="drawer" id="drawer">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#precio">Precios desde $14.99</a>
+    <a href="#contadores">Para contadores</a>
+    <a href="#cambiar">Cambiar de proveedor</a>
+    <a href="#faq">Preguntas</a>
+    <a class="btn btn-wa" data-wa="menu-movil" href="#">Escribinos por WhatsApp</a>
+  </div>
 </header>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Navegación">
-  <a href="#planes">Planes</a>
-  <a href="consiti-ai.html">Consiti AI</a>
-  <a href="servicios.html">Servicios</a>
-  <a href="faq.html">Preguntas</a>
-  <button class="m-cta" data-plan="Consulta general" data-wa>Escríbenos por WhatsApp</button>
-</nav>
 
 <!-- ================= HERO ================= -->
-<section class="hero" style="padding-bottom:0">
+<section class="hero" id="top">
   <div class="wrap hero-grid">
     <div>
-      <div class="proof-pill">
-        <div class="avatars"><span>MR</span><span>CM</span><span>SL</span></div>
-        <div><b><em>+3,500 empresas</em> facturan con nosotros</b><br/><i>en todo El Salvador</i></div>
+      <div class="social">
+        <div class="avatares"><span>MR</span><span>CM</span><span>SL</span></div>
+        <p class="social-txt"><b><em>+500 empresas</em> facturan con nosotros</b>en todo El Salvador</p>
       </div>
-      <h1>Factura más rápido con<br><span class="grad draw">Inteligencia Artificial</span></h1>
-      <p class="sub">La plataforma de facturación electrónica <b>más rápida del país</b>. Autorizados por Hacienda, Partner de Odoo y Google Cloud. Tu sistema queda listo <b>en menos de 24 horas</b>.</p>
+
+      <h1>Facturá electrónico<br>sin volverte<br><span class="grad draw">experto en nada</span></h1>
+
+      <p class="hero-sub">
+        Tres clics y tu factura queda en Hacienda. Nosotros hacemos el papeleo,
+        te enseñamos a usarlo y <b>te contestamos el mismo día</b> cuando tengas una duda.
+        Detrás no hay una aplicación: hay una empresa con 12 años.
+      </p>
+
+      <div class="precio-ancla">
+        <span class="p">Desde $14.99</span>
+        <span class="t">al mes + IVA</span>
+        <a href="#precio">Ver qué plan te toca →</a>
+      </div>
+
       <div class="hero-cta">
-        <a class="btn btn-amarillo" href="#planes">Ver planes y precios
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14m0 0l-6-6m6 6l6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a class="btn btn-wa" data-wa="hero" href="#">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
+          Escribinos por WhatsApp
         </a>
-        <button class="btn btn-ghost" data-plan="Consulta general" data-price="0" data-wa>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp directo
-        </button>
+        <a class="btn btn-ghost" href="#como-funciona">Ver cómo se ve el sistema</a>
       </div>
-      <div class="hero-checks">
-        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Autorizados por Hacienda</div>
-        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte siempre GRATIS</div>
-        <div class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Respaldo en tiempo real 24/7</div>
-      </div>
+      <p class="horario">Te atendemos lunes a viernes, 8:00 a.m. a 5:00 p.m.</p>
+
+      <a class="plazo-hero" href="#normativa">
+        <b id="cuenta">—</b>
+        <span id="cuenta-txt">para el plazo de la Normativa DTE 2.0. ¿Tu proveedor ya te confirmó por escrito que va a actualizar?</span>
+      </a>
     </div>
 
-    <!-- Feed de facturación en vivo -->
-    <div class="live" aria-hidden="true">
-      <div class="live-head">
-        <span class="t"><span class="pulse"></span> Facturación en vivo</span>
-        <span class="hoy">Hoy: <b id="hoy-count">312</b> DTEs</span>
-      </div>
-      <div class="feed" id="feed"></div>
-      <div class="live-foot">
-        <span>Transmisión directa a Hacienda</span>
-        <b>~1.8 s por DTE</b>
-      </div>
-    </div>
-  </div>
-
-  <!-- Imán de scroll: cue + ticker -->
-  <div class="hero-bottom">
-    <div class="scroll-cue">
-      <span>Descubre por qué</span>
-      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </div>
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track" id="ticker-track">
-        <!-- se duplica por JS -->
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> <b>Autorizados</b> por el Ministerio de Hacienda</span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg> <b>Partner oficial</b> de Odoo</span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19a4.5 4.5 0 100-9 6 6 0 00-11.6-1.5A4 4 0 006 19h11.5z"/></svg> <b>Partner</b> de Google Cloud</span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Implementación <b>en menos de 24h</b></span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h8m-8 4h5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Soporte de dudas <b>siempre GRATIS</b></span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg> Respaldo en tiempo real <b>24/7</b></span>
-        <span class="tk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 11c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 3-1.34 3-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3z"/></svg> <b>+3,500 empresas</b> en El Salvador</span>
-      </div>
+    <!-- ============ ASSET PRINCIPAL: producto ============ -->
+    <div class="asset ratio-43">
+      <span class="asset-tag">Asset 01 · prioridad máxima</span>
+      <h4>Captura del sistema emitiendo una factura</h4>
+      <ul>
+        <li>Pantalla real de emisión de DTE, no un mockup genérico</li>
+        <li>1200 × 900 px · PNG o WebP · @2x para retina</li>
+        <li>Que se vean POCOS campos y un botón claro de "Emitir"</li>
+        <li>Datos de ejemplo ficticios: nada de clientes reales</li>
+        <li>Ideal: mockup en laptop + celular al lado, para mostrar que funciona en los dos</li>
+        <li>Objetivo: que el dueño piense "esto yo lo puedo usar"</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- ================= STATS ================= -->
-<div class="stats wrap">
-  <div class="stats-grid stagger" data-stagger>
-    <div class="stat"><div class="n"><span class="acc">+</span><span data-count="3500">0</span></div><div class="l">empresas en todo el país</div></div>
-    <div class="stat"><div class="n">&lt;<span data-count="24">0</span><span class="acc">h</span></div><div class="l">implementación garantizada</div></div>
-    <div class="stat"><div class="n"><span data-count="99.9" data-dec="1">0</span><span class="acc">%</span></div><div class="l">disponibilidad en Google Cloud</div></div>
-    <div class="stat"><div class="n">24/7</div><div class="l">respaldo de tu información</div></div>
+<!-- ================= FRANJA ================= -->
+<div class="franja">
+  <div class="wrap franja-in">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Emisor autorizado ante Hacienda</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner oficial de Odoo</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner de Google Cloud</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Listo en menos de 24 horas</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Normativa DTE 2.0 incluida</span>
   </div>
 </div>
 
-<!-- ================= BENEFICIOS (bento) ================= -->
-<section class="wrap">
-  <div class="sec-head reveal">
-    <p class="eyebrow">Por qué Odoo Factura IA</p>
-    <h2>Todo lo que tu facturación necesita</h2>
-    <p class="sec-sub">Sin digitación manual, sin miedo a perder información, sin costos ocultos.</p>
-  </div>
-  <div class="bento stagger" data-stagger>
-    <div class="bcard b-lg">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a7 7 0 00-4 12.7V17a2 2 0 002 2h4a2 2 0 002-2v-2.3A7 7 0 0012 2z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 22h6" stroke-linecap="round"/></svg></div>
-      <h3>Compras procesadas con IA</h3>
-      <p>Carga los JSON de tus diferentes proveedores y nuestra IA procesa tus facturas de compra automáticamente. Cero digitación manual, cero errores de tipeo.</p>
-      <div class="mini-tags"><span>JSON multi-proveedor</span><span>Procesamiento automático</span><span>Sin digitación</span></div>
-    </div>
-    <div class="bcard b-lg">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round"/></svg></div>
-      <h3>Respaldo en tiempo real, 24/7</h3>
-      <p>Tu información se respalda en tiempo real las 24 horas. ¿Perdiste tu equipo o se dañó? Todos tus datos están disponibles en el momento en que los solicites.</p>
-      <div class="mini-tags"><span>Tiempo real</span><span>Disponible siempre</span><span>Google Cloud</span></div>
-    </div>
-    <div class="bcard b-sm">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>Cumplimiento total</h3>
-      <p>Autorizados por Hacienda. Firma digital incluida y DTEs transmitidos en tiempo real.</p>
-    </div>
-    <div class="bcard b-sm">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>Listo en menos de 24h</h3>
-      <p>Tu sistema queda funcionando en menos de 24 horas, con la gestión ante Hacienda incluida.</p>
-    </div>
-    <div class="bcard b-sm">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 10h8m-8 4h5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>Soporte siempre GRATIS</h3>
-      <p>Respuestas inmediatas y la mejor tasa de resolución de problemas del mercado.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= DTE 2.0 ================= -->
-<section class="wrap" id="dte2">
-  <div class="dte2-card reveal">
-    <div class="dte2-left">
-      <span class="dte2-tag"><span class="dot"></span> Nueva normativa de Hacienda</span>
-      <h2>DTE 2.0: nosotros nos encargamos de la actualización</h2>
-      <p>El Ministerio de Hacienda anunció la versión 2.0 de la facturación electrónica, con nuevas estructuras, nuevos catálogos y eventos obligatorios. Ya estamos trabajando en la actualización para que tu facturación no tenga ningún problema cuando entre en vigencia: sin trámites, sin interrupciones y sin que tengas que hacer nada.</p>
-      <span class="dte2-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Actualización incluida en todos los planes, sin costo adicional</span>
-    </div>
-    <div class="dte2-list stagger" data-stagger>
-      <div class="dte2-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10" stroke-linecap="round"/></svg>
-        <div><b>Nuevos catálogos y estructuras</b><span>Distritos, recintos fiscales y regímenes de exportación actualizados en el sistema.</span></div>
-      </div>
-      <div class="dte2-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Notificación de invalidación</b><span>Tu receptor recibe el evento y archivo de invalidación de forma automática.</span></div>
-      </div>
-      <div class="dte2-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 3v5h5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Eventos de retorno y operaciones especiales</b><span>Devoluciones y comprobantes internos cubiertos según la nueva normativa.</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ONBOARDING ================= -->
-<section class="wrap">
-  <div class="sec-head reveal">
-    <p class="eyebrow">Onboarding exclusivo</p>
-    <h2>Los únicos con acompañamiento total</h2>
-    <p class="sec-sub">Desde que adquieres tu plan no estás solo: un gestor de cuenta te acompaña en todo el proceso y te capacita totalmente GRATIS.</p>
-  </div>
-  <div class="onb-grid stagger" data-stagger>
-    <div class="onb-left">
-      <h3>Tu gestor de cuenta + <em>2 cursos grabados incluidos</em></h3>
-      <p>Te guía paso a paso, configura contigo y te entrena sin costo. Y para aprender a tu ritmo:</p>
-      <div class="cursos">
-        <div class="curso">
-          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="6 3 20 12 6 21 6 3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div><b>Curso completo · 15 capítulos</b><span>Formato largo, todo el sistema a profundidad</span></div>
-          <span class="chip">GRATIS</span>
-        </div>
-        <div class="curso">
-          <div class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <div><b>Curso puntual · 15 capítulos</b><span>Formato corto, respuestas directas del día a día</span></div>
-          <span class="chip">GRATIS</span>
-        </div>
-      </div>
-    </div>
-    <div class="timeline">
-      <div class="tl-step"><div class="tl-num">1</div><div><b>Contratas tu plan</b><span>Nos escribes por WhatsApp y eliges el plan ideal para tu negocio.</span></div></div>
-      <div class="tl-step"><div class="tl-num">2</div><div><b>Implementación en menos de 24h</b><span>Configuramos todo y gestionamos tu autorización ante Hacienda.</span></div></div>
-      <div class="tl-step"><div class="tl-num">3</div><div><b>Onboarding con tu gestor<span class="free-tag">GRATIS</span></b><span>Te capacita y te acompaña en cada paso del proceso.</span></div></div>
-      <div class="tl-step"><div class="tl-num">4</div><div><b>Facturas sin preocuparte</b><span>Soporte gratuito de dudas y consultas, con respuestas inmediatas.</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PLANES ================= -->
-<section id="planes">
+<!-- ================= 1. QUÉ ES Y CÓMO SE VE ================= -->
+<section id="como-funciona">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Planes y precios</p>
-      <h2>Elige el plan que factura por ti</h2>
-      <p class="sec-sub">Todos incluyen DTEs, gestión ante Hacienda, firma digital, respaldo en tiempo real y soporte gratuito.</p>
+    <span class="eyebrow rv">Cómo funciona</span>
+    <h2 class="rv">Se hace en tres pasos. Nada más.</h2>
+    <p class="lede rv">Si sabés usar WhatsApp, sabés usar esto. En serio.</p>
+
+    <div class="queEs-grid" style="margin-top:34px">
+      <div class="rv">
+        <ul class="simple">
+          <li><span class="n">01</span><div><b>Elegís el cliente y el producto</b><p>Los tenés guardados. Los buscás por nombre y se llenan solos.</p></div></li>
+          <li><span class="n">02</span><div><b>Le das a "Emitir"</b><p>El sistema arma el documento, lo firma y lo manda a Hacienda. Vos no tocás nada de eso.</p></div></li>
+          <li><span class="n">03</span><div><b>Se lo mandás al cliente</b><p>Por correo o por WhatsApp, desde el mismo sistema. Queda guardado para siempre.</p></div></li>
+        </ul>
+        <div class="glosario">
+          <b>¿Y qué es un "DTE"?</b> Es el nombre que le da Hacienda a la factura electrónica:
+          Documento Tributario Electrónico. Cada factura, crédito fiscal o nota de crédito que
+          emitís es un DTE. Cuando en esta página veas "30 DTE al mes", leelo como
+          "30 facturas al mes".
+        </div>
+      </div>
+
+      <div class="asset ratio-169 rv">
+        <span class="asset-tag">Asset 02 · prioridad máxima</span>
+        <h4>Video de 30 a 45 segundos: emitir una factura de principio a fin</h4>
+        <ul>
+          <li>Grabación de pantalla real, sin cortes ni efectos</li>
+          <li>1920 × 1080 · MP4 + WebM · autoplay, en silencio, en bucle</li>
+          <li>SIN audio y CON subtítulos: se ve en el celular sin auriculares</li>
+          <li>Debe caber en 45 s. Si tarda más, el mensaje "es fácil" se cae</li>
+          <li>Poster/thumbnail obligatorio para que no cargue en blanco</li>
+          <li>Peso máximo 3 MB: buena parte del tráfico entra con datos móviles</li>
+        </ul>
+      </div>
     </div>
-
-    <div class="billing-toggle" role="tablist" aria-label="Ciclo de facturación">
-      <button id="bt-mensual" class="active" type="button">Mensual</button>
-      <button id="bt-anual" type="button">Anual <span class="save">hasta −15%</span></button>
-    </div>
-
-    <div class="grid-planes stagger" data-stagger>
-
-      <!-- STARTER -->
-      <div class="plan" data-plan-name="Starter" data-monthly="14.99" data-annual="0.05">
-        <div class="pname">Starter</div>
-        <div class="pnote">Documentos esenciales</div>
-        <div class="price"><span class="cur">$</span><span class="amt">14.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
-        <div class="bill-note"></div>
-        <div class="impl">Implementación <b>$40 + IVA</b> · <b>30</b> DTEs/mes</div>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Consumidor final (ventas y compras)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Crédito fiscal (ventas y compras)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Notas de crédito</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Solo nombre registrado en Hacienda <span style="opacity:.7">(sin logo)</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por correo</li>
-          <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" stroke-linejoin="round"/></svg> Anexos de IVA y libros contables</li>
-          <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" stroke-linejoin="round"/></svg> Exportación, sujeto excluido y retención</li>
-        </ul>
-        <button class="btn btn-plan" data-wa>CONTRATAR</button>
-      </div>
-
-      <!-- PROFESSIONAL -->
-      <div class="plan featured" data-plan-name="Professional" data-monthly="24.99" data-annual="0.05">
-        <div class="badge">★ Más vendido</div>
-        <div class="pname">Professional</div>
-        <div class="pnote">Contabilidad completa</div>
-        <div class="price"><span class="cur">$</span><span class="amt">24.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
-        <div class="bill-note"></div>
-        <div class="impl">Implementación <b>$50 + IVA</b> · <b>100</b> DTEs/mes</div>
-        <ul>
-          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Starter, y además:</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Logo en el encabezado del DTE</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Anexos de IVA y libros en PDF y Excel</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Factura de exportación y sujeto excluido</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por WhatsApp <span style="opacity:.7">(horario de oficina)</span></li>
-        </ul>
-        <button class="btn btn-plan" data-wa>CONTRATAR</button>
-      </div>
-
-      <!-- ADVANCED -->
-      <div class="plan" data-plan-name="Advanced" data-monthly="34.99" data-annual="0.10">
-        <div class="pname">Advanced</div>
-        <div class="pnote">Compras automáticas con IA</div>
-        <div class="price"><span class="cur">$</span><span class="amt">34.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
-        <div class="bill-note"></div>
-        <div class="impl">Implementación <b>$60 + IVA</b> · <b>500</b> DTEs/mes</div>
-        <ul>
-          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Professional, y además:</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Carga de compras con JSON en automático</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte por WhatsApp y llamada telefónica</li>
-        </ul>
-        <button class="btn btn-plan" data-wa>CONTRATAR</button>
-      </div>
-
-      <!-- DELUXE -->
-      <div class="plan" data-plan-name="Deluxe" data-monthly="54.99" data-annual="0.10">
-        <div class="pname">Deluxe</div>
-        <div class="pnote">Elige tu módulo</div>
-        <div class="price"><span class="cur">$</span><span class="amt">54.99</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
-        <div class="bill-note"></div>
-        <div class="impl">Implementación <b>$70 + IVA</b> · <b>1,000</b> DTEs/mes</div>
-        <ul>
-          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Advanced, y además:</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> 1 módulo a elección: POS, Inventario, Compras, Cotizaciones o CRM</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Módulo adicional: <b>$30 + IVA</b> (activación)</li>
-        </ul>
-        <div class="li-note">*La configuración de cada módulo se cotiza por separado.</div>
-        <button class="btn btn-plan" data-wa>CONTRATAR</button>
-      </div>
-
-      <!-- ENTERPRISE -->
-      <div class="plan" data-plan-name="Enterprise" data-monthly="150" data-annual="0.15">
-        <div class="pname">Enterprise</div>
-        <div class="pnote">Persona dedicada a tu sistema</div>
-        <div class="price"><span class="cur">$</span><span class="amt">150</span><span class="per">/mes</span><span class="iva">+ IVA</span></div>
-        <div class="bill-note"></div>
-        <div class="impl">Implementación <b>$100 + IVA</b> · DTEs <b>ilimitados</b></div>
-        <ul>
-          <li class="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Todo lo de Deluxe, y además:</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Una persona dedicada a tu sistema</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Te ayuda siempre que lo necesites <span style="opacity:.7">(horario de oficina)</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> DTEs ilimitados</li>
-        </ul>
-        <button class="btn btn-plan" data-wa>CONTRATAR</button>
-      </div>
-
-    </div>
-    <p class="planes-foot">Precios en USD + IVA. La implementación se paga una sola vez. ¿No sabes cuál elegir? Escríbenos y te asesoramos gratis.</p>
   </div>
 </section>
 
-<!-- ================= TESTIMONIOS ================= -->
+<!-- ================= 2. PRECIO TEMPRANO: CALCULADORA ================= -->
+<section class="calc" id="precio">
+  <div class="wrap">
+    <span class="eyebrow rv">Precios</span>
+    <h2 class="rv">Decinos cuántas facturas hacés y te decimos el precio</h2>
+    <p class="lede rv">
+      Sin cotizaciones, sin llamadas de venta para saber cuánto cuesta.
+      El precio está publicado y es el mismo para todos.
+    </p>
+
+    <div class="calc-box rv">
+      <p class="calc-preg">¿Cuántas facturas emitís, más o menos, en un día normal?</p>
+      <div class="opciones" id="opciones">
+        <button data-plan="0">1 o 2<small>~30 al mes</small></button>
+        <button data-plan="1">3 a 5<small>~100 al mes</small></button>
+        <button data-plan="2">Hasta 20<small>~500 al mes</small></button>
+        <button data-plan="3">Hasta 40<small>~1,000 al mes</small></button>
+        <button data-plan="4">Más de 40<small>sin límite</small></button>
+      </div>
+
+      <div class="resultado" id="resultado">
+        <div class="res-grid">
+          <div>
+            <div class="res-plan">Tu plan recomendado</div>
+            <div class="res-nombre" id="r-nombre">—</div>
+            <p class="res-detalle" id="r-detalle">—</p>
+          </div>
+          <div class="res-precio">
+            <div class="p" id="r-precio">—</div>
+            <div class="m">+ IVA al mes</div>
+            <div class="m" id="r-impl">—</div>
+          </div>
+        </div>
+        <div class="res-cta">
+          <a class="btn btn-wa" id="r-cta" href="#">Contratar por WhatsApp</a>
+          <a class="btn btn-ghost" href="#tabla">Ver todo lo que incluye</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. EL PRODUCTO POR DENTRO ================= -->
 <section>
   <div class="wrap">
-    <div class="sec-head reveal">
-      <p class="eyebrow">Testimonios</p>
-      <h2>Dueños de negocios que ya facturan con nosotros</h2>
+    <span class="eyebrow rv">El sistema</span>
+    <h2 class="rv">Lo que vas a usar todos los días</h2>
+
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Tus facturas de compra se cargan solas</h3>
+        <p class="lede">
+          Subís los archivos que te mandan tus proveedores y el sistema los lee y registra la
+          compra por vos. Lo que antes era una tarde entera digitando, ahora son unos minutos.
+        </p>
+        <div class="tags">
+          <span class="tag">Varios proveedores</span>
+          <span class="tag">Sin digitar</span>
+          <span class="tag">Desde el plan Advanced</span>
+        </div>
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 03 · prioridad alta</span>
+        <h4>Antes / después de la carga de compras</h4>
+        <ul>
+          <li>Dos paneles: los archivos entrando, y la compra ya registrada</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Mejor si es un GIF corto del arrastrar y soltar</li>
+          <li>Tapar o inventar los nombres de proveedores reales</li>
+        </ul>
+      </div>
     </div>
-    <div class="carousel" id="carousel">
-      <div class="car-track" id="car-track">
 
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>Antes tardaba toda una tarde digitando facturas de compras. Ahora cargo los JSON de mis proveedores y la IA hace todo. Es otra vida.</p>
-          <div class="who"><div class="av">MR</div><div><b>María R.</b><span>Farmacia · San Salvador</span></div></div>
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Los anexos de IVA y los libros, listos</h3>
+        <p class="lede">
+          Anexos de IVA, libro de compras y libro de ventas generados por el sistema, en PDF y
+          en Excel. Tu contador los descarga y trabaja: no hay que armar nada a mano.
+        </p>
+        <div class="tags">
+          <span class="tag">PDF y Excel</span>
+          <span class="tag">Listos para el cierre</span>
         </div>
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 04 · prioridad alta</span>
+        <h4>Pantalla de anexos de IVA y libros</h4>
+        <ul>
+          <li>Vista del reporte generado + los botones de descarga PDF / Excel</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Este asset es PARA EL CONTADOR: que se vean las columnas del anexo</li>
+          <li>Cifras de ejemplo, ninguna cifra de cliente real</li>
+        </ul>
+      </div>
+    </div>
 
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>Se me dañó la computadora y pensé que había perdido todo. Les escribí y en minutos tenía toda mi información disponible. El respaldo es real.</p>
-          <div class="who"><div class="av">CM</div><div><b>Carlos M.</b><span>Ferretería · Santa Ana</span></div></div>
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Y funciona desde el celular</h3>
+        <p class="lede">
+          Podés emitir y consultar desde el teléfono, en la tienda o en la calle. No necesitás
+          estar sentado frente a la computadora para facturar.
+        </p>
+        <div class="tags">
+          <span class="tag">Celular y computadora</span>
+          <span class="tag">Sin instalar nada</span>
         </div>
-
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>El gestor de cuenta me acompañó desde el día uno y me capacitó gratis. En menos de 24 horas ya estaba facturando con Hacienda.</p>
-          <div class="who"><div class="av">SL</div><div><b>Sandra L.</b><span>Restaurante · San Miguel</span></div></div>
-        </div>
-
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>Los cursos grabados son oro. Cuando entra alguien nuevo al negocio, le paso los capítulos cortos y en una tarde ya sabe facturar.</p>
-          <div class="who"><div class="av">JA</div><div><b>José A.</b><span>Distribuidora · Soyapango</span></div></div>
-        </div>
-
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>Cada vez que tengo una duda escribo al soporte y me responden al momento, sin costo. Nunca me han dejado con un problema sin resolver.</p>
-          <div class="who"><div class="av">KP</div><div><b>Karla P.</b><span>Boutique · Santa Tecla</span></div></div>
-        </div>
-
-        <div class="tcard">
-          <svg class="qi" viewBox="0 0 24 24" fill="currentColor"><path d="M6.5 10c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.293-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.318.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065.069-.232.14-.468.254-.68.114-.308.292-.575.469-.844.148-.291.409-.488.601-.737.201-.242.475-.403.692-.604.213-.21.492-.315.714-.463.232-.133.434-.28.65-.35l.539-.222.474-.197-.485-1.938-.597.144c-.191.048-.424.104-.689.171-.271.05-.56.187-.882.312-.317.142-.686.238-1.028.466-.344.218-.741.4-1.091.692-.339.301-.748.562-1.05.945-.33.358-.656.734-.909 1.162-.293.408-.492.856-.702 1.299-.19.443-.343.896-.468 1.336-.237.882-.343 1.72-.384 2.437-.034.718-.014 1.315.028 1.747.015.204.043.402.063.539l.025.168.026-.006A4.5 4.5 0 1 0 17.5 10z"/></svg>
-          <div class="stars">★★★★★</div>
-          <p>Probé otros sistemas y ninguno se compara. Somos una clínica con bastante movimiento y los DTEs salen solos, en tiempo real.</p>
-          <div class="who"><div class="av">RG</div><div><b>Roberto G.</b><span>Clínica · La Libertad</span></div></div>
-        </div>
-
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 05 · prioridad media</span>
+        <h4>Mockup de la vista móvil</h4>
+        <ul>
+          <li>Celular mostrando la pantalla de emisión</li>
+          <li>900 × 900 px · PNG con fondo transparente</li>
+          <li>Confirmar antes con Luis si la vista móvil está lista: si no lo está, borrar este bloque y el texto de al lado</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= PARTNERS ================= -->
-<section class="wrap">
-  <div class="sec-head reveal">
-    <p class="eyebrow">Respaldados por los grandes</p>
-    <h2>Partners oficiales, autorizados en el país</h2>
-  </div>
-  <div class="partners-grid stagger" data-stagger>
-    <div class="partner">
-      <div class="pbadge"><img src="assets/odoo-partner.png" alt="Odoo Ready Partner" loading="lazy" decoding="async" /></div>
-      <b>Partner de Odoo</b>
-      <span>Construido sobre el ERP más usado del mundo, con respaldo oficial.</span>
-    </div>
-    <div class="partner">
-      <div class="pbadge"><img src="assets/google-partner.png" alt="Google Cloud Partner" loading="lazy" decoding="async" /></div>
-      <b>Partner de Google Cloud</b>
-      <span>99.9% de disponibilidad y respaldo de tu información en tiempo real.</span>
-    </div>
-    <div class="partner">
-      <div class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <b>Autorizados por Hacienda</b>
-      <span>Transmisión de DTEs certificada ante el Ministerio de Hacienda.</span>
-    </div>
-    <div class="partner">
-      <div class="pi"><img src="assets/consiti-isotipo.svg" alt="Grupo Consiti" /></div>
-      <b>Grupo Consiti</b>
-      <span>Firma salvadoreña de tecnología con más de 3,500 empresas atendidas.</span>
+<!-- ================= 4. PARA CONTADORES ================= -->
+<section class="conta dark" id="contadores">
+  <div class="wrap">
+    <span class="eyebrow rv">Para contadores y despachos</span>
+    <h2 class="rv">Si llevás la contabilidad de varias empresas, esto es para vos</h2>
+    <div class="conta-grid" style="margin-top:30px">
+      <div class="rv">
+        <ul class="conta-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Todas tus empresas desde una sola cuenta.</b> Cambiás de una a otra sin volver a entrar. Y con un clic tenés los anexos y libros de IVA de todos tus clientes, sin andar saltando entre sistemas.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Anexos y libros en PDF y en Excel.</b> Listos para el cierre. Los descargás y trabajás: no hay que rearmar nada a mano.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Todos los documentos.</b> Crédito fiscal, exportación, sujeto excluido, retención, notas de crédito y débito.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Tus clientes no te llaman a vos por soporte.</b> Nos llaman a nosotros, y sin costo.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>La Normativa 2.0 la actualizamos nosotros</b> en todas las empresas que tengas con nosotros, a la vez.</span></li>
+        </ul>
+        <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:24px">Escribinos por WhatsApp</a>
+      </div>
+
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 06 · prioridad alta</span>
+        <h4>Pantalla del selector de empresas</h4>
+        <ul>
+          <li>Vista del contador con su lista de empresas y el cambio entre una y otra</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Nombres de empresa inventados</li>
+          <li>Idealmente mostrar el clic que descarga los anexos/libros de todas las empresas a la vez</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ================= FAQ ================= -->
-<section class="wrap">
-  <div class="sec-head reveal">
-    <p class="eyebrow">Preguntas frecuentes</p>
-    <h2>Lo que todo negocio pregunta</h2>
-  </div>
-  <div class="faq reveal">
-    <details>
-      <summary>¿Están autorizados por el Ministerio de Hacienda? <span class="plus">+</span></summary>
-      <p>Sí. Estamos autorizados por el Ministerio de Hacienda de El Salvador y transmitimos los DTEs de forma automática y en tiempo real. La firma digital viene incluida.</p>
-    </details>
-    <details>
-      <summary>¿Ya están listos para la normativa DTE 2.0? <span class="plus">+</span></summary>
-      <p>Sí, ya estamos trabajando en ella. Estamos actualizando la plataforma con los nuevos catálogos, estructuras y eventos que exige la versión 2.0 del Ministerio de Hacienda, para que tu facturación siga funcionando sin ningún problema cuando entre en vigencia. La actualización está incluida en todos los planes, sin costo adicional.</p>
-    </details>
-    <details>
-      <summary>¿En cuánto tiempo queda funcionando? <span class="plus">+</span></summary>
-      <p>En menos de 24 horas. Nos encargamos de la configuración y la gestión ante Hacienda, y tu gestor de cuenta inicia el onboarding de inmediato.</p>
-    </details>
-    <details>
-      <summary>¿Qué pasa si pierdo mi computadora o se daña? <span class="plus">+</span></summary>
-      <p>Nada se pierde. Tu información se respalda en tiempo real las 24 horas del día. En cualquier momento puedes solicitarla y la tendremos disponible.</p>
-    </details>
-    <details>
-      <summary>¿La capacitación y el soporte tienen costo? <span class="plus">+</span></summary>
-      <p>No. Tu gestor de cuenta te capacita totalmente GRATIS y además recibes dos capacitaciones grabadas de 15 capítulos cada una (formato largo y formato corto). El soporte de dudas y consultas siempre es gratuito, con respuestas inmediatas.</p>
-    </details>
-    <details>
-      <summary>¿Qué pasa si emito más DTEs de los que incluye mi plan? <span class="plus">+</span></summary>
-      <p>Puedes subir de plan en cualquier momento. Te ayudamos a elegir el que mejor se ajuste al volumen de tu negocio; escríbenos por WhatsApp y lo revisamos juntos.</p>
-    </details>
-  </div>
-</section>
+<!-- ================= 5. UNA EMPRESA DETRÁS ================= -->
+<section id="respaldo">
+  <div class="wrap">
+    <span class="eyebrow rv">Quién está detrás</span>
+    <h2 class="rv">No somos una app. Somos una empresa.</h2>
+    <p class="lede rv">
+      La facturación electrónica ya tiene dos años en El Salvador. En ese tiempo aparecieron
+      muchos sistemas hechos por una sola persona: funcionaron el primer año, y después
+      dejaron de actualizarse. Por eso estos meses nos están llegando tantos clientes
+      que vienen de otro lado.
+    </p>
 
-<!-- ================= CTA FINAL ================= -->
-<section class="wrap">
-  <div class="final-card reveal">
-    <p class="eyebrow">Más de 3,500 empresas ya lo hicieron</p>
-    <h2>Empieza a facturar en menos de 24 horas</h2>
-    <p>Escríbenos por WhatsApp, elige tu plan y deja el papeleo en nuestras manos. Tu gestor de cuenta te espera.</p>
-    <button class="btn btn-amarillo" data-plan="CTA final" data-price="0" data-wa>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      CONTRATAR
-    </button>
-    <div class="final-meta">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Sin permanencia forzada</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Capacitación GRATIS</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Soporte inmediato</span>
+    <div class="cifras rv">
+      <div><div class="n">12</div><div class="l">años de operación continua en El Salvador</div></div>
+      <div><div class="n">22</div><div class="l">personas: soporte, desarrollo e implementación</div></div>
+      <div><div class="n">+500</div><div class="l">empresas facturando electrónicamente con nosotros</div></div>
+      <div><div class="n">+3,500</div><div class="l">empresas atendidas por Grupo Consiti en 12 años</div></div>
+    </div>
+
+    <div class="preguntas rv">
+      <div class="preguntas-cab">
+        <h3>Cinco preguntas para hacerle a cualquier proveedor</h3>
+        <p>
+          Incluidos nosotros. Hacelas antes de firmar con quien sea, y compará las respuestas.
+          Al lado de cada una está la nuestra.
+        </p>
+      </div>
+      <ol>
+        <li><div><b>¿Quién me contesta si el sistema falla un día de cierre?</b>
+          <p class="resp"><em>Nosotros:</em> un equipo de soporte, no una persona. Respuesta el mismo día, en horario de oficina, sin costo.</p></div></li>
+        <li><div><b>¿Me van a tener actualizado a la Normativa 2.0 antes del 1 de diciembre?</b>
+          <p class="resp"><em>Nosotros:</em> sí, incluido en todos los planes y sin trámite de tu parte.</p></div></li>
+        <li><div><b>¿Dónde vive mi información y quién responde si se pierde?</b>
+          <p class="resp"><em>Nosotros:</em> en Google Cloud, con respaldo continuo. Grupo Consiti responde, con nombre y con planilla.</p></div></li>
+        <li><div><b>¿Qué pasa con mi facturación si la persona que hizo el sistema se va?</b>
+          <p class="resp"><em>Nosotros:</em> hay 22 personas y 12 años de operación. El sistema no depende de que alguien conteste.</p></div></li>
+        <li><div><b>¿La capacitación y el soporte tienen costo aparte?</b>
+          <p class="resp"><em>Nosotros:</em> no. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados, incluidos.</p></div></li>
+      </ol>
+    </div>
+
+    <p class="escrito rv">
+      Un consejo, aunque no nos contratés: <b>pedí las respuestas por escrito.</b>
+      Un proveedor que no te confirma por escrito que va a cumplir con la Normativa 2.0
+      antes del 1 de diciembre te está diciendo algo importante.
+    </p>
+
+    <!-- feed compacto, anonimizado -->
+    <div class="vivo rv">
+      <div class="vivo-head">
+        <div class="t"><span class="dot"></span>Facturación en vivo <span class="demo" id="tag-demo">Vista de ejemplo</span></div>
+        <div class="c">Hoy: <b data-pulso="dtes">—</b> facturas emitidas · <b data-pulso="latencia">~1.8 s</b> cada una</div>
+      </div>
+      <div class="feed" id="feed"></div>
     </div>
   </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
+<!-- ================= 6. NORMATIVA 2.0 ================= -->
+<section class="norma" id="normativa">
+  <div class="wrap">
+    <span class="chip rv">Plazo oficial: 1 de diciembre de 2026</span>
+    <div class="norma-grid">
+      <div class="rv">
+        <h2>El 1 de diciembre cambian las reglas.<br>Nosotros lo resolvemos.</h2>
+        <p class="lede">
+          Hacienda publicó nuevas reglas para la factura electrónica. Todos los sistemas del país
+          tienen que adaptarse antes de esa fecha. Si un sistema no se adapta, los documentos
+          empiezan a rechazarse y el negocio no puede facturar.
+        </p>
+        <div class="incluido">
+          <b>Vos no tenés que hacer nada.</b> La actualización va incluida en todos los planes,
+          sin costo extra y sin trámites. Te avisamos cuando ya esté aplicada en tu cuenta.
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-wa" data-wa="dte20" href="#">Quiero quedar cubierto</a>
+        </div>
+
+        <details class="tecnico">
+          <summary>El detalle técnico, para tu contador o tu programador</summary>
+          <div class="cuerpo">
+            <ul>
+              <li>Normativa de Cumplimiento DTE versión 2.0, publicada el 25 de mayo de 2026, en sustitución de la 1.2.</li>
+              <li>Plazo para adaptar los sistemas de transmisión: 1 de diciembre de 2026.</li>
+              <li>Nuevo Evento de Retorno (ERET) para ajustar facturas electrónicas, de exportación y de sujeto excluido.</li>
+              <li>Código de Generación al estándar <code>UUID v4</code>.</li>
+              <li>Catálogos actualizados: distritos, recintos fiscales y regímenes de exportación.</li>
+              <li>Notificación automática del evento y del archivo de invalidación al receptor.</li>
+              <li>Comprobantes de control interno para operaciones especiales y venta simplificada.</li>
+              <li>Entrega obligatoria del <code>JSON</code> firmado, que es el documento con validez jurídica.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="rv center">
+        <div class="reloj">
+          <span id="cuenta-2">—</span>
+          <small id="cuenta-2-txt">para el plazo de la Normativa DTE 2.0</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. MIGRACIÓN ================= -->
+<section class="migra" id="cambiar">
+  <div class="wrap">
+    <span class="eyebrow rv">¿Ya facturás con otro proveedor?</span>
+    <h2 class="rv">Cambiarse ya es un trámite normal</h2>
+    <p class="lede rv">
+      Desde mayo de 2026 el portal de Hacienda tiene habilitada la opción de
+      <b>Cambio de Plataforma</b>. No estás amarrado a tu proveedor actual.
+    </p>
+    <div class="migra-card rv">
+      <div>
+        <h3>Hacemos el cambio completo, sin costo de migración</h3>
+        <ul class="pasos-migra">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Gestionamos el trámite de cambio en el portal de Hacienda.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Migramos tu catálogo de productos, clientes y proveedores.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Conservás tus documentos históricos y quedás cubierto para la 2.0.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>No dejás de facturar ni un día.</li>
+        </ul>
+      </div>
+      <div>
+        <a class="btn btn-v" data-wa="migracion" href="#" style="width:100%">Quiero cambiarme</a>
+        <p style="font-size:.84rem;color:var(--gris);margin-top:13px;text-align:center;line-height:1.5">
+          Contanos con quién estás y te decimos exactamente qué implica.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CÓMO ARRANCA ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow rv">Cómo arranca</span>
+    <h2 class="rv">Alguien con nombre te acompaña desde el primer día</h2>
+    <p class="lede rv">
+      No te mandamos un manual y suerte. Te asignamos un gestor de cuenta que configura con vos,
+      te capacita y queda como tu contacto.
+    </p>
+    <div class="pasos rv">
+      <div class="paso"><div class="num">PASO 01</div><h3>Nos escribís</h3><p>Por WhatsApp. Definimos juntos el plan según cuántas facturas hacés.</p></div>
+      <div class="paso"><div class="num">PASO 02</div><h3>Lo dejamos listo</h3><p>En menos de 24 horas, con la gestión ante Hacienda incluida.</p></div>
+      <div class="paso"><div class="num">PASO 03</div><h3>Te enseñamos</h3><p>Capacitación en vivo sin costo y dos cursos grabados que te quedan.</p></div>
+      <div class="paso"><div class="num">PASO 04</div><h3>Facturás tranquilo</h3><p>Con soporte gratis y la normativa siempre al día de nuestro lado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. TABLA DE PLANES ================= -->
+<section style="background:var(--nube)" id="tabla">
+  <div class="wrap">
+    <span class="eyebrow rv">El detalle completo</span>
+    <h2 class="rv">Qué incluye cada plan</h2>
+    <p class="lede rv">
+      Si ya sabés lo que buscás, acá está todo. Si no, usá
+      <a href="#precio" style="color:var(--violeta);font-weight:600">la calculadora de arriba</a>.
+    </p>
+
+    <div class="tabla-wrap rv">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left">Plan</th>
+            <th>Starter</th>
+            <th>Professional</th>
+            <th class="reco">Advanced</th>
+            <th>Deluxe</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Precio al mes</th>
+            <td><span class="tp">$14.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$24.99</span><small>+ IVA</small></td>
+            <td class="reco"><span class="tp">$34.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$59.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$150</span><small>+ IVA</small></td>
+          </tr>
+          <tr>
+            <th>Facturas incluidas al mes</th>
+            <td>30</td><td>100</td><td class="reco">500</td><td>1,000</td><td>Sin límite</td>
+          </tr>
+          <tr>
+            <th>Factura adicional / excedente <small style="font-weight:400;color:var(--gris-2)">(+ IVA c/u)</small></th>
+            <td>$0.25</td><td>$0.15</td><td class="reco">$0.10</td><td>$0.05</td><td>Sin excedente</td>
+          </tr>
+          <tr>
+            <th>Implementación (una sola vez)</th>
+            <td>$40<small style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--gris-2)">+ IVA</small></td>
+            <td>$50<small style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--gris-2)">+ IVA</small></td>
+            <td class="reco">$60<small style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--gris-2)">+ IVA</small></td>
+            <td>$70<small style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--gris-2)">+ IVA</small></td>
+            <td>$100<small style="display:block;font-family:var(--mono);font-size:.66rem;color:var(--gris-2)">+ IVA</small></td>
+          </tr>
+          <tr>
+            <th>Consumidor final y crédito fiscal</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Notas de crédito y débito</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Anexos de IVA y libros en PDF</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Tu logo en la factura</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Anexos y libros en Excel</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Exportación, sujeto excluido y retención</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Carga automática de facturas de compra</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Un módulo del ERP a elección</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Una persona asignada a tu sistema</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="no">—</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Soporte de dudas sin costo</th>
+            <td>Correo</td><td>WhatsApp</td><td class="reco">WhatsApp y llamada</td><td>WhatsApp y llamada</td><td>Persona dedicada</td>
+          </tr>
+          <tr>
+            <th>Normativa DTE 2.0 incluida</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Capacitación y cursos grabados</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-starter" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-professional" href="#">Contratar</a></td>
+            <td class="reco"><a class="btn btn-v btn-sm" data-wa="plan-advanced" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-deluxe" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-enterprise" href="#">Hablemos</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">← Deslizá la tabla para ver todos los planes →</p>
+
+    <div class="nota-planes rv">
+      <b>Si te pasás de las facturas incluidas</b> no te suspendemos el servicio: cada factura
+      adicional se cobra según tu plan (ver la fila "Factura adicional" en la tabla), y baja
+      mientras más alto sea el plan — <b>desde $0.25 + IVA en Starter hasta $0.05 + IVA en Deluxe</b>.
+      El plan Enterprise es sin límite. Si mes con mes te estás pasando, te avisamos y te movemos
+      al plan que te salga más barato.<br><br>
+      <b>Todos nuestros precios son + IVA</b> — cada pago te genera crédito fiscal.
+      La implementación se paga una sola vez. Módulo adicional del ERP: $30 + IVA de activación,
+      y la configuración se cotiza aparte. Sin permanencia forzada: si te querés ir, te vas.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. TESTIMONIOS ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow rv">Clientes</span>
+    <h2 class="rv">Quiénes facturan con nosotros</h2>
+    <div class="tst">
+      <div class="asset rv">
+        <span class="asset-tag">Asset 07 · prioridad máxima</span>
+        <h4>Testimonio 1 — de alguien que se cambió de proveedor</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px, cara visible</li>
+          <li>Nombre completo, cargo, empresa y municipio</li>
+          <li>Consentimiento POR ESCRITO para usar nombre, foto y logo</li>
+          <li>Que la frase mencione que venía de otro sistema</li>
+          <li>Es el testimonio que sostiene todo el argumento de la página</li>
+        </ul>
+      </div>
+      <div class="asset rv">
+        <span class="asset-tag">Asset 08 · prioridad alta</span>
+        <h4>Testimonio 2 — un contador o despacho</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px</li>
+          <li>Nombre, despacho y cuántas empresas maneja</li>
+          <li>Consentimiento por escrito</li>
+          <li>Que hable de anexos, cierre mensual o multi-empresa</li>
+        </ul>
+      </div>
+      <div class="asset rv">
+        <span class="asset-tag">Asset 09 · prioridad media</span>
+        <h4>Testimonio 3 — dueño de PyME</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px</li>
+          <li>Nombre, negocio y municipio</li>
+          <li>Consentimiento por escrito</li>
+          <li>Que hable de lo fácil que fue empezar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="asset rv" style="margin-top:20px">
+      <span class="asset-tag">Regla de publicación</span>
+      <h4>No publicar esta sección con testimonios inventados ni anónimos</h4>
+      <ul>
+        <li>Con tres testimonios firmados: se publican los tres</li>
+        <li>Con dos: se publican dos y se ajusta la grilla. Dos reales pesan más que seis anónimos</li>
+        <li>Con cero: se BORRA la sección completa hasta tenerlos</li>
+        <li>Iniciales sin empresa (tipo "María R.") leen como inventadas y exponen a la empresa</li>
+        <li>Opcional y mucho más fuerte: video vertical de 20 s grabado con celular, 1080 × 1920</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11. FAQ ================= -->
+<section style="background:var(--nube)" id="faq">
+  <div class="wrap">
+    <span class="eyebrow rv">Preguntas frecuentes</span>
+    <h2 class="rv">Lo que todo negocio pregunta</h2>
+    <div class="faq rv">
+      <details open>
+        <summary>¿Es difícil de usar? Yo no soy de sistemas</summary>
+        <p>No. Emitir una factura son tres pasos: elegís el cliente, elegís el producto y le das a
+        "Emitir". Además te capacitamos en vivo sin costo y te quedan dos cursos grabados para
+        cuando se te olvide algo. Y si te trabás, nos escribís por WhatsApp.</p>
+      </details>
+      <details>
+        <summary>¿Están autorizados por el Ministerio de Hacienda?</summary>
+        <p>Nuestro sistema opera en producción con el Sistema de Transmisión DTE de Hacienda y
+        transmite tus documentos en tiempo real, con firma electrónica incluida. La autorización
+        como emisor electrónico la otorga Hacienda al contribuyente, es decir a tu empresa: ese
+        trámite lo gestionamos nosotros como parte de la implementación.</p>
+      </details>
+      <details>
+        <summary>¿Ya están listos para la Normativa DTE 2.0?</summary>
+        <p>La actualización está en ejecución. El plazo que fijó Hacienda es el 1 de diciembre de
+        2026 y nuestro compromiso es tenerte actualizado antes de esa fecha, sin trámites de tu
+        parte y sin costo adicional en ningún plan. Te avisamos cuando ya esté aplicada.</p>
+      </details>
+      <details>
+        <summary>Estoy con otro proveedor, ¿puedo cambiarme?</summary>
+        <p>Sí. Desde mayo de 2026 el portal de Hacienda habilitó la opción de Cambio de Plataforma.
+        Gestionamos el trámite, migramos tu catálogo de productos, clientes y proveedores, y
+        coordinamos el cambio para que no dejés de facturar ningún día.</p>
+      </details>
+      <details>
+        <summary>¿En cuánto tiempo queda funcionando?</summary>
+        <p>En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si se me daña la computadora?</summary>
+        <p>No se pierde nada. Tu información se respalda de forma continua en Google Cloud. El
+        sistema no vive en tu computadora, así que entrás desde otra y seguís trabajando.</p>
+      </details>
+      <details>
+        <summary>¿La capacitación y el soporte tienen costo?</summary>
+        <p>No. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados de 15 capítulos
+        cada uno. El soporte de dudas es siempre gratuito y respondemos el mismo día en horario de
+        oficina.</p>
+      </details>
+      <details>
+        <summary>¿Y si emito más facturas de las que incluye mi plan?</summary>
+        <p>No te suspendemos el servicio. Cada factura adicional se cobra según tu plan: $0.25 + IVA
+        en Starter, $0.15 en Professional, $0.10 en Advanced y $0.05 en Deluxe. El plan Enterprise
+        es sin límite. Si el exceso se vuelve constante, te avisamos y te movemos al plan que te
+        resulte más económico.</p>
+      </details>
+      <details>
+        <summary>¿Me amarran con un contrato largo?</summary>
+        <p>No hay permanencia forzada. Si te querés ir, te vas, y tus documentos históricos son
+        tuyos.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CIERRE ================= -->
+<section class="cierre">
+  <div class="wrap">
+    <h2 class="rv">Empezá a facturar en menos de 24 horas</h2>
+    <p class="lede rv">Escribinos, vemos juntos qué plan te toca y el papeleo ante Hacienda queda de nuestro lado.</p>
+    <div class="cierre-cta rv">
+      <a class="btn btn-wa" data-wa="cierre" href="#">Escribinos por WhatsApp</a>
+      <a class="btn btn-ghost" href="#precio">Ver precios</a>
+    </div>
+    <p class="horario rv">Lunes a viernes, 8:00 a.m. a 5:00 p.m. · Respondemos el mismo día</p>
+  </div>
+</section>
+
 <footer>
-  <div class="wrap foot-grid">
-    <div>
-      <div class="foot-logo"><img src="assets/odoo-factura-logo.png" alt="Odoo Factura IA" loading="lazy" decoding="async" /></div>
-      <p class="muted" style="margin-top:10px">La plataforma SaaS de facturación electrónica<br/>más rápida de El Salvador.<br/>Un producto de Grupo Consiti S.A. de C.V.</p>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:290px">
+        <a class="mark" href="#top"><img class="mark-logo" src="assets/factura-ia-logo.svg" alt="Factura IA"><span>de Grupo Consiti</span></a>
+        <p style="margin-top:15px;line-height:1.6">
+          Facturación electrónica para empresas en El Salvador.
+          Un producto de Grupo Consiti S.A. de C.V.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>Producto</h4>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#precio">Precios</a>
+        <a href="#contadores">Para contadores</a>
+        <a href="#cambiar">Cambiar de proveedor</a>
+        <a href="#normativa">Normativa DTE 2.0</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a data-wa="footer" href="#">WhatsApp 7255-9059</a>
+        <a href="mailto:facturacion@consiti.com">facturacion@consiti.com</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/terminos">Términos del servicio</a>
+        <a href="/privacidad">Aviso de privacidad</a>
+        <a href="/sla">Niveles de servicio</a>
+      </div>
     </div>
-    <div style="text-align:right">
-      <a class="wa" href="#" data-plan="Footer" data-price="0" data-wa>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp: 7255-9059
-      </a>
-      <p class="muted" style="margin-top:14px">© <span id="year"></span> Grupo Consiti. Todos los derechos reservados.</p>
-    </div>
+    <p class="legal">
+      © <span id="anio">2026</span> Grupo Consiti S.A. de C.V. Todos los derechos reservados.
+      Partner oficial de Odoo y Partner de Google Cloud. Odoo es una marca registrada de Odoo S.A.
+      y Google Cloud es una marca de Google LLC. Este producto se construye sobre Odoo y no es un
+      producto de Odoo S.A.
+    </p>
   </div>
 </footer>
 
-<!-- ================= FLOATING WHATSAPP ================= -->
-<a class="fab" href="#" data-plan="Botón flotante" data-price="0" data-wa aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a class="wa-float" data-wa="flotante" href="#" aria-label="Escribinos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#04371A"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
+  <span>Escribinos</span>
 </a>
 
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Factura IA de Grupo Consiti","description":"Facturación electrónica DTE para empresas en El Salvador desde 14.99 dólares al mes, con soporte incluido y actualización a la Normativa DTE 2.0.","brand":{"@type":"Brand","name":"Grupo Consiti"},"offers":{"@type":"AggregateOffer","lowPrice":"14.99","highPrice":"150.00","priceCurrency":"USD","offerCount":"5","availability":"https://schema.org/InStock"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Es difícil de usar la facturación electrónica?","acceptedAnswer":{"@type":"Answer","text":"Emitir una factura son tres pasos: elegir el cliente, elegir el producto y presionar Emitir. Incluye capacitación en vivo sin costo y dos cursos grabados."}},
+{"@type":"Question","name":"¿Están autorizados por el Ministerio de Hacienda?","acceptedAnswer":{"@type":"Answer","text":"El sistema opera en producción con el Sistema de Transmisión DTE del Ministerio de Hacienda y transmite los documentos en tiempo real con firma electrónica. La autorización como emisor electrónico la otorga Hacienda al contribuyente y Grupo Consiti gestiona ese trámite como parte de la implementación."}},
+{"@type":"Question","name":"¿Ya están listos para la Normativa DTE 2.0?","acceptedAnswer":{"@type":"Answer","text":"La actualización está en ejecución. El plazo fijado por Hacienda es el 1 de diciembre de 2026 y la actualización está incluida en todos los planes sin costo adicional."}},
+{"@type":"Question","name":"Estoy con otro proveedor, ¿puedo cambiarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. Desde mayo de 2026 el portal de Hacienda habilitó el Cambio de Plataforma para emisores de DTE. Grupo Consiti gestiona el trámite y migra el catálogo de productos, clientes y proveedores sin interrumpir la facturación."}},
+{"@type":"Question","name":"¿En cuánto tiempo queda funcionando?","acceptedAnswer":{"@type":"Answer","text":"En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda."}},
+{"@type":"Question","name":"¿Qué pasa si emito más facturas de las que incluye mi plan?","acceptedAnswer":{"@type":"Answer","text":"El servicio no se suspende. Cada factura adicional se cobra según el plan: 0.25 dólares en Starter, 0.15 en Professional, 0.10 en Advanced y 0.05 en Deluxe, más IVA. El plan Enterprise no tiene límite. Se recomienda el cambio de plan cuando el exceso es constante."}}]}
+</script>
+
 <script>
-/* =====================================================================
-   CONFIGURACIÓN
-   ===================================================================== */
-const WHATSAPP_NUMBER = "50372559059";       // WhatsApp destino (+503 7255-9059)
-const PIXEL_ID        = "27890392917235121"; // Dataset/pixel de Meta (Odoo Factura IA)
-// El descuento anual es por-plan (atributo data-annual en cada tarjeta): Starter/Pro 5%, Advanced/Deluxe 10%, Enterprise 15%
-/* ===================================================================== */
-
-// ---- Meta Pixel ----
-try { fbq('init', PIXEL_ID); fbq('track', 'PageView'); } catch(e) {}
-
-// ---- Año ----
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// ---- Header scrolled ----
-const header = document.getElementById('site-header');
-addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 24), {passive:true});
-
-// ---- Menú móvil (toggle) ----
-(function(){
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobile-menu');
-  if(!burger || !menu) return;
-  function setOpen(o){
-    menu.classList.toggle('open', o);
-    burger.classList.toggle('is-open', o);
-    burger.setAttribute('aria-expanded', o);
-    document.body.classList.toggle('menu-open', o);
-  }
-  burger.addEventListener('click', ()=>setOpen(!menu.classList.contains('open')));
-  menu.querySelectorAll('a,button').forEach(el=>el.addEventListener('click', ()=>setOpen(false)));
-  addEventListener('keydown', e=>{ if(e.key==='Escape') setOpen(false); });
-})();
-
-// ---- Ticker: duplicar contenido para loop infinito ----
-(function(){
-  const t = document.getElementById('ticker-track');
-  t.innerHTML += t.innerHTML;
-})();
-
-// ---- Feed en vivo ----
-(function(){
-  const feed = document.getElementById('feed');
-  const hoy = document.getElementById('hoy-count');
-  const negocios = [
-    ['Farmacia El Carmen','San Salvador'],['Ferretería La Central','Santa Ana'],
-    ['Distribuidora JR','Soyapango'],['Clínica Santa María','San Miguel'],
-    ['Restaurante El Portal','Santa Tecla'],['Boutique Karla','Merliot'],
-    ['Autorepuestos Díaz','Sonsonate'],['Panadería San José','Apopa'],
-    ['Óptica Visión','San Salvador'],['Veterinaria Patitas','Antiguo Cuscatlán']
-  ];
-  const tipos = ['Factura','Crédito Fiscal','Factura','Factura','Crédito Fiscal'];
-  let n = 2041, count = 312;
-  const docSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v6h6M9 15l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  function row(){
-    const [neg] = [negocios[Math.floor(Math.random()*negocios.length)]];
-    const tipo = tipos[Math.floor(Math.random()*tipos.length)];
-    n += Math.floor(Math.random()*7)+1;
-    const el = document.createElement('div');
-    el.className = 'frow enter';
-    el.innerHTML = `<div class="fi">${docSVG}</div><div class="fx"><b>${neg[0]}</b><span>${tipo} · DTE-01-${n} · ${neg[1]}</span></div><span class="ok">✓ Aceptado</span>`;
-    return el;
-  }
-  // 5 filas iniciales
-  for(let i=0;i<5;i++){ const r=row(); r.classList.remove('enter'); feed.appendChild(r); }
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduced){
-    setInterval(()=>{
-      const r = row();
-      feed.prepend(r);
-      requestAnimationFrame(()=>requestAnimationFrame(()=>r.classList.remove('enter')));
-      while(feed.children.length > 5) feed.removeChild(feed.lastChild);
-      count++; hoy.textContent = count.toLocaleString();
-    }, 3400);
-  }
-})();
-
-// ---- Contadores animados ----
-(function(){
-  const els = document.querySelectorAll('[data-count]');
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function animate(el){
-    const target = parseFloat(el.dataset.count);
-    const dec = parseInt(el.dataset.dec||'0');
-    if(reduced){ el.textContent = target.toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec}); return; }
-    const dur = 1400, t0 = performance.now();
-    function frame(t){
-      const p = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-p,3);
-      el.textContent = (target*e).toLocaleString(undefined,{minimumFractionDigits:dec,maximumFractionDigits:dec});
-      if(p<1) requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-  const io = new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.isIntersecting){ animate(e.target); io.unobserve(e.target); }
-  }),{threshold:.6});
-  els.forEach(el=>io.observe(el));
-})();
-
-// ---- Toggle Mensual / Anual (con animación de conteo) ----
-let billing = 'mensual';
-const btM = document.getElementById('bt-mensual');
-const btA = document.getElementById('bt-anual');
-function fmt(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}).replace(/\.00$/,''); }
-function discFor(card){ return parseFloat(card.dataset.annual || '0'); }
-function precioAnual(m, d){ return m * 12 * (1 - d); }
-// anima el número desde su valor actual hasta el nuevo (sube o baja)
-function animNum(el, to, dur = 700){
-  const from = parseFloat(el.textContent.replace(/,/g,'')) || 0;
-  el.dataset.target = to; // fuente de verdad
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || Math.abs(to - from) < .005){
-    el.textContent = fmt(to); return;
-  }
-  const t0 = performance.now();
-  function frame(t){
-    if (parseFloat(el.dataset.target) !== to) return; // otro toggle tomó el control
-    const p = Math.min(1, (t - t0) / dur);
-    const e = 1 - Math.pow(1 - p, 3); // ease-out
-    el.textContent = fmt(from + (to - from) * e);
-    if (p < 1) requestAnimationFrame(frame); else el.textContent = fmt(to);
-  }
-  requestAnimationFrame(frame);
-  // fallback: garantiza el valor final aunque el navegador pause los frames
-  setTimeout(()=>{ if (parseFloat(el.dataset.target) === to) el.textContent = fmt(to); }, dur + 120);
-}
-function renderPrices(){
-  document.querySelectorAll('.plan').forEach(card => {
-    const m = parseFloat(card.dataset.monthly);
-    const amt  = card.querySelector('.amt');
-    const per  = card.querySelector('.per');
-    const note = card.querySelector('.bill-note');
-    const d = discFor(card);
-    if (billing === 'anual'){
-      animNum(amt, precioAnual(m, d));
-      per.textContent = '/año';
-      note.textContent = `Equivale a $${fmt(m * (1 - d))}/mes · ahorras ${Math.round(d*100)}%`;
-    } else {
-      animNum(amt, m);
-      per.textContent = '/mes';
-      note.textContent = '';
-    }
-  });
-  btM.classList.toggle('active', billing==='mensual');
-  btA.classList.toggle('active', billing==='anual');
-}
-btM.addEventListener('click', ()=>{ if(billing!=='mensual'){ billing='mensual'; renderPrices(); } });
-btA.addEventListener('click', ()=>{ if(billing!=='anual'){ billing='anual';  renderPrices(); } });
-renderPrices();
-
-// ---- CTAs a WhatsApp + evento Lead ----
-function irAWhatsApp(plan, price, disc){
-  const anual = billing === 'anual';
-  const ciclo = anual ? ` (pago anual con ${Math.round((disc||0)*100)}% de descuento)` : '';
-  const precioTxt = (price && Number(price) > 0)
-    ? ` de $${fmt(Number(price))} + IVA ${anual ? 'al año' : 'al mes'}`
-    : '';
-  const msg = ['Consulta general','CTA final','Footer','Botón flotante'].includes(plan)
-    ? 'Hola, quiero información sobre Odoo Factura IA para mi negocio.'
-    : `Hola, quiero CONTRATAR el plan ${plan}${precioTxt}${ciclo} de Odoo Factura IA.`;
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-  try {
-    fbq('track', 'Lead', {
-      content_name: plan,
-      content_category: 'Plan Facturación',
-      value: Number(price) || 0,
-      currency: 'USD',
-      billing_cycle: billing
-    });
-  } catch(e) {}
-  window.open(url, '_blank', 'noopener');
-}
-document.querySelectorAll('[data-wa]').forEach(el => {
-  el.addEventListener('click', (ev) => {
-    ev.preventDefault();
-    const card = el.closest('.plan');
-    const plan  = card ? card.dataset.planName : (el.dataset.plan || 'Consulta general');
-    const d = card ? discFor(card) : 0;
-    let price = card ? parseFloat(card.dataset.monthly) : Number(el.dataset.price) || 0;
-    if (card && billing === 'anual') price = precioAnual(price, d);
-    irAWhatsApp(plan, price, d);
+/* ============ WhatsApp con mensaje distinto por CTA (atribución) ============ */
+var WA = "50372559059";
+var MENSAJES = {
+  nav:"Hola, vengo de la página de Factura IA y quiero información.",
+  "menu-movil":"Hola, vengo de la página de Factura IA y quiero información.",
+  hero:"Hola, vi la página de Factura IA y quiero empezar a facturar electrónico. ¿Me ayudan?",
+  contadores:"Hola, soy contador y llevo la contabilidad de varias empresas. Quiero saber cómo funciona el multi-empresa.",
+  dte20:"Hola, quiero asegurarme de quedar cubierto con la Normativa DTE 2.0 antes del 1 de diciembre.",
+  migracion:"Hola, hoy facturo con otro proveedor y me quiero cambiar. ¿Cómo funciona?",
+  "plan-starter":"Hola, me interesa el plan Starter de Factura IA.",
+  "plan-professional":"Hola, me interesa el plan Professional de Factura IA.",
+  "plan-advanced":"Hola, me interesa el plan Advanced, el de carga automática de compras.",
+  "plan-deluxe":"Hola, me interesa el plan Deluxe y quiero saber de los módulos.",
+  "plan-enterprise":"Hola, quiero hablar del plan Enterprise para mi empresa.",
+  cierre:"Hola, quiero empezar a facturar con Factura IA.",
+  footer:"Hola, quiero información sobre Factura IA.",
+  flotante:"Hola, tengo una consulta sobre Factura IA."
+};
+function waURL(t){ return "https://wa.me/"+WA+"?text="+encodeURIComponent(t); }
+document.querySelectorAll("[data-wa]").forEach(function(a){
+  var id=a.getAttribute("data-wa");
+  a.href=waURL(MENSAJES[id]||MENSAJES.nav); a.target="_blank"; a.rel="noopener";
+  a.addEventListener("click",function(){
+    /* GA4 y Meta Pixel: cambiar por gtag() y fbq() cuando estén los IDs */
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({event:"clic_whatsapp",cta_id:id});
   });
 });
 
-// ---- ViewContent al ver planes ----
-const planesSec = document.getElementById('planes');
-if (planesSec && 'IntersectionObserver' in window){
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        try { fbq('track','ViewContent',{content_name:'Sección Planes',content_category:'Pricing'}); } catch(err){}
-        io.unobserve(e.target);
-      }
-    });
-  }, {threshold:.3});
-  io.observe(planesSec);
-}
-
-// ---- Testimonios: marquee continuo (duplicar para loop sin costura) ----
+/* ============ Menú móvil ============ */
 (function(){
-  const track = document.getElementById('car-track');
-  if(!track) return;
-  track.innerHTML += track.innerHTML; // 2 copias -> translateX(-50%) hace loop perfecto
+  var b=document.getElementById("burger"), d=document.getElementById("drawer");
+  if(!b||!d) return;
+  b.addEventListener("click",function(){
+    var abierto=d.classList.toggle("abierto");
+    b.setAttribute("aria-expanded",abierto?"true":"false");
+  });
+  d.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){ d.classList.remove("abierto"); b.setAttribute("aria-expanded","false"); });
+  });
 })();
 
-// ---- Reveals + stagger ----
-if ('IntersectionObserver' in window){
-  const ro = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target);} });
-  }, {threshold:.12});
-  document.querySelectorAll('.reveal, [data-stagger]').forEach(el=>ro.observe(el));
-} else {
-  document.querySelectorAll('.reveal, [data-stagger]').forEach(el=>el.classList.add('in'));
-}
+/* ============ Calculadora de plan ============ */
+var PLANES=[
+  {n:"Starter",p:"$14.99",impl:"Implementación $40 + IVA",d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito, con anexos de IVA y libros en PDF.",wa:"Hola, hice la calculadora y me sale el plan Starter (1 o 2 facturas al día). Quiero contratarlo."},
+  {n:"Professional",p:"$24.99",impl:"Implementación $50 + IVA",d:"Hasta 100 facturas al mes. Agrega tu logo en la factura, anexos en Excel, exportación, sujeto excluido y retención.",wa:"Hola, hice la calculadora y me sale el plan Professional (3 a 5 facturas al día). Quiero contratarlo."},
+  {n:"Advanced",p:"$34.99",impl:"Implementación $60 + IVA",d:"Hasta 500 facturas al mes. Incluye la carga automática de tus facturas de compra, que es lo que te ahorra la digitación.",wa:"Hola, hice la calculadora y me sale el plan Advanced (hasta 20 facturas al día). Quiero contratarlo."},
+  {n:"Deluxe",p:"$59.99",impl:"Implementación $70 + IVA",d:"Hasta 1,000 facturas al mes y un módulo del ERP a elección: punto de venta, inventario, compras, cotizaciones o CRM.",wa:"Hola, hice la calculadora y me sale el plan Deluxe (hasta 40 facturas al día). Quiero contratarlo."},
+  {n:"Enterprise",p:"$150",impl:"Implementación $100 + IVA",d:"Facturas sin límite y una persona de nuestro equipo asignada a tu sistema, disponible en horario de oficina.",wa:"Hola, hice la calculadora y me sale el plan Enterprise (más de 40 facturas al día). Quiero que me contacten."}
+];
+(function(){
+  var cont=document.getElementById("opciones"); if(!cont) return;
+  var res=document.getElementById("resultado");
+  cont.querySelectorAll("button").forEach(function(b){
+    b.addEventListener("click",function(){
+      cont.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b);});
+      var pl=PLANES[+b.getAttribute("data-plan")];
+      document.getElementById("r-nombre").textContent=pl.n;
+      document.getElementById("r-detalle").textContent=pl.d;
+      document.getElementById("r-precio").textContent=pl.p;
+      document.getElementById("r-impl").textContent=pl.impl+" (una sola vez)";
+      var cta=document.getElementById("r-cta");
+      cta.href=waURL(pl.wa); cta.target="_blank"; cta.rel="noopener";
+      cta.textContent="Contratar "+pl.n+" por WhatsApp";
+      res.classList.add("ver");
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:"calculadora_plan",plan:pl.n});
+    });
+  });
+})();
+
+/* ============ Cuenta regresiva al 1 dic 2026 ============ */
+(function(){
+  var META=new Date("2026-12-01T00:00:00-06:00");
+  function set(id,v){ var e=document.getElementById(id); if(e) e.textContent=v; }
+  function tick(){
+    var d=Math.ceil((META-new Date())/86400000);
+    if(d>0){
+      set("cuenta",d+" días"); set("cuenta-2",d+" días");
+    }else{
+      /* plazo vencido: el mensaje cambia a que ya es obligatoria y que ayudamos a cumplir */
+      set("cuenta","Ya en vigencia");
+      set("cuenta-txt","La Normativa DTE 2.0 ya es obligatoria. Nosotros te ayudamos a cumplir sin que dejes de facturar.");
+      set("cuenta-2","Vigente");
+      set("cuenta-2-txt","La Normativa DTE 2.0 ya es obligatoria — te ayudamos a cumplir.");
+    }
+  }
+  tick(); setInterval(tick,3600000);
+})();
+
+/* ==================================================================
+   FEED "FACTURACIÓN EN VIVO"
+   MODO_DEMO = true  -> ejemplos ANÓNIMOS (giro y municipio, sin razón
+                        social) + etiqueta "Vista de ejemplo". Publicable.
+   MODO_DEMO = false -> consume GET /api/dte/recientes y quita la etiqueta:
+                        { total_hoy, latencia_ms, items:[
+                          {giro,municipio,tipo,correlativo} ] }
+   NUNCA publicar razón social ni correlativo completo de un cliente real
+   sin consentimiento por escrito.
+   ================================================================== */
+var MODO_DEMO = true;
+var EJEMPLOS=[
+  {giro:"Farmacia",municipio:"San Salvador",tipo:"Crédito Fiscal"},
+  {giro:"Veterinaria",municipio:"Antiguo Cuscatlán",tipo:"Factura"},
+  {giro:"Autorepuestos",municipio:"Sonsonate",tipo:"Crédito Fiscal"},
+  {giro:"Restaurante",municipio:"Santa Tecla",tipo:"Crédito Fiscal"},
+  {giro:"Ferretería",municipio:"Santa Ana",tipo:"Factura"},
+  {giro:"Clínica",municipio:"La Libertad",tipo:"Crédito Fiscal"},
+  {giro:"Distribuidora",municipio:"Soyapango",tipo:"Crédito Fiscal"},
+  {giro:"Boutique",municipio:"San Miguel",tipo:"Factura"}
+];
+var OK='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="M20 6 9 17l-5-5"/></svg>';
+(function(){
+  var feed=document.getElementById("feed"), tag=document.getElementById("tag-demo");
+  if(!feed) return;
+  function pintar(items,base){
+    feed.innerHTML="";
+    items.slice(0,3).forEach(function(d,i){
+      var el=document.createElement("div"); el.className="dte";
+      el.innerHTML='<div class="dte-txt"><b>'+d.giro+'</b><span>'+d.tipo+' · '+
+        (d.correlativo||("DTE-01-"+(base-i*3)))+' · '+d.municipio+'</span></div>'+
+        '<div class="sello-ok">'+OK+'Aceptado</div>';
+      feed.appendChild(el);
+    });
+  }
+  function set(k,v){ document.querySelectorAll('[data-pulso="'+k+'"]').forEach(function(n){n.textContent=v;}); }
+
+  if(MODO_DEMO){
+    var i=0, base=2077;
+    var rotar=function(){
+      var v=[]; for(var k=0;k<3;k++) v.push(EJEMPLOS[(i+k)%EJEMPLOS.length]);
+      pintar(v,base); i=(i+1)%EJEMPLOS.length; base+=1;
+    };
+    rotar();
+    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(rotar,5200);
+    return;
+  }
+  if(tag) tag.remove();
+  fetch("/api/dte/recientes").then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(d){
+      if(d.items&&d.items.length) pintar(d.items,0);
+      if(d.total_hoy!=null) set("dtes",Number(d.total_hoy).toLocaleString("es-SV"));
+      if(d.latencia_ms!=null) set("latencia","~"+(d.latencia_ms/1000).toFixed(1)+" s");
+    }).catch(function(){ /* sin datos reales no se inventa nada */ });
+})();
+
+/* ============ Reveal ============ */
+(function(){
+  var it=document.querySelectorAll(".rv");
+  if(!("IntersectionObserver" in window)){it.forEach(function(i){i.classList.add("in");});return;}
+  var o=new IntersectionObserver(function(en){
+    en.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target);} });
+  },{threshold:.1,rootMargin:"0px 0px -40px 0px"});
+  it.forEach(function(i){o.observe(i);});
+})();
+
+document.getElementById("anio").textContent=new Date().getFullYear();
+
+/* ============ Contadores que suben al entrar en pantalla ============ */
+(function(){
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var nums=document.querySelectorAll(".cifras .n");
+  if(!nums.length||!("IntersectionObserver" in window)) return;
+  function run(el){
+    var m=el.textContent.trim().match(/^(\D*)([\d.,]+)(\D*)$/);
+    if(!m) return;
+    var pre=m[1], target=parseInt(m[2].replace(/[.,]/g,""),10), post=m[3];
+    if(isNaN(target)||reduce) return;
+    var dur=1200,start=null;
+    el.textContent=pre+"0"+post;
+    function step(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/dur,1), e=1-Math.pow(1-p,3);
+      el.textContent=pre+Math.round(target*e).toLocaleString("es-SV")+post;
+      if(p<1) requestAnimationFrame(step);
+      else el.textContent=pre+target.toLocaleString("es-SV")+post;
+    }
+    requestAnimationFrame(step);
+  }
+  var o=new IntersectionObserver(function(en){
+    en.forEach(function(e){ if(e.isIntersecting){ run(e.target); o.unobserve(e.target); } });
+  },{threshold:.4});
+  nums.forEach(function(n){ o.observe(n); });
+})();
+
+/* ============ Parallax suave del hero ============ */
+(function(){
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var hero=document.querySelector(".hero"); if(!hero) return;
+  var tick=false;
+  function upd(){ hero.style.setProperty("--py",(Math.min(window.pageYOffset||0,700)*0.15)+"px"); tick=false; }
+  window.addEventListener("scroll",function(){ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
+})();
 </script>
 </body>
 </html>
