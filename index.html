@@ -198,6 +198,25 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 }
 @media(max-width:1000px){.shot img{border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.45)}}
 
+/* ============ DEMO EN VIDEO ============ */
+.demo{margin:0}
+.demo video{
+  width:100%;height:auto;aspect-ratio:4/3;border-radius:14px;
+  background:var(--nube);border:1px solid var(--linea);
+  box-shadow:0 22px 50px rgba(20,10,46,.16),0 2px 8px rgba(20,10,46,.08);
+}
+.demo figcaption{
+  display:flex;align-items:center;gap:9px;margin-top:14px;
+  font-family:var(--mono);font-size:.72rem;line-height:1.5;color:var(--gris)
+}
+.demo figcaption .ok{
+  flex:none;width:18px;height:18px;border-radius:50%;background:var(--sello);
+  display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700
+}
+.dark .demo video{border-color:var(--linea-osc);box-shadow:0 30px 70px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3)}
+.dark .demo figcaption{color:rgba(255,255,255,.62)}
+@media(max-width:1000px){.demo video{border-radius:12px;box-shadow:0 18px 40px rgba(20,10,46,.14)}}
+
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
 .franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
@@ -522,18 +541,21 @@ footer a:hover{color:#fff}
         </div>
       </div>
 
-      <div class="asset ratio-169 rv">
-        <span class="asset-tag">Asset 02 · prioridad máxima</span>
-        <h4>Video de 30 a 45 segundos: emitir una factura de principio a fin</h4>
-        <ul>
-          <li>Grabación de pantalla real, sin cortes ni efectos</li>
-          <li>1920 × 1080 · MP4 + WebM · autoplay, en silencio, en bucle</li>
-          <li>SIN audio y CON subtítulos: se ve en el celular sin auriculares</li>
-          <li>Debe caber en 45 s. Si tarda más, el mensaje "es fácil" se cae</li>
-          <li>Poster/thumbnail obligatorio para que no cargue en blanco</li>
-          <li>Peso máximo 3 MB: buena parte del tráfico entra con datos móviles</li>
-        </ul>
-      </div>
+      <figure class="demo rv">
+        <video id="demo-emitir"
+               poster="assets/emitir-factura-poster.webp"
+               width="1600" height="1200"
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="Grabación de pantalla real: se abre una factura de cliente en borrador, se elige el cliente y el producto, se presiona Publicar y Enviar, y la factura queda emitida con su sello de Hacienda, su UUID y su número de control.">
+          <source src="assets/emitir-factura.webm" type="video/webm">
+          <source src="assets/emitir-factura.mp4" type="video/mp4">
+          <p>Tu navegador no puede reproducir el video.
+             <a href="assets/emitir-factura.mp4">Descargalo aquí</a>.</p>
+        </video>
+        <figcaption><span class="ok" aria-hidden="true">✓</span>
+          29 segundos, sin cortes ni efectos: de factura en blanco a factura emitida ante Hacienda. Datos de ejemplo.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1418,6 +1440,26 @@ document.getElementById("anio").textContent=new Date().getFullYear();
   var tick=false;
   function upd(){ hero.style.setProperty("--py",(Math.min(window.pageYOffset||0,700)*0.15)+"px"); tick=false; }
   window.addEventListener("scroll",function(){ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
+})();
+
+/* ============ Video demo: bucle silencioso solo mientras se ve en pantalla ============ */
+(function(){
+  var v=document.getElementById("demo-emitir"); if(!v) return;
+  /* si el usuario pide menos movimiento: nada de bucle, que lo controle él */
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    v.autoplay=false; v.loop=false; v.controls=true;
+    v.pause(); try{ v.currentTime=0; }catch(e){}
+    return;
+  }
+  if(!("IntersectionObserver" in window)) return;
+  /* el navegador pausa el video al salir de vista pero no siempre lo reanuda al volver */
+  var io=new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if(e.isIntersecting){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
+      else if(!v.paused){ v.pause(); }
+    });
+  },{threshold:.25});
+  io.observe(v);
 })();
 </script>
 </body>
