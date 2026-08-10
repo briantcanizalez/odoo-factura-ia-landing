@@ -199,23 +199,25 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 @media(max-width:1000px){.shot img{border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.45)}}
 
 /* ============ DEMO EN VIDEO ============ */
-.demo{margin:0}
-.demo video{
+/* OJO: no usar .demo aca. Esa clase ya existe mas abajo como insignia
+   naranja de "Vista de ejemplo" y, por estar despues, gana la cascada. */
+.demo-video{margin:0}
+.demo-video video{
   width:100%;height:auto;aspect-ratio:4/3;border-radius:14px;
   background:var(--nube);border:1px solid var(--linea);
   box-shadow:0 22px 50px rgba(20,10,46,.16),0 2px 8px rgba(20,10,46,.08);
 }
-.demo figcaption{
+.demo-video figcaption{
   display:flex;align-items:center;gap:9px;margin-top:14px;
   font-family:var(--mono);font-size:.72rem;line-height:1.5;color:var(--gris)
 }
-.demo figcaption .ok{
+.demo-video figcaption .ok{
   flex:none;width:18px;height:18px;border-radius:50%;background:var(--sello);
   display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700
 }
-.dark .demo video{border-color:var(--linea-osc);box-shadow:0 30px 70px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3)}
-.dark .demo figcaption{color:rgba(255,255,255,.62)}
-@media(max-width:1000px){.demo video{border-radius:12px;box-shadow:0 18px 40px rgba(20,10,46,.14)}}
+.dark .demo-video video{border-color:var(--linea-osc);box-shadow:0 30px 70px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3)}
+.dark .demo-video figcaption{color:rgba(255,255,255,.62)}
+@media(max-width:1000px){.demo-video video{border-radius:12px;box-shadow:0 18px 40px rgba(20,10,46,.14)}}
 
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
@@ -541,7 +543,7 @@ footer a:hover{color:#fff}
         </div>
       </div>
 
-      <figure class="demo rv">
+      <figure class="demo-video rv">
         <video id="demo-emitir"
                poster="assets/emitir-factura-poster.webp"
                width="1600" height="1200"
