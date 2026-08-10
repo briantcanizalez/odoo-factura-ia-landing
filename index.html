@@ -160,7 +160,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 /* ============ NAV con menú móvil ============ */
 header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea-osc)}
 .nav-in{display:flex;align-items:center;gap:24px;height:70px}
-.mark{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+/* align-items:flex-start es obligatorio: sin el, el align-items:stretch por
+   defecto de flex estira el <img> al ancho del contenedor. En la cabecera no
+   se notaba porque .mark es un item flex y se encoge al contenido, pero en el
+   pie vive dentro de un div de 290px y el logo salia deformado 3.2 veces. */
+.mark{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;line-height:1}
 .mark b{font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.03em;color:#fff}
 .mark b i{font-style:normal;color:var(--violeta-hi)}
 .mark span{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
@@ -187,6 +191,12 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(760px 460px at 12% 2%,rgba(82,22,231,.36),transparent 66%),radial-gradient(600px 400px at 94% 92%,rgba(139,98,255,.2),transparent 68%)}
 .hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:74px 74px;mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%);-webkit-mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%);transform:translateY(var(--py,0));will-change:transform}
 .hero .wrap{position:relative;z-index:2}
+/* El hero tiene fondo oscuro pero NO la clase .dark, asi que .btn-ghost se
+   quedaba con color:var(--tinta) — casi negro sobre casi negro. El boton
+   solo aparecia al pasar el mouse, cuando el :hover lo pinta de morado.
+   Mismo remedio que ya usaba .cierre. */
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.hero .btn-ghost:hover{color:#fff;border-color:#fff;background:rgba(255,255,255,.08)}
 .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center}
 @media(max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:36px}}
 .social{display:inline-flex;align-items:center;gap:13px;padding:9px 20px 9px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--linea-osc)}
@@ -357,23 +367,10 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .escrito{margin-top:24px;padding:22px 24px;border-radius:14px;background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--amarillo);font-size:1rem;line-height:1.65;color:var(--gris)}
 .escrito b{color:var(--tinta);font-weight:600}
 
-/* ============ FEED compacto ============ */
-.vivo{margin-top:44px;background:var(--nube);border:1px solid var(--linea);border-radius:20px;padding:22px}
-.vivo-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:15px}
-.vivo-head .t{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--tinta)}
-.dot{width:7px;height:7px;border-radius:50%;background:var(--sello);animation:latido 2.4s ease-in-out infinite}
-@keyframes latido{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
-.demo{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--alerta);border:1px solid rgba(194,65,12,.4);background:rgba(255,138,0,.11);padding:3px 7px;border-radius:5px}
-.vivo-head .c{font-family:var(--mono);font-size:.76rem;color:var(--gris-2)}
-.vivo-head .c b{color:var(--tinta)}
-.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
-@media(max-width:820px){.feed{grid-template-columns:1fr}.feed>*:nth-child(n+3){display:none}}
-.dte{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:12px;background:var(--papel);border:1px solid var(--linea);animation:entra .5s ease both}
-@keyframes entra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
-.dte-txt{flex:1;min-width:0}
-.dte-txt b{font-family:var(--display);font-weight:700;font-size:.92rem;display:block}
-.dte-txt span{font-family:var(--mono);font-size:.68rem;color:var(--gris-2);display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.sello-ok{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(14,159,99,.11);border:1px solid rgba(14,159,99,.3);font-size:.72rem;font-weight:600;color:var(--sello)}
+/* Aquí vivían los estilos del feed "Facturación en vivo": .vivo, .dot,
+   .demo, .feed, .dte y sus animaciones. Se retiraron con la sección.
+   OJO: la clase se llamaba .demo y por eso chocaba con el bloque del
+   video de la demo, que hubo que renombrar a .demo-video. */
 
 /* ============ NORMATIVA ============ */
 .norma{background:var(--noche);color:#fff;position:relative;overflow:hidden}
@@ -822,13 +819,18 @@ footer a:hover{color:#fff}
     </p>
 
     <!-- feed compacto, anonimizado -->
-    <div class="vivo rv">
-      <div class="vivo-head">
-        <div class="t"><span class="dot"></span>Facturación en vivo <span class="demo" id="tag-demo">Vista de ejemplo</span></div>
-        <div class="c">Hoy: <b data-pulso="dtes">—</b> facturas emitidas · <b data-pulso="latencia">~1.8 s</b> cada una</div>
-      </div>
-      <div class="feed" id="feed"></div>
-    </div>
+    <!-- Aquí iba el feed "Facturación en vivo". Se retiró el 10/08/2026.
+         Mostraba tres tarjetas rotando con datos simulados y la etiqueta
+         "Vista de ejemplo". El deck del rediseño ya lo señalaba como el
+         metro cuadrado peor invertido de la página: comunicaba actividad,
+         un argumento que se da cuatro veces más abajo, y no respondía
+         ninguna pregunta del comprador. Al llevar el disclaimer a la vista,
+         además invitaba a dudar de las demás cifras.
+
+         Si algún día se quiere mostrar actividad real, el camino está en
+         contexto-rediseno-landing.md sección 8: endpoint /api/dte/recientes
+         devolviendo datos YA anonimizados, giro y municipio, nunca razón
+         social ni correlativo completo de un cliente. -->
   </div>
 </section>
 
@@ -983,7 +985,7 @@ footer a:hover{color:#fff}
           </tr>
           <tr>
             <th>Anexos de IVA y libros en PDF</th>
-            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
           </tr>
           <tr>
             <th>Tu logo en la factura</th>
@@ -1291,8 +1293,8 @@ document.querySelectorAll("[data-wa]").forEach(function(a){
 
 /* ============ Calculadora de plan ============ */
 var PLANES=[
-  {n:"Starter",p:"$14.99",impl:"Implementación $40 + IVA",d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito, con anexos de IVA y libros en PDF.",wa:"Hola, hice la calculadora y me sale el plan Starter (1 o 2 facturas al día). Quiero contratarlo."},
-  {n:"Professional",p:"$24.99",impl:"Implementación $50 + IVA",d:"Hasta 100 facturas al mes. Agrega tu logo en la factura, anexos en Excel, exportación, sujeto excluido y retención.",wa:"Hola, hice la calculadora y me sale el plan Professional (3 a 5 facturas al día). Quiero contratarlo."},
+  {n:"Starter",p:"$14.99",impl:"Implementación $40 + IVA",d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito.",wa:"Hola, hice la calculadora y me sale el plan Starter (1 o 2 facturas al día). Quiero contratarlo."},
+  {n:"Professional",p:"$24.99",impl:"Implementación $50 + IVA",d:"Hasta 100 facturas al mes. Agrega los anexos de IVA y los libros en PDF y Excel, tu logo en la factura, exportación, sujeto excluido y retención.",wa:"Hola, hice la calculadora y me sale el plan Professional (3 a 5 facturas al día). Quiero contratarlo."},
   {n:"Advanced",p:"$34.99",impl:"Implementación $60 + IVA",d:"Hasta 500 facturas al mes. Incluye la carga automática de tus facturas de compra, que es lo que te ahorra la digitación.",wa:"Hola, hice la calculadora y me sale el plan Advanced (hasta 20 facturas al día). Quiero contratarlo."},
   {n:"Deluxe",p:"$59.99",impl:"Implementación $70 + IVA",d:"Hasta 1,000 facturas al mes y un módulo del ERP a elección: punto de venta, inventario, compras, cotizaciones o CRM.",wa:"Hola, hice la calculadora y me sale el plan Deluxe (hasta 40 facturas al día). Quiero contratarlo."},
   {n:"Enterprise",p:"$150",impl:"Implementación $100 + IVA",d:"Facturas sin límite y una persona de nuestro equipo asignada a tu sistema, disponible en horario de oficina.",wa:"Hola, hice la calculadora y me sale el plan Enterprise (más de 40 facturas al día). Quiero que me contacten."}
@@ -1389,61 +1391,10 @@ var PLANES=[
   tick(); setInterval(tick,3600000);
 })();
 
-/* ==================================================================
-   FEED "FACTURACIÓN EN VIVO"
-   MODO_DEMO = true  -> ejemplos ANÓNIMOS (giro y municipio, sin razón
-                        social) + etiqueta "Vista de ejemplo". Publicable.
-   MODO_DEMO = false -> consume GET /api/dte/recientes y quita la etiqueta:
-                        { total_hoy, latencia_ms, items:[
-                          {giro,municipio,tipo,correlativo} ] }
-   NUNCA publicar razón social ni correlativo completo de un cliente real
-   sin consentimiento por escrito.
-   ================================================================== */
-var MODO_DEMO = true;
-var EJEMPLOS=[
-  {giro:"Farmacia",municipio:"San Salvador",tipo:"Crédito Fiscal"},
-  {giro:"Veterinaria",municipio:"Antiguo Cuscatlán",tipo:"Factura"},
-  {giro:"Autorepuestos",municipio:"Sonsonate",tipo:"Crédito Fiscal"},
-  {giro:"Restaurante",municipio:"Santa Tecla",tipo:"Crédito Fiscal"},
-  {giro:"Ferretería",municipio:"Santa Ana",tipo:"Factura"},
-  {giro:"Clínica",municipio:"La Libertad",tipo:"Crédito Fiscal"},
-  {giro:"Distribuidora",municipio:"Soyapango",tipo:"Crédito Fiscal"},
-  {giro:"Boutique",municipio:"San Miguel",tipo:"Factura"}
-];
-var OK='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="M20 6 9 17l-5-5"/></svg>';
-(function(){
-  var feed=document.getElementById("feed"), tag=document.getElementById("tag-demo");
-  if(!feed) return;
-  function pintar(items,base){
-    feed.innerHTML="";
-    items.slice(0,3).forEach(function(d,i){
-      var el=document.createElement("div"); el.className="dte";
-      el.innerHTML='<div class="dte-txt"><b>'+d.giro+'</b><span>'+d.tipo+' · '+
-        (d.correlativo||("DTE-01-"+(base-i*3)))+' · '+d.municipio+'</span></div>'+
-        '<div class="sello-ok">'+OK+'Aceptado</div>';
-      feed.appendChild(el);
-    });
-  }
-  function set(k,v){ document.querySelectorAll('[data-pulso="'+k+'"]').forEach(function(n){n.textContent=v;}); }
-
-  if(MODO_DEMO){
-    var i=0, base=2077;
-    var rotar=function(){
-      var v=[]; for(var k=0;k<3;k++) v.push(EJEMPLOS[(i+k)%EJEMPLOS.length]);
-      pintar(v,base); i=(i+1)%EJEMPLOS.length; base+=1;
-    };
-    rotar();
-    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(rotar,5200);
-    return;
-  }
-  if(tag) tag.remove();
-  fetch("/api/dte/recientes").then(function(r){if(!r.ok)throw 0;return r.json();})
-    .then(function(d){
-      if(d.items&&d.items.length) pintar(d.items,0);
-      if(d.total_hoy!=null) set("dtes",Number(d.total_hoy).toLocaleString("es-SV"));
-      if(d.latencia_ms!=null) set("latencia","~"+(d.latencia_ms/1000).toFixed(1)+" s");
-    }).catch(function(){ /* sin datos reales no se inventa nada */ });
-})();
+/* El bloque del feed "Facturación en vivo" se retiró junto con su HTML.
+   Rotaba ocho ejemplos anónimos escritos a mano y tenía la vía preparada
+   para consumir /api/dte/recientes. Si se recupera, está en el historial
+   de git y documentado en docs/brief/contexto-rediseno-landing.md. */
 
 /* ============ Reveal ============ */
 (function(){
