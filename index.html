@@ -181,6 +181,23 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .plazo-hero b{font-family:var(--mono);color:var(--alerta-vivo);font-size:.88rem;white-space:nowrap}
 .plazo-hero:hover{background:rgba(255,138,0,.17)}
 
+/* ============ CAPTURA DE PRODUCTO ============ */
+.shot{margin:0}
+.shot img{
+  width:100%;height:auto;border-radius:14px;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 30px 70px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3);
+}
+.shot figcaption{
+  display:flex;align-items:center;gap:9px;margin-top:14px;
+  font-family:var(--mono);font-size:.72rem;line-height:1.5;color:rgba(255,255,255,.62)
+}
+.shot figcaption .ok{
+  flex:none;width:18px;height:18px;border-radius:50%;background:var(--sello);
+  display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700
+}
+@media(max-width:1000px){.shot img{border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.45)}}
+
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
 .franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
@@ -462,18 +479,13 @@ footer a:hover{color:#fff}
     </div>
 
     <!-- ============ ASSET PRINCIPAL: producto ============ -->
-    <div class="asset ratio-43">
-      <span class="asset-tag">Asset 01 · prioridad máxima</span>
-      <h4>Captura del sistema emitiendo una factura</h4>
-      <ul>
-        <li>Pantalla real de emisión de DTE, no un mockup genérico</li>
-        <li>1200 × 900 px · PNG o WebP · @2x para retina</li>
-        <li>Que se vean POCOS campos y un botón claro de "Emitir"</li>
-        <li>Datos de ejemplo ficticios: nada de clientes reales</li>
-        <li>Ideal: mockup en laptop + celular al lado, para mostrar que funciona en los dos</li>
-        <li>Objetivo: que el dueño piense "esto yo lo puedo usar"</li>
-      </ul>
-    </div>
+    <figure class="shot">
+      <img src="assets/factura-emitida.webp" width="1600" height="1356" loading="eager" decoding="async"
+           alt="Factura electrónica ya emitida en el sistema, con su número de DTE, el sello de Hacienda, el UUID y el número de control llenos, y el estado en Publicado.">
+      <figcaption><span class="ok" aria-hidden="true">✓</span>
+        Una factura recién emitida: sello de Hacienda, UUID y número de control, en el mismo momento. Datos de ejemplo.
+      </figcaption>
+    </figure>
   </div>
 </section>
 
