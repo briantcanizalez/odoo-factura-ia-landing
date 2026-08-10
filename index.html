@@ -20,7 +20,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <!-- ============================================================
-     META PIXEL  ·  Odoo Factura IA
+     META PIXEL  ·  Factura IA de Grupo Consiti
      init + PageView aquí. Lead y ViewContent se disparan al final
      del documento, junto con el envío a CAPI.
      ============================================================ -->
@@ -104,8 +104,8 @@ section{padding:82px 0}
 .dark .asset h4,.dark .asset ul{color:#FFC781}
 .dark .asset{background:repeating-linear-gradient(45deg,rgba(255,138,0,.1),rgba(255,138,0,.1) 10px,transparent 10px,transparent 20px)}
 @media(max-width:600px){.asset{padding:18px}.asset ul{font-size:.7rem}.asset.ratio-43,.asset.ratio-169{aspect-ratio:auto}}
-/* dato que Rafa debe confirmar antes de publicar */
-.rev{border-bottom:2px dotted var(--alerta-vivo);cursor:help}
+/* .rev marcaba los datos sin confirmar. Los cuatro quedaron resueltos
+   (ver README); si vuelve a aparecer uno, se recupera la regla. */
 
 /* ============ BOTONES ============ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;padding:15px 26px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
@@ -296,9 +296,8 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .conta-list li{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--linea-osc);font-size:.98rem;line-height:1.5}
 .conta-list li:last-child{border-bottom:none}
 .conta-list svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:#3DD68C}
-.referido{margin-top:26px;padding:22px;border-radius:16px;background:rgba(139,98,255,.14);border:1px solid rgba(139,98,255,.4)}
-.referido h4{font-family:var(--display);font-size:1.06rem;font-weight:700;margin-bottom:8px}
-.referido p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.55}
+/* el bloque .referido se retiro de la pagina: la mecanica del programa
+   nunca se definio. Si se recupera, el estilo esta en el historial. */
 
 /* ============ EMPRESA DETRÁS ============ */
 .cifras{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--linea);border-radius:16px;overflow:hidden;margin-top:34px}

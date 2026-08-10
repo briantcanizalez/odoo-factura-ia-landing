@@ -90,8 +90,34 @@ Sin estas variables `api/capi.js` responde no-op y el sitio sigue funcionando co
 
 Sitio estático en **Vercel**, conectado a este repo de GitHub. **Push a `main` → deploy de producción automático.** No requiere build.
 
+## Los cuatro datos que bloqueaban la publicación
+
+El brief del rediseño (`contexto-rediseno-landing.md`, sección 6) marcaba cuatro datos
+sin confirmar, señalados en el HTML con la clase `.rev`. Estado al 10 de agosto de 2026:
+
+| Dato | Estado | Quién |
+|---|---|---|
+| ¿Existe el multi-empresa? ¿En qué planes? | **Confirmado: existe y está disponible.** Rafael Henríquez está al tanto | Briant Canizalez |
+| Horario real de soporte (L–V 8:00 a.m. – 5:00 p.m.) | **Confirmado con Soporte.** Publicado en 2 lugares del index | Soporte |
+| Mecánica del programa de referidos | Resuelto por eliminación: el bloque se quitó de la página | — |
+| Precio por factura excedente ($0.03 + IVA) | Resuelto por eliminación: no aparece en la página | — |
+
+Los marcadores `.rev` ya no hacen falta y la regla CSS se retiró. Si vuelve a aparecer
+un dato sin confirmar, se marca de nuevo antes de publicarlo como un hecho.
+
+## Otras decisiones tomadas
+
+- **Los videos van sin subtítulos.** El brief del asset 02 pedía subtítulos por ser un
+  video mudo. Se revisó ya montado y se resolvió dejarlo así: la grabación se entiende
+  sin ellos y el pie de foto da el contexto. Decisión de Briant Canizalez, 10/08/2026.
+- **Los datos de terceros van difuminados, no regrabados.** En los assets 03 y 04 se
+  enmascaran los identificadores en vez de rehacer la grabación con datos demo. Queda
+  sujeto a que Rafael no haga observaciones al revisarlo.
+
 ## Pendientes
 
+- **Testimonios (assets 07, 08, 09)** — el 07 bloquea la publicación según el orden de producción del brief. Requiere consentimiento por escrito de un cliente que haya migrado desde otro proveedor. **Con cero testimonios firmados, la sección completa se borra.**
 - **Contenido legal incompleto** — 17 puntos sin resolver en privacidad, términos y SLA. Estaban escritos dentro de las páginas como recuadros visibles al público; se movieron a [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md). **Bloquean la publicación en el dominio definitivo.**
 - `canonical` y `og:url` están comentados en las 4 páginas, a la espera de confirmar el dominio definitivo.
 - Falta el archivo `assets/og-facturaia.jpg` (1200×630) que referencia el `og:image` del index.
+- **Asset 06** (selector multi-empresa) — pendiente de captura. La función existe, así que aplica el asset normal y no el reemplazo por foto del equipo que preveía el brief.
