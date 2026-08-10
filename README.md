@@ -86,6 +86,27 @@ Se activa con variables de entorno en Vercel (Settings → Environment Variables
 
 Sin estas variables `api/capi.js` responde no-op y el sitio sigue funcionando con el Pixel del navegador. Tras configurarlas hay que hacer **redeploy**.
 
+## Google Analytics 4
+
+Instalado en el `<head>` de `index.html`, justo debajo del Pixel. **Falta pegar el Measurement ID** en la constante `GA4_ID` (formato `G-XXXXXXXXXX`).
+
+Con `GA4_ID` vacío no se carga la librería de Google ni se dispara ningún evento: la página funciona igual. Mismo criterio defensivo que `api/capi.js`.
+
+El Measurement ID **no es un secreto** — viaja en el HTML público y así debe ser. El único secreto del proyecto es el token de CAPI, que va en Vercel y nunca en el repo.
+
+Eventos que se envían a GA4:
+
+| Evento GA4 | Cuándo | Equivalente en Meta |
+|---|---|---|
+| `page_view` | Automático al cargar | `PageView` |
+| `generate_lead` | Clic en cualquier CTA a WhatsApp, con `cta_id`, `item_name`, `value` y `currency` | `Lead` |
+| `view_item_list` | La sección de precios entra en pantalla | `ViewContent` |
+| `select_item` | La calculadora devuelve un plan | *(no tiene)* |
+
+Los `dataLayer.push` originales (`clic_whatsapp`, `calculadora_plan`) se mantienen: no estorban y sirven si algún día entra un contenedor de GTM.
+
+`generate_lead` y `select_item` conviene marcarlos como **conversión** en GA4 → Administrar → Eventos.
+
 ## Deploy
 
 Sitio estático en **Vercel**, conectado a este repo de GitHub. **Push a `main` → deploy de producción automático.** No requiere build.

@@ -39,6 +39,42 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none" alt=""
 src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
 
+<!-- ============================================================
+     GOOGLE ANALYTICS 4  ·  Factura IA de Grupo Consiti
+
+     PARA ACTIVARLO: poné el Measurement ID de la propiedad GA4 en
+     GA4_ID, con el formato "G-XXXXXXXXXX". Se saca en GA4 →
+     Administrar → Flujos de datos → (el flujo web).
+
+     El Measurement ID NO es un secreto: viaja en el HTML público y
+     así debe ser. El que nunca va en el repo es el token de CAPI.
+
+     Con GA4_ID vacío no se carga la librería ni se dispara nada: la
+     página funciona igual. Mismo criterio que /api/capi.
+     ============================================================ -->
+<script>
+var GA4_ID = "";   /* <- pegar aquí el G-XXXXXXXXXX */
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){ dataLayer.push(arguments); }
+
+if (GA4_ID) {
+  var _ga = document.createElement("script");
+  _ga.async = true;
+  _ga.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
+  document.head.appendChild(_ga);
+  gtag("js", new Date());
+  gtag("config", GA4_ID);
+}
+
+/* Un solo punto de entrada para los eventos. Si GA4 no está configurado
+   no hace nada, pero el dataLayer.push se mantiene por si más adelante
+   entra un contenedor de GTM. */
+function trackGA(evento, params){
+  try{ if (GA4_ID) gtag("event", evento, params || {}); }catch(e){}
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -1227,6 +1263,14 @@ document.querySelectorAll("[data-wa]").forEach(function(a){
       currency: "USD",
       cta_id: id
     });
+    /* GA4: generate_lead es el evento recomendado para esto. Mismos
+       datos que van al Pixel, para poder cruzar las dos fuentes. */
+    trackGA("generate_lead", {
+      cta_id: id,
+      item_name: p ? p.plan : "Consulta general",
+      value: p ? p.valor : 0,
+      currency: "USD"
+    });
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({event:"clic_whatsapp",cta_id:id});
   });
@@ -1269,6 +1313,14 @@ var PLANES=[
       cta.textContent="Contratar "+pl.n+" por WhatsApp";
       cta.setAttribute("data-plan-calc", pl.n);
       res.classList.add("ver");
+      /* GA4: select_item marca qué plan le calzó a cada visitante.
+         Es el dato que dice si la calculadora está bien calibrada. */
+      trackGA("select_item", {
+        item_list_name: "Calculadora de precio",
+        item_name: pl.n,
+        value: Number(String(pl.p).replace(/[^0-9.]/g,"")) || 0,
+        currency: "USD"
+      });
       window.dataLayer=window.dataLayer||[];
       window.dataLayer.push({event:"calculadora_plan",plan:pl.n});
     });
@@ -1280,12 +1332,19 @@ var PLANES=[
     var n=ctaRes.getAttribute("data-plan-calc");
     var p=null;
     for(var i=0;i<PLANES.length;i++){ if(PLANES[i].n===n){ p=PLANES[i]; break; } }
+    var valor = p ? Number(String(p.p).replace(/[^0-9.]/g,"")) || 0 : 0;
     trackLead({
       content_name: n||"Calculadora",
       content_category: "Plan Facturación",
-      value: p ? Number(p.p.replace("$","")) : 0,
+      value: valor,
       currency: "USD",
       cta_id: "calculadora"
+    });
+    trackGA("generate_lead", {
+      cta_id: "calculadora",
+      item_name: n||"Calculadora",
+      value: valor,
+      currency: "USD"
     });
   });
 })();
@@ -1301,6 +1360,9 @@ var PLANES=[
         var cd={content_name:"Sección Precios",content_category:"Pricing"};
         try{ fbq('track','ViewContent',cd,{eventID:id}); }catch(err){}
         sendCAPI('ViewContent', id, cd);
+        /* GA4: cuántos llegan a ver el precio. El deck subió esta
+           sección de la posición 10 a la 3; este evento lo mide. */
+        trackGA("view_item_list", { item_list_name: "Sección Precios" });
         io.unobserve(e.target);
       }
     });
