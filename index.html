@@ -202,8 +202,10 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 /* OJO: no usar .demo aca. Esa clase ya existe mas abajo como insignia
    naranja de "Vista de ejemplo" y, por estar despues, gana la cascada. */
 .demo-video{margin:0}
+/* sin aspect-ratio fijo: el navegador lo deduce de width/height de cada <video>,
+   asi conviven el de emision (4:3) y el de compras (16:9) sin barras */
 .demo-video video{
-  width:100%;height:auto;aspect-ratio:4/3;border-radius:14px;
+  width:100%;height:auto;border-radius:14px;
   background:var(--nube);border:1px solid var(--linea);
   box-shadow:0 22px 50px rgba(20,10,46,.16),0 2px 8px rgba(20,10,46,.08);
 }
@@ -623,16 +625,21 @@ footer a:hover{color:#fff}
           <span class="tag">Desde el plan Advanced</span>
         </div>
       </div>
-      <div class="asset ratio-43 rv">
-        <span class="asset-tag">Asset 03 · prioridad alta</span>
-        <h4>Antes / después de la carga de compras</h4>
-        <ul>
-          <li>Dos paneles: los archivos entrando, y la compra ya registrada</li>
-          <li>1200 × 900 px · PNG o WebP</li>
-          <li>Mejor si es un GIF corto del arrastrar y soltar</li>
-          <li>Tapar o inventar los nombres de proveedores reales</li>
-        </ul>
-      </div>
+      <figure class="demo-video rv">
+        <video id="demo-compras"
+               poster="assets/carga-compras-poster.webp"
+               width="1600" height="900"
+               autoplay muted loop playsinline preload="metadata"
+               aria-label="Grabación de pantalla real: se suben los archivos JSON de las facturas de compra, se presiona Procesar con IA y el sistema registra la compra con su proveedor, sus líneas, sus impuestos y su total, sin digitar nada.">
+          <source src="assets/carga-compras.webm" type="video/webm">
+          <source src="assets/carga-compras.mp4" type="video/mp4">
+          <p>Tu navegador no puede reproducir el video.
+             <a href="assets/carga-compras.mp4">Descargalo aquí</a>.</p>
+        </video>
+        <figcaption><span class="ok" aria-hidden="true">✓</span>
+          29 segundos: de archivos sueltos a compra registrada. Los datos del proveedor van difuminados a propósito.
+        </figcaption>
+      </figure>
     </div>
 
     <div class="prod-fila">
@@ -1444,24 +1451,28 @@ document.getElementById("anio").textContent=new Date().getFullYear();
   window.addEventListener("scroll",function(){ if(!tick){ requestAnimationFrame(upd); tick=true; } },{passive:true});
 })();
 
-/* ============ Video demo: bucle silencioso solo mientras se ve en pantalla ============ */
+/* ============ Videos demo: bucle silencioso solo mientras se ven en pantalla ============ */
 (function(){
-  var v=document.getElementById("demo-emitir"); if(!v) return;
+  var vids=document.querySelectorAll(".demo-video video");
+  if(!vids.length) return;
   /* si el usuario pide menos movimiento: nada de bucle, que lo controle él */
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    v.autoplay=false; v.loop=false; v.controls=true;
-    v.pause(); try{ v.currentTime=0; }catch(e){}
+    Array.prototype.forEach.call(vids,function(v){
+      v.autoplay=false; v.loop=false; v.controls=true;
+      v.pause(); try{ v.currentTime=0; }catch(e){}
+    });
     return;
   }
   if(!("IntersectionObserver" in window)) return;
   /* el navegador pausa el video al salir de vista pero no siempre lo reanuda al volver */
   var io=new IntersectionObserver(function(en){
     en.forEach(function(e){
+      var v=e.target;
       if(e.isIntersecting){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
       else if(!v.paused){ v.pause(); }
     });
   },{threshold:.25});
-  io.observe(v);
+  Array.prototype.forEach.call(vids,function(v){ io.observe(v); });
 })();
 </script>
 </body>
