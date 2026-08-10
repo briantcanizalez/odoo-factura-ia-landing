@@ -5,16 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Facturación Electrónica DTE El Salvador · desde $14.99 al mes · Grupo Consiti</title>
 <meta name="description" content="Facturación electrónica DTE en El Salvador desde $14.99 al mes. Fácil de usar, soporte que contesta el mismo día y una empresa de 12 años detrás. Actualización a la Normativa DTE 2.0 incluida antes del 1 de diciembre de 2026.">
-<link rel="canonical" href="https://facturaia.consiti.com/">
+<!-- canonical PENDIENTE: dominio por validar con Duvan Rondo -->
+
 <meta name="theme-color" content="#0A0616">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_SV">
 <meta property="og:title" content="Facturación Electrónica DTE El Salvador · desde $14.99 al mes">
 <meta property="og:description" content="Emitís tu factura en tres clics. Soporte que contesta el mismo día y una empresa con 12 años de operación detrás.">
-<meta property="og:url" content="https://facturaia.consiti.com/">
+<!-- og:url PENDIENTE: dominio por validar con Duvan Rondo -->
 <!-- ASSET: og:image 1200x630 -->
 <meta property="og:image" content="/assets/og-facturaia.jpg">
 <meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- ============================================================
+     META PIXEL  ·  Odoo Factura IA
+     init + PageView aquí. Lead y ViewContent se disparan al final
+     del documento, junto con el envío a CAPI.
+     ============================================================ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '27890392917235121');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" alt=""
+src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1120,6 +1143,36 @@ footer a:hover{color:#fff}
 </script>
 
 <script>
+/* ============ Meta CAPI (server-side) con dedup por eventID ============
+   El Pixel (init + PageView) se dispara en el <head>. Aquí van Lead y
+   ViewContent: el mismo event_id va al Pixel y a /api/capi para que Meta
+   no cuente doble. Las credenciales de CAPI viven en variables de entorno
+   de Vercel (META_PIXEL_ID, META_CAPI_TOKEN); sin ellas el endpoint es no-op. */
+function getCookie(n){ var m=document.cookie.match('(^|;)\\s*'+n+'=([^;]+)'); return m?decodeURIComponent(m.pop()):''; }
+function newEventId(){ try{ return crypto.randomUUID(); }catch(e){ return 'ev-'+Date.now()+'-'+Math.random().toString(16).slice(2); } }
+function sendCAPI(eventName, eventId, customData){
+  try{
+    fetch('/api/capi', { method:'POST', keepalive:true, headers:{'content-type':'application/json'},
+      body: JSON.stringify({ event_name:eventName, event_id:eventId, event_source_url:location.href,
+        fbp:getCookie('_fbp'), fbc:getCookie('_fbc'), custom_data:customData||{} }) }).catch(function(){});
+  }catch(e){}
+}
+/* Dispara el mismo evento al Pixel y a CAPI con un event_id compartido */
+function trackLead(customData){
+  var id = newEventId();
+  try{ fbq('track','Lead', customData, { eventID:id }); }catch(e){}
+  sendCAPI('Lead', id, customData);
+}
+
+/* Precio por CTA de plan, para que el evento Lead lleve value/currency */
+var VALOR_CTA = {
+  "plan-starter":      {plan:"Starter",      valor:14.99},
+  "plan-professional": {plan:"Professional", valor:24.99},
+  "plan-advanced":     {plan:"Advanced",     valor:34.99},
+  "plan-deluxe":       {plan:"Deluxe",       valor:59.99},
+  "plan-enterprise":   {plan:"Enterprise",   valor:150}
+};
+
 /* ============ WhatsApp con mensaje distinto por CTA (atribución) ============ */
 var WA = "50372559059";
 var MENSAJES = {
@@ -1143,7 +1196,14 @@ document.querySelectorAll("[data-wa]").forEach(function(a){
   var id=a.getAttribute("data-wa");
   a.href=waURL(MENSAJES[id]||MENSAJES.nav); a.target="_blank"; a.rel="noopener";
   a.addEventListener("click",function(){
-    /* GA4 y Meta Pixel: cambiar por gtag() y fbq() cuando estén los IDs */
+    var p = VALOR_CTA[id];
+    trackLead({
+      content_name: p ? p.plan : "Consulta general",
+      content_category: p ? "Plan Facturación" : "Consulta",
+      value: p ? p.valor : 0,
+      currency: "USD",
+      cta_id: id
+    });
     window.dataLayer=window.dataLayer||[];
     window.dataLayer.push({event:"clic_whatsapp",cta_id:id});
   });
@@ -1184,11 +1244,45 @@ var PLANES=[
       var cta=document.getElementById("r-cta");
       cta.href=waURL(pl.wa); cta.target="_blank"; cta.rel="noopener";
       cta.textContent="Contratar "+pl.n+" por WhatsApp";
+      cta.setAttribute("data-plan-calc", pl.n);
       res.classList.add("ver");
       window.dataLayer=window.dataLayer||[];
       window.dataLayer.push({event:"calculadora_plan",plan:pl.n});
     });
   });
+
+  /* El CTA del resultado también es un Lead, con el plan que salió en la calculadora */
+  var ctaRes=document.getElementById("r-cta");
+  if(ctaRes) ctaRes.addEventListener("click",function(){
+    var n=ctaRes.getAttribute("data-plan-calc");
+    var p=null;
+    for(var i=0;i<PLANES.length;i++){ if(PLANES[i].n===n){ p=PLANES[i]; break; } }
+    trackLead({
+      content_name: n||"Calculadora",
+      content_category: "Plan Facturación",
+      value: p ? Number(p.p.replace("$","")) : 0,
+      currency: "USD",
+      cta_id: "calculadora"
+    });
+  });
+})();
+
+/* ============ ViewContent al ver la sección de precios ============ */
+(function(){
+  var sec=document.getElementById("precio");
+  if(!sec || !("IntersectionObserver" in window)) return;
+  var io=new IntersectionObserver(function(entradas){
+    entradas.forEach(function(e){
+      if(e.isIntersecting){
+        var id=newEventId();
+        var cd={content_name:"Sección Precios",content_category:"Pricing"};
+        try{ fbq('track','ViewContent',cd,{eventID:id}); }catch(err){}
+        sendCAPI('ViewContent', id, cd);
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:.3});
+  io.observe(sec);
 })();
 
 /* ============ Cuenta regresiva al 1 dic 2026 ============ */

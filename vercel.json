@@ -1,4 +1,9 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/faq", "destination": "/#faq", "statusCode": 301 },
+    { "source": "/servicios", "destination": "/", "statusCode": 301 },
+    { "source": "/consiti-ai", "destination": "/", "statusCode": 301 }
+  ]
 }

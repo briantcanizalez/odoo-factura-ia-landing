@@ -1,0 +1,133 @@
+/* =====================================================================
+   Páginas legales · Grupo Consiti — estilo corporativo / ejecutivo
+   Manual de Marca v1.0: HK Grotesk (Hanken Grotesk), morado #5216E7,
+   lavanda #DFD2FF, negro sobre blanco. Sin amarillo (solo marketing).
+   ===================================================================== */
+:root{
+  --morado:#5216E7;
+  --morado-osc:#3B0FA6;
+  --lavanda:#DFD2FF;
+  --lavanda-suave:#F4EFFF;
+  --tinta:#14102E;
+  --negro:#0B0A12;
+  --gris:#5A5568;
+  --gris-2:#8B869B;
+  --gris-linea:#E7E4EF;
+  --gris-fondo:#F7F6FA;
+  --papel:#FFFFFF;
+  --fuente:'Hanken Grotesk',Arial,Helvetica,system-ui,sans-serif;
+  --max:1120px;
+  /* header igual que la página principal */
+  --noche:#0A0616;
+  --linea-osc:rgba(255,255,255,.15);
+  --amarillo:#F2D64B;
+  --wa:#25D366;
+  --display:'Archivo',system-ui,sans-serif;
+  --texto:'Instrument Sans',system-ui,sans-serif;
+  --mono-nav:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  margin:0;background:var(--papel);color:var(--negro);
+  font-family:var(--fuente);font-size:16.5px;line-height:1.72;
+  -webkit-font-smoothing:antialiased;font-feature-settings:"ss01","cv01";
+}
+img{max-width:100%;display:block}
+a{color:var(--morado);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+
+/* ============ HEADER (idéntico a la página principal) ============ */
+header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--linea-osc)}
+.nav-in{display:flex;align-items:center;gap:24px;height:70px}
+.mark{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.mark:hover{text-decoration:none}
+.mark-logo{height:30px;width:auto;display:block}
+.mark span{font-family:var(--mono-nav);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+.nav-links{display:flex;gap:24px;margin-left:auto;font-family:var(--texto);font-size:.93rem;font-weight:500}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.72)}
+.nav-links a:hover{color:#fff;text-decoration:none}
+.nav-links a.precio-nav{color:var(--amarillo);font-weight:600}
+.burger{display:none;margin-left:auto;background:transparent;border:1px solid var(--linea-osc);border-radius:10px;padding:9px 11px;cursor:pointer}
+.burger svg{display:block;color:#fff}
+.drawer{display:none;background:var(--noche);border-bottom:1px solid var(--linea-osc);padding:8px 32px 20px}
+.drawer.abierto{display:block}
+.drawer a{display:block;padding:14px 0;color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;border-bottom:1px solid var(--linea-osc);font-family:var(--texto)}
+.drawer a:hover{text-decoration:none}
+.drawer .btn{width:100%;margin-top:18px;border-bottom:none}
+@media(max-width:940px){.nav-links{display:none}.burger{display:block}.nav-in .btn{display:none}}
+@media(max-width:600px){.mark-logo{height:26px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;padding:15px 26px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn:active{transform:translateY(1px)}
+.btn-wa{background:var(--wa);color:#04371A;box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-sm{padding:11px 19px;font-size:.88rem}
+
+/* ============ ENCABEZADO DEL DOCUMENTO ============ */
+.doc-head{padding:56px 0 30px}
+.doc-head .kicker{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--morado);margin:0 0 14px}
+.doc-head h1{font-family:var(--fuente);font-weight:700;font-size:clamp(2rem,4.2vw,2.9rem);letter-spacing:-.02em;line-height:1.1;margin:0;color:var(--negro)}
+.doc-head .meta{font-size:.86rem;color:var(--gris-2);margin:16px 0 0}
+.doc-head:after{content:"";display:block;height:1px;background:var(--gris-linea);margin-top:30px}
+
+/* ============ LAYOUT: índice + contenido ============ */
+.doc-body{display:grid;grid-template-columns:248px 1fr;gap:56px;padding:36px 0 20px;align-items:start}
+@media(max-width:900px){.doc-body{grid-template-columns:1fr;gap:8px}}
+
+/* índice lateral */
+.toc{position:sticky;top:24px}
+@media(max-width:900px){.toc{position:static;border:1px solid var(--gris-linea);border-radius:12px;padding:18px 20px;background:var(--gris-fondo);margin-bottom:24px}}
+.toc-t{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gris-2);margin:0 0 14px}
+.toc nav{display:flex;flex-direction:column;gap:2px}
+.toc nav a{font-size:.86rem;color:var(--gris);padding:7px 12px;border-left:2px solid var(--gris-linea);line-height:1.4}
+.toc nav a:hover{color:var(--tinta);text-decoration:none;background:var(--lavanda-suave)}
+.toc nav a.activo{color:var(--morado);font-weight:600;border-left-color:var(--morado);background:var(--lavanda-suave)}
+.toc-docs{display:flex;flex-direction:column;gap:8px;margin-top:22px;padding-top:20px;border-top:1px solid var(--gris-linea)}
+.toc-docs a{font-size:.82rem;font-weight:600;color:var(--tinta)}
+.toc-docs a[aria-current="page"]{color:var(--morado)}
+.toc-docs a:before{content:"▸ ";color:var(--gris-2)}
+.toc-docs a[aria-current="page"]:before{content:"▪ ";color:var(--morado)}
+
+/* contenido */
+.content{max-width:70ch}
+.content section{scroll-margin-top:90px}
+.content h2{
+  font-family:var(--fuente);font-weight:700;font-size:1.24rem;letter-spacing:-.01em;
+  color:var(--negro);margin:0 0 12px;padding-top:34px;display:flex;gap:8px 12px;align-items:baseline;flex-wrap:wrap
+}
+.content h2 .flag{margin-left:auto;align-self:center;font-size:.58rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--morado);background:var(--lavanda-suave);border:1px solid var(--lavanda);border-radius:999px;padding:4px 11px;white-space:nowrap}
+.nota-legal{background:var(--gris-fondo);border:1px dashed #C9C2E0;border-left:3px solid var(--morado);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:.86rem;color:var(--gris);line-height:1.55}
+.nota-legal b{color:var(--morado);font-weight:700}
+/* tabla (header lavanda, según manual de marca) */
+.tabla-wrap{overflow-x:auto;border:1px solid var(--gris-linea);border-radius:10px;margin:18px 0}
+.content table{width:100%;border-collapse:collapse;font-size:.9rem;background:var(--papel)}
+.content thead th{background:var(--lavanda-suave);color:var(--tinta);text-align:left;font-weight:700;font-size:.78rem;letter-spacing:.01em;padding:11px 14px;border-bottom:2px solid var(--lavanda);white-space:nowrap}
+.content tbody td{padding:11px 14px;border-bottom:1px solid var(--gris-linea);color:#26232F;vertical-align:top;line-height:1.5}
+.content tbody tr:last-child td{border-bottom:none}
+.content td .lvl{font-weight:700;color:var(--negro);white-space:nowrap}
+.content section:first-of-type h2{padding-top:0}
+.content h2 .n{font-size:.9rem;font-weight:700;color:var(--morado);font-variant-numeric:tabular-nums;min-width:1.4em}
+.content h3{font-weight:700;font-size:1.02rem;color:var(--tinta);margin:22px 0 6px}
+.content p{margin:11px 0;color:#26232F}
+.content ul{margin:13px 0;padding-left:0;list-style:none}
+.content li{position:relative;padding-left:22px;margin:9px 0;color:#26232F}
+.content li:before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;border-radius:1px;background:var(--morado);transform:rotate(45deg)}
+.content strong,.content b{color:var(--negro);font-weight:700}
+.dato{font-variant-numeric:tabular-nums;font-weight:600;color:var(--tinta)}
+.mut{color:var(--gris)}
+
+/* callout sobrio (lavanda, sin amarillo) */
+.callout{background:var(--lavanda-suave);border:1px solid var(--lavanda);border-left:3px solid var(--morado);border-radius:0 8px 8px 0;padding:16px 20px;margin:0 0 34px;font-size:.92rem;color:var(--gris);line-height:1.6}
+.callout b{color:var(--tinta);font-weight:700}
+
+/* ============ PIE ============ */
+.doc-foot{margin-top:56px;border-top:2px solid var(--morado);background:var(--papel)}
+.doc-foot .wrap{padding:26px 32px}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.82rem;color:var(--gris);font-weight:500}
+.foot-row a{color:var(--gris)}
+.trademarks{margin-top:16px;padding-top:14px;border-top:1px solid var(--gris-linea);font-size:.74rem;color:var(--gris-2);line-height:1.7;max-width:none}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--morado);outline-offset:3px;border-radius:3px}
