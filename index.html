@@ -239,7 +239,9 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
   font-family:var(--mono);font-size:.72rem;line-height:1.5;color:rgba(255,255,255,.62)
 }
 .shot figcaption .ok{
-  flex:none;width:18px;height:18px;border-radius:50%;background:var(--sello);
+  /* verde mas oscuro que var(--sello): el ✓ blanco sobre el verde de marca
+     daba 3.41:1. Mismo criterio que los simbolos de la tabla de planes. */
+  flex:none;width:18px;height:18px;border-radius:50%;background:#0A7A4B;
   display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700
 }
 @media(max-width:1000px){.shot img{border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.45)}}
@@ -260,7 +262,9 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
   font-family:var(--mono);font-size:.72rem;line-height:1.5;color:var(--gris)
 }
 .demo-video figcaption .ok{
-  flex:none;width:18px;height:18px;border-radius:50%;background:var(--sello);
+  /* verde mas oscuro que var(--sello): el ✓ blanco sobre el verde de marca
+     daba 3.41:1. Mismo criterio que los simbolos de la tabla de planes. */
+  flex:none;width:18px;height:18px;border-radius:50%;background:#0A7A4B;
   display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:.6rem;font-weight:700
 }
 .dark .demo-video video{border-color:var(--linea-osc);box-shadow:0 30px 70px rgba(0,0,0,.5),0 2px 8px rgba(0,0,0,.3)}
@@ -419,8 +423,12 @@ tbody th{text-align:left;font-family:var(--texto);font-weight:500;font-size:.9re
 td.reco{background:rgba(82,22,231,.05);font-weight:600}
 .tp{font-family:var(--mono);font-weight:700;font-size:1.2rem;letter-spacing:-.04em;display:block}
 .tp small{font-family:var(--texto);font-size:.7rem;font-weight:400;color:var(--gris-2);letter-spacing:0}
-.si{color:var(--sello);font-weight:700}
-.no{color:#B9B3C8}
+/* Los simbolos de la tabla llevan color propio, no var(--sello) ni un gris
+   claro: sobre blanco daban 3.41:1 y 2.03:1, por debajo del minimo AA de
+   4.5:1. Son los que dicen que incluye y que no cada plan, y el publico de
+   la pagina promedia 40-60 anos leyendo en celular. */
+.si{color:#0A7A4B;font-weight:700}
+.no{color:#6E6786}
 .scroll-hint{display:none;font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:10px;text-align:center}
 @media(max-width:820px){.scroll-hint{display:block}}
 .nota-planes{margin-top:22px;padding:20px 22px;background:var(--nube);border:1px solid var(--linea);border-radius:14px;font-size:.92rem;color:var(--gris);line-height:1.65}
@@ -507,7 +515,10 @@ footer a:hover{color:#fff}
 </header>
 
 <!-- ================= HERO ================= -->
-<section class="hero" id="top">
+<!-- La clase .dark no es decorativa: activa las correcciones de color para
+     fondo oscuro (.dark .lede, .dark .horario, .dark .btn-ghost...). Toda
+     seccion con fondo oscuro debe llevarla o su texto queda ilegible. -->
+<section class="hero dark" id="top">
   <div class="wrap hero-grid">
     <div>
       <div class="social">
@@ -835,7 +846,7 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- ================= 6. NORMATIVA 2.0 ================= -->
-<section class="norma" id="normativa">
+<section class="norma dark" id="normativa">
   <div class="wrap">
     <span class="chip rv">Plazo oficial: 1 de diciembre de 2026</span>
     <div class="norma-grid">
@@ -1133,7 +1144,7 @@ footer a:hover{color:#fff}
 </section>
 
 <!-- ================= CIERRE ================= -->
-<section class="cierre">
+<section class="cierre dark">
   <div class="wrap">
     <h2 class="rv">Empezá a facturar en menos de 24 horas</h2>
     <p class="lede rv">Escribinos, vemos juntos qué plan te toca y el papeleo ante Hacienda queda de nuestro lado.</p>
