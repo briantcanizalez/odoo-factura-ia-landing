@@ -116,7 +116,7 @@ un dato sin confirmar, se marca de nuevo antes de publicarlo como un hecho.
 
 ## Pendientes
 
-- **Testimonios (assets 07, 08, 09)** — el 07 bloquea la publicación según el orden de producción del brief. Requiere consentimiento por escrito de un cliente que haya migrado desde otro proveedor. **Con cero testimonios firmados, la sección completa se borra.**
+- **Testimonios (assets 07, 08, 09)** — la sección **se retiró de la página** el 10/08/2026, aplicando la regla de publicación del brief: con cero testimonios firmados se borra completa. En `index.html` quedó un comentario con las instrucciones para reponerla, y los estilos `.tst` siguen intactos. Hace falta, por cada uno: foto real de 400×400 con la cara visible, nombre completo, cargo, empresa, municipio y **consentimiento por escrito**. El 07 —alguien que se cambió desde otro proveedor— es el que el deck marca como bloqueante de lanzamiento.
 - **Contenido legal incompleto** — 17 puntos sin resolver en privacidad, términos y SLA. Estaban escritos dentro de las páginas como recuadros visibles al público; se movieron a [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md). **Bloquean la publicación en el dominio definitivo.**
 - `canonical` y `og:url` están comentados en las 4 páginas, a la espera de confirmar el dominio definitivo.
 - Falta el archivo `assets/og-facturaia.jpg` (1200×630) que referencia el `og:image` del index.
