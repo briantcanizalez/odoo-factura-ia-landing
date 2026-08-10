@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+<html lang="es-SV">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Facturación Electrónica DTE El Salvador · desde $14.99 al mes · Grupo Consiti</title>
+<meta name="description" content="Facturación electrónica DTE en El Salvador desde $14.99 al mes. Fácil de usar, soporte que contesta el mismo día y una empresa de 12 años detrás. Actualización a la Normativa DTE 2.0 incluida antes del 1 de diciembre de 2026.">
+<link rel="canonical" href="https://facturaia.consiti.com/">
+<meta name="theme-color" content="#0A0616">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_SV">
+<meta property="og:title" content="Facturación Electrónica DTE El Salvador · desde $14.99 al mes">
+<meta property="og:description" content="Emitís tu factura en tres clics. Soporte que contesta el mismo día y una empresa con 12 años de operación detrás.">
+<meta property="og:url" content="https://facturaia.consiti.com/">
+<!-- ASSET: og:image 1200x630 -->
+<meta property="og:image" content="/assets/og-facturaia.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --violeta:#5216E7;
+  --violeta-hi:#8B62FF;
+  --tinta:#140A2E;
+  --nube:#F6F4FF;
+  --papel:#FFFFFF;
+  --noche:#0A0616;
+  --sello:#0E9F63;
+  --alerta:#C2410C;
+  --alerta-vivo:#FF8A00;
+  --amarillo:#F2D64B;
+  --gris:#544D6B;          /* oscurecido para lectura en celular a plena luz */
+  --gris-2:#6E6786;
+  --linea:rgba(20,10,46,.12);
+  --linea-osc:rgba(255,255,255,.15);
+  --wa:#25D366;
+  --display:'Archivo',system-ui,sans-serif;
+  --texto:'Instrument Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:78px}
+body{margin:0;background:var(--papel);color:var(--tinta);font-family:var(--texto);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);margin:0;line-height:1.06;letter-spacing:-.025em;font-weight:800}
+h1{font-size:clamp(2.3rem,5.4vw,4.1rem)}
+h2{font-size:clamp(1.8rem,3.8vw,2.7rem)}
+h3{font-size:1.15rem;letter-spacing:-.015em;font-weight:700}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+section{padding:82px 0}
+@media(max-width:700px){section{padding:58px 0}}
+.eyebrow{font-family:var(--mono);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:.16em;color:var(--violeta);margin-bottom:13px;display:block}
+.dark .eyebrow{color:var(--violeta-hi)}
+.lede{color:var(--gris);font-size:1.08rem;max-width:60ch;margin-top:15px}
+.dark{background:var(--tinta);color:#fff}
+.dark .lede{color:rgba(255,255,255,.78)}
+.center{text-align:center}
+.center .lede{margin-left:auto;margin-right:auto}
+
+/* ============ MARCADOR DE ASSET PARA EL DISEÑADOR ============ */
+.asset{
+  border:2px dashed var(--alerta-vivo);border-radius:16px;background:
+    repeating-linear-gradient(45deg,rgba(255,138,0,.07),rgba(255,138,0,.07) 10px,transparent 10px,transparent 20px);
+  padding:24px;position:relative
+}
+.asset-tag{
+  display:inline-block;background:var(--alerta-vivo);color:#2B1500;
+  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.13em;
+  text-transform:uppercase;padding:5px 10px;border-radius:5px;margin-bottom:14px
+}
+.asset h4{font-family:var(--mono);font-size:.86rem;letter-spacing:0;color:#7C3E00;margin-bottom:10px;font-weight:700}
+.asset ul{margin:0;padding-left:18px;font-family:var(--mono);font-size:.76rem;line-height:1.85;color:#7C3E00}
+.asset.ratio-43{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:center}
+.asset.ratio-169{aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center}
+.dark .asset h4,.dark .asset ul{color:#FFC781}
+.dark .asset{background:repeating-linear-gradient(45deg,rgba(255,138,0,.1),rgba(255,138,0,.1) 10px,transparent 10px,transparent 20px)}
+@media(max-width:600px){.asset{padding:18px}.asset ul{font-size:.7rem}.asset.ratio-43,.asset.ratio-169{aspect-ratio:auto}}
+/* dato que Rafa debe confirmar antes de publicar */
+.rev{border-bottom:2px dotted var(--alerta-vivo);cursor:help}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;padding:15px 26px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-wa{background:var(--wa);color:#04371A;box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-v{background:var(--violeta);color:#fff;box-shadow:0 8px 24px rgba(82,22,231,.26)}
+.btn-v:hover{background:#4712C7}
+.btn-ghost{background:transparent;color:var(--tinta);border-color:var(--linea)}
+.btn-ghost:hover{border-color:var(--violeta);color:var(--violeta)}
+.dark .btn-ghost{color:#fff;border-color:var(--linea-osc)}
+.btn-sm{padding:11px 19px;font-size:.88rem}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--violeta-hi);outline-offset:3px;border-radius:6px}
+.horario{font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;color:var(--gris-2);margin-top:14px}
+.dark .horario{color:rgba(255,255,255,.55)}
+
+/* ============ NAV con menú móvil ============ */
+header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea-osc)}
+.nav-in{display:flex;align-items:center;gap:24px;height:70px}
+.mark{display:flex;flex-direction:column;text-decoration:none;line-height:1}
+.mark b{font-family:var(--display);font-weight:800;font-size:1.2rem;letter-spacing:-.03em;color:#fff}
+.mark b i{font-style:normal;color:var(--violeta-hi)}
+.mark span{font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+.nav-links{display:flex;gap:24px;margin-left:auto;font-size:.93rem;font-weight:500}
+.nav-links a{text-decoration:none;color:rgba(255,255,255,.72)}
+.nav-links a:hover{color:#fff}
+.nav-links a.precio-nav{color:var(--amarillo);font-weight:600}
+.burger{display:none;margin-left:auto;background:transparent;border:1px solid var(--linea-osc);border-radius:10px;padding:9px 11px;cursor:pointer}
+.burger svg{display:block;color:#fff}
+.drawer{display:none;background:var(--noche);border-bottom:1px solid var(--linea-osc);padding:8px 22px 20px}
+.drawer.abierto{display:block}
+.drawer a{display:block;padding:14px 0;color:rgba(255,255,255,.85);text-decoration:none;font-weight:500;border-bottom:1px solid var(--linea-osc)}
+.drawer .btn{width:100%;margin-top:18px}
+@media(max-width:940px){
+  .nav-links{display:none}
+  .burger{display:block}
+  .nav-in .btn{display:none}
+}
+
+/* ============ HERO ============ */
+.hero{position:relative;overflow:hidden;background:var(--noche);color:#fff;padding:66px 0 72px}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(760px 460px at 12% 2%,rgba(82,22,231,.36),transparent 66%),radial-gradient(600px 400px at 94% 92%,rgba(139,98,255,.2),transparent 68%)}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.45;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:74px 74px;mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%);-webkit-mask-image:radial-gradient(880px 500px at 18% 8%,#000,transparent 72%)}
+.hero .wrap{position:relative;z-index:2}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center}
+@media(max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:36px}}
+.social{display:inline-flex;align-items:center;gap:13px;padding:9px 20px 9px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--linea-osc)}
+.avatares{display:flex}
+.avatares span{width:32px;height:32px;border-radius:50%;margin-right:-10px;background:linear-gradient(160deg,var(--violeta-hi),var(--violeta));border:2px solid var(--noche);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.58rem;font-weight:700;color:#fff}
+.social-txt{font-size:.88rem;line-height:1.35;color:rgba(255,255,255,.7)}
+.social-txt b{display:block;color:#fff;font-weight:600}
+.social-txt b em{font-style:normal;color:var(--amarillo);font-weight:700}
+.hero h1{margin-top:26px}
+.grad{background:linear-gradient(94deg,#F4EFFF 4%,#C0A8FF 48%,#8B62FF 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.trazo{display:block;margin:-4px 0 0 -8px;max-width:min(420px,74%);height:auto;color:var(--amarillo)}
+.hero-sub{color:rgba(255,255,255,.8);font-size:1.12rem;max-width:50ch;margin-top:20px}
+.hero-sub b{color:#fff;font-weight:600}
+.precio-ancla{display:flex;align-items:baseline;gap:10px;margin-top:26px;flex-wrap:wrap}
+.precio-ancla .p{font-family:var(--mono);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:-.04em}
+.precio-ancla .t{font-size:.92rem;color:rgba(255,255,255,.65)}
+.precio-ancla a{color:var(--amarillo);font-size:.9rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(242,214,75,.45)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+.plazo-hero{display:inline-flex;align-items:flex-start;gap:11px;margin-top:24px;padding:13px 19px;border-radius:14px;background:rgba(255,138,0,.11);border:1px solid rgba(255,138,0,.34);font-size:.9rem;color:rgba(255,255,255,.8);text-decoration:none;line-height:1.5}
+.plazo-hero b{font-family:var(--mono);color:var(--alerta-vivo);font-size:.88rem;white-space:nowrap}
+.plazo-hero:hover{background:rgba(255,138,0,.17)}
+
+/* ============ FRANJA ============ */
+.franja{border-bottom:1px solid var(--linea);background:var(--nube)}
+.franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
+.franja-in span{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;font-weight:500;color:var(--tinta)}
+.franja-in svg{flex:0 0 15px;width:15px;height:15px;color:var(--sello)}
+
+/* ============ QUÉ ES ============ */
+.queEs-grid{display:grid;grid-template-columns:.88fr 1.12fr;gap:48px;align-items:center}
+@media(max-width:920px){.queEs-grid{grid-template-columns:1fr;gap:32px}}
+.simple{list-style:none;padding:0;margin:24px 0 0}
+.simple li{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--linea)}
+.simple li:last-child{border-bottom:none}
+.simple .n{font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--violeta);flex:0 0 26px;padding-top:3px}
+.simple b{font-family:var(--display);font-size:1rem;display:block}
+.simple p{font-size:.94rem;color:var(--gris);margin-top:3px;line-height:1.5}
+.glosario{margin-top:26px;padding:18px 20px;border-radius:14px;background:var(--nube);border-left:4px solid var(--violeta);font-size:.95rem;line-height:1.6;color:var(--gris)}
+.glosario b{color:var(--tinta)}
+
+/* ============ CALCULADORA DE PLAN ============ */
+.calc{background:var(--nube)}
+.calc-box{background:var(--papel);border:1px solid var(--linea);border-radius:22px;padding:32px;margin-top:34px;box-shadow:0 24px 60px -36px rgba(20,10,46,.3)}
+@media(max-width:600px){.calc-box{padding:22px}}
+.calc-preg{font-family:var(--display);font-weight:700;font-size:1.16rem;margin-bottom:18px}
+.opciones{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+@media(max-width:900px){.opciones{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.opciones{grid-template-columns:1fr}}
+.opciones button{
+  font-family:var(--texto);font-size:.94rem;font-weight:600;color:var(--tinta);
+  background:var(--papel);border:1.5px solid var(--linea);border-radius:14px;
+  padding:16px 12px;cursor:pointer;text-align:center;line-height:1.35;transition:all .16s
+}
+.opciones button small{display:block;font-family:var(--mono);font-size:.66rem;font-weight:400;color:var(--gris-2);margin-top:5px}
+.opciones button:hover{border-color:var(--violeta-hi)}
+.opciones button.on{background:var(--violeta);border-color:var(--violeta);color:#fff}
+.opciones button.on small{color:rgba(255,255,255,.75)}
+.resultado{display:none;margin-top:26px;padding-top:26px;border-top:1px solid var(--linea)}
+.resultado.ver{display:block;animation:sube .4s ease both}
+@keyframes sube{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.res-grid{display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}
+@media(max-width:760px){.res-grid{grid-template-columns:1fr;gap:18px}}
+.res-plan{font-family:var(--mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--violeta)}
+.res-nombre{font-family:var(--display);font-weight:800;font-size:1.7rem;letter-spacing:-.03em;margin-top:6px}
+.res-detalle{font-size:.95rem;color:var(--gris);margin-top:8px;line-height:1.55}
+.res-precio{text-align:right}
+@media(max-width:760px){.res-precio{text-align:left}}
+.res-precio .p{font-family:var(--mono);font-weight:700;font-size:2.5rem;letter-spacing:-.05em;line-height:1;color:var(--violeta)}
+.res-precio .m{font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:7px}
+.res-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:22px}
+
+/* ============ PRODUCTO ============ */
+.prod-fila{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;margin-top:52px}
+.prod-fila:nth-child(even) .prod-txt{order:2}
+@media(max-width:900px){.prod-fila{grid-template-columns:1fr;gap:26px;margin-top:40px}.prod-fila:nth-child(even) .prod-txt{order:0}}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:6px;background:var(--nube);color:var(--violeta)}
+
+/* ============ CONTADORES ============ */
+.conta{background:var(--tinta);color:#fff}
+.conta-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:900px){.conta-grid{grid-template-columns:1fr;gap:32px}}
+.conta-list{list-style:none;padding:0;margin:22px 0 0}
+.conta-list li{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid var(--linea-osc);font-size:.98rem;line-height:1.5}
+.conta-list li:last-child{border-bottom:none}
+.conta-list svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:#3DD68C}
+.referido{margin-top:26px;padding:22px;border-radius:16px;background:rgba(139,98,255,.14);border:1px solid rgba(139,98,255,.4)}
+.referido h4{font-family:var(--display);font-size:1.06rem;font-weight:700;margin-bottom:8px}
+.referido p{font-size:.95rem;color:rgba(255,255,255,.78);line-height:1.55}
+
+/* ============ EMPRESA DETRÁS ============ */
+.cifras{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--linea);border-radius:16px;overflow:hidden;margin-top:34px}
+@media(max-width:760px){.cifras{grid-template-columns:1fr 1fr}}
+.cifras div{padding:28px 22px;border-right:1px solid var(--linea)}
+.cifras div:last-child{border-right:none}
+@media(max-width:760px){.cifras div:nth-child(2n){border-right:none}.cifras div:nth-child(-n+2){border-bottom:1px solid var(--linea)}}
+.cifras .n{font-family:var(--mono);font-weight:700;font-size:2.05rem;letter-spacing:-.045em;color:var(--violeta);line-height:1}
+.cifras .l{font-size:.87rem;color:var(--gris);margin-top:9px;line-height:1.45}
+.preguntas{margin-top:44px;border:1px solid var(--linea);border-radius:20px;overflow:hidden}
+.preguntas-cab{padding:24px 26px;background:var(--nube);border-bottom:1px solid var(--linea)}
+.preguntas-cab h3{font-size:1.2rem}
+.preguntas-cab p{font-size:.94rem;color:var(--gris);margin-top:7px;line-height:1.55}
+.preguntas ol{list-style:none;counter-reset:q;padding:0;margin:0}
+.preguntas li{counter-increment:q;display:flex;gap:16px;padding:20px 26px;border-bottom:1px solid var(--linea)}
+.preguntas li:last-child{border-bottom:none}
+.preguntas li:before{content:counter(q);font-family:var(--mono);font-weight:700;font-size:.8rem;color:var(--violeta);background:var(--nube);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 28px;margin-top:2px}
+.preguntas b{font-family:var(--display);font-size:1rem;display:block;font-weight:700}
+.preguntas .resp{font-size:.93rem;color:var(--gris);margin-top:5px;line-height:1.55}
+.preguntas .resp em{font-style:normal;color:var(--sello);font-weight:600}
+.escrito{margin-top:24px;padding:22px 24px;border-radius:14px;background:var(--papel);border:1px solid var(--linea);border-left:4px solid var(--amarillo);font-size:1rem;line-height:1.65;color:var(--gris)}
+.escrito b{color:var(--tinta);font-weight:600}
+
+/* ============ FEED compacto ============ */
+.vivo{margin-top:44px;background:var(--nube);border:1px solid var(--linea);border-radius:20px;padding:22px}
+.vivo-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:15px}
+.vivo-head .t{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.68rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--tinta)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--sello);animation:latido 2.4s ease-in-out infinite}
+@keyframes latido{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.78)}}
+.demo{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--alerta);border:1px solid rgba(194,65,12,.4);background:rgba(255,138,0,.11);padding:3px 7px;border-radius:5px}
+.vivo-head .c{font-family:var(--mono);font-size:.76rem;color:var(--gris-2)}
+.vivo-head .c b{color:var(--tinta)}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+@media(max-width:820px){.feed{grid-template-columns:1fr}.feed>*:nth-child(n+3){display:none}}
+.dte{display:flex;align-items:center;gap:11px;padding:13px 14px;border-radius:12px;background:var(--papel);border:1px solid var(--linea);animation:entra .5s ease both}
+@keyframes entra{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.dte-txt{flex:1;min-width:0}
+.dte-txt b{font-family:var(--display);font-weight:700;font-size:.92rem;display:block}
+.dte-txt span{font-family:var(--mono);font-size:.68rem;color:var(--gris-2);display:block;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sello-ok{flex:0 0 auto;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(14,159,99,.11);border:1px solid rgba(14,159,99,.3);font-size:.72rem;font-weight:600;color:var(--sello)}
+
+/* ============ NORMATIVA ============ */
+.norma{background:var(--noche);color:#fff;position:relative;overflow:hidden}
+.norma:before{content:"";position:absolute;inset:0;background:radial-gradient(700px 400px at 85% 10%,rgba(255,138,0,.13),transparent 65%);pointer-events:none}
+.norma .wrap{position:relative;z-index:2}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:rgba(255,138,0,.13);border:1px solid rgba(255,138,0,.38);font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--alerta-vivo)}
+.norma-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;margin-top:22px}
+@media(max-width:900px){.norma-grid{grid-template-columns:1fr;gap:32px}}
+.reloj{font-family:var(--mono);font-weight:700;font-size:clamp(2.6rem,7vw,4.4rem);letter-spacing:-.05em;line-height:1;color:#fff}
+.reloj small{display:block;font-family:var(--texto);font-size:.94rem;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.6);margin-top:10px}
+.incluido{margin-top:24px;padding:20px 22px;border-radius:14px;background:rgba(14,159,99,.14);border:1px solid rgba(61,214,140,.34);font-size:.98rem;line-height:1.6;color:rgba(255,255,255,.85)}
+.incluido b{color:#3DD68C}
+details.tecnico{margin-top:22px;border:1px solid var(--linea-osc);border-radius:14px;background:rgba(255,255,255,.04)}
+details.tecnico summary{padding:16px 20px;cursor:pointer;list-style:none;font-family:var(--display);font-weight:700;font-size:.96rem;display:flex;align-items:center;gap:10px}
+details.tecnico summary::-webkit-details-marker{display:none}
+details.tecnico summary:after{content:"+";margin-left:auto;font-family:var(--mono);font-size:1.3rem;color:var(--violeta-hi);font-weight:400}
+details.tecnico[open] summary:after{content:"–"}
+details.tecnico .cuerpo{padding:0 20px 20px}
+details.tecnico ul{margin:0;padding-left:20px;font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.7)}
+details.tecnico code{font-family:var(--mono);font-size:.84rem;color:var(--violeta-hi)}
+
+/* ============ MIGRACIÓN ============ */
+.migra{background:var(--nube)}
+.migra-card{background:var(--papel);border:1px solid var(--linea);border-radius:20px;padding:36px;display:grid;grid-template-columns:1.35fr .65fr;gap:38px;align-items:center;margin-top:30px}
+@media(max-width:860px){.migra-card{grid-template-columns:1fr;gap:24px;padding:26px}}
+.pasos-migra{list-style:none;padding:0;margin:18px 0 0;font-size:.96rem}
+.pasos-migra li{display:flex;gap:11px;padding:8px 0;color:var(--gris)}
+.pasos-migra svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:var(--sello)}
+
+/* ============ PASOS ============ */
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--linea)}
+@media(max-width:860px){.pasos{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pasos{grid-template-columns:1fr}}
+.paso{padding:24px 22px 24px 0;border-right:1px solid var(--linea)}
+.paso:last-child{border-right:none}
+.paso .num{font-family:var(--mono);font-size:.7rem;color:var(--violeta);letter-spacing:.14em;margin-bottom:12px}
+.paso p{font-size:.92rem;color:var(--gris);margin-top:7px;line-height:1.5}
+
+/* ============ TABLA DE PLANES ============ */
+.tabla-wrap{margin-top:32px;border:1px solid var(--linea);border-radius:18px;overflow:auto;background:var(--papel);-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:.9rem}
+th,td{padding:14px 16px;text-align:center;border-bottom:1px solid var(--linea)}
+thead th{background:var(--nube);font-family:var(--display);font-weight:700;font-size:.95rem;position:sticky;top:0}
+thead th.reco{background:var(--violeta);color:#fff}
+tbody th{text-align:left;font-family:var(--texto);font-weight:500;font-size:.9rem;color:var(--gris);position:sticky;left:0;background:var(--papel);min-width:220px;border-right:1px solid var(--linea)}
+td.reco{background:rgba(82,22,231,.05);font-weight:600}
+.tp{font-family:var(--mono);font-weight:700;font-size:1.2rem;letter-spacing:-.04em;display:block}
+.tp small{font-family:var(--texto);font-size:.7rem;font-weight:400;color:var(--gris-2);letter-spacing:0}
+.si{color:var(--sello);font-weight:700}
+.no{color:#B9B3C8}
+.scroll-hint{display:none;font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:10px;text-align:center}
+@media(max-width:820px){.scroll-hint{display:block}}
+.nota-planes{margin-top:22px;padding:20px 22px;background:var(--nube);border:1px solid var(--linea);border-radius:14px;font-size:.92rem;color:var(--gris);line-height:1.65}
+.nota-planes b{color:var(--tinta)}
+
+/* ============ TESTIMONIOS ============ */
+.tst{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
+@media(max-width:900px){.tst{grid-template-columns:1fr}}
+
+/* ============ FAQ ============ */
+.faq{max-width:840px;margin:34px auto 0}
+.faq details{border-bottom:1px solid var(--linea);padding:3px 0}
+.faq summary{cursor:pointer;list-style:none;padding:19px 40px 19px 0;position:relative;font-family:var(--display);font-weight:700;font-size:1.02rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:6px;top:16px;font-family:var(--mono);font-size:1.4rem;color:var(--violeta);font-weight:400;transition:transform .2s}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{padding:0 20px 21px 0;color:var(--gris);font-size:.97rem;line-height:1.65}
+
+/* ============ CIERRE / FOOTER ============ */
+.cierre{background:linear-gradient(155deg,var(--violeta) 0%,#340B96 100%);color:#fff;text-align:center}
+.cierre .lede{color:rgba(255,255,255,.85);margin:15px auto 0}
+.cierre-cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.cierre .btn-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+.cierre .horario{color:rgba(255,255,255,.7)}
+footer{background:var(--noche);color:rgba(255,255,255,.65);padding:52px 0 28px;font-size:.9rem}
+.foot-grid{display:flex;flex-wrap:wrap;gap:38px;justify-content:space-between}
+footer a{color:rgba(255,255,255,.75);text-decoration:none;display:block;padding:4px 0}
+footer a:hover{color:#fff}
+.foot-col h4{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:500;margin-bottom:9px}
+.legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--linea-osc);font-size:.77rem;color:rgba(255,255,255,.45);line-height:1.7}
+
+/* ============ WA flotante ============ */
+.wa-float{position:fixed;bottom:20px;right:20px;z-index:80;display:flex;align-items:center;gap:10px;padding:13px 20px 13px 15px;border-radius:999px;background:var(--wa);color:#04371A;font-family:var(--display);font-weight:700;font-size:.92rem;text-decoration:none;box-shadow:0 10px 30px rgba(37,211,102,.42)}
+@media(max-width:600px){.wa-float{padding:14px;gap:0}.wa-float span{display:none}}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#top"><b>Factura<i>IA</i></b><span>de Grupo Consiti</span></a>
+    <nav class="nav-links">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a class="precio-nav" href="#precio">Precios desde $14.99</a>
+      <a href="#contadores">Para contadores</a>
+      <a href="#cambiar">Cambiar de proveedor</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <a class="btn btn-wa btn-sm" data-wa="nav" href="#">Escribinos</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#precio">Precios desde $14.99</a>
+    <a href="#contadores">Para contadores</a>
+    <a href="#cambiar">Cambiar de proveedor</a>
+    <a href="#faq">Preguntas</a>
+    <a class="btn btn-wa" data-wa="menu-movil" href="#">Escribinos por WhatsApp</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="social">
+        <div class="avatares"><span>MR</span><span>CM</span><span>SL</span></div>
+        <p class="social-txt"><b><em>+500 empresas</em> facturan con nosotros</b>en todo El Salvador</p>
+      </div>
+
+      <h1>Facturá electrónico<br>sin volverte<br><span class="grad">experto en nada</span>
+        <svg class="trazo" viewBox="0 0 400 26" fill="none" aria-hidden="true">
+          <path d="M6 19.5C78 8.5 262 2.5 392 12.5c-70 6-236 10-356 5.5" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+        </svg>
+      </h1>
+
+      <p class="hero-sub">
+        Tres clics y tu factura queda en Hacienda. Nosotros hacemos el papeleo,
+        te enseñamos a usarlo y <b>te contestamos el mismo día</b> cuando tengas una duda.
+        Detrás no hay una aplicación: hay una empresa con 12 años.
+      </p>
+
+      <div class="precio-ancla">
+        <span class="p">Desde $14.99</span>
+        <span class="t">al mes + IVA</span>
+        <a href="#precio">Ver qué plan te toca →</a>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-wa" data-wa="hero" href="#">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
+          Escribinos por WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="#como-funciona">Ver cómo se ve el sistema</a>
+      </div>
+      <p class="horario">Te atendemos <span class="rev" title="Confirmar horario real de soporte antes de publicar">lunes a viernes, 8:00 a.m. a 5:00 p.m.</span></p>
+
+      <a class="plazo-hero" href="#normativa">
+        <b id="cuenta">—</b>
+        <span>para el plazo de la Normativa DTE 2.0. ¿Tu proveedor ya te confirmó por escrito que va a actualizar?</span>
+      </a>
+    </div>
+
+    <!-- ============ ASSET PRINCIPAL: producto ============ -->
+    <div class="asset ratio-43">
+      <span class="asset-tag">Asset 01 · prioridad máxima</span>
+      <h4>Captura del sistema emitiendo una factura</h4>
+      <ul>
+        <li>Pantalla real de emisión de DTE, no un mockup genérico</li>
+        <li>1200 × 900 px · PNG o WebP · @2x para retina</li>
+        <li>Que se vean POCOS campos y un botón claro de "Emitir"</li>
+        <li>Datos de ejemplo ficticios: nada de clientes reales</li>
+        <li>Ideal: mockup en laptop + celular al lado, para mostrar que funciona en los dos</li>
+        <li>Objetivo: que el dueño piense "esto yo lo puedo usar"</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FRANJA ================= -->
+<div class="franja">
+  <div class="wrap franja-in">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Emisor autorizado ante Hacienda</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner oficial de Odoo</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner de Google Cloud</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Listo en menos de 24 horas</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Normativa DTE 2.0 incluida</span>
+  </div>
+</div>
+
+<!-- ================= 1. QUÉ ES Y CÓMO SE VE ================= -->
+<section id="como-funciona">
+  <div class="wrap">
+    <span class="eyebrow rv">Cómo funciona</span>
+    <h2 class="rv">Se hace en tres pasos. Nada más.</h2>
+    <p class="lede rv">Si sabés usar WhatsApp, sabés usar esto. En serio.</p>
+
+    <div class="queEs-grid" style="margin-top:34px">
+      <div class="rv">
+        <ul class="simple">
+          <li><span class="n">01</span><div><b>Elegís el cliente y el producto</b><p>Los tenés guardados. Los buscás por nombre y se llenan solos.</p></div></li>
+          <li><span class="n">02</span><div><b>Le das a "Emitir"</b><p>El sistema arma el documento, lo firma y lo manda a Hacienda. Vos no tocás nada de eso.</p></div></li>
+          <li><span class="n">03</span><div><b>Se lo mandás al cliente</b><p>Por correo o por WhatsApp, desde el mismo sistema. Queda guardado para siempre.</p></div></li>
+        </ul>
+        <div class="glosario">
+          <b>¿Y qué es un "DTE"?</b> Es el nombre que le da Hacienda a la factura electrónica:
+          Documento Tributario Electrónico. Cada factura, crédito fiscal o nota de crédito que
+          emitís es un DTE. Cuando en esta página veas "30 DTE al mes", leelo como
+          "30 facturas al mes".
+        </div>
+      </div>
+
+      <div class="asset ratio-169 rv">
+        <span class="asset-tag">Asset 02 · prioridad máxima</span>
+        <h4>Video de 30 a 45 segundos: emitir una factura de principio a fin</h4>
+        <ul>
+          <li>Grabación de pantalla real, sin cortes ni efectos</li>
+          <li>1920 × 1080 · MP4 + WebM · autoplay, en silencio, en bucle</li>
+          <li>SIN audio y CON subtítulos: se ve en el celular sin auriculares</li>
+          <li>Debe caber en 45 s. Si tarda más, el mensaje "es fácil" se cae</li>
+          <li>Poster/thumbnail obligatorio para que no cargue en blanco</li>
+          <li>Peso máximo 3 MB: buena parte del tráfico entra con datos móviles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. PRECIO TEMPRANO: CALCULADORA ================= -->
+<section class="calc" id="precio">
+  <div class="wrap">
+    <span class="eyebrow rv">Precios</span>
+    <h2 class="rv">Decinos cuántas facturas hacés y te decimos el precio</h2>
+    <p class="lede rv">
+      Sin cotizaciones, sin llamadas de venta para saber cuánto cuesta.
+      El precio está publicado y es el mismo para todos.
+    </p>
+
+    <div class="calc-box rv">
+      <p class="calc-preg">¿Cuántas facturas emitís, más o menos, en un día normal?</p>
+      <div class="opciones" id="opciones">
+        <button data-plan="0">1 o 2<small>~30 al mes</small></button>
+        <button data-plan="1">3 a 5<small>~100 al mes</small></button>
+        <button data-plan="2">Hasta 20<small>~500 al mes</small></button>
+        <button data-plan="3">Hasta 40<small>~1,000 al mes</small></button>
+        <button data-plan="4">Más de 40<small>sin límite</small></button>
+      </div>
+
+      <div class="resultado" id="resultado">
+        <div class="res-grid">
+          <div>
+            <div class="res-plan">Tu plan recomendado</div>
+            <div class="res-nombre" id="r-nombre">—</div>
+            <p class="res-detalle" id="r-detalle">—</p>
+          </div>
+          <div class="res-precio">
+            <div class="p" id="r-precio">—</div>
+            <div class="m">+ IVA al mes</div>
+            <div class="m" id="r-impl">—</div>
+          </div>
+        </div>
+        <div class="res-cta">
+          <a class="btn btn-wa" id="r-cta" href="#">Contratar por WhatsApp</a>
+          <a class="btn btn-ghost" href="#tabla">Ver todo lo que incluye</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. EL PRODUCTO POR DENTRO ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow rv">El sistema</span>
+    <h2 class="rv">Lo que vas a usar todos los días</h2>
+
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Tus facturas de compra se cargan solas</h3>
+        <p class="lede">
+          Subís los archivos que te mandan tus proveedores y el sistema los lee y registra la
+          compra por vos. Lo que antes era una tarde entera digitando, ahora son unos minutos.
+        </p>
+        <div class="tags">
+          <span class="tag">Varios proveedores</span>
+          <span class="tag">Sin digitar</span>
+          <span class="tag">Desde el plan Advanced</span>
+        </div>
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 03 · prioridad alta</span>
+        <h4>Antes / después de la carga de compras</h4>
+        <ul>
+          <li>Dos paneles: los archivos entrando, y la compra ya registrada</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Mejor si es un GIF corto del arrastrar y soltar</li>
+          <li>Tapar o inventar los nombres de proveedores reales</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Los anexos de IVA y los libros, listos</h3>
+        <p class="lede">
+          Anexos de IVA, libro de compras y libro de ventas generados por el sistema, en PDF y
+          en Excel. Tu contador los descarga y trabaja: no hay que armar nada a mano.
+        </p>
+        <div class="tags">
+          <span class="tag">PDF y Excel</span>
+          <span class="tag">Listos para el cierre</span>
+        </div>
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 04 · prioridad alta</span>
+        <h4>Pantalla de anexos de IVA y libros</h4>
+        <ul>
+          <li>Vista del reporte generado + los botones de descarga PDF / Excel</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Este asset es PARA EL CONTADOR: que se vean las columnas del anexo</li>
+          <li>Cifras de ejemplo, ninguna cifra de cliente real</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="prod-fila">
+      <div class="prod-txt rv">
+        <h3>Y funciona desde el celular</h3>
+        <p class="lede">
+          Podés emitir y consultar desde el teléfono, en la tienda o en la calle. No necesitás
+          estar sentado frente a la computadora para facturar.
+        </p>
+        <div class="tags">
+          <span class="tag">Celular y computadora</span>
+          <span class="tag">Sin instalar nada</span>
+        </div>
+      </div>
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 05 · prioridad media</span>
+        <h4>Mockup de la vista móvil</h4>
+        <ul>
+          <li>Celular mostrando la pantalla de emisión</li>
+          <li>900 × 900 px · PNG con fondo transparente</li>
+          <li>Confirmar antes con Luis si la vista móvil está lista: si no lo está, borrar este bloque y el texto de al lado</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. PARA CONTADORES ================= -->
+<section class="conta dark" id="contadores">
+  <div class="wrap">
+    <span class="eyebrow rv">Para contadores y despachos</span>
+    <h2 class="rv">Si llevás la contabilidad de varias empresas, esto es para vos</h2>
+    <div class="conta-grid" style="margin-top:30px">
+      <div class="rv">
+        <ul class="conta-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Varias empresas desde una sola cuenta.</b> Cambiás de empresa sin volver a entrar. <span class="rev" title="CONFIRMAR con Luis Portillo: ¿el multi-empresa está disponible hoy? ¿en qué planes? Si no está, este bullet se cae y hay que reescribir la sección.">Confirmar alcance y en qué planes aplica.</span></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Anexos de IVA y libros en Excel.</b> Descargás y trabajás. No hay que rearmar nada.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Todos los documentos.</b> Crédito fiscal, exportación, sujeto excluido, retención, notas de crédito y débito.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Tus clientes no te llaman a vos por soporte.</b> Nos llaman a nosotros, y sin costo.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>La Normativa 2.0 la actualizamos nosotros</b> en todas las empresas que tengas con nosotros, a la vez.</span></li>
+        </ul>
+
+        <div class="referido">
+          <h4>Programa de referidos para contadores</h4>
+          <p>
+            Si nos recomendás a tus clientes, te reconocemos cada cuenta que entre.
+            <span class="rev" title="DEFINIR ANTES DE PUBLICAR: ¿% de comisión recurrente, meses gratis, o descuento en su propia cuenta? Sin condiciones concretas este bloque no convierte y conviene quitarlo.">Definir la mecánica y el beneficio concreto.</span>
+            Escribinos y te lo explicamos en una llamada de 15 minutos.
+          </p>
+          <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:16px">Hablar del programa</a>
+        </div>
+      </div>
+
+      <div class="asset ratio-43 rv">
+        <span class="asset-tag">Asset 06 · prioridad alta</span>
+        <h4>Pantalla del selector de empresas</h4>
+        <ul>
+          <li>Vista del contador con su lista de empresas y el cambio entre una y otra</li>
+          <li>1200 × 900 px · PNG o WebP</li>
+          <li>Nombres de empresa inventados</li>
+          <li>Si el multi-empresa todavía no existe: NO usar mockup falso. Reemplazar por una foto del equipo de soporte atendiendo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. UNA EMPRESA DETRÁS ================= -->
+<section id="respaldo">
+  <div class="wrap">
+    <span class="eyebrow rv">Quién está detrás</span>
+    <h2 class="rv">No somos una app. Somos una empresa.</h2>
+    <p class="lede rv">
+      La facturación electrónica ya tiene dos años en El Salvador. En ese tiempo aparecieron
+      muchos sistemas hechos por una sola persona: funcionaron el primer año, y después
+      dejaron de actualizarse. Por eso estos meses nos están llegando tantos clientes
+      que vienen de otro lado.
+    </p>
+
+    <div class="cifras rv">
+      <div><div class="n">12</div><div class="l">años de operación continua en El Salvador</div></div>
+      <div><div class="n">22</div><div class="l">personas: soporte, desarrollo e implementación</div></div>
+      <div><div class="n">+500</div><div class="l">empresas facturando electrónicamente con nosotros</div></div>
+      <div><div class="n">+3,500</div><div class="l">empresas atendidas por Grupo Consiti en 12 años</div></div>
+    </div>
+
+    <div class="preguntas rv">
+      <div class="preguntas-cab">
+        <h3>Cinco preguntas para hacerle a cualquier proveedor</h3>
+        <p>
+          Incluidos nosotros. Hacelas antes de firmar con quien sea, y compará las respuestas.
+          Al lado de cada una está la nuestra.
+        </p>
+      </div>
+      <ol>
+        <li><div><b>¿Quién me contesta si el sistema falla un día de cierre?</b>
+          <p class="resp"><em>Nosotros:</em> un equipo de soporte, no una persona. Respuesta el mismo día, en horario de oficina, sin costo.</p></div></li>
+        <li><div><b>¿Me van a tener actualizado a la Normativa 2.0 antes del 1 de diciembre?</b>
+          <p class="resp"><em>Nosotros:</em> sí, incluido en todos los planes y sin trámite de tu parte.</p></div></li>
+        <li><div><b>¿Dónde vive mi información y quién responde si se pierde?</b>
+          <p class="resp"><em>Nosotros:</em> en Google Cloud, con respaldo continuo. Grupo Consiti responde, con nombre y con planilla.</p></div></li>
+        <li><div><b>¿Qué pasa con mi facturación si la persona que hizo el sistema se va?</b>
+          <p class="resp"><em>Nosotros:</em> hay 22 personas y 12 años de operación. El sistema no depende de que alguien conteste.</p></div></li>
+        <li><div><b>¿La capacitación y el soporte tienen costo aparte?</b>
+          <p class="resp"><em>Nosotros:</em> no. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados, incluidos.</p></div></li>
+      </ol>
+    </div>
+
+    <p class="escrito rv">
+      Un consejo, aunque no nos contratés: <b>pedí las respuestas por escrito.</b>
+      Un proveedor que no te confirma por escrito que va a cumplir con la Normativa 2.0
+      antes del 1 de diciembre te está diciendo algo importante.
+    </p>
+
+    <!-- feed compacto, anonimizado -->
+    <div class="vivo rv">
+      <div class="vivo-head">
+        <div class="t"><span class="dot"></span>Facturación en vivo <span class="demo" id="tag-demo">Vista de ejemplo</span></div>
+        <div class="c">Hoy: <b data-pulso="dtes">—</b> facturas emitidas · <b data-pulso="latencia">~1.8 s</b> cada una</div>
+      </div>
+      <div class="feed" id="feed"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. NORMATIVA 2.0 ================= -->
+<section class="norma" id="normativa">
+  <div class="wrap">
+    <span class="chip rv">Plazo oficial: 1 de diciembre de 2026</span>
+    <div class="norma-grid">
+      <div class="rv">
+        <h2>El 1 de diciembre cambian las reglas.<br>Nosotros lo resolvemos.</h2>
+        <p class="lede">
+          Hacienda publicó nuevas reglas para la factura electrónica. Todos los sistemas del país
+          tienen que adaptarse antes de esa fecha. Si un sistema no se adapta, los documentos
+          empiezan a rechazarse y el negocio no puede facturar.
+        </p>
+        <div class="incluido">
+          <b>Vos no tenés que hacer nada.</b> La actualización va incluida en todos los planes,
+          sin costo extra y sin trámites. Te avisamos cuando ya esté aplicada en tu cuenta.
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-wa" data-wa="dte20" href="#">Quiero quedar cubierto</a>
+        </div>
+
+        <details class="tecnico">
+          <summary>El detalle técnico, para tu contador o tu programador</summary>
+          <div class="cuerpo">
+            <ul>
+              <li>Normativa de Cumplimiento DTE versión 2.0, publicada el 25 de mayo de 2026, en sustitución de la 1.2.</li>
+              <li>Plazo para adaptar los sistemas de transmisión: 1 de diciembre de 2026.</li>
+              <li>Nuevo Evento de Retorno (ERET) para ajustar facturas electrónicas, de exportación y de sujeto excluido.</li>
+              <li>Código de Generación al estándar <code>UUID v4</code>.</li>
+              <li>Catálogos actualizados: distritos, recintos fiscales y regímenes de exportación.</li>
+              <li>Notificación automática del evento y del archivo de invalidación al receptor.</li>
+              <li>Comprobantes de control interno para operaciones especiales y venta simplificada.</li>
+              <li>Entrega obligatoria del <code>JSON</code> firmado, que es el documento con validez jurídica.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <div class="rv center">
+        <div class="reloj">
+          <span id="cuenta-2">—</span>
+          <small>para el plazo de la Normativa DTE 2.0</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. MIGRACIÓN ================= -->
+<section class="migra" id="cambiar">
+  <div class="wrap">
+    <span class="eyebrow rv">¿Ya facturás con otro proveedor?</span>
+    <h2 class="rv">Cambiarse ya es un trámite normal</h2>
+    <p class="lede rv">
+      Desde mayo de 2026 el portal de Hacienda tiene habilitada la opción de
+      <b>Cambio de Plataforma</b>. No estás amarrado a tu proveedor actual.
+    </p>
+    <div class="migra-card rv">
+      <div>
+        <h3>Hacemos el cambio completo, sin costo de migración</h3>
+        <ul class="pasos-migra">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Gestionamos el trámite de cambio en el portal de Hacienda.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Migramos tu catálogo de productos, clientes y proveedores.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Conservás tus documentos históricos y quedás cubierto para la 2.0.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>No dejás de facturar ni un día.</li>
+        </ul>
+      </div>
+      <div>
+        <a class="btn btn-v" data-wa="migracion" href="#" style="width:100%">Quiero cambiarme</a>
+        <p style="font-size:.84rem;color:var(--gris);margin-top:13px;text-align:center;line-height:1.5">
+          Contanos con quién estás y te decimos exactamente qué implica.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. CÓMO ARRANCA ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow rv">Cómo arranca</span>
+    <h2 class="rv">Alguien con nombre te acompaña desde el primer día</h2>
+    <p class="lede rv">
+      No te mandamos un manual y suerte. Te asignamos un gestor de cuenta que configura con vos,
+      te capacita y queda como tu contacto.
+    </p>
+    <div class="pasos rv">
+      <div class="paso"><div class="num">PASO 01</div><h3>Nos escribís</h3><p>Por WhatsApp. Definimos juntos el plan según cuántas facturas hacés.</p></div>
+      <div class="paso"><div class="num">PASO 02</div><h3>Lo dejamos listo</h3><p>En menos de 24 horas, con la gestión ante Hacienda incluida.</p></div>
+      <div class="paso"><div class="num">PASO 03</div><h3>Te enseñamos</h3><p>Capacitación en vivo sin costo y dos cursos grabados que te quedan.</p></div>
+      <div class="paso"><div class="num">PASO 04</div><h3>Facturás tranquilo</h3><p>Con soporte gratis y la normativa siempre al día de nuestro lado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. TABLA DE PLANES ================= -->
+<section style="background:var(--nube)" id="tabla">
+  <div class="wrap">
+    <span class="eyebrow rv">El detalle completo</span>
+    <h2 class="rv">Qué incluye cada plan</h2>
+    <p class="lede rv">
+      Si ya sabés lo que buscás, acá está todo. Si no, usá
+      <a href="#precio" style="color:var(--violeta);font-weight:600">la calculadora de arriba</a>.
+    </p>
+
+    <div class="tabla-wrap rv">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left">Plan</th>
+            <th>Starter</th>
+            <th>Professional</th>
+            <th class="reco">Advanced</th>
+            <th>Deluxe</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Precio al mes</th>
+            <td><span class="tp">$14.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$24.99</span><small>+ IVA</small></td>
+            <td class="reco"><span class="tp">$34.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$59.99</span><small>+ IVA</small></td>
+            <td><span class="tp">$150</span><small>+ IVA</small></td>
+          </tr>
+          <tr>
+            <th>Facturas incluidas al mes</th>
+            <td>30</td><td>100</td><td class="reco">500</td><td>1,000</td><td>Sin límite</td>
+          </tr>
+          <tr>
+            <th>Implementación (una sola vez)</th>
+            <td>$40</td><td>$50</td><td class="reco">$60</td><td>$70</td><td>$100</td>
+          </tr>
+          <tr>
+            <th>Consumidor final y crédito fiscal</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Notas de crédito y débito</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Anexos de IVA y libros en PDF</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Tu logo en la factura</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Anexos y libros en Excel</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Exportación, sujeto excluido y retención</th>
+            <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Carga automática de facturas de compra</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Un módulo del ERP a elección</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Una persona asignada a tu sistema</th>
+            <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="no">—</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Soporte de dudas sin costo</th>
+            <td>Correo</td><td>WhatsApp</td><td class="reco">WhatsApp y llamada</td><td>WhatsApp y llamada</td><td>Persona dedicada</td>
+          </tr>
+          <tr>
+            <th>Normativa DTE 2.0 incluida</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th>Capacitación y cursos grabados</th>
+            <td class="si">✓</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-starter" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-professional" href="#">Contratar</a></td>
+            <td class="reco"><a class="btn btn-v btn-sm" data-wa="plan-advanced" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-deluxe" href="#">Contratar</a></td>
+            <td><a class="btn btn-ghost btn-sm" data-wa="plan-enterprise" href="#">Hablemos</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">← Deslizá la tabla para ver todos los planes →</p>
+
+    <div class="nota-planes rv">
+      <b>Si te pasás de las facturas incluidas</b> no te suspendemos el servicio: cobramos
+      <b><span class="rev" title="CONFIRMAR precio de excedente con Finanzas antes de publicar.">$0.03 + IVA</span></b>
+      por factura adicional. Si mes con mes te estás pasando, te avisamos y te movemos al plan que
+      te salga más barato.<br><br>
+      La implementación se paga una sola vez. Módulo adicional del ERP: $30 + IVA de activación,
+      y la configuración se cotiza aparte. Sin permanencia forzada: si te querés ir, te vas.
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10. TESTIMONIOS ================= -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow rv">Clientes</span>
+    <h2 class="rv">Quiénes facturan con nosotros</h2>
+    <div class="tst">
+      <div class="asset rv">
+        <span class="asset-tag">Asset 07 · prioridad máxima</span>
+        <h4>Testimonio 1 — de alguien que se cambió de proveedor</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px, cara visible</li>
+          <li>Nombre completo, cargo, empresa y municipio</li>
+          <li>Consentimiento POR ESCRITO para usar nombre, foto y logo</li>
+          <li>Que la frase mencione que venía de otro sistema</li>
+          <li>Es el testimonio que sostiene todo el argumento de la página</li>
+        </ul>
+      </div>
+      <div class="asset rv">
+        <span class="asset-tag">Asset 08 · prioridad alta</span>
+        <h4>Testimonio 2 — un contador o despacho</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px</li>
+          <li>Nombre, despacho y cuántas empresas maneja</li>
+          <li>Consentimiento por escrito</li>
+          <li>Que hable de anexos, cierre mensual o multi-empresa</li>
+        </ul>
+      </div>
+      <div class="asset rv">
+        <span class="asset-tag">Asset 09 · prioridad media</span>
+        <h4>Testimonio 3 — dueño de PyME</h4>
+        <ul>
+          <li>Foto real, 400 × 400 px</li>
+          <li>Nombre, negocio y municipio</li>
+          <li>Consentimiento por escrito</li>
+          <li>Que hable de lo fácil que fue empezar</li>
+        </ul>
+      </div>
+    </div>
+    <div class="asset rv" style="margin-top:20px">
+      <span class="asset-tag">Regla de publicación</span>
+      <h4>No publicar esta sección con testimonios inventados ni anónimos</h4>
+      <ul>
+        <li>Con tres testimonios firmados: se publican los tres</li>
+        <li>Con dos: se publican dos y se ajusta la grilla. Dos reales pesan más que seis anónimos</li>
+        <li>Con cero: se BORRA la sección completa hasta tenerlos</li>
+        <li>Iniciales sin empresa (tipo "María R.") leen como inventadas y exponen a la empresa</li>
+        <li>Opcional y mucho más fuerte: video vertical de 20 s grabado con celular, 1080 × 1920</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11. FAQ ================= -->
+<section style="background:var(--nube)" id="faq">
+  <div class="wrap">
+    <span class="eyebrow rv">Preguntas frecuentes</span>
+    <h2 class="rv">Lo que todo negocio pregunta</h2>
+    <div class="faq rv">
+      <details open>
+        <summary>¿Es difícil de usar? Yo no soy de sistemas</summary>
+        <p>No. Emitir una factura son tres pasos: elegís el cliente, elegís el producto y le das a
+        "Emitir". Además te capacitamos en vivo sin costo y te quedan dos cursos grabados para
+        cuando se te olvide algo. Y si te trabás, nos escribís por WhatsApp.</p>
+      </details>
+      <details>
+        <summary>¿Están autorizados por el Ministerio de Hacienda?</summary>
+        <p>Nuestro sistema opera en producción con el Sistema de Transmisión DTE de Hacienda y
+        transmite tus documentos en tiempo real, con firma electrónica incluida. La autorización
+        como emisor electrónico la otorga Hacienda al contribuyente, es decir a tu empresa: ese
+        trámite lo gestionamos nosotros como parte de la implementación.</p>
+      </details>
+      <details>
+        <summary>¿Ya están listos para la Normativa DTE 2.0?</summary>
+        <p>La actualización está en ejecución. El plazo que fijó Hacienda es el 1 de diciembre de
+        2026 y nuestro compromiso es tenerte actualizado antes de esa fecha, sin trámites de tu
+        parte y sin costo adicional en ningún plan. Te avisamos cuando ya esté aplicada.</p>
+      </details>
+      <details>
+        <summary>Estoy con otro proveedor, ¿puedo cambiarme?</summary>
+        <p>Sí. Desde mayo de 2026 el portal de Hacienda habilitó la opción de Cambio de Plataforma.
+        Gestionamos el trámite, migramos tu catálogo de productos, clientes y proveedores, y
+        coordinamos el cambio para que no dejés de facturar ningún día.</p>
+      </details>
+      <details>
+        <summary>¿En cuánto tiempo queda funcionando?</summary>
+        <p>En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si se me daña la computadora?</summary>
+        <p>No se pierde nada. Tu información se respalda de forma continua en Google Cloud. El
+        sistema no vive en tu computadora, así que entrás desde otra y seguís trabajando.</p>
+      </details>
+      <details>
+        <summary>¿La capacitación y el soporte tienen costo?</summary>
+        <p>No. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados de 15 capítulos
+        cada uno. El soporte de dudas es siempre gratuito y respondemos el mismo día en horario de
+        oficina.</p>
+      </details>
+      <details>
+        <summary>¿Y si emito más facturas de las que incluye mi plan?</summary>
+        <p>No te suspendemos el servicio. Las facturas adicionales se cobran a $0.03 + IVA cada una.
+        Si el exceso se vuelve constante, te avisamos y te movemos al plan que te resulte más
+        económico.</p>
+      </details>
+      <details>
+        <summary>¿Me amarran con un contrato largo?</summary>
+        <p>No hay permanencia forzada. Si te querés ir, te vas, y tus documentos históricos son
+        tuyos.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CIERRE ================= -->
+<section class="cierre">
+  <div class="wrap">
+    <h2 class="rv">Empezá a facturar en menos de 24 horas</h2>
+    <p class="lede rv">Escribinos, vemos juntos qué plan te toca y el papeleo ante Hacienda queda de nuestro lado.</p>
+    <div class="cierre-cta rv">
+      <a class="btn btn-wa" data-wa="cierre" href="#">Escribinos por WhatsApp</a>
+      <a class="btn btn-ghost" href="#precio">Ver precios</a>
+    </div>
+    <p class="horario rv">Lunes a viernes, 8:00 a.m. a 5:00 p.m. · Respondemos el mismo día</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div style="max-width:290px">
+        <a class="mark" href="#top"><b>Factura<i>IA</i></b><span>de Grupo Consiti</span></a>
+        <p style="margin-top:15px;line-height:1.6">
+          Facturación electrónica para empresas en El Salvador.
+          Un producto de Grupo Consiti S.A. de C.V.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h4>Producto</h4>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#precio">Precios</a>
+        <a href="#contadores">Para contadores</a>
+        <a href="#cambiar">Cambiar de proveedor</a>
+        <a href="#normativa">Normativa DTE 2.0</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contacto</h4>
+        <a data-wa="footer" href="#">WhatsApp 7255-9059</a>
+        <a href="mailto:facturacion@consiti.com">facturacion@consiti.com</a>
+        <a href="#faq">Preguntas frecuentes</a>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <a href="/terminos">Términos del servicio</a>
+        <a href="/privacidad">Aviso de privacidad</a>
+        <a href="/sla">Niveles de servicio</a>
+      </div>
+    </div>
+    <p class="legal">
+      © <span id="anio">2026</span> Grupo Consiti S.A. de C.V. Todos los derechos reservados.
+      Partner oficial de Odoo y Partner de Google Cloud. Odoo es una marca registrada de Odoo S.A.
+      y Google Cloud es una marca de Google LLC. Este producto se construye sobre Odoo y no es un
+      producto de Odoo S.A.
+    </p>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa="flotante" href="#" aria-label="Escribinos por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#04371A"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
+  <span>Escribinos</span>
+</a>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Factura IA de Grupo Consiti","description":"Facturación electrónica DTE para empresas en El Salvador desde 14.99 dólares al mes, con soporte incluido y actualización a la Normativa DTE 2.0.","brand":{"@type":"Brand","name":"Grupo Consiti"},"offers":{"@type":"AggregateOffer","lowPrice":"14.99","highPrice":"150.00","priceCurrency":"USD","offerCount":"5","availability":"https://schema.org/InStock"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"¿Es difícil de usar la facturación electrónica?","acceptedAnswer":{"@type":"Answer","text":"Emitir una factura son tres pasos: elegir el cliente, elegir el producto y presionar Emitir. Incluye capacitación en vivo sin costo y dos cursos grabados."}},
+{"@type":"Question","name":"¿Están autorizados por el Ministerio de Hacienda?","acceptedAnswer":{"@type":"Answer","text":"El sistema opera en producción con el Sistema de Transmisión DTE del Ministerio de Hacienda y transmite los documentos en tiempo real con firma electrónica. La autorización como emisor electrónico la otorga Hacienda al contribuyente y Grupo Consiti gestiona ese trámite como parte de la implementación."}},
+{"@type":"Question","name":"¿Ya están listos para la Normativa DTE 2.0?","acceptedAnswer":{"@type":"Answer","text":"La actualización está en ejecución. El plazo fijado por Hacienda es el 1 de diciembre de 2026 y la actualización está incluida en todos los planes sin costo adicional."}},
+{"@type":"Question","name":"Estoy con otro proveedor, ¿puedo cambiarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. Desde mayo de 2026 el portal de Hacienda habilitó el Cambio de Plataforma para emisores de DTE. Grupo Consiti gestiona el trámite y migra el catálogo de productos, clientes y proveedores sin interrumpir la facturación."}},
+{"@type":"Question","name":"¿En cuánto tiempo queda funcionando?","acceptedAnswer":{"@type":"Answer","text":"En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda."}},
+{"@type":"Question","name":"¿Qué pasa si emito más facturas de las que incluye mi plan?","acceptedAnswer":{"@type":"Answer","text":"El servicio no se suspende. Las facturas adicionales se cobran a 0.03 dólares más IVA cada una y se recomienda el cambio de plan cuando el exceso es constante."}}]}
+</script>
+
+<script>
+/* ============ WhatsApp con mensaje distinto por CTA (atribución) ============ */
+var WA = "50372559059";
+var MENSAJES = {
+  nav:"Hola, vengo de la página de Factura IA y quiero información.",
+  "menu-movil":"Hola, vengo de la página de Factura IA y quiero información.",
+  hero:"Hola, vi la página de Factura IA y quiero empezar a facturar electrónico. ¿Me ayudan?",
+  contadores:"Hola, soy contador y llevo la contabilidad de varias empresas. Quiero saber del multi-empresa y del programa de referidos.",
+  dte20:"Hola, quiero asegurarme de quedar cubierto con la Normativa DTE 2.0 antes del 1 de diciembre.",
+  migracion:"Hola, hoy facturo con otro proveedor y me quiero cambiar. ¿Cómo funciona?",
+  "plan-starter":"Hola, me interesa el plan Starter de Factura IA.",
+  "plan-professional":"Hola, me interesa el plan Professional de Factura IA.",
+  "plan-advanced":"Hola, me interesa el plan Advanced, el de carga automática de compras.",
+  "plan-deluxe":"Hola, me interesa el plan Deluxe y quiero saber de los módulos.",
+  "plan-enterprise":"Hola, quiero hablar del plan Enterprise para mi empresa.",
+  cierre:"Hola, quiero empezar a facturar con Factura IA.",
+  footer:"Hola, quiero información sobre Factura IA.",
+  flotante:"Hola, tengo una consulta sobre Factura IA."
+};
+function waURL(t){ return "https://wa.me/"+WA+"?text="+encodeURIComponent(t); }
+document.querySelectorAll("[data-wa]").forEach(function(a){
+  var id=a.getAttribute("data-wa");
+  a.href=waURL(MENSAJES[id]||MENSAJES.nav); a.target="_blank"; a.rel="noopener";
+  a.addEventListener("click",function(){
+    /* GA4 y Meta Pixel: cambiar por gtag() y fbq() cuando estén los IDs */
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({event:"clic_whatsapp",cta_id:id});
+  });
+});
+
+/* ============ Menú móvil ============ */
+(function(){
+  var b=document.getElementById("burger"), d=document.getElementById("drawer");
+  if(!b||!d) return;
+  b.addEventListener("click",function(){
+    var abierto=d.classList.toggle("abierto");
+    b.setAttribute("aria-expanded",abierto?"true":"false");
+  });
+  d.querySelectorAll("a").forEach(function(a){
+    a.addEventListener("click",function(){ d.classList.remove("abierto"); b.setAttribute("aria-expanded","false"); });
+  });
+})();
+
+/* ============ Calculadora de plan ============ */
+var PLANES=[
+  {n:"Starter",p:"$14.99",impl:"Implementación $40",d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito, con anexos de IVA y libros en PDF.",wa:"Hola, hice la calculadora y me sale el plan Starter (1 o 2 facturas al día). Quiero contratarlo."},
+  {n:"Professional",p:"$24.99",impl:"Implementación $50",d:"Hasta 100 facturas al mes. Agrega tu logo en la factura, anexos en Excel, exportación, sujeto excluido y retención.",wa:"Hola, hice la calculadora y me sale el plan Professional (3 a 5 facturas al día). Quiero contratarlo."},
+  {n:"Advanced",p:"$34.99",impl:"Implementación $60",d:"Hasta 500 facturas al mes. Incluye la carga automática de tus facturas de compra, que es lo que te ahorra la digitación.",wa:"Hola, hice la calculadora y me sale el plan Advanced (hasta 20 facturas al día). Quiero contratarlo."},
+  {n:"Deluxe",p:"$59.99",impl:"Implementación $70",d:"Hasta 1,000 facturas al mes y un módulo del ERP a elección: punto de venta, inventario, compras, cotizaciones o CRM.",wa:"Hola, hice la calculadora y me sale el plan Deluxe (hasta 40 facturas al día). Quiero contratarlo."},
+  {n:"Enterprise",p:"$150",impl:"Implementación $100",d:"Facturas sin límite y una persona de nuestro equipo asignada a tu sistema, disponible en horario de oficina.",wa:"Hola, hice la calculadora y me sale el plan Enterprise (más de 40 facturas al día). Quiero que me contacten."}
+];
+(function(){
+  var cont=document.getElementById("opciones"); if(!cont) return;
+  var res=document.getElementById("resultado");
+  cont.querySelectorAll("button").forEach(function(b){
+    b.addEventListener("click",function(){
+      cont.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b);});
+      var pl=PLANES[+b.getAttribute("data-plan")];
+      document.getElementById("r-nombre").textContent=pl.n;
+      document.getElementById("r-detalle").textContent=pl.d;
+      document.getElementById("r-precio").textContent=pl.p;
+      document.getElementById("r-impl").textContent=pl.impl+" (una sola vez)";
+      var cta=document.getElementById("r-cta");
+      cta.href=waURL(pl.wa); cta.target="_blank"; cta.rel="noopener";
+      cta.textContent="Contratar "+pl.n+" por WhatsApp";
+      res.classList.add("ver");
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:"calculadora_plan",plan:pl.n});
+    });
+  });
+})();
+
+/* ============ Cuenta regresiva al 1 dic 2026 ============ */
+(function(){
+  function tick(){
+    var d=Math.ceil((new Date("2026-12-01T00:00:00-06:00")-new Date())/86400000);
+    var t=d>0?d+" días":"Plazo vencido";
+    ["cuenta","cuenta-2"].forEach(function(id){
+      var e=document.getElementById(id); if(e) e.textContent=t;
+    });
+  }
+  tick(); setInterval(tick,3600000);
+})();
+
+/* ==================================================================
+   FEED "FACTURACIÓN EN VIVO"
+   MODO_DEMO = true  -> ejemplos ANÓNIMOS (giro y municipio, sin razón
+                        social) + etiqueta "Vista de ejemplo". Publicable.
+   MODO_DEMO = false -> consume GET /api/dte/recientes y quita la etiqueta:
+                        { total_hoy, latencia_ms, items:[
+                          {giro,municipio,tipo,correlativo} ] }
+   NUNCA publicar razón social ni correlativo completo de un cliente real
+   sin consentimiento por escrito.
+   ================================================================== */
+var MODO_DEMO = true;
+var EJEMPLOS=[
+  {giro:"Farmacia",municipio:"San Salvador",tipo:"Crédito Fiscal"},
+  {giro:"Veterinaria",municipio:"Antiguo Cuscatlán",tipo:"Factura"},
+  {giro:"Autorepuestos",municipio:"Sonsonate",tipo:"Crédito Fiscal"},
+  {giro:"Restaurante",municipio:"Santa Tecla",tipo:"Crédito Fiscal"},
+  {giro:"Ferretería",municipio:"Santa Ana",tipo:"Factura"},
+  {giro:"Clínica",municipio:"La Libertad",tipo:"Crédito Fiscal"},
+  {giro:"Distribuidora",municipio:"Soyapango",tipo:"Crédito Fiscal"},
+  {giro:"Boutique",municipio:"San Miguel",tipo:"Factura"}
+];
+var OK='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4"><path d="M20 6 9 17l-5-5"/></svg>';
+(function(){
+  var feed=document.getElementById("feed"), tag=document.getElementById("tag-demo");
+  if(!feed) return;
+  function pintar(items,base){
+    feed.innerHTML="";
+    items.slice(0,3).forEach(function(d,i){
+      var el=document.createElement("div"); el.className="dte";
+      el.innerHTML='<div class="dte-txt"><b>'+d.giro+'</b><span>'+d.tipo+' · '+
+        (d.correlativo||("DTE-01-"+(base-i*3)))+' · '+d.municipio+'</span></div>'+
+        '<div class="sello-ok">'+OK+'Aceptado</div>';
+      feed.appendChild(el);
+    });
+  }
+  function set(k,v){ document.querySelectorAll('[data-pulso="'+k+'"]').forEach(function(n){n.textContent=v;}); }
+
+  if(MODO_DEMO){
+    var i=0, base=2077;
+    var rotar=function(){
+      var v=[]; for(var k=0;k<3;k++) v.push(EJEMPLOS[(i+k)%EJEMPLOS.length]);
+      pintar(v,base); i=(i+1)%EJEMPLOS.length; base+=1;
+    };
+    rotar();
+    if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches) setInterval(rotar,5200);
+    return;
+  }
+  if(tag) tag.remove();
+  fetch("/api/dte/recientes").then(function(r){if(!r.ok)throw 0;return r.json();})
+    .then(function(d){
+      if(d.items&&d.items.length) pintar(d.items,0);
+      if(d.total_hoy!=null) set("dtes",Number(d.total_hoy).toLocaleString("es-SV"));
+      if(d.latencia_ms!=null) set("latencia","~"+(d.latencia_ms/1000).toFixed(1)+" s");
+    }).catch(function(){ /* sin datos reales no se inventa nada */ });
+})();
+
+/* ============ Reveal ============ */
+(function(){
+  var it=document.querySelectorAll(".rv");
+  if(!("IntersectionObserver" in window)){it.forEach(function(i){i.classList.add("in");});return;}
+  var o=new IntersectionObserver(function(en){
+    en.forEach(function(e){ if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target);} });
+  },{threshold:.1,rootMargin:"0px 0px -40px 0px"});
+  it.forEach(function(i){o.observe(i);});
+})();
+
+document.getElementById("anio").textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
