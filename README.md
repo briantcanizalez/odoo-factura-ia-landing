@@ -92,5 +92,6 @@ Sitio estático en **Vercel**, conectado a este repo de GitHub. **Push a `main` 
 
 ## Pendientes
 
+- **Contenido legal incompleto** — 17 puntos sin resolver en privacidad, términos y SLA. Estaban escritos dentro de las páginas como recuadros visibles al público; se movieron a [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md). **Bloquean la publicación en el dominio definitivo.**
 - `canonical` y `og:url` están comentados en las 4 páginas, a la espera de confirmar el dominio definitivo.
 - Falta el archivo `assets/og-facturaia.jpg` (1200×630) que referencia el `og:image` del index.
