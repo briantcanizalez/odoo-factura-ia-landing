@@ -221,6 +221,17 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .dark .demo-video figcaption{color:rgba(255,255,255,.62)}
 @media(max-width:1000px){.demo-video video{border-radius:12px;box-shadow:0 18px 40px rgba(20,10,46,.14)}}
 
+/* ============ MOCKUP MOVIL ============ */
+/* el PNG es 9:16 con fondo transparente: se limita por alto, no por ancho,
+   o en una columna de 546px saldria un telefono de casi 1000px de alto */
+.movil{margin:0;display:flex;justify-content:center;align-items:center}
+.movil img{
+  width:auto;height:auto;max-height:520px;max-width:100%;
+  filter:drop-shadow(0 26px 50px rgba(20,10,46,.22));
+}
+.dark .movil img{filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
+@media(max-width:1000px){.movil img{max-height:430px}}
+
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
 .franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
@@ -683,15 +694,11 @@ footer a:hover{color:#fff}
           <span class="tag">Sin instalar nada</span>
         </div>
       </div>
-      <div class="asset ratio-43 rv">
-        <span class="asset-tag">Asset 05 · prioridad media</span>
-        <h4>Mockup de la vista móvil</h4>
-        <ul>
-          <li>Celular mostrando la pantalla de emisión</li>
-          <li>900 × 900 px · PNG con fondo transparente</li>
-          <li>Confirmar antes con Luis si la vista móvil está lista: si no lo está, borrar este bloque y el texto de al lado</li>
-        </ul>
-      </div>
+      <figure class="movil rv">
+        <img src="assets/movil-mockup.webp" width="700" height="1244"
+             loading="lazy" decoding="async"
+             alt="Teléfono mostrando la pantalla de emisión de Factura IA: una factura de cliente en borrador, con sus campos de cliente, diario, tipo de documento, sello, UUID y número de control.">
+      </figure>
     </div>
   </div>
 </section>
