@@ -8,12 +8,12 @@ Sitio de marketing de **Factura IA** (Grupo Consiti S.A. de C.V.), facturación 
 
 | Ruta | Archivo | Contenido |
 |------|---------|-----------|
-| `/` | `index.html` | Landing completa: hero, cómo funciona, calculadora de plan, contadores, respaldo, DTE 2.0, migración, tabla de planes, testimonios, FAQ |
-| `/terminos` | `terminos.html` | Términos del servicio |
-| `/privacidad` | `privacidad.html` | Aviso de privacidad |
-| `/sla` | `sla.html` | Niveles de servicio |
+| `/` | `index.html` | Landing completa: hero, franja de campaña, cómo funciona, calculadora, contadores, respaldo, DTE 2.0, migración, tabla de planes, franja de confianza, FAQ |
+| `/terminos` | `terminos.html` | **Términos y Condiciones del Servicio** — página legal única, incluye privacidad y cookies (§9) |
 
 > Las rutas `/consiti-ai`, `/servicios` y `/faq` existieron hasta el rediseño v2 y hoy responden **301** hacia el index (ver `vercel.json`). Su contenido vive en la rama `claude/odoo-factura-ctas-visibility-085889`.
+>
+> Las páginas legales se **consolidaron en una sola** (`/terminos`, recortada a lo esencial y **sin SLA**). `/privacidad` y `/sla` responden **301** hacia `/terminos`. La privacidad y las cookies viven ahora en la sección §9 de esa página.
 
 ## Stack
 
@@ -25,15 +25,14 @@ Tipografías (Google Fonts): **Archivo** (títulos), **Instrument Sans** (texto)
 
 ```
 ├── index.html            # Landing
-├── terminos.html         # Legales
-├── privacidad.html
-├── sla.html
+├── terminos.html         # Términos y Condiciones (incluye privacidad y cookies)
 ├── assets/
 │   ├── favicon.svg           # Favicon de marca
-│   ├── factura-ia-logo.svg   # Logo (header/footer de las 4 páginas)
+│   ├── factura-ia-logo.svg   # Logo (header/footer)
 │   ├── firma.png             # Trazo animado del hero
-│   ├── legal.css             # Estilos de las páginas legales
-│   └── legal.js              # Menú móvil + índice lateral de legales
+│   ├── consent.js            # Banner de cookies + carga del Pixel/GA solo con consentimiento
+│   ├── legal.css             # Estilos de la página legal
+│   └── legal.js              # Menú móvil + índice lateral
 ├── api/
 │   └── capi.js           # Endpoint Meta Conversions API (serverless)
 ├── vercel.json           # cleanUrls + redirects de rutas retiradas
@@ -62,7 +61,11 @@ Además está la tabla comparativa (sección `#tabla`, HTML plano) y el JSON-LD 
 ## Configuración
 
 - **`WA`** — número destino de los CTA (formato internacional sin `+`). Está en el `<script>` final de `index.html`; en las legales va en los `href` directos.
-- **Pixel de Meta** — el ID `27890392917235121` está en el `<head>` de las 4 páginas, en **dos lugares por página**: `fbq('init', …)` y el `<img>` del `<noscript>`.
+- **Pixel de Meta** — el ID `27890392917235121` va en `window.CONSENT_CFG.pixelId` del `<head>` (index y `/terminos`). **Ya no se carga al entrar:** lo carga `assets/consent.js` solo si la persona acepta las cookies (consentimiento previo).
+
+## Consentimiento de cookies
+
+`assets/consent.js` muestra un banner (Aceptar / Rechazar) y **carga el Pixel de Meta y GA4 únicamente si la persona acepta**. Sin aceptar, no se instala ninguna cookie de medición y `sendCAPI` no envía nada. La elección se guarda en `localStorage` y se puede cambiar desde «Preferencias de cookies» (footer del index y §9 de `/terminos`). Cierra el punto de cookies del aviso de privacidad.
 
 ## Conversions API (CAPI · server-side)
 

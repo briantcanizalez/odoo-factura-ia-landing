@@ -4,6 +4,8 @@
   "redirects": [
     { "source": "/faq", "destination": "/#faq", "statusCode": 301 },
     { "source": "/servicios", "destination": "/", "statusCode": 301 },
-    { "source": "/consiti-ai", "destination": "/", "statusCode": 301 }
+    { "source": "/consiti-ai", "destination": "/", "statusCode": 301 },
+    { "source": "/privacidad", "destination": "/terminos#s9", "statusCode": 301 },
+    { "source": "/sla", "destination": "/terminos", "statusCode": 301 }
   ]
 }

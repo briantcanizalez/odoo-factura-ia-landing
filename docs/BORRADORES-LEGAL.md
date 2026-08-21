@@ -4,6 +4,14 @@
 **Para:** Legal (con apoyo de Rafa/Soporte y Finanzas donde se indica)
 **Complementa:** [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md) — allí está la lista; acá está el **texto propuesto** para cada punto.
 
+> **Actualización (21/08/2026):** por decisión de negocio, las páginas legales se
+> **consolidaron en una sola** (`/terminos` = *Términos y Condiciones del Servicio*),
+> recortada a lo esencial y **sin SLA**. La versión live ya aplicó los valores
+> **recomendados** de la tabla de decisiones (tope 3 meses, aviso 30 días, tribunales
+> de San Salvador, derechos 10 días hábiles, sin créditos). Este documento se conserva
+> como **fundamento y opciones** para la revisión de un abogado; sus referencias a
+> páginas/§ separados corresponden a la estructura anterior.
+
 > **Cómo leer esto.** Cada punto trae un **borrador de texto** listo para revisar. **No es asesoría legal** ni texto definitivo: lo redactó el equipo de la landing con base en estándar de industria y en la ley salvadadoreña vigente, para que Legal solo tenga que **revisar, ajustar y aprobar** en vez de partir de cero. Nada de esto debe publicarse en el dominio definitivo sin el visto bueno de Legal.
 >
 > 🟡 = **decisión de negocio** (la resuelve Briant / Rafa / Finanzas) · 🔴 = **necesita abogado** para firmarse.
