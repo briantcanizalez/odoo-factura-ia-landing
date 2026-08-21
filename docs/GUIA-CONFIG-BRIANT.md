@@ -67,24 +67,11 @@ Se creó la propiedad GA4 **"Factura IA"** (cuenta *Grupo Consiti*, zona horaria
 
 ---
 
-## 4) La imagen para compartir (og:image)
+## 4) La imagen para compartir (og:image) — ✅ Resuelto
 
-**Por qué:** hoy, al compartir el enlace por WhatsApp, Facebook o LinkedIn, **no se ve imagen de vista previa**. El `index.html` ya la referencia, pero **el archivo no existe todavía**:
-```html
-<meta property="og:image" content="/assets/og-facturaia.jpg">
-```
+Se creó **`assets/og-facturaia.jpg`** (1200 × 630, ~67 KB): imagen de marca con el mensaje raíz *"Las reglas de Hacienda cambian…"* sobre el fondo morado, más la línea de confianza. Es exactamente el archivo que referencia el `<meta og:image>`, así que ya funciona.
 
-**Qué se necesita:**
-- Un archivo **exactamente** llamado **`og-facturaia.jpg`**, en la carpeta **`assets/`**.
-- Tamaño **1200 × 630 px** (proporción 1.91:1).
-- Peso ideal **< 1 MB**.
-- Contenido sugerido: logo de Factura IA + una frase corta (ej. *"Facturación electrónica DTE, con una empresa detrás"*) sobre el fondo morado de marca. El texto, alejado de los bordes (por si se recorta).
-
-**Dos caminos:**
-- **Te la genero yo ahora** — armo una imagen 1200×630 con la marca y la dejo en `assets/`. *(Recomendado, es rápido.)*
-- **La hace diseño** — solo tiene que guardarla como `assets/og-facturaia.jpg` con ese nombre exacto.
-
-**Cómo verificar:** después de publicar, pegá el enlace en el **Sharing Debugger de Meta** (https://developers.facebook.com/tools/debug/) → *Scrape Again* para que actualice la vista previa.
+**Cómo verificar (una vez publicado):** pegá el enlace en el **Sharing Debugger de Meta** (https://developers.facebook.com/tools/debug/) → *Scrape Again* para que actualice la vista previa.
 
 ---
 
@@ -93,6 +80,6 @@ Se creó la propiedad GA4 **"Factura IA"** (cuenta *Grupo Consiti*, zona horaria
 - [x] **1.** Pixel creado (`2238963863532324`) y puesto en el código — falta conectarlo a la cuenta publicitaria y ponerlo en Vercel
 - [x] **2.** GA4 creado y `G-BTME51TFEN` pegado en el código — falta marcar `generate_lead` y `select_item` como evento clave en GA4
 - [ ] **3.** `META_PIXEL_ID` + `META_CAPI_TOKEN` en Vercel + **redeploy** + probado con Test Events
-- [ ] **4.** `assets/og-facturaia.jpg` (1200×630) existe y la vista previa se ve en el Sharing Debugger
+- [x] **4.** `assets/og-facturaia.jpg` (1200×630) creado — verificar la vista previa en el Sharing Debugger tras publicar
 
-> Las tareas **1, 2 y 4 (parte de código)** las puedo aplicar yo si me pasás los valores; la **3 (token)** y las creaciones de cuenta/propiedad las hacés vos, porque involucran credenciales.
+> Estado: **1, 2 y 4 hechas** (falta que Briant conecte el pixel a la cuenta publicitaria, ponga las variables de Vercel y marque los 2 eventos clave cuando lleguen datos). La **3 (token de CAPI)** la hacés vos, porque es una credencial.
