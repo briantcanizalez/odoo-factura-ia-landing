@@ -97,10 +97,9 @@ section{padding:82px 0}
 /* Los estilos .asset (recuadros naranja de placeholder para el disenador) se
    retiraron: los 9 assets del brief ya estan entregados, incluido el 06
    (selector multi-empresa, assets/multiempresa.webp). */
-/* .rev marca los datos sin confirmar. Se reactivo para el rediseno v2:
-   las cifras que debe cerrar Rafa ([X] DTE, % aceptados, migraciones,
-   horas, primera respuesta) van marcadas hasta tener el numero real.
-   NO PUBLICAR con .rev visibles: cada marca es un dato sin confirmar. */
+/* .rev marca datos sin confirmar (fondo naranja). Todas las cifras del
+   rediseno v2 ya son reales, asi que hoy no se usa; se conserva la regla
+   por si vuelve a aparecer un dato por confirmar. */
 .rev{background:rgba(255,138,0,.16);border-bottom:2px dashed var(--alerta-vivo);padding:0 4px;border-radius:3px;font-style:normal}
 .dark .rev{background:rgba(255,138,0,.2);color:#fff}
 
@@ -821,8 +820,8 @@ footer a:hover{color:#fff}
     </p>
 
     <!-- Banda de cifras: las dos primeras dicen quien es Consiti; las dos ultimas,
-         que la maquina funciona. Los [X] los cierra Rafa (ver docs/brief/v2). NO
-         PUBLICAR con .rev visibles. Sustitutos validos en el copy v2, seccion 7. -->
+         que la maquina funciona. Todas son reales (DTE y % de aceptacion salen
+         del reporte de facturas por mes). -->
     <div class="cifras rv">
       <div><div class="n">12</div><div class="l">años de operación continua en El Salvador</div></div>
       <div><div class="n">+500</div><div class="l">empresas facturan con nosotros todos los días</div></div>
