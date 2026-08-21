@@ -8,23 +8,15 @@ Son 4 tareas. Ninguna es de diseño ni de código de fondo: son datos/credencial
 
 ---
 
-## 1) Confirmar el Pixel ID de Meta
+## 1) Pixel ID de Meta — ✅ Resuelto
 
-**Por qué:** hoy el sitio usa el Pixel `27890392917235121`. Hay que confirmar que **ese es el pixel real y activo** de Factura IA (si no, los eventos van al vacío o a otro pixel).
+Resultó que **no existía un pixel real**: el `27890392917235121` era un placeholder, así que desde julio los eventos no llegaban a ningún lado. Se **creó el pixel** en el portafolio *Grupo Consiti Portfolio*:
 
-**Pasos:**
-1. Entrá a **Meta Events Manager** → https://business.facebook.com/events_manager
-2. En la columna izquierda, seleccioná el **origen de datos / conjunto de datos** (dataset) de Factura IA.
-3. Debajo del nombre aparece el **ID** (un número de ~16 dígitos). **Comparalo con `27890392917235121`.**
+> **Pixel de Factura IA: `2238963863532324`**
 
-**Si coincide:** no hay que tocar nada. ✅
-
-**Si es distinto:** hay que reemplazar el número viejo por el correcto en **3 lugares**:
-- `index.html` → línea con `window.CONSENT_CFG = { pixelId: "…" }`
-- `terminos.html` → misma línea `CONSENT_CFG.pixelId`
-- Vercel → variable de entorno `META_PIXEL_ID` (ver tarea 3)
-
-> Pedímelo y yo hago el cambio en el código; el de Vercel lo hacés vos.
+Ya quedó puesto en el código (`index.html` y `terminos.html`). **Faltan dos cosas, que hacés vos en Meta/Vercel:**
+1. **Conectar el pixel a la cuenta publicitaria** para que los anuncios lo usen: config del dataset → **Socios / Cuentas publicitarias**, o asignarlo desde la cuenta publicitaria.
+2. **Poner el mismo ID en Vercel** como `META_PIXEL_ID` (ver tarea 3).
 
 ---
 
@@ -70,7 +62,7 @@ Son 4 tareas. Ninguna es de diseño ni de código de fondo: son datos/credencial
 
    | Variable | Valor |
    |---|---|
-   | `META_PIXEL_ID` | `27890392917235121` (o el confirmado en la tarea 1) |
+   | `META_PIXEL_ID` | `2238963863532324` |
    | `META_CAPI_TOKEN` | *(el token secreto que copiaste)* |
    | `META_TEST_EVENT_CODE` | *(opcional)* el código de "Probar eventos" |
 
@@ -107,7 +99,7 @@ Son 4 tareas. Ninguna es de diseño ni de código de fondo: son datos/credencial
 
 ## Checklist rápido
 
-- [ ] **1.** Pixel ID confirmado en Meta Events Manager (¿coincide con `27890392917235121`?)
+- [x] **1.** Pixel creado (`2238963863532324`) y puesto en el código — falta conectarlo a la cuenta publicitaria y ponerlo en Vercel
 - [ ] **2.** Measurement ID `G-XXXXXXXXXX` pegado en `index.html` + `generate_lead` y `select_item` marcados como conversión en GA4
 - [ ] **3.** `META_PIXEL_ID` + `META_CAPI_TOKEN` en Vercel + **redeploy** + probado con Test Events
 - [ ] **4.** `assets/og-facturaia.jpg` (1200×630) existe y la vista previa se ve en el Sharing Debugger

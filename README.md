@@ -61,7 +61,7 @@ Además está la tabla comparativa (sección `#tabla`, HTML plano) y el JSON-LD 
 ## Configuración
 
 - **`WA`** — número destino de los CTA (formato internacional sin `+`). Está en el `<script>` final de `index.html`; en las legales va en los `href` directos.
-- **Pixel de Meta** — el ID `27890392917235121` va en `window.CONSENT_CFG.pixelId` del `<head>` (index y `/terminos`). **Ya no se carga al entrar:** lo carga `assets/consent.js` solo si la persona acepta las cookies (consentimiento previo).
+- **Pixel de Meta** — el ID `2238963863532324` va en `window.CONSENT_CFG.pixelId` del `<head>` (index y `/terminos`). **Ya no se carga al entrar:** lo carga `assets/consent.js` solo si la persona acepta las cookies (consentimiento previo).
 
 ## Consentimiento de cookies
 
@@ -83,7 +83,7 @@ Se activa con variables de entorno en Vercel (Settings → Environment Variables
 
 | Variable | Valor |
 |----------|-------|
-| `META_PIXEL_ID` | `27890392917235121` |
+| `META_PIXEL_ID` | `2238963863532324` |
 | `META_CAPI_TOKEN` | Token de acceso de Meta (secreto) |
 | `META_TEST_EVENT_CODE` | *(opcional)* código de "Probar eventos" |
 
