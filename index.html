@@ -483,6 +483,15 @@ td.reco{background:rgba(82,22,231,.05);font-weight:600}
 .tst{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
 @media(max-width:900px){.tst{grid-template-columns:1fr}}
 
+/* ============ FRANJA DE CONFIANZA (rubros reales) ============ */
+.rubros{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.rubro{display:inline-flex;align-items:center;gap:10px;font-family:var(--texto);font-size:.95rem;font-weight:600;color:var(--tinta);background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:11px 18px;transition:border-color .15s,transform .15s}
+.rubro:hover{border-color:var(--violeta);transform:translateY(-1px)}
+.rubro i{width:7px;height:7px;border-radius:50%;background:var(--violeta);flex:none}
+.confianza-cierre{margin-top:28px;font-size:1rem;color:var(--gris);line-height:1.6}
+.confianza-cierre a{color:var(--violeta);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(82,22,231,.3)}
+.confianza-cierre a:hover{border-bottom-color:var(--violeta)}
+
 /* ============ FAQ ============ */
 .faq{max-width:840px;margin:34px auto 0}
 .faq details{border-bottom:1px solid var(--linea);padding:3px 0}
@@ -1134,6 +1143,38 @@ footer a:hover{color:#fff}
      de alguien que se cambió desde otro proveedor. El deck lo marca como
      bloqueante de lanzamiento.
      ===================================================================== -->
+
+<!-- ================= 10b. FRANJA DE CONFIANZA (rubros reales) =================
+     Reemplaza a los testimonios mientras no haya firmados. Los rubros salen del
+     export real de contactos (Odoo res.partner): son categorias verdaderas. NO se
+     publica el conteo por rubro porque el export puede incluir prospectos/proveedores.
+     Cuando lleguen testimonios firmados, pueden ir encima de esta franja o sustituirla. -->
+<section id="confianza">
+  <div class="wrap">
+    <span class="eyebrow rv">Quiénes facturan con nosotros</span>
+    <h2 class="rv">Su rubro, seguramente ya lo atendemos</h2>
+    <p class="lede rv">
+      Entre las empresas que facturan con nosotros hay comercios, clínicas y consultorios,
+      transportistas, despachos contables y muchos giros más. Si el suyo está en esta lista,
+      su caso ya lo hemos resuelto antes.
+    </p>
+    <div class="rubros rv">
+      <span class="rubro"><i aria-hidden="true"></i>Comercio y tiendas</span>
+      <span class="rubro"><i aria-hidden="true"></i>Clínicas y consultorios</span>
+      <span class="rubro"><i aria-hidden="true"></i>Transporte y logística</span>
+      <span class="rubro"><i aria-hidden="true"></i>Despachos contables</span>
+      <span class="rubro"><i aria-hidden="true"></i>Restaurantes</span>
+      <span class="rubro"><i aria-hidden="true"></i>Farmacias</span>
+      <span class="rubro"><i aria-hidden="true"></i>Automotriz y talleres</span>
+      <span class="rubro"><i aria-hidden="true"></i>Industria y manufactura</span>
+      <span class="rubro"><i aria-hidden="true"></i>Inmobiliarias</span>
+      <span class="rubro"><i aria-hidden="true"></i>Construcción</span>
+    </div>
+    <p class="confianza-cierre rv">
+      ¿No ve su rubro? Igual lo atendemos. <a href="#respaldo">Hágale a cualquier proveedor las cinco preguntas</a> y compare las respuestas.
+    </p>
+  </div>
+</section>
 
 <!-- ================= 11. FAQ ================= -->
 <section style="background:var(--nube)" id="faq">
