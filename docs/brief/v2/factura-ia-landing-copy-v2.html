@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es-SV">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factura IA · Landing v2 — Copy final</title>
+<style>
+  :root{
+    --ink:#141019; --ink-2:#4a4356; --ink-3:#7b7488;
+    --line:#e3dfe9; --line-soft:#efecf3;
+    --paper:#faf9fb; --card:#ffffff;
+    --brand:#5B21F0; --brand-soft:#f1ecfe;
+    --red:#c2321f; --red-soft:#fdecea;
+    --amber:#8a5a00; --amber-soft:#fdf3e0;
+    --green:#1a6b3c; --green-soft:#e8f5ed;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px 120px}
+
+  header.mast{border-bottom:2px solid var(--ink);padding:56px 0 28px;margin-bottom:40px}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin:0 0 14px}
+  h1{font-size:40px;line-height:1.12;letter-spacing:-.02em;margin:0 0 14px;font-weight:700}
+  .lede{font-size:17px;color:var(--ink-2);margin:0;max-width:62ch}
+  .meta{margin-top:22px;font-family:var(--mono);font-size:12px;color:var(--ink-3);display:flex;gap:20px;flex-wrap:wrap}
+
+  section{margin:0 0 60px;scroll-margin-top:20px}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--ink);padding-bottom:10px;margin-bottom:24px}
+  .sec-num{font-family:var(--mono);font-size:12px;color:var(--brand);font-weight:700}
+  h2{font-size:24px;letter-spacing:-.015em;margin:0;font-weight:700}
+  h3{font-size:15px;margin:32px 0 12px;font-weight:700}
+  h3:first-child{margin-top:0}
+  p{margin:0 0 14px}
+  .note{color:var(--ink-2);font-size:15px}
+
+  .strategy{background:linear-gradient(160deg,#f3eeff,#fbf9ff);border:1px solid #ddd0ff;
+    border-radius:12px;padding:26px 30px;margin-bottom:48px}
+  .strategy .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--brand);margin:0 0 12px}
+  .strategy .msg{font-size:23px;line-height:1.28;font-weight:700;letter-spacing:-.02em;margin:0 0 14px;max-width:28ch}
+  .strategy p:last-child{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin-bottom:52px}
+  nav.toc ol{margin:0;padding-left:20px;columns:2;column-gap:36px}
+  nav.toc li{margin:5px 0;font-size:14px}
+  nav.toc a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid transparent}
+  nav.toc a:hover{color:var(--brand);border-bottom-color:var(--brand)}
+
+  .flag{border-left:3px solid;padding:14px 18px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:15px}
+  .flag strong{display:block;margin-bottom:3px}
+  .f-red{border-color:var(--red);background:var(--red-soft)}
+  .f-amber{border-color:var(--amber);background:var(--amber-soft)}
+  .f-green{border-color:var(--green);background:var(--green-soft)}
+  .f-brand{border-color:var(--brand);background:var(--brand-soft)}
+
+  .copy{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px;margin:0 0 18px;position:relative}
+  .copy .tag{position:absolute;top:-9px;left:18px;background:var(--ink);color:#fff;font-family:var(--mono);
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:2px 9px;border-radius:3px}
+  .copy.old{background:#fbfafc;border-style:dashed}
+  .copy.old .tag{background:var(--ink-3)}
+  .copy.old *{color:var(--ink-3)}
+  .copy p:last-child,.copy ul:last-child{margin-bottom:0}
+  .h1-demo{font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin:0 0 12px}
+  .h2-demo{font-size:20px;font-weight:700;margin:0 0 10px;letter-spacing:-.01em}
+  .h3-demo{font-size:16px;font-weight:700;margin:20px 0 6px}
+  .eyebrow-demo{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+    text-transform:uppercase;background:var(--brand-soft);color:var(--brand);padding:5px 11px;
+    border-radius:20px;margin-bottom:14px;font-weight:600}
+  .cta-demo{display:inline-block;background:var(--brand);color:#fff;padding:9px 18px;border-radius:7px;
+    font-weight:600;font-size:14px;margin:6px 8px 0 0}
+  .cta-demo.ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+  .support{font-size:13px;color:var(--ink-3);font-family:var(--mono);margin-top:12px}
+  .caption{font-size:13px;color:var(--ink-3);font-style:italic}
+  .copy ul{padding-left:20px;margin:0 0 12px}
+  .copy li{margin:7px 0}
+  .band{background:#f6f2ff;border:1px solid #ddd0ff;border-radius:8px;padding:14px 18px;font-size:15px}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 18px;background:var(--card);
+    border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  th{text-align:left;background:#f4f2f7;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-2);padding:11px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-weight:600}
+  td{padding:11px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.num{font-family:var(--mono);text-align:center;font-weight:700}
+  code{font-family:var(--mono);font-size:12.5px;background:#f2eefb;color:#3d1699;padding:2px 6px;border-radius:4px}
+
+  ul.check{list-style:none;padding:0;margin:0}
+  ul.check li{padding:11px 0 11px 34px;border-bottom:1px solid var(--line-soft);position:relative;font-size:15px}
+  ul.check li:last-child{border-bottom:none}
+  ul.check li::before{content:"";position:absolute;left:4px;top:15px;width:14px;height:14px;
+    border:1.5px solid var(--ink-3);border-radius:3px}
+
+  .pending{background:#fffbea;border:1px dashed #d9b84a;border-radius:8px;padding:20px 24px}
+  .pending h3{margin-top:0}
+  mark{background:#ffe89a;padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:13px;font-weight:600}
+
+  @media(max-width:680px){
+    h1{font-size:29px} nav.toc ol{columns:1} .wrap{padding:0 18px 80px}
+    table{font-size:13px} .strategy .msg{font-size:19px}
+  }
+  @media print{body{background:#fff} section{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Factura IA · Grupo Consiti</p>
+  <h1>Landing v2 — Copy final</h1>
+  <p class="lede">Texto listo para pegar, sección por sección, en tratamiento de usted. El razonamiento está en el briefing de implementación; la estrategia completa, en el deck.</p>
+  <div class="meta"><span>21 de agosto de 2026</span><span>Versión 2.1</span><span>Alineado al mensaje permanente</span></div>
+</header>
+
+<div class="strategy">
+  <p class="lbl">Mensaje raíz · todo cuelga de acá</p>
+  <p class="msg">Las reglas de Hacienda cambian. Su facturación no se debería enterar.</p>
+  <p>Tres pilares lo sostienen: <strong>empresa salvadoreña detrás</strong>, <strong>siempre al día con Hacienda</strong> y <strong>soporte que contesta</strong>. Cada uno aparece una sola vez, en el lugar donde más pesa. Si un texto no refuerza esta idea, sobra.</p>
+</div>
+
+<nav class="toc">
+  <ol>
+    <li><a href="#s1">Hero</a></li>
+    <li><a href="#s2">Franja de campaña</a></li>
+    <li><a href="#s3">Cómo funciona</a></li>
+    <li><a href="#s4">Precios y calculadora</a></li>
+    <li><a href="#s5">El sistema</a></li>
+    <li><a href="#s6">Para contadores</a></li>
+    <li><a href="#s7">Quién está detrás</a></li>
+    <li><a href="#s8">Cinco preguntas</a></li>
+    <li><a href="#s9">Normativa 2.0</a></li>
+    <li><a href="#s10">Cambiar de proveedor</a></li>
+    <li><a href="#s11">Cómo arranca</a></li>
+    <li><a href="#s12">Tabla de planes</a></li>
+    <li><a href="#s13">Preguntas frecuentes</a></li>
+    <li><a href="#s14">Cierre y footer</a></li>
+    <li><a href="#s15">Mensajes de WhatsApp</a></li>
+    <li><a href="#s16">Conversión a usted</a></li>
+    <li><a href="#s17">Datos pendientes</a></li>
+  </ol>
+</nav>
+
+<!-- 1 -->
+<section id="s1">
+  <div class="sec-head"><span class="sec-num">01</span><h2>Hero</h2></div>
+  <p class="note"><strong>Por qué cambia.</strong> El hero actual vende facilidad de uso, que le habla a quien todavía no factura — el segmento más chico y más frío, porque la facturación electrónica lleva dos años siendo obligatoria. Además "fácil de usar" es lo que dice todo competidor. El nuevo abre por el único territorio que no se puede copiar con un adjetivo: no cumplir, sino <em>seguir cumpliendo</em>.</p>
+
+  <div class="copy old">
+    <span class="tag">Antes</span>
+    <p class="h1-demo">Facturá electrónico sin volverte experto en nada</p>
+    <p>Tres clics y tu factura queda en Hacienda. Nosotros hacemos el papeleo, te enseñamos a usarlo y te contestamos el mismo día cuando tengas una duda. Detrás no hay una aplicación: hay una empresa con 12 años.</p>
+  </div>
+
+  <div class="copy">
+    <span class="tag">Después</span>
+    <span class="eyebrow-demo">Empresa salvadoreña · 12 años · +500 empresas facturando</span>
+    <p class="h1-demo">Las reglas de Hacienda cambian. Su facturación no se debería enterar.</p>
+    <p>Cada vez que el Ministerio de Hacienda actualiza la normativa, alguien tiene que ajustar el sistema, probarlo y dejarlo funcionando antes de la fecha. Ese alguien somos nosotros: una empresa salvadoreña con 12 años operando, equipo de soporte que contesta el mismo día, y su información respaldada en Google Cloud.</p>
+    <a class="cta-demo">Ver planes desde $14.99</a>
+    <a class="cta-demo ghost">Escríbanos por WhatsApp</a>
+    <p class="support">Actualizaciones normativas incluidas en todos los planes · Soporte sin costo · Listo en menos de 24 horas</p>
+  </div>
+
+  <div class="flag f-brand">
+    <strong>Por qué esta frase y no un adjetivo</strong>
+    "Su facturación no se debería enterar" hace el trabajo de <em>seguro</em> y <em>con soporte</em> sin usar ninguna de las dos palabras — que es exactamente lo que las vuelve creíbles. Y no caduca: sirve igual en diciembre de 2026 que en 2029.
+  </div>
+
+  <h3>Fila de badges</h3>
+  <div class="copy old">
+    <span class="tag">Antes</span>
+    <p>Emisor autorizado ante Hacienda · Partner oficial de Odoo · Partner de Google Cloud · Listo en menos de 24 horas · Normativa DTE 2.0 incluida</p>
+  </div>
+  <div class="copy">
+    <span class="tag">Después</span>
+    <p>En producción con el Sistema de Transmisión DTE · Google Cloud · Soporte el mismo día · Listo en 24 horas</p>
+  </div>
+
+  <div class="flag f-red">
+    <strong>"Emisor autorizado ante Hacienda" contradice el propio FAQ</strong>
+    El FAQ aclara —correctamente— que la autorización la otorga Hacienda al contribuyente, no al proveedor. Un contador detecta la inconsistencia en dos segundos, y es el lector que menos conviene perder.
+  </div>
+
+  <div class="flag f-amber">
+    <strong>Odoo sale del hero y el eyebrow no se repite</strong>
+    El producto ya no se llama Odoo Factura IA: otra marca en el primer scroll diluye el nombre propio. Se queda en el footer, donde está el disclaimer legal. Y como el eyebrow ya carga "12 años" y "+500 empresas", los badges cubren lo que falta.
+  </div>
+
+  <div class="flag f-amber">
+    <strong>Eliminar del hero: "Te atendemos lunes a viernes, 8:00 a.m. a 5:00 p.m."</strong>
+    Aparece idéntica en el CTA final. En el primer scroll se está vendiendo respaldo y permanencia; el horario resta energía y adelanta una limitación. Se conserva solo abajo.
+  </div>
+
+  <p class="caption"><strong>Caption de la imagen:</strong> ✓ Una factura recién emitida: sello de Hacienda, UUID y número de control, en el mismo momento. Datos de ejemplo.</p>
+</section>
+
+<!-- 2 -->
+<section id="s2">
+  <div class="sec-head"><span class="sec-num">02</span><h2>Franja de campaña</h2></div>
+  <p class="note"><strong>Nueva.</strong> Banda delgada inmediatamente debajo del hero.</p>
+
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="band"><strong>Ahora mismo:</strong> Hacienda fijó el 1 de diciembre de 2026 para la Normativa DTE 2.0. Ya la estamos aplicando en todas las cuentas, sin costo y sin trámite de su parte. → <strong>Ver el detalle</strong></p>
+  </div>
+
+  <div class="flag f-brand">
+    <strong>Por qué separada y no dentro del hero</strong>
+    El 1 de diciembre es la urgencia más fuerte del año, pero caduca. Si la marca se construye sobre una fecha, hay que rehacerla cuando la fecha pase. Acá la normativa deja de ser la tesis y pasa a ser evidencia. Márquela como componente independiente para que retirarla en diciembre sea un solo cambio.
+  </div>
+
+  <div class="flag f-amber">
+    <strong>Si se agrega contador de días</strong>
+    Debe calcularse en cliente contra el 1 de diciembre de 2026, nunca escribirse fijo. Un número desactualizado desmiente el argumento completo.
+  </div>
+</section>
+
+<!-- 3 -->
+<section id="s3">
+  <div class="sec-head"><span class="sec-num">03</span><h2>Cómo funciona</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Se hace en tres pasos. Nada más.</p>
+    <p>Si sabe usar WhatsApp, sabe usar esto. En serio.</p>
+    <p class="h3-demo">01 · Elige el cliente y el producto</p>
+    <p>Ya los tiene guardados. Los busca por nombre y se llenan solos.</p>
+    <p class="h3-demo">02 · Le da a "Emitir"</p>
+    <p>El sistema arma el documento, lo firma y lo manda a Hacienda. Usted no toca nada de eso.</p>
+    <p class="h3-demo">03 · Se lo manda al cliente</p>
+    <p>Por correo o por WhatsApp, desde el mismo sistema. Queda guardado para siempre.</p>
+  </div>
+  <div class="copy">
+    <span class="tag">Glosario</span>
+    <p><strong>¿Y qué es un "DTE"?</strong> Es el nombre que le da Hacienda a la factura electrónica: Documento Tributario Electrónico. Cada factura, crédito fiscal o nota de crédito que emite es un DTE. Cuando en esta página vea "30 DTE al mes", léalo como "30 facturas al mes".</p>
+  </div>
+  <p class="caption"><strong>Caption del video:</strong> ✓ 29 segundos, sin cortes ni efectos: de factura en blanco a factura emitida ante Hacienda. Datos de ejemplo.</p>
+</section>
+
+<!-- 4 -->
+<section id="s4">
+  <div class="sec-head"><span class="sec-num">04</span><h2>Precios y calculadora</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Díganos cuántas facturas hace y le decimos el precio</p>
+    <p>Sin cotizaciones y sin llamadas de venta para saber cuánto cuesta. El precio está publicado y es el mismo para todos.</p>
+    <p><strong>Pregunta:</strong> ¿Cuántas facturas emite, más o menos, en un día normal?</p>
+  </div>
+
+  <h3>Resultado con desglose del primer mes</h3>
+  <div class="copy">
+    <span class="tag">Nuevo</span>
+    <p>Su plan recomendado: <strong>Professional</strong><br>$24.99 + IVA al mes · hasta 100 facturas</p>
+    <p class="caption">Primer mes: $24.99 + $50 de implementación (un solo pago) = $74.99 + IVA. Desde el segundo mes, $24.99 + IVA.</p>
+    <a class="cta-demo">Contratar por WhatsApp</a>
+    <a class="cta-demo ghost">Ver todo lo que incluye</a>
+  </div>
+
+  <div class="flag f-amber">
+    <strong>El costo de implementación debe estar acá, no enterrado en la tabla</strong>
+    El comprador salvadoreño castiga duro el costo que aparece después. Decirlo primero convierte una objeción en prueba de honestidad, que es justo el eje narrativo de la página.
+  </div>
+
+  <h3>Aviso condicional cuando el resultado cae en Starter</h3>
+  <div class="copy">
+    <span class="tag">Nuevo</span>
+    <p>Con Starter no se generan anexos de IVA ni libros. Si su contador se los pide, el plan es Professional.</p>
+  </div>
+
+  <div class="flag f-amber">
+    <strong>El gancho de $14.99 no incluye lo que el contador necesita</strong>
+    Alguien va a llegar por el precio y se va a sentir engañado en el primer cierre. Advertirlo pierde algunos Starter, gana Professionals y no quema la relación con el contador — que es quien recomienda al resto de su cartera.
+  </div>
+
+  <div class="flag f-brand">
+    <strong>La calculadora debe abrir con un plan preseleccionado</strong>
+    Hoy arranca vacía y exige interacción para mostrar precio. Preseleccione "3 a 5 / ~100 al mes" → Professional, para que el visitante vea una cifra concreta sin trabajo.
+  </div>
+</section>
+
+<!-- 5 -->
+<section id="s5">
+  <div class="sec-head"><span class="sec-num">05</span><h2>El sistema</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Lo que va a usar todos los días</p>
+    <p class="h3-demo">Sus facturas de compra se cargan solas</p>
+    <p>Sube los archivos que le mandan sus proveedores y el sistema los lee y registra la compra. Lo que antes era una tarde entera digitando, ahora son unos minutos.</p>
+    <p class="h3-demo">El cierre deja de ser su problema</p>
+    <p>Anexos de IVA y libros de compras y ventas salen del sistema en PDF y Excel. Su contador entra, los descarga y trabaja. Se acabaron los correos de "mándeme el detalle del mes".</p>
+    <p class="h3-demo">Y funciona desde el celular</p>
+    <p>Puede emitir y consultar desde el teléfono, en la tienda o en la calle. No necesita estar sentado frente a la computadora para facturar.</p>
+  </div>
+  <div class="flag f-amber">
+    <strong>Este bloque y el bullet de contadores decían lo mismo, casi palabra por palabra</strong>
+    El argumento de los anexos vive acá, escrito para el dueño. En contadores se reemplaza por lo que sí es nuevo para él.
+  </div>
+  <p class="caption"><strong>Caption:</strong> ✓ 19 segundos: de archivos sueltos a compra registrada. Los datos del proveedor van difuminados a propósito.</p>
+</section>
+
+<!-- 6 -->
+<section id="s6">
+  <div class="sec-head"><span class="sec-num">06</span><h2>Para contadores y despachos</h2></div>
+  <div class="flag f-brand">
+    <strong>El hueco estratégico más caro de la página</strong>
+    El pequeño empresario no elige sistema de facturación: le pregunta a su contador. Un despacho con 30 clientes decide 30 contratos. Hoy esta sección tiene cinco bullets y un CTA genérico idéntico al de todos. No responde lo único que el despacho se pregunta: qué gana él.
+  </div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Si lleva la contabilidad de varias empresas, esto es para usted</p>
+    <ul>
+      <li><strong>Cuenta de despacho, sin costo.</strong> No paga por tener acceso a las empresas de sus clientes. Cada empresa paga su plan; su cuenta de administración va incluida.</li>
+      <li><strong>Todas sus empresas desde una sola sesión.</strong> Cambia de una a otra sin volver a entrar.</li>
+      <li><strong>Los anexos de todos sus clientes en una sola descarga.</strong> No entra empresa por empresa: filtra el período una vez y baja el cierre completo de su cartera, en PDF y Excel.</li>
+      <li><strong>Todos los documentos.</strong> Crédito fiscal, exportación, sujeto excluido, retención, notas de crédito y débito.</li>
+      <li><strong>Sus clientes no lo llaman a usted por soporte.</strong> Nos llaman a nosotros, y sin costo.</li>
+      <li><strong>La Normativa 2.0 la actualizamos nosotros</strong>, en todas sus empresas a la vez.</li>
+    </ul>
+    <a class="cta-demo">Quiero una cuenta de despacho</a>
+  </div>
+  <div class="flag f-amber">
+    <strong>Decisión pendiente: esquema de comisión por referido</strong>
+    Si se define, el bullet correspondiente es el que más contratos trae de toda la página. Es modelo comercial, no copy.
+  </div>
+  <div class="flag f-red">
+    <strong>Revisar el placeholder de Asset 06</strong>
+    En esta sección hay un bloque con especificaciones internas de un asset pendiente. En staging no molesta, pero confirme que no viaje a producción: está en la sección del segmento de mayor valor.
+  </div>
+</section>
+
+<!-- 7 -->
+<section id="s7">
+  <div class="sec-head"><span class="sec-num">07</span><h2>Quién está detrás</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">No somos una app. Somos una empresa.</p>
+    <p>La facturación electrónica ya tiene dos años en El Salvador y en ese tiempo aparecieron muchos sistemas hechos por una sola persona: funcionaron el primer año y después dejaron de actualizarse. Nosotros llevamos 12 años operando sin interrupciones, y la Normativa 2.0 no es la primera vez que nos toca actualizar todo el parque de clientes a la vez.</p>
+  </div>
+
+  <h3>Banda de cifras</h3>
+  <table>
+    <tr><th>Cifra</th><th>Etiqueta</th><th>Qué prueba</th></tr>
+    <tr><td class="num">12</td><td>años de operación continua en El Salvador</td><td>Permanencia</td></tr>
+    <tr><td class="num">+500</td><td>empresas facturan con nosotros todos los días</td><td>Escala</td></tr>
+    <tr><td class="num"><mark>[X]</mark></td><td>DTE transmitidos a Hacienda</td><td>Volumen real</td></tr>
+    <tr><td class="num"><mark>[X]%</mark></td><td>aceptados por Hacienda en el primer intento</td><td>Confiabilidad</td></tr>
+  </table>
+
+  <div class="flag f-red">
+    <strong>Eliminar la tarjeta de "22 personas"</strong>
+    Quien la lee no piensa "tienen equipo", piensa "son 22". Y al lado de "+3,500 empresas atendidas" invita a una cuenta mental incómoda. Lo que ese dato sí aportaba —que soporte, desarrollo e implementación son áreas distintas— se conserva como cualidad en la pregunta #4 de la sección 08.
+  </div>
+
+  <div class="flag f-red">
+    <strong>Sacar "+3,500 empresas atendidas" de la banda</strong>
+    Al lado de "+500 activas" se lee como fuga de clientes: nadie sabe que las 3,500 son de consultoría del grupo y las 500 son de Factura IA. Un contador hace la resta y concluye que se fueron 3,000. Va como pie de sección: <em>"Grupo Consiti ha atendido +3,500 empresas en 12 años en consultoría, software y nube."</em>
+  </div>
+
+  <h3>Métricas alternativas disponibles</h3>
+  <p class="note">Si alguna de las dos pendientes no se puede documentar, estos son sustitutos válidos.</p>
+  <table>
+    <tr><th>Categoría</th><th>Métrica</th><th>Por qué pesa</th></tr>
+    <tr><td>Escala</td><td>$ facturados a través de la plataforma</td><td>La que más impresiona al dueño</td></tr>
+    <tr><td>Escala</td><td>Departamentos con clientes activos</td><td>Cobertura nacional, si aplica</td></tr>
+    <tr><td>Escala</td><td>Rubros atendidos</td><td>Le dice "su caso ya lo vimos"</td></tr>
+    <tr><td>Confiabilidad</td><td>Cierres de mes consecutivos operando</td><td>Traduce disponibilidad al único día que importa</td></tr>
+    <tr><td>Operación</td><td>Tiempo promedio de primera respuesta</td><td>Más fuerte que "el mismo día", que es vago</td></tr>
+    <tr><td>Permanencia</td><td>% de clientes que siguen después de 12 meses</td><td>Antídoto contra "y si me va mal"</td></tr>
+  </table>
+
+  <div class="flag f-brand">
+    <strong>Aplique sus propias cinco preguntas</strong>
+    La página le dice al mercado "pida las respuestas por escrito". Cada cifra publicada tiene que poder sostenerse si un cliente la pide documentada. Publique solo lo defendible y redondee hacia abajo.
+  </div>
+</section>
+
+<!-- 8 -->
+<section id="s8">
+  <div class="sec-head"><span class="sec-num">08</span><h2>Cinco preguntas</h2></div>
+  <div class="flag f-green">
+    <strong>La mejor pieza de la página. Se conserva íntegra.</strong>
+    Le entrega al comprador una herramienta que sirve incluso si no contrata, y encuadra la comparación en el terreno donde los competidores pierden. Solo cambia la respuesta #4 y la conversión a usted.
+  </div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h3-demo">Cinco preguntas para hacerle a cualquier proveedor</p>
+    <p>Incluidos nosotros. Hágalas antes de firmar con quien sea y compare las respuestas. Al lado de cada una está la nuestra.</p>
+    <p><strong>1. ¿Quién me contesta si el sistema falla un día de cierre?</strong><br>
+    <em>Nosotros:</em> un equipo de soporte, no una persona. Respuesta el mismo día, en horario de oficina, sin costo.</p>
+    <p><strong>2. ¿Me van a tener actualizado a la Normativa 2.0 antes del 1 de diciembre?</strong><br>
+    <em>Nosotros:</em> sí, incluido en todos los planes y sin trámite de su parte.</p>
+    <p><strong>3. ¿Dónde vive mi información y quién responde si se pierde?</strong><br>
+    <em>Nosotros:</em> en Google Cloud, con respaldo continuo. Grupo Consiti responde, con nombre y con planilla.</p>
+    <p><strong>4. ¿Qué pasa con mi facturación si la persona que hizo el sistema se va?</strong><br>
+    <em>Nosotros:</em> el sistema lo mantiene un equipo de desarrollo, no su autor. Soporte, desarrollo e implementación son áreas distintas, con 12 años de operación continua detrás. Si alguien se va, su facturación no se entera.</p>
+    <p><strong>5. ¿La capacitación y el soporte tienen costo aparte?</strong><br>
+    <em>Nosotros:</em> no. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados, incluidos.</p>
+    <p>Un consejo, aunque no nos contrate: <strong>pida las respuestas por escrito.</strong> Un proveedor que no le confirma por escrito que va a cumplir con la Normativa 2.0 antes del 1 de diciembre le está diciendo algo importante.</p>
+  </div>
+  <div class="flag f-brand">
+    <strong>Por qué la #4 cambia</strong>
+    El problema del competidor no es tener poca gente: es depender de una sola persona. Atacar eso directo es más fuerte que oponer un headcount, y elimina la comparación de tamaño. La respuesta además cierra con el mensaje raíz: <em>"su facturación no se entera"</em>.
+  </div>
+</section>
+
+<!-- 9 -->
+<section id="s9">
+  <div class="sec-head"><span class="sec-num">09</span><h2>Normativa 2.0</h2></div>
+  <div class="flag f-amber">
+    <strong>Esta sección se reduce a la ficha técnica</strong>
+    Con el hero y la franja de campaña llevando el argumento normativo, los párrafos de apertura lo repiten por tercera vez. Eliminarlos completos.
+  </div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">El detalle técnico, para su contador o su programador</p>
+    <p class="note">Los 8 bullets técnicos quedan exactamente igual: son términos normativos, no llevan voseo y son prueba de dominio real.</p>
+    <a class="cta-demo">Quiero quedar cubierto</a>
+  </div>
+  <div class="flag f-green">
+    <strong>Sin los párrafos redundantes encima, la lista se lee como lo que es</strong>
+    La sección donde Consiti demuestra que sabe de qué está hablando. Es el sustento técnico del pilar 02.
+  </div>
+</section>
+
+<!-- 10 -->
+<section id="s10">
+  <div class="sec-head"><span class="sec-num">10</span><h2>Cambiar de proveedor</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Cambiarse ya es un trámite normal</p>
+    <p>Desde mayo de 2026 el portal de Hacienda tiene habilitada la opción de <strong>Cambio de Plataforma</strong>. No está amarrado a su proveedor actual.</p>
+    <p class="h3-demo">Hacemos el cambio completo, sin costo de migración</p>
+    <ul>
+      <li>Gestionamos el trámite de cambio en el portal de Hacienda.</li>
+      <li>Migramos su catálogo de productos, clientes y proveedores.</li>
+      <li>Conserva sus documentos históricos y queda cubierto para la 2.0.</li>
+      <li>No deja de facturar ni un día.</li>
+    </ul>
+    <p class="support"><mark>[X] migraciones</mark> completadas desde otro proveedor · <mark>[X] horas</mark> de puesta en marcha promedio · 0 días sin facturar</p>
+    <a class="cta-demo">Quiero cambiarme</a>
+    <p class="note" style="margin-top:12px">Cuéntenos con quién está y le decimos exactamente qué implica.</p>
+  </div>
+  <div class="flag f-brand">
+    <strong>La micro-banda de cifras es nueva</strong>
+    Hoy la sección promete que cambiarse es rutina pero no lo prueba. Tres cifras en línea, sin tarjetas, bastan para que deje de parecer una aventura.
+  </div>
+</section>
+
+<!-- 11 -->
+<section id="s11">
+  <div class="sec-head"><span class="sec-num">11</span><h2>Cómo arranca</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Alguien con nombre lo acompaña desde el primer día</p>
+    <p>No le mandamos un manual y suerte. Le asignamos un gestor de cuenta que configura con usted, lo capacita y queda como su contacto.</p>
+    <p><strong>01 · Nos escribe</strong> — Por WhatsApp. Definimos juntos el plan según cuántas facturas hace.</p>
+    <p><strong>02 · Lo dejamos listo</strong> — En menos de 24 horas, con la gestión ante Hacienda incluida.</p>
+    <p><strong>03 · Lo capacitamos</strong> — Capacitación en vivo sin costo y dos cursos grabados que le quedan.</p>
+    <p><strong>04 · Factura tranquilo</strong> — Con soporte gratis y la normativa siempre al día de nuestro lado.</p>
+  </div>
+</section>
+
+<!-- 12 -->
+<section id="s12">
+  <div class="sec-head"><span class="sec-num">12</span><h2>Tabla de planes</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Qué incluye cada plan</p>
+    <p>Si ya sabe lo que busca, acá está todo. Si no, use la calculadora de arriba.</p>
+    <p class="caption">← Deslice la tabla para ver todos los planes →</p>
+  </div>
+  <h3>Nota al pie — condensada</h3>
+  <div class="copy old">
+    <span class="tag">Antes</span>
+    <p>Tres párrafos largos después de una tabla que ya cansó, con los cuatro precios de excedente repetidos verbatim en el FAQ.</p>
+  </div>
+  <div class="copy">
+    <span class="tag">Después</span>
+    <p><strong>Si se pasa de las facturas incluidas</strong> no lo suspendemos: cada factura extra se cobra según su plan (fila "Factura adicional"), desde $0.25 en Starter hasta $0.05 en Deluxe. Si el exceso se vuelve constante, le avisamos y lo movemos al plan más barato para usted.</p>
+    <p>Todos los precios son + IVA y le generan crédito fiscal. Implementación, un solo pago. Sin permanencia forzada.</p>
+  </div>
+  <div class="flag f-amber">
+    <strong>Los valores de la tabla no cambian</strong>
+    Solo cambian los mensajes precargados de los CTA (sección 15) y la nota al pie.
+  </div>
+</section>
+
+<!-- 13 -->
+<section id="s13">
+  <div class="sec-head"><span class="sec-num">13</span><h2>Preguntas frecuentes</h2></div>
+  <div class="flag f-red">
+    <strong>De 9 preguntas a 6. Siete de las nueve repetían algo ya resuelto arriba.</strong>
+    El FAQ es el duplicado más caro de la página: recuenta las "Cinco preguntas" 400 píxeles más abajo, en tono plano, y les quita fuerza.
+  </div>
+  <h3>Eliminar completas</h3>
+  <table>
+    <tr><th>Pregunta</th><th>Dónde ya está resuelta</th></tr>
+    <tr><td>¿Ya están listos para la Normativa DTE 2.0?</td><td>Hero + franja + sección normativa</td></tr>
+    <tr><td>Estoy con otro proveedor, ¿puedo cambiarme?</td><td>Sección cambiar (verbatim)</td></tr>
+    <tr><td>¿En cuánto tiempo queda funcionando?</td><td>Badge + paso 02</td></tr>
+    <tr><td>¿La capacitación y el soporte tienen costo?</td><td>Cinco preguntas #5</td></tr>
+    <tr><td>¿Y si emito más facturas de las que incluye mi plan?</td><td>Nota bajo la tabla (verbatim)</td></tr>
+  </table>
+  <h3>FAQ final</h3>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Lo que todo negocio pregunta</p>
+    <p><strong>¿Es difícil de usar? Yo no soy de sistemas</strong><br>
+    Emitir una factura son tres pasos. Lo capacitamos en vivo y le quedan dos cursos grabados. Si se traba, nos escribe por WhatsApp.</p>
+    <p><strong>¿Están autorizados por el Ministerio de Hacienda?</strong><br>
+    Nuestro sistema opera en producción con el Sistema de Transmisión DTE y transmite en tiempo real, con firma electrónica. La autorización como emisor la otorga Hacienda al contribuyente —a su empresa—, y ese trámite lo gestionamos nosotros.</p>
+    <p><strong>¿Cómo y cuándo se paga?</strong><br>
+    Mensual, por transferencia o depósito. Le facturamos con crédito fiscal. La implementación se paga una sola vez, al inicio.</p>
+    <p><strong>¿Qué necesito tener a mano para arrancar?</strong><br>
+    NIT y NRC de la empresa, su logo, y la lista de productos o servicios que factura. Nada más: el resto del papeleo ante Hacienda lo hacemos nosotros.</p>
+    <p><strong>¿Qué pasa si se me daña la computadora?</strong><br>
+    Nada. Su información vive en Google Cloud con respaldo continuo. Entra desde otra máquina y sigue trabajando.</p>
+    <p><strong>¿Me amarran con un contrato largo?</strong><br>
+    No hay permanencia. Si se quiere ir, se va, y sus documentos históricos son suyos.</p>
+  </div>
+  <div class="flag f-green">
+    <strong>Las dos preguntas nuevas eliminan fricción en el primer mensaje</strong>
+    "Cómo se paga" y "qué necesito tener a mano" hoy obligan a preguntar por WhatsApp. Resueltas en la página, el prospecto escribe con los datos completos.
+  </div>
+</section>
+
+<!-- 14 -->
+<section id="s14">
+  <div class="sec-head"><span class="sec-num">14</span><h2>Cierre y footer</h2></div>
+  <div class="copy">
+    <span class="tag">Copy final</span>
+    <p class="h2-demo">Empiece a facturar en menos de 24 horas</p>
+    <p>Escríbanos, vemos juntos qué plan le toca y el papeleo ante Hacienda queda de nuestro lado.</p>
+    <a class="cta-demo">Escríbanos por WhatsApp</a>
+    <a class="cta-demo ghost">Ver precios</a>
+    <p class="support">Lunes a viernes, 8:00 a.m. a 5:00 p.m. · Respondemos el mismo día</p>
+  </div>
+  <div class="copy">
+    <span class="tag">Footer</span>
+    <p>Facturación electrónica para empresas en El Salvador. Un producto de Grupo Consiti S.A. de C.V.</p>
+    <p class="note">El resto del footer —navegación, contacto, legal y disclaimer de marcas— no contiene voseo y queda igual.</p>
+  </div>
+  <div class="copy">
+    <span class="tag">Pie de "Quién está detrás"</span>
+    <p>Grupo Consiti ha atendido +3,500 empresas en 12 años en consultoría, software y nube.</p>
+  </div>
+</section>
+
+<!-- 15 -->
+<section id="s15">
+  <div class="sec-head"><span class="sec-num">15</span><h2>Mensajes de WhatsApp</h2></div>
+  <p class="note">Lo que importa acá es <strong>qué texto llega precargado</strong>: el prospecto no debería tener que volver a explicar lo que ya eligió en la página. Ahí es donde se enfría. El mensaje precargado convierte una consulta en una orden de compra.</p>
+  <table>
+    <tr><th>Origen</th><th>Mensaje precargado</th></tr>
+    <tr><td><strong>Starter</strong></td><td>Buen día. Emito unas 30 facturas al mes y quiero contratar el plan Starter de $14.99 + IVA.</td></tr>
+    <tr><td><strong>Professional</strong></td><td>Buen día. Emito unas 100 facturas al mes y quiero contratar el plan Professional de $24.99 + IVA.</td></tr>
+    <tr><td><strong>Advanced</strong></td><td>Buen día. Emito unas 500 facturas al mes y quiero contratar el plan Advanced de $34.99 + IVA.</td></tr>
+    <tr><td><strong>Deluxe</strong></td><td>Buen día. Emito unas 1,000 facturas al mes y quiero contratar el plan Deluxe de $59.99 + IVA.</td></tr>
+    <tr><td><strong>Enterprise</strong></td><td>Buen día. Emito más de 1,000 facturas al mes y quiero conocer el plan Enterprise.</td></tr>
+    <tr><td>Hero</td><td>Buen día. Vengo de la página de Factura IA y quiero información sobre los planes.</td></tr>
+    <tr><td>Franja normativa</td><td>Buen día. Quiero quedar cubierto para la Normativa DTE 2.0 antes del 1 de diciembre.</td></tr>
+    <tr><td>Cambiar proveedor</td><td>Buen día. Actualmente facturo con ______ y quiero saber qué implica cambiarme a Factura IA.</td></tr>
+    <tr><td>Contadores</td><td>Buen día. Soy contador y llevo la contabilidad de ______ empresas. Quiero ver la cuenta de despacho.</td></tr>
+  </table>
+  <div class="flag f-brand">
+    <strong>Sobre el tratamiento en estos mensajes</strong>
+    Este texto lo envía el cliente, no Consiti. Va en neutro para no romper la coherencia de la página. El guion bajo en los dos últimos es intencional: invita a completar el dato y arranca la conversación con información útil.
+  </div>
+</section>
+
+<!-- 16 -->
+<section id="s16">
+  <div class="sec-head"><span class="sec-num">16</span><h2>Conversión a usted</h2></div>
+  <div class="flag f-brand">
+    <strong>Regla de ejecución</strong>
+    El usted mal ejecutado se vuelve acartonado y pierde la calidez que hace funcionar "si sabe usar WhatsApp, sabe usar esto". Frases cortas, cero pronombre "usted" explícito, y nada de "le invitamos a", "no dude en" o "estimado cliente". El usted salvadoreño es respetuoso y directo, no corporativo: es el mismo tono con otro pronombre, no un registro nuevo.
+  </div>
+  <table>
+    <tr><th>Voseo</th><th>Usted</th><th>Voseo</th><th>Usted</th></tr>
+    <tr><td>Facturá</td><td>Facture</td><td>querés</td><td>quiere</td></tr>
+    <tr><td>Emitís</td><td>Emite</td><td>escribinos</td><td>escríbanos</td></tr>
+    <tr><td>Elegís</td><td>Elige</td><td>decinos</td><td>díganos</td></tr>
+    <tr><td>le das</td><td>le da</td><td>contanos</td><td>cuéntenos</td></tr>
+    <tr><td>mandás</td><td>manda</td><td>pedí</td><td>pida</td></tr>
+    <tr><td>tenés</td><td>tiene</td><td>usá</td><td>use</td></tr>
+    <tr><td>hacés</td><td>hace</td><td>deslizá</td><td>deslice</td></tr>
+    <tr><td>podés</td><td>puede</td><td>tu / tus</td><td>su / sus</td></tr>
+    <tr><td>sabés</td><td>sabe</td><td>vos</td><td>usted</td></tr>
+  </table>
+  <div class="flag f-amber">
+    <strong>Los imperativos llevan tilde</strong>
+    Escríbanos · Díganos · Cuéntenos · Hágalas · Léalo · Descárguelo · Empiece · Deslice · Pida.
+  </div>
+  <div class="flag f-green">
+    <strong>Qué no se convierte</strong>
+    Los mensajes precargados de WhatsApp (los escribe el cliente), los 8 bullets técnicos de la Normativa (son términos normativos) y el footer legal (no tiene voseo).
+  </div>
+</section>
+
+<!-- 17 -->
+<section id="s17">
+  <div class="sec-head"><span class="sec-num">17</span><h2>Datos pendientes</h2></div>
+  <div class="pending">
+    <h3>Para cerrar los bloques marcados con <mark>[X]</mark></h3>
+    <ul class="check">
+      <li><strong>DTE transmitidos a Hacienda</strong> — acumulado o mensual, el que resulte mayor. Con 500 clientes activos debería ser de seis o siete dígitos.</li>
+      <li><strong>% de DTE aceptados en primer intento</strong> — si anda en 99.x%, es la mejor cifra de toda la página: un contador entiende de inmediato qué significa un rechazo en día de cierre.</li>
+      <li><strong>Migraciones completadas desde otro proveedor</strong> — para la micro-banda de la sección 10.</li>
+      <li><strong>Horas promedio de puesta en marcha</strong> — si el promedio real es menor a 24, publicar el número real.</li>
+      <li><strong>Tiempo promedio de primera respuesta</strong> — sustituye a "el mismo día", la frase más repetida y más vaga de la página.</li>
+      <li><strong>Decisión sobre comisión por referido para contadores</strong> — antes de invertir en pauta.</li>
+      <li><strong>Asset 06</strong> — pantalla del selector de empresas, 1200 × 900, nombres inventados.</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+</body>
+</html>

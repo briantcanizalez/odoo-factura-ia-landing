@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es-SV">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Factura IA · Estrategia de comunicación</title>
+<style>
+:root{
+  --bg:#0A0616;
+  --bg-2:#140b28;
+  --card:#170e2c;
+  --line:#2c1f4a;
+  --line-2:#3d2c63;
+  --ink:#F2EEFB;
+  --ink-2:#B6AACF;
+  --ink-3:#7E739A;
+  --brand:#8B5CFF;
+  --brand-2:#B18CFF;
+  --brand-dim:#221340;
+  --ok:#3DD68C;
+  --warn:#FFB84D;
+  --bad:#FF6B6B;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
+  -webkit-font-smoothing:antialiased;overflow:hidden;
+}
+#stage{position:relative;height:100vh;width:100vw}
+.slide{
+  position:absolute;inset:0;display:none;
+  padding:64px 76px 88px;overflow-y:auto;
+  animation:in .45s cubic-bezier(.2,.7,.3,1);
+}
+.slide.on{display:flex;flex-direction:column}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.slide{animation:none}}
+
+/* chrome */
+#bar{position:fixed;top:0;left:0;height:2px;background:var(--brand);z-index:50;transition:width .35s ease}
+#hud{position:fixed;bottom:22px;left:76px;right:76px;display:flex;justify-content:space-between;
+  align-items:center;font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.1em;z-index:40}
+#hud .nav{display:flex;gap:8px}
+#hud button{background:var(--card);border:1px solid var(--line);color:var(--ink-2);
+  width:30px;height:30px;border-radius:7px;cursor:pointer;font-size:13px;line-height:1}
+#hud button:hover{border-color:var(--brand);color:var(--brand-2)}
+#hud button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand-2);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:120px}
+h1{font-size:64px;line-height:1.02;letter-spacing:-.035em;font-weight:700}
+h2{font-size:38px;line-height:1.12;letter-spacing:-.028em;font-weight:700;margin-bottom:14px;max-width:24ch}
+h2.wide{max-width:34ch}
+.sub{font-size:17px;line-height:1.55;color:var(--ink-2);max-width:66ch;margin-bottom:34px}
+.sub strong{color:var(--ink);font-weight:600}
+p{line-height:1.55}
+em{color:var(--brand-2);font-style:normal}
+
+/* cover */
+.cover{justify-content:center;background:
+  radial-gradient(900px 520px at 18% 22%, #1d1038 0%, transparent 62%),
+  radial-gradient(700px 480px at 88% 80%, #170d30 0%, transparent 60%);}
+.cover h1{max-width:17ch;margin-bottom:26px}
+.cover .tag{font-family:var(--mono);font-size:12px;color:var(--ink-3);letter-spacing:.14em;
+  display:flex;gap:26px;flex-wrap:wrap;margin-top:8px}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+.card h3{font-size:17px;margin-bottom:9px;letter-spacing:-.01em}
+.card p{font-size:14.5px;color:var(--ink-2)}
+.card .n{font-family:var(--mono);font-size:11px;color:var(--brand);letter-spacing:.14em;margin-bottom:12px;display:block}
+.card.hot{border-color:var(--brand);background:linear-gradient(160deg,#241442,#170e2c)}
+.card.hot h3{color:var(--brand-2)}
+.card.mute{opacity:.5}
+
+/* pillar */
+.pillar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;
+  display:flex;flex-direction:column;gap:16px}
+.pillar .top{border-bottom:1px solid var(--line);padding-bottom:15px}
+.pillar .top span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--brand);
+  display:block;margin-bottom:8px}
+.pillar .top h3{font-size:19px;line-height:1.2;letter-spacing:-.015em}
+.pillar .row{font-size:13.5px;line-height:1.5}
+.pillar .row b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;font-weight:600}
+.pillar .row.no b{color:var(--bad)}
+.pillar .row.yes b{color:var(--ok)}
+.pillar .row p{color:var(--ink-2)}
+
+/* quote / root message */
+.root{border:1px solid var(--brand);background:linear-gradient(150deg,#26154a,#160d2b);
+  border-radius:18px;padding:44px 48px;margin:10px 0 26px}
+.root .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--brand-2);
+  text-transform:uppercase;margin-bottom:18px}
+.root .msg{font-size:34px;line-height:1.22;letter-spacing:-.025em;font-weight:700;max-width:26ch}
+.root .msg em{color:var(--brand-2)}
+
+/* table */
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+th{text-align:left;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);padding:0 14px 11px;border-bottom:1px solid var(--line-2);font-weight:600}
+td{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--ink-2);vertical-align:top;line-height:1.45}
+td strong{color:var(--ink)}
+tr:last-child td{border-bottom:none}
+td.c{text-align:center;font-family:var(--mono)}
+
+/* pills */
+.pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid;font-weight:600}
+.p-ok{color:var(--ok);border-color:#1e5c40;background:#0f2c20}
+.p-warn{color:var(--warn);border-color:#5c4520;background:#2c2010}
+.p-bad{color:var(--bad);border-color:#5c2424;background:#2c1010}
+.p-b{color:var(--brand-2);border-color:var(--line-2);background:var(--brand-dim)}
+
+/* layers */
+.layer{display:flex;gap:18px;align-items:stretch;margin-bottom:14px}
+.layer .side{width:132px;flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-3);padding-top:26px}
+.layer .body{flex:1;border-radius:14px;padding:22px 26px;border:1px solid var(--line);background:var(--card)}
+.layer.perm .body{border-color:var(--brand);background:linear-gradient(150deg,#241442,#170e2c)}
+.layer .body h3{font-size:16px;margin-bottom:7px}
+.layer .body p{font-size:14px;color:var(--ink-2)}
+
+/* say/dont */
+.sd{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.sd .col{border-radius:14px;padding:24px 26px;border:1px solid var(--line);background:var(--card)}
+.sd .col.no{border-color:#4a2020;background:#1e1018}
+.sd h3{font-size:15px;margin-bottom:16px;font-family:var(--mono);letter-spacing:.1em;
+  text-transform:uppercase;font-size:11px}
+.sd .col.yes h3{color:var(--ok)}
+.sd .col.no h3{color:var(--bad)}
+.sd ul{list-style:none}
+.sd li{font-size:14px;color:var(--ink-2);padding:9px 0 9px 20px;position:relative;line-height:1.45;
+  border-bottom:1px solid var(--line)}
+.sd li:last-child{border-bottom:none}
+.sd .col.yes li::before{content:"→";position:absolute;left:0;color:var(--ok)}
+.sd .col.no li::before{content:"×";position:absolute;left:2px;color:var(--bad)}
+
+/* option cards */
+.opt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px}
+.opt.pick{border-color:var(--brand);background:linear-gradient(160deg,#241442,#170e2c)}
+.opt .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.opt .hd span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--brand)}
+.opt .h1x{font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin-bottom:11px}
+.opt .sx{font-size:13.5px;color:var(--ink-2);line-height:1.5;margin-bottom:14px}
+.opt .why{font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:12px;line-height:1.45}
+
+.foot{margin-top:auto;padding-top:26px;font-size:13.5px;color:var(--ink-3);
+  border-top:1px solid var(--line);line-height:1.5;max-width:80ch}
+.foot b{color:var(--brand-2)}
+
+@media(max-width:1100px){
+  .slide{padding:44px 40px 84px}
+  #hud{left:40px;right:40px}
+  h1{font-size:44px}h2{font-size:30px}
+  .g3,.g4{grid-template-columns:1fr 1fr}
+  .root .msg{font-size:26px}
+}
+@media(max-width:720px){
+  .slide{padding:34px 22px 80px}
+  #hud{left:22px;right:22px}
+  h1{font-size:32px}h2{font-size:24px}
+  .g2,.g3,.g4,.sd{grid-template-columns:1fr}
+  .layer{flex-direction:column;gap:8px}
+  .layer .side{width:auto;padding-top:0}
+  .root{padding:28px 24px}.root .msg{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide cover on">
+  <p class="eyebrow">Factura IA · Grupo Consiti</p>
+  <h1>Estrategia de comunicación</h1>
+  <p class="sub">Qué le decimos al mercado, por qué, y en qué orden. Documento previo al copy: define los mensajes antes de escribir la página.</p>
+  <p class="tag"><span>Agosto 2026</span><span>v1.0</span><span>Insumo del briefing de landing v2</span></p>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+  <p class="eyebrow">01 · Punto de partida</p>
+  <h2 class="wide">Hoy la página vende facilidad de uso. Ese ya no es el mercado.</h2>
+  <p class="sub">El mensaje de entrada actual —<em>"facturá sin volverte experto en nada"</em>— le habla a quien todavía no factura. Pero la facturación electrónica lleva dos años siendo obligatoria en El Salvador.</p>
+  <div class="g4">
+    <div class="card mute"><span class="n">PERFIL 04</span><h3>Va a empezar</h3><p>El único que no factura todavía. El segmento más chico y el más frío.</p></div>
+    <div class="card hot"><span class="n">PERFIL 01</span><h3>Duda de su proveedor</h3><p>Factura con alguien más y no sabe si va a cumplir con los cambios de Hacienda. El más grande.</p></div>
+    <div class="card hot"><span class="n">PERFIL 02</span><h3>Quedó abandonado</h3><p>Compró un sistema hecho por una sola persona. Funcionó un año y dejó de actualizarse.</p></div>
+    <div class="card hot"><span class="n">PERFIL 03</span><h3>El contador</h3><p>Evalúa para su cartera completa. Decide por varias empresas a la vez.</p></div>
+  </div>
+  <p class="foot">Tres de los cuatro perfiles <b>ya facturan</b>. No están buscando aprender a facturar: están evaluando si quien los tiene hoy los va a sostener mañana. La comunicación tiene que hablarle a esa evaluación.</p>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+  <p class="eyebrow">02 · Cadena de decisión</p>
+  <h2>El que firma no es el que elige.</h2>
+  <p class="sub">El pequeño empresario no evalúa sistemas de facturación. Le pregunta a su contador y hace lo que le digan. Eso cambia a quién hay que convencer.</p>
+  <div class="g3">
+    <div class="card"><span class="n">INFLUYE</span><h3>El contador o despacho</h3><p>Es quien recomienda, quien sufre el cierre de mes y quien decide por toda su cartera. Un despacho con 30 clientes decide 30 contratos.</p></div>
+    <div class="card"><span class="n">FIRMA</span><h3>El dueño del negocio</h3><p>Paga y firma, pero rara vez compara opciones. Necesita sentir que la decisión es segura, no entender el detalle técnico.</p></div>
+    <div class="card"><span class="n">USA</span><h3>Quien factura a diario</h3><p>Cajero, vendedor, asistente. No decide nada, pero si se traba genera la queja que rompe la relación.</p></div>
+  </div>
+  <p class="foot">Consecuencia: <b>el contador necesita su propio argumento y su propia puerta de entrada.</b> Hoy recibe el mismo mensaje que el dueño, y ese mensaje no le resuelve nada a él.</p>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+  <p class="eyebrow">03 · El problema de categoría</p>
+  <h2 class="wide">Todos los competidores dicen exactamente lo mismo.</h2>
+  <p class="sub">Ningún proveedor de facturación en El Salvador dice que es inseguro, difícil o que no contesta. Estos son atributos de <strong>paridad</strong>: obligatorios de tener, inútiles para diferenciar.</p>
+  <div class="g4">
+    <div class="card mute"><h3>"Fácil de usar"</h3><p>Nadie puede verificarlo antes de comprar.</p></div>
+    <div class="card mute"><h3>"Seguro"</h3><p>Es un requisito, no una ventaja.</p></div>
+    <div class="card mute"><h3>"Soporte"</h3><p>Todos lo prometen. Nadie lo dimensiona.</p></div>
+    <div class="card mute"><h3>"Cumple con Hacienda"</h3><p>Si no cumpliera, no existiría.</p></div>
+  </div>
+  <p class="foot">La regla que aplicamos: <b>si el competidor puede decir la misma frase sin mentir, la frase no diferencia.</b> Los cuatro atributos se quedan en la página —hay que tenerlos— pero ninguno puede ser el mensaje de entrada tal como está escrito.</p>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+  <p class="eyebrow">04 · El territorio propio</p>
+  <h2 class="wide">La diferencia no es cumplir. Es seguir cumpliendo.</h2>
+  <p class="sub">El mercado salvadoreño ya vivió la primera ola: decenas de sistemas nacieron con la obligatoriedad, cumplieron el primer año y se quedaron. La normativa de Hacienda no es un examen que se aprueba una vez — <strong>cambia, y alguien tiene que estar encima cada vez.</strong></p>
+  <div class="g2">
+    <div class="card"><span class="n">LO QUE DICE EL COMPETIDOR</span><h3>"Cumplimos con la normativa"</h3><p>Una foto. Habla del presente y no dice nada de la próxima actualización, que es cuando el cliente queda expuesto.</p></div>
+    <div class="card hot"><span class="n">LO QUE DECIMOS NOSOTROS</span><h3>"Cada vez que las reglas cambian, lo resolvemos antes de la fecha"</h3><p>Una película. Es verificable, es lo que el cliente realmente necesita, y solo lo puede sostener quien tenga empresa y equipo detrás.</p></div>
+  </div>
+  <p class="foot">Este territorio hace tres cosas a la vez: <b>vuelve concreto el respaldo empresarial</b> (sin él no se puede sostener), <b>convierte el soporte en consecuencia</b> en lugar de promesa, y <b>no caduca</b> — sirve igual en diciembre de 2026 que en 2029.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+  <p class="eyebrow">05 · Mensaje raíz</p>
+  <h2>Todo lo que digamos cuelga de esta idea.</h2>
+  <div class="root">
+    <p class="lbl">Idea central</p>
+    <p class="msg">Las reglas de Hacienda cambian.<br><em>Su facturación no se debería enterar.</em></p>
+  </div>
+  <div class="g3">
+    <div class="card"><span class="n">QUÉ AFIRMA</span><p>Que el cambio normativo es constante y que el cliente no debería sentirlo nunca.</p></div>
+    <div class="card"><span class="n">QUÉ IMPLICA</span><p>Que hay una organización estable absorbiendo ese trabajo. Dice "seguro" y "con soporte" sin usar esas palabras.</p></div>
+    <div class="card"><span class="n">POR QUÉ AGUANTA</span><p>No depende de una fecha ni de una promesa que el competidor pueda copiar con un adjetivo.</p></div>
+  </div>
+  <p class="foot">Criterio de uso: <b>cualquier pieza de comunicación tiene que poder rastrearse hasta esta frase.</b> Si un mensaje no la refuerza, sobra.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+  <p class="eyebrow">06 · Arquitectura</p>
+  <h2>Tres pilares sostienen el mensaje raíz.</h2>
+  <div class="g3">
+    <div class="pillar">
+      <div class="top"><span>PILAR 01</span><h3>Empresa salvadoreña detrás</h3></div>
+      <div class="row"><b>Qué decimos</b><p>No hay una aplicación: hay una organización con años de operación, áreas separadas y gente con nombre.</p></div>
+      <div class="row yes"><b>Con qué se prueba</b><p>12 años continuos · +500 empresas activas · gestor de cuenta asignado · Google Cloud.</p></div>
+      <div class="row no"><b>Qué no decimos</b><p>El número de empleados. Invita a medir tamaño y nos pone techo.</p></div>
+    </div>
+    <div class="pillar">
+      <div class="top"><span>PILAR 02</span><h3>Siempre al día con Hacienda</h3></div>
+      <div class="row"><b>Qué decimos</b><p>Cada cambio normativo lo aplicamos nosotros, antes de la fecha, sin trámite ni costo para el cliente.</p></div>
+      <div class="row yes"><b>Con qué se prueba</b><p>Normativa 2.0 en ejecución · ficha técnica detallada · % de DTE aceptados en primer intento.</p></div>
+      <div class="row no"><b>Qué no decimos</b><p>"Autorizados por Hacienda". Hacienda autoriza al contribuyente, no al proveedor.</p></div>
+    </div>
+    <div class="pillar">
+      <div class="top"><span>PILAR 03</span><h3>Soporte que contesta</h3></div>
+      <div class="row"><b>Qué decimos</b><p>Si algo falla un día de cierre, hay un equipo del otro lado. No un formulario ni una persona sola.</p></div>
+      <div class="row yes"><b>Con qué se prueba</b><p>Respuesta el mismo día · capacitación en vivo · soporte sin costo en todos los planes.</p></div>
+      <div class="row no"><b>Qué no decimos</b><p>"Soporte 24/7". Es falso y el horario real ya es competitivo.</p></div>
+    </div>
+  </div>
+  <p class="foot">Cada pilar aparece <b>una sola vez en el lugar donde más pesa.</b> La repetición fue el defecto principal de la versión anterior: ocho menciones del mismo argumento en una sola página.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+  <p class="eyebrow">07 · Modelo de capas</p>
+  <h2 class="wide">Lo permanente arriba. Las campañas, en franjas que se retiran.</h2>
+  <p class="sub">El error a evitar es construir la identidad sobre una fecha. El 1 de diciembre es la urgencia más fuerte del año, pero caduca — y todo lo que se apoye en ella hay que rehacerlo.</p>
+  <div class="layer perm">
+    <div class="side">Capa permanente</div>
+    <div class="body"><h3>Mensaje raíz y tres pilares</h3><p>No cambia. Es lo que la marca dice siempre, con o sin campaña activa. Vive en el hero, en "Quién está detrás" y en las Cinco preguntas.</p></div>
+  </div>
+  <div class="layer">
+    <div class="side">Capa de campaña</div>
+    <div class="body"><h3>Franja del 1 de diciembre</h3><p>Banda delgada bajo el hero. La normativa deja de ser la tesis y pasa a ser <em>evidencia</em> del pilar 02. Se retira en diciembre sin tocar nada más.</p></div>
+  </div>
+  <div class="layer">
+    <div class="side">Capa táctica</div>
+    <div class="body"><h3>Precio, planes, promociones</h3><p>Cambia libremente sin afectar el posicionamiento, porque no carga ningún argumento estratégico.</p></div>
+  </div>
+  <p class="foot">Regla: <b>ninguna capa inferior puede contradecir a la de arriba.</b> Una promoción agresiva que sugiera precariedad rompe el pilar 01 aunque venda ese mes.</p>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+  <p class="eyebrow">08 · Segmentación</p>
+  <h2>Mismo mensaje raíz, distinta puerta de entrada.</h2>
+  <table>
+    <tr><th style="width:16%">Audiencia</th><th style="width:22%">Lo que teme</th><th style="width:32%">Puerta de entrada</th><th style="width:30%">Prueba que le cierra</th></tr>
+    <tr>
+      <td><strong>Dueño de negocio</strong></td>
+      <td>Quedarse sin poder facturar y no saber a quién llamar.</td>
+      <td>Tranquilidad. "Usted no tiene que hacer nada, ni entender nada."</td>
+      <td>12 años, +500 empresas, alguien con nombre asignado a su cuenta.</td>
+    </tr>
+    <tr>
+      <td><strong>Contador o despacho</strong></td>
+      <td>Que un sistema le arruine el cierre de varios clientes a la vez.</td>
+      <td>Eficiencia de cartera. "Todos sus clientes desde una sola sesión."</td>
+      <td>Cuenta de despacho sin costo · anexos de toda la cartera en una descarga · % de aceptación en primer intento.</td>
+    </tr>
+    <tr>
+      <td><strong>Quien opera a diario</strong></td>
+      <td>Trabarse frente a un cliente esperando.</td>
+      <td>Simplicidad demostrada, no prometida.</td>
+      <td>El video de 29 segundos sin cortes. Vale más que cualquier adjetivo.</td>
+    </tr>
+  </table>
+  <p class="foot">El contador es el único que <b>necesita sección propia y CTA propio</b>. Los otros dos comparten el recorrido principal de la página.</p>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+  <p class="eyebrow">09 · Reglas de mensaje</p>
+  <h2>Qué decimos y qué dejamos de decir.</h2>
+  <div class="sd">
+    <div class="col yes">
+      <h3>Sí</h3>
+      <ul>
+        <li>Hechos verificables con número, fecha o nombre.</li>
+        <li>Lo que hacemos <em>nosotros</em> para que el cliente no lo haga.</li>
+        <li>El costo completo antes de que lo pregunte, incluida la implementación.</li>
+        <li>Las limitaciones de cada plan, en el momento de elegirlo.</li>
+        <li>Preguntas que el cliente le puede hacer a cualquier proveedor, no solo a nosotros.</li>
+      </ul>
+    </div>
+    <div class="col no">
+      <h3>No</h3>
+      <ul>
+        <li>Adjetivos que el competidor puede copiar sin mentir.</li>
+        <li>Cifras que no podamos documentar si un cliente las pide por escrito.</li>
+        <li>Headcount, tamaño de oficina o cualquier dato que invite a medirnos.</li>
+        <li>Capacidades que el producto no tiene todavía, aunque estén en roadmap.</li>
+        <li>Marcas de terceros en el mensaje de entrada. Diluyen el nombre propio.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="foot">La regla de oro viene de la propia página: le decimos al mercado <b>"pida las respuestas por escrito"</b>. Todo lo que afirmemos tiene que sobrevivir a esa prueba aplicada a nosotros.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+  <p class="eyebrow">10 · Tono</p>
+  <h2>Respetuoso y directo. Nunca corporativo.</h2>
+  <div class="g2">
+    <div class="card"><span class="n">DECISIÓN</span><h3>Tratamiento de usted</h3><p>Toda la comunicación pasa de voseo a usted, por el peso del segmento contable y de empresa mediana. El riesgo es volverse acartonado y perder la calidez que hace funcionar <em>"si sabe usar WhatsApp, sabe usar esto"</em>.</p></div>
+    <div class="card"><span class="n">CÓMO SE EVITA</span><h3>Usted salvadoreño, no usted de oficina</h3><p>Frases cortas. Cero pronombre explícito. Prohibido <em>"le invitamos a"</em>, <em>"no dude en"</em>, <em>"estimado cliente"</em>. Es el mismo tono de antes con otro pronombre, no un registro nuevo.</p></div>
+  </div>
+  <div class="g3" style="margin-top:18px">
+    <div class="card"><span class="n">VOZ</span><p>Habla una empresa, no una persona ni un robot. Primera persona del plural, sin nombres propios en el copy.</p></div>
+    <div class="card"><span class="n">VOCABULARIO</span><p>Se traduce el término técnico la primera vez que aparece. "DTE" se explica; nunca se asume.</p></div>
+    <div class="card"><span class="n">EXCEPCIONES</span><p>La ficha técnica de la normativa mantiene el lenguaje normativo. Ahí el rigor es la prueba.</p></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide">
+  <p class="eyebrow">11 · Aplicación</p>
+  <h2>Tres formas de abrir. La misma estrategia detrás.</h2>
+  <div class="g3">
+    <div class="opt pick">
+      <div class="hd"><span>OPCIÓN A</span><span class="pill p-b">Recomendada</span></div>
+      <p class="h1x">Las reglas de Hacienda cambian. Su facturación no se debería enterar.</p>
+      <p class="sx">Cada vez que el Ministerio de Hacienda actualiza la normativa, alguien tiene que ajustar el sistema, probarlo y dejarlo funcionando antes de la fecha. Ese alguien somos nosotros.</p>
+      <p class="why">Cubre los tres pilares, no caduca, y es la única que un competidor no puede replicar con un adjetivo. Dice "seguro" y "con soporte" sin usar ninguna de las dos palabras.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span>OPCIÓN B</span><span class="pill p-warn">Alterna</span></div>
+      <p class="h1x">Detrás de su facturación hay una empresa salvadoreña, no una aplicación.</p>
+      <p class="sx">12 años operando, +500 empresas facturando, y un equipo de soporte que contesta el mismo día. Cuando Hacienda cambia las reglas, actualizamos el sistema nosotros.</p>
+      <p class="why">Pone el pilar 01 al frente. Es la que mejor le habla a quien ya se quemó con un sistema de una sola persona. Más directa, menos memorable.</p>
+    </div>
+    <div class="opt">
+      <div class="hd"><span>OPCIÓN C</span><span class="pill p-warn">Alterna</span></div>
+      <p class="h1x">Un sistema de facturación que contesta el teléfono.</p>
+      <p class="sx">Si algo falla un día de cierre, hay un equipo salvadoreño del otro lado, no un formulario. Cada cambio de normativa lo aplicamos nosotros.</p>
+      <p class="why">La frase con más personalidad de las tres. Apuesta todo al pilar 03 y deja cumplimiento y respaldo en segundo plano.</p>
+    </div>
+  </div>
+  <p class="foot">Debajo de cualquiera de las tres va la franja de campaña: <b>"Hacienda fijó el 1 de diciembre de 2026 para la Normativa DTE 2.0. Ya la estamos aplicando en todas las cuentas, sin costo y sin trámite de su parte."</b></p>
+</section>
+
+<!-- 13 -->
+<section class="slide">
+  <p class="eyebrow">12 · Mapa</p>
+  <h2>Cada sección de la página tiene un solo trabajo.</h2>
+  <table>
+    <tr><th style="width:26%">Sección</th><th style="width:20%">Pilar que carga</th><th style="width:54%">Su único trabajo</th></tr>
+    <tr><td><strong>Hero</strong></td><td><span class="pill p-b">Raíz</span></td><td>Instalar la idea central y ofrecer dos salidas: precio o conversación.</td></tr>
+    <tr><td><strong>Franja de normativa</strong></td><td><span class="pill p-b">02</span></td><td>Dar urgencia con fecha, sin comprometer el mensaje permanente.</td></tr>
+    <tr><td><strong>Cómo funciona</strong></td><td>—</td><td>Demostrar simplicidad con el video. No argumentar: mostrar.</td></tr>
+    <tr><td><strong>Precios</strong></td><td>—</td><td>Eliminar la fricción de "cuánto cuesta" y revelar el costo total del primer mes.</td></tr>
+    <tr><td><strong>El sistema</strong></td><td>—</td><td>Mostrar las tres capacidades que se usan a diario. Nada de roadmap.</td></tr>
+    <tr><td><strong>Para contadores</strong></td><td><span class="pill p-b">01 + 03</span></td><td>Responder "¿qué gano yo?" y abrir su propia puerta de entrada.</td></tr>
+    <tr><td><strong>Quién está detrás</strong></td><td><span class="pill p-b">01</span></td><td>Convertir el respaldo en cifras verificables, sin invitar a medir tamaño.</td></tr>
+    <tr><td><strong>Cinco preguntas</strong></td><td><span class="pill p-b">01 + 02 + 03</span></td><td>Entregar el criterio de comparación. La pieza más valiosa de la página.</td></tr>
+    <tr><td><strong>Cambiar de proveedor</strong></td><td><span class="pill p-b">02</span></td><td>Probar que cambiarse es rutina, no aventura.</td></tr>
+    <tr><td><strong>FAQ</strong></td><td>—</td><td>Resolver solo lo que no se resolvió arriba. Nada de repetir.</td></tr>
+  </table>
+</section>
+
+<!-- 14 -->
+<section class="slide">
+  <p class="eyebrow">13 · Para cerrar</p>
+  <h2>Lo que falta para ejecutar.</h2>
+  <div class="g2">
+    <div class="card">
+      <span class="n">DECISIONES · RAFA</span>
+      <h3>Estratégicas</h3>
+      <p style="margin-bottom:12px">Cuál de las tres aperturas se adopta como mensaje de entrada.</p>
+      <p style="margin-bottom:12px">Si se define comisión por referido para contadores. Es el argumento con más impacto comercial de toda la estrategia y hoy no existe.</p>
+      <p>Dominio propio, antes de invertir en pauta.</p>
+    </div>
+    <div class="card">
+      <span class="n">EVIDENCIA · PENDIENTE</span>
+      <h3>Cifras que sostienen los pilares</h3>
+      <p style="margin-bottom:10px"><span class="pill p-warn">Pilar 02</span> &nbsp;DTE transmitidos a Hacienda · % aceptados en primer intento.</p>
+      <p style="margin-bottom:10px"><span class="pill p-warn">Pilar 02</span> &nbsp;Migraciones completadas desde otro proveedor · horas promedio de puesta en marcha.</p>
+      <p><span class="pill p-warn">Pilar 03</span> &nbsp;Tiempo promedio de primera respuesta. Sustituye a "el mismo día", que es la frase más repetida y la más vaga.</p>
+    </div>
+  </div>
+  <p class="foot">Definido esto, el briefing de implementación y el documento de copy se actualizan para colgar de la apertura elegida. <b>El orden importa: primero el mensaje, después la página.</b></p>
+</section>
+
+</div>
+
+<div id="hud">
+  <span id="lbl">FACTURA IA · ESTRATEGIA DE COMUNICACIÓN</span>
+  <div class="nav">
+    <button id="prev" aria-label="Anterior">←</button>
+    <button id="next" aria-label="Siguiente">→</button>
+  </div>
+  <span id="cnt">01 / 14</span>
+</div>
+
+<script>
+(function(){
+  var s = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var i = 0;
+  var bar = document.getElementById('bar');
+  var cnt = document.getElementById('cnt');
+  function pad(n){ return (n<10?'0':'')+n; }
+  function go(n){
+    i = Math.max(0, Math.min(s.length-1, n));
+    s.forEach(function(el,k){ el.classList.toggle('on', k===i); });
+    s[i].scrollTop = 0;
+    bar.style.width = ((i+1)/s.length*100) + '%';
+    cnt.textContent = pad(i+1) + ' / ' + pad(s.length);
+  }
+  document.getElementById('next').onclick = function(){ go(i+1); };
+  document.getElementById('prev').onclick = function(){ go(i-1); };
+  document.addEventListener('keydown', function(e){
+    if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); go(i+1); }
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); go(i-1); }
+    if(e.key==='Home'){ go(0); }
+    if(e.key==='End'){ go(s.length-1); }
+  });
+  var x0=null;
+  document.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(x0===null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 55){ go(dx < 0 ? i+1 : i-1); }
+    x0 = null;
+  }, {passive:true});
+  go(0);
+})();
+</script>
+</body>
+</html>

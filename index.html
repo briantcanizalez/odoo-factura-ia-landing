@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_SV">
 <meta property="og:title" content="Facturación Electrónica DTE El Salvador · desde $14.99 al mes">
-<meta property="og:description" content="Emitís tu factura en tres clics. Soporte que contesta el mismo día y una empresa con 12 años de operación detrás.">
+<meta property="og:description" content="Las reglas de Hacienda cambian; su facturación no se debería enterar. Una empresa salvadoreña con 12 años y soporte que contesta el mismo día.">
 <!-- og:url PENDIENTE: dominio por validar con Duvan Rondo -->
 <!-- ASSET: og:image 1200x630 -->
 <meta property="og:image" content="/assets/og-facturaia.jpg">
@@ -140,8 +140,12 @@ section{padding:82px 0}
 .dark .asset h4,.dark .asset ul{color:#FFC781}
 .dark .asset{background:repeating-linear-gradient(45deg,rgba(255,138,0,.1),rgba(255,138,0,.1) 10px,transparent 10px,transparent 20px)}
 @media(max-width:600px){.asset{padding:18px}.asset ul{font-size:.7rem}.asset.ratio-43,.asset.ratio-169{aspect-ratio:auto}}
-/* .rev marcaba los datos sin confirmar. Los cuatro quedaron resueltos
-   (ver README); si vuelve a aparecer uno, se recupera la regla. */
+/* .rev marca los datos sin confirmar. Se reactivo para el rediseno v2:
+   las cifras que debe cerrar Rafa ([X] DTE, % aceptados, migraciones,
+   horas, primera respuesta) van marcadas hasta tener el numero real.
+   NO PUBLICAR con .rev visibles: cada marca es un dato sin confirmar. */
+.rev{background:rgba(255,138,0,.16);border-bottom:2px dashed var(--alerta-vivo);padding:0 4px;border-radius:3px;font-style:normal}
+.dark .rev{background:rgba(255,138,0,.2);color:#fff}
 
 /* ============ BOTONES ============ */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--display);font-weight:700;font-size:.98rem;letter-spacing:-.01em;padding:15px 26px;border-radius:999px;border:1.5px solid transparent;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .15s,background .15s}
@@ -199,13 +203,9 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .hero .btn-ghost:hover{color:#fff;border-color:#fff;background:rgba(255,255,255,.08)}
 .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center}
 @media(max-width:1000px){.hero-grid{grid-template-columns:1fr;gap:36px}}
-.social{display:inline-flex;align-items:center;gap:13px;padding:9px 20px 9px 11px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--linea-osc)}
-.avatares{display:flex}
-.avatares span{width:32px;height:32px;border-radius:50%;margin-right:-10px;background:linear-gradient(160deg,var(--violeta-hi),var(--violeta));border:2px solid var(--noche);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.58rem;font-weight:700;color:#fff}
-.social-txt{font-size:.88rem;line-height:1.35;color:rgba(255,255,255,.7)}
-.social-txt b{display:block;color:#fff;font-weight:600}
-.social-txt b em{font-style:normal;color:var(--amarillo);font-weight:700}
-.hero h1{margin-top:26px}
+/* .social / .avatares / .social-txt se retiraron con el rediseno v2 del hero:
+   la prueba social ("+500 empresas") ahora vive en el eyebrow. */
+.hero h1{margin-top:22px}
 .grad{background:linear-gradient(94deg,#F4EFFF 4%,#C0A8FF 48%,#8B62FF 96%);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* trazo amarillo (firma de marca) que se dibuja solo al cargar */
 .draw{position:relative;white-space:nowrap}
@@ -218,14 +218,9 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 @keyframes draw{to{transform:scaleX(1)}}
 .hero-sub{color:rgba(255,255,255,.8);font-size:1.12rem;max-width:50ch;margin-top:20px}
 .hero-sub b{color:#fff;font-weight:600}
-.precio-ancla{display:flex;align-items:baseline;gap:10px;margin-top:26px;flex-wrap:wrap}
-.precio-ancla .p{font-family:var(--mono);font-weight:700;font-size:1.5rem;color:#fff;letter-spacing:-.04em}
-.precio-ancla .t{font-size:.92rem;color:rgba(255,255,255,.65)}
-.precio-ancla a{color:var(--amarillo);font-size:.9rem;font-weight:600;text-decoration:none;border-bottom:1px solid rgba(242,214,75,.45)}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-.plazo-hero{display:inline-flex;align-items:flex-start;gap:11px;margin-top:24px;padding:13px 19px;border-radius:14px;background:rgba(255,138,0,.11);border:1px solid rgba(255,138,0,.34);font-size:.9rem;color:rgba(255,255,255,.8);text-decoration:none;line-height:1.5}
-.plazo-hero b{font-family:var(--mono);color:var(--alerta-vivo);font-size:.88rem;white-space:nowrap}
-.plazo-hero:hover{background:rgba(255,138,0,.17)}
+/* .precio-ancla y .plazo-hero se retiraron con el rediseno v2: el precio paso
+   al CTA "Ver planes desde $14.99" y el plazo a la franja de campana. */
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 
 /* ============ CAPTURA DE PRODUCTO ============ */
 .shot{margin:0}
@@ -282,6 +277,15 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 .dark .movil img{filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
 @media(max-width:1000px){.movil img{max-height:430px}}
 
+/* ============ FRANJA DE CAMPANA (caduca dic 2026) ============ */
+.campana{background:#FFF4E6;border-bottom:1px solid rgba(255,138,0,.32)}
+.campana-in{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:15px 22px;font-size:.93rem;line-height:1.5;color:var(--tinta)}
+.campana .ahora{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;color:var(--alerta)}
+.campana .ahora svg{width:15px;height:15px;flex:none}
+.campana a{margin-left:auto;color:var(--violeta);font-weight:700;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.campana a:hover{text-decoration:underline}
+@media(max-width:640px){.campana a{margin-left:0}}
+
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
 .franja-in{display:flex;flex-wrap:wrap;align-items:center;gap:14px 30px;padding:18px 22px}
@@ -329,6 +333,11 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 @media(max-width:760px){.res-precio{text-align:left}}
 .res-precio .p{font-family:var(--mono);font-weight:700;font-size:2.5rem;letter-spacing:-.05em;line-height:1;color:var(--violeta)}
 .res-precio .m{font-family:var(--mono);font-size:.7rem;color:var(--gris-2);margin-top:7px}
+.res-primer{margin-top:20px;font-size:.92rem;color:var(--gris);line-height:1.6}
+.res-primer b{color:var(--tinta);font-weight:600}
+.res-aviso{display:none;margin-top:18px;padding:13px 17px;border-radius:12px;background:rgba(255,138,0,.1);border:1px solid rgba(255,138,0,.34);font-size:.9rem;line-height:1.55;color:var(--tinta)}
+.res-aviso.ver{display:block}
+.res-aviso b{color:var(--alerta);font-weight:700}
 .res-cta{display:flex;flex-wrap:wrap;gap:11px;margin-top:22px}
 
 /* ============ PRODUCTO ============ */
@@ -395,6 +404,10 @@ details.tecnico[open] summary:after{content:"–"}
 details.tecnico .cuerpo{padding:0 20px 20px}
 details.tecnico ul{margin:0;padding-left:20px;font-size:.92rem;line-height:1.75;color:rgba(255,255,255,.7)}
 details.tecnico code{font-family:var(--mono);font-size:.84rem;color:var(--violeta-hi)}
+/* lista tecnica visible (sin el toggle): es prueba de dominio, no un extra */
+.tecnico-lista{margin:24px 0 0;padding-left:20px;font-size:.93rem;line-height:1.8;color:rgba(255,255,255,.78)}
+.tecnico-lista li{margin:6px 0}
+.tecnico-lista code{font-family:var(--mono);font-size:.84rem;color:var(--violeta-hi)}
 
 /* ============ MIGRACIÓN ============ */
 .migra{background:var(--nube)}
@@ -403,6 +416,9 @@ details.tecnico code{font-family:var(--mono);font-size:.84rem;color:var(--violet
 .pasos-migra{list-style:none;padding:0;margin:18px 0 0;font-size:.96rem}
 .pasos-migra li{display:flex;gap:11px;padding:8px 0;color:var(--gris)}
 .pasos-migra svg{flex:0 0 17px;width:17px;height:17px;margin-top:4px;color:var(--sello)}
+.micro-cifras{margin-top:18px;padding-top:16px;border-top:1px solid var(--linea);font-family:var(--mono);font-size:.82rem;color:var(--gris);line-height:1.7}
+.micro-cifras b{color:var(--tinta);font-weight:700}
+.pie-cifra{margin-top:20px;font-size:.9rem;color:var(--gris-2);line-height:1.6}
 
 /* ============ PASOS ============ */
 .pasos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--linea)}
@@ -499,7 +515,7 @@ footer a:hover{color:#fff}
       <a href="#cambiar">Cambiar de proveedor</a>
       <a href="#faq">Preguntas</a>
     </nav>
-    <a class="btn btn-wa btn-sm" data-wa="nav" href="#">Escribinos</a>
+    <a class="btn btn-wa btn-sm" data-wa="nav" href="#">Escríbanos</a>
     <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -510,7 +526,7 @@ footer a:hover{color:#fff}
     <a href="#contadores">Para contadores</a>
     <a href="#cambiar">Cambiar de proveedor</a>
     <a href="#faq">Preguntas</a>
-    <a class="btn btn-wa" data-wa="menu-movil" href="#">Escribinos por WhatsApp</a>
+    <a class="btn btn-wa" data-wa="menu-movil" href="#">Escríbanos por WhatsApp</a>
   </div>
 </header>
 
@@ -521,38 +537,25 @@ footer a:hover{color:#fff}
 <section class="hero dark" id="top">
   <div class="wrap hero-grid">
     <div>
-      <div class="social">
-        <div class="avatares"><span>MR</span><span>CM</span><span>SL</span></div>
-        <p class="social-txt"><b><em>+500 empresas</em> facturan con nosotros</b>en todo El Salvador</p>
-      </div>
+      <span class="eyebrow">Empresa salvadoreña · 12 años · +500 empresas facturando</span>
 
-      <h1>Facturá electrónico<br>sin volverte<br><span class="grad draw">experto en nada</span></h1>
+      <h1>Las reglas de Hacienda cambian.<br><span class="grad">Su facturación no se debería enterar.</span></h1>
 
       <p class="hero-sub">
-        Tres clics y tu factura queda en Hacienda. Nosotros hacemos el papeleo,
-        te enseñamos a usarlo y <b>te contestamos el mismo día</b> cuando tengas una duda.
-        Detrás no hay una aplicación: hay una empresa con 12 años.
+        Cada vez que el Ministerio de Hacienda actualiza la normativa, alguien tiene que
+        ajustar el sistema, probarlo y dejarlo funcionando antes de la fecha. Ese alguien
+        somos nosotros: una empresa salvadoreña con <b>12 años operando</b>, equipo de
+        soporte que <b>contesta el mismo día</b>, y su información respaldada en Google Cloud.
       </p>
 
-      <div class="precio-ancla">
-        <span class="p">Desde $14.99</span>
-        <span class="t">al mes + IVA</span>
-        <a href="#precio">Ver qué plan te toca →</a>
-      </div>
-
       <div class="hero-cta">
+        <a class="btn btn-v" href="#precio">Ver planes desde $14.99</a>
         <a class="btn btn-wa" data-wa="hero" href="#">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
-          Escribinos por WhatsApp
+          Escríbanos por WhatsApp
         </a>
-        <a class="btn btn-ghost" href="#como-funciona">Ver cómo se ve el sistema</a>
       </div>
-      <p class="horario">Te atendemos lunes a viernes, 8:00 a.m. a 5:00 p.m.</p>
-
-      <a class="plazo-hero" href="#normativa">
-        <b id="cuenta">—</b>
-        <span id="cuenta-txt">para el plazo de la Normativa DTE 2.0. ¿Tu proveedor ya te confirmó por escrito que va a actualizar?</span>
-      </a>
+      <p class="horario">Actualizaciones normativas incluidas en todos los planes · Soporte sin costo · Listo en menos de 24 horas</p>
     </div>
 
     <!-- ============ ASSET PRINCIPAL: producto ============ -->
@@ -566,14 +569,26 @@ footer a:hover{color:#fff}
   </div>
 </section>
 
+<!-- ================= FRANJA DE CAMPANA =================
+     CADUCA: diciembre de 2026. Es un componente independiente a proposito.
+     Para retirarla cuando pase el plazo, borrar SOLO este bloque <div class="campana">
+     completo; el resto de la pagina no depende de el. La tesis permanente vive
+     en el hero, no en esta fecha. -->
+<div class="campana">
+  <div class="wrap campana-in">
+    <span class="ahora"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ahora mismo</span>
+    <span>Hacienda fijó el <b>1 de diciembre de 2026</b> para la Normativa DTE 2.0. Ya la estamos aplicando en todas las cuentas, sin costo y sin trámite de su parte.</span>
+    <a href="#normativa">Ver el detalle →</a>
+  </div>
+</div>
+
 <!-- ================= FRANJA ================= -->
 <div class="franja">
   <div class="wrap franja-in">
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Emisor autorizado ante Hacienda</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner oficial de Odoo</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Partner de Google Cloud</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Listo en menos de 24 horas</span>
-    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Normativa DTE 2.0 incluida</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>En producción con el Sistema de Transmisión DTE</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Google Cloud</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Soporte el mismo día</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>Listo en 24 horas</span>
   </div>
 </div>
 
@@ -582,19 +597,19 @@ footer a:hover{color:#fff}
   <div class="wrap">
     <span class="eyebrow rv">Cómo funciona</span>
     <h2 class="rv">Se hace en tres pasos. Nada más.</h2>
-    <p class="lede rv">Si sabés usar WhatsApp, sabés usar esto. En serio.</p>
+    <p class="lede rv">Si sabe usar WhatsApp, sabe usar esto. En serio.</p>
 
     <div class="queEs-grid" style="margin-top:34px">
       <div class="rv">
         <ul class="simple">
-          <li><span class="n">01</span><div><b>Elegís el cliente y el producto</b><p>Los tenés guardados. Los buscás por nombre y se llenan solos.</p></div></li>
-          <li><span class="n">02</span><div><b>Le das a "Emitir"</b><p>El sistema arma el documento, lo firma y lo manda a Hacienda. Vos no tocás nada de eso.</p></div></li>
-          <li><span class="n">03</span><div><b>Se lo mandás al cliente</b><p>Por correo o por WhatsApp, desde el mismo sistema. Queda guardado para siempre.</p></div></li>
+          <li><span class="n">01</span><div><b>Elige el cliente y el producto</b><p>Ya los tiene guardados. Los busca por nombre y se llenan solos.</p></div></li>
+          <li><span class="n">02</span><div><b>Le da a "Emitir"</b><p>El sistema arma el documento, lo firma y lo manda a Hacienda. Usted no toca nada de eso.</p></div></li>
+          <li><span class="n">03</span><div><b>Se lo manda al cliente</b><p>Por correo o por WhatsApp, desde el mismo sistema. Queda guardado para siempre.</p></div></li>
         </ul>
         <div class="glosario">
           <b>¿Y qué es un "DTE"?</b> Es el nombre que le da Hacienda a la factura electrónica:
           Documento Tributario Electrónico. Cada factura, crédito fiscal o nota de crédito que
-          emitís es un DTE. Cuando en esta página veas "30 DTE al mes", leelo como
+          emite es un DTE. Cuando en esta página vea "30 DTE al mes", léalo como
           "30 facturas al mes".
         </div>
       </div>
@@ -607,8 +622,8 @@ footer a:hover{color:#fff}
                aria-label="Grabación de pantalla real: se abre una factura de cliente en borrador, se elige el cliente y el producto, se presiona Publicar y Enviar, y la factura queda emitida con su sello de Hacienda, su UUID y su número de control.">
           <source src="assets/emitir-factura.webm" type="video/webm">
           <source src="assets/emitir-factura.mp4" type="video/mp4">
-          <p>Tu navegador no puede reproducir el video.
-             <a href="assets/emitir-factura.mp4">Descargalo aquí</a>.</p>
+          <p>Su navegador no puede reproducir el video.
+             <a href="assets/emitir-factura.mp4">Descárguelo aquí</a>.</p>
         </video>
         <figcaption><span class="ok" aria-hidden="true">✓</span>
           29 segundos, sin cortes ni efectos: de factura en blanco a factura emitida ante Hacienda. Datos de ejemplo.
@@ -622,14 +637,14 @@ footer a:hover{color:#fff}
 <section class="calc" id="precio">
   <div class="wrap">
     <span class="eyebrow rv">Precios</span>
-    <h2 class="rv">Decinos cuántas facturas hacés y te decimos el precio</h2>
+    <h2 class="rv">Díganos cuántas facturas hace y le decimos el precio</h2>
     <p class="lede rv">
-      Sin cotizaciones, sin llamadas de venta para saber cuánto cuesta.
+      Sin cotizaciones y sin llamadas de venta para saber cuánto cuesta.
       El precio está publicado y es el mismo para todos.
     </p>
 
     <div class="calc-box rv">
-      <p class="calc-preg">¿Cuántas facturas emitís, más o menos, en un día normal?</p>
+      <p class="calc-preg">¿Cuántas facturas emite, más o menos, en un día normal?</p>
       <div class="opciones" id="opciones">
         <button data-plan="0">1 o 2<small>~30 al mes</small></button>
         <button data-plan="1">3 a 5<small>~100 al mes</small></button>
@@ -641,15 +656,18 @@ footer a:hover{color:#fff}
       <div class="resultado" id="resultado">
         <div class="res-grid">
           <div>
-            <div class="res-plan">Tu plan recomendado</div>
+            <div class="res-plan">Su plan recomendado</div>
             <div class="res-nombre" id="r-nombre">—</div>
             <p class="res-detalle" id="r-detalle">—</p>
           </div>
           <div class="res-precio">
             <div class="p" id="r-precio">—</div>
             <div class="m">+ IVA al mes</div>
-            <div class="m" id="r-impl">—</div>
           </div>
+        </div>
+        <p class="res-primer" id="r-primer"></p>
+        <div class="res-aviso" id="r-aviso">
+          <b>Ojo:</b> con Starter no se generan anexos de IVA ni libros. Si su contador se los pide, el plan es Professional.
         </div>
         <div class="res-cta">
           <a class="btn btn-wa" id="r-cta" href="#">Contratar por WhatsApp</a>
@@ -664,14 +682,14 @@ footer a:hover{color:#fff}
 <section>
   <div class="wrap">
     <span class="eyebrow rv">El sistema</span>
-    <h2 class="rv">Lo que vas a usar todos los días</h2>
+    <h2 class="rv">Lo que va a usar todos los días</h2>
 
     <div class="prod-fila">
       <div class="prod-txt rv">
-        <h3>Tus facturas de compra se cargan solas</h3>
+        <h3>Sus facturas de compra se cargan solas</h3>
         <p class="lede">
-          Subís los archivos que te mandan tus proveedores y el sistema los lee y registra la
-          compra por vos. Lo que antes era una tarde entera digitando, ahora son unos minutos.
+          Sube los archivos que le mandan sus proveedores y el sistema los lee y registra la
+          compra. Lo que antes era una tarde entera digitando, ahora son unos minutos.
         </p>
         <div class="tags">
           <span class="tag">Varios proveedores</span>
@@ -687,8 +705,8 @@ footer a:hover{color:#fff}
                aria-label="Grabación de pantalla real: se suben los archivos JSON de las facturas de compra, se presiona Procesar con IA y el sistema registra la factura de proveedor con su fecha, su tipo de documento y su sello de Hacienda, sin digitar nada.">
           <source src="assets/carga-compras.webm" type="video/webm">
           <source src="assets/carga-compras.mp4" type="video/mp4">
-          <p>Tu navegador no puede reproducir el video.
-             <a href="assets/carga-compras.mp4">Descargalo aquí</a>.</p>
+          <p>Su navegador no puede reproducir el video.
+             <a href="assets/carga-compras.mp4">Descárguelo aquí</a>.</p>
         </video>
         <figcaption><span class="ok" aria-hidden="true">✓</span>
           19 segundos: de archivos sueltos a compra registrada. Los datos del proveedor van difuminados a propósito.
@@ -698,10 +716,11 @@ footer a:hover{color:#fff}
 
     <div class="prod-fila">
       <div class="prod-txt rv">
-        <h3>Los anexos de IVA y los libros, listos</h3>
+        <h3>El cierre deja de ser su problema</h3>
         <p class="lede">
-          Anexos de IVA, libro de compras y libro de ventas generados por el sistema, en PDF y
-          en Excel. Tu contador los descarga y trabaja: no hay que armar nada a mano.
+          Anexos de IVA y libros de compras y ventas salen del sistema en PDF y Excel.
+          Su contador entra, los descarga y trabaja. Se acabaron los correos de
+          "mándeme el detalle del mes".
         </p>
         <div class="tags">
           <span class="tag">PDF y Excel</span>
@@ -716,8 +735,8 @@ footer a:hover{color:#fff}
                aria-label="Grabación de pantalla real: se elige el período y el formato del libro de consumidor, se presiona Descargar, y se abre el PDF que genera el sistema con todas las columnas del anexo: ventas exentas, no sujetas, gravadas locales, gravadas de exportación, débito fiscal, IVA percibido, IVA retenido y total de ventas.">
           <source src="assets/anexos-libros.webm" type="video/webm">
           <source src="assets/anexos-libros.mp4" type="video/mp4">
-          <p>Tu navegador no puede reproducir el video.
-             <a href="assets/anexos-libros.mp4">Descargalo aquí</a>.</p>
+          <p>Su navegador no puede reproducir el video.
+             <a href="assets/anexos-libros.mp4">Descárguelo aquí</a>.</p>
         </video>
         <figcaption><span class="ok" aria-hidden="true">✓</span>
           Del filtro al archivo: se elige el período, se descarga, y así sale el anexo. Datos de nuestra propia empresa.
@@ -729,7 +748,7 @@ footer a:hover{color:#fff}
       <div class="prod-txt rv">
         <h3>Y funciona desde el celular</h3>
         <p class="lede">
-          Podés emitir y consultar desde el teléfono, en la tienda o en la calle. No necesitás
+          Puede emitir y consultar desde el teléfono, en la tienda o en la calle. No necesita
           estar sentado frente a la computadora para facturar.
         </p>
         <div class="tags">
@@ -750,22 +769,27 @@ footer a:hover{color:#fff}
 <section class="conta dark" id="contadores">
   <div class="wrap">
     <span class="eyebrow rv">Para contadores y despachos</span>
-    <h2 class="rv">Si llevás la contabilidad de varias empresas, esto es para vos</h2>
+    <h2 class="rv">Si lleva la contabilidad de varias empresas, esto es para usted</h2>
     <div class="conta-grid" style="margin-top:30px">
       <div class="rv">
         <ul class="conta-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><b>Todas tus empresas desde una sola cuenta.</b> Cambiás de una a otra sin volver a entrar. Y con un clic tenés los anexos y libros de IVA de todos tus clientes, sin andar saltando entre sistemas.</span></li>
+            <span><b>Cuenta de despacho, sin costo.</b> No paga por tener acceso a las empresas de sus clientes. Cada empresa paga su plan; su cuenta de administración va incluida.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><b>Anexos y libros en PDF y en Excel.</b> Listos para el cierre. Los descargás y trabajás: no hay que rearmar nada a mano.</span></li>
+            <span><b>Todas sus empresas desde una sola sesión.</b> Cambia de una a otra sin volver a entrar.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
+            <span><b>Los anexos de todos sus clientes en una sola descarga.</b> No entra empresa por empresa: filtra el período una vez y baja el cierre completo de su cartera, en PDF y Excel.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
             <span><b>Todos los documentos.</b> Crédito fiscal, exportación, sujeto excluido, retención, notas de crédito y débito.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><b>Tus clientes no te llaman a vos por soporte.</b> Nos llaman a nosotros, y sin costo.</span></li>
+            <span><b>Sus clientes no lo llaman a usted por soporte.</b> Nos llaman a nosotros, y sin costo.</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
-            <span><b>La Normativa 2.0 la actualizamos nosotros</b> en todas las empresas que tengas con nosotros, a la vez.</span></li>
+            <span><b>La Normativa 2.0 la actualizamos nosotros</b>, en todas sus empresas a la vez.</span></li>
         </ul>
-        <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:24px">Escribinos por WhatsApp</a>
+        <!-- Decision pendiente de Rafa: si se define comision por referido para
+             contadores, va un bullet aca. El briefing lo marca como el que mas
+             contratos trae, pero es modelo comercial, no copy. -->
+        <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:24px">Quiero una cuenta de despacho</a>
       </div>
 
       <div class="asset ratio-43 rv">
@@ -788,24 +812,28 @@ footer a:hover{color:#fff}
     <span class="eyebrow rv">Quién está detrás</span>
     <h2 class="rv">No somos una app. Somos una empresa.</h2>
     <p class="lede rv">
-      La facturación electrónica ya tiene dos años en El Salvador. En ese tiempo aparecieron
-      muchos sistemas hechos por una sola persona: funcionaron el primer año, y después
-      dejaron de actualizarse. Por eso estos meses nos están llegando tantos clientes
-      que vienen de otro lado.
+      La facturación electrónica ya tiene dos años en El Salvador y en ese tiempo aparecieron
+      muchos sistemas hechos por una sola persona: funcionaron el primer año y después
+      dejaron de actualizarse. Nosotros llevamos 12 años operando sin interrupciones, y la
+      Normativa 2.0 no es la primera vez que nos toca actualizar todo el parque de clientes a la vez.
     </p>
 
+    <!-- Banda de cifras: las dos primeras dicen quien es Consiti; las dos ultimas,
+         que la maquina funciona. Los [X] los cierra Rafa (ver docs/brief/v2). NO
+         PUBLICAR con .rev visibles. Sustitutos validos en el copy v2, seccion 7. -->
     <div class="cifras rv">
       <div><div class="n">12</div><div class="l">años de operación continua en El Salvador</div></div>
-      <div><div class="n">22</div><div class="l">personas: soporte, desarrollo e implementación</div></div>
-      <div><div class="n">+500</div><div class="l">empresas facturando electrónicamente con nosotros</div></div>
-      <div><div class="n">+3,500</div><div class="l">empresas atendidas por Grupo Consiti en 12 años</div></div>
+      <div><div class="n">+500</div><div class="l">empresas facturan con nosotros todos los días</div></div>
+      <div><div class="n"><span class="rev">[X]</span></div><div class="l">DTE transmitidos a Hacienda</div></div>
+      <div><div class="n"><span class="rev">[X]%</span></div><div class="l">aceptados por Hacienda en el primer intento</div></div>
     </div>
+    <p class="pie-cifra rv">Grupo Consiti ha atendido +3,500 empresas en 12 años en consultoría, software y nube.</p>
 
     <div class="preguntas rv">
       <div class="preguntas-cab">
         <h3>Cinco preguntas para hacerle a cualquier proveedor</h3>
         <p>
-          Incluidos nosotros. Hacelas antes de firmar con quien sea, y compará las respuestas.
+          Incluidos nosotros. Hágalas antes de firmar con quien sea y compare las respuestas.
           Al lado de cada una está la nuestra.
         </p>
       </div>
@@ -813,20 +841,20 @@ footer a:hover{color:#fff}
         <li><div><b>¿Quién me contesta si el sistema falla un día de cierre?</b>
           <p class="resp"><em>Nosotros:</em> un equipo de soporte, no una persona. Respuesta el mismo día, en horario de oficina, sin costo.</p></div></li>
         <li><div><b>¿Me van a tener actualizado a la Normativa 2.0 antes del 1 de diciembre?</b>
-          <p class="resp"><em>Nosotros:</em> sí, incluido en todos los planes y sin trámite de tu parte.</p></div></li>
+          <p class="resp"><em>Nosotros:</em> sí, incluido en todos los planes y sin trámite de su parte.</p></div></li>
         <li><div><b>¿Dónde vive mi información y quién responde si se pierde?</b>
           <p class="resp"><em>Nosotros:</em> en Google Cloud, con respaldo continuo. Grupo Consiti responde, con nombre y con planilla.</p></div></li>
         <li><div><b>¿Qué pasa con mi facturación si la persona que hizo el sistema se va?</b>
-          <p class="resp"><em>Nosotros:</em> hay 22 personas y 12 años de operación. El sistema no depende de que alguien conteste.</p></div></li>
+          <p class="resp"><em>Nosotros:</em> el sistema lo mantiene un equipo de desarrollo, no su autor. Soporte, desarrollo e implementación son áreas distintas, con 12 años de operación continua detrás. Si alguien se va, su facturación no se entera.</p></div></li>
         <li><div><b>¿La capacitación y el soporte tienen costo aparte?</b>
           <p class="resp"><em>Nosotros:</em> no. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados, incluidos.</p></div></li>
       </ol>
     </div>
 
     <p class="escrito rv">
-      Un consejo, aunque no nos contratés: <b>pedí las respuestas por escrito.</b>
-      Un proveedor que no te confirma por escrito que va a cumplir con la Normativa 2.0
-      antes del 1 de diciembre te está diciendo algo importante.
+      Un consejo, aunque no nos contrate: <b>pida las respuestas por escrito.</b>
+      Un proveedor que no le confirma por escrito que va a cumplir con la Normativa 2.0
+      antes del 1 de diciembre le está diciendo algo importante.
     </p>
 
     <!-- feed compacto, anonimizado -->
@@ -851,35 +879,20 @@ footer a:hover{color:#fff}
     <span class="chip rv">Plazo oficial: 1 de diciembre de 2026</span>
     <div class="norma-grid">
       <div class="rv">
-        <h2>El 1 de diciembre cambian las reglas.<br>Nosotros lo resolvemos.</h2>
-        <p class="lede">
-          Hacienda publicó nuevas reglas para la factura electrónica. Todos los sistemas del país
-          tienen que adaptarse antes de esa fecha. Si un sistema no se adapta, los documentos
-          empiezan a rechazarse y el negocio no puede facturar.
-        </p>
-        <div class="incluido">
-          <b>Vos no tenés que hacer nada.</b> La actualización va incluida en todos los planes,
-          sin costo extra y sin trámites. Te avisamos cuando ya esté aplicada en tu cuenta.
-        </div>
+        <h2>El detalle técnico, para su contador o su programador</h2>
+        <ul class="tecnico-lista">
+          <li>Normativa de Cumplimiento DTE versión 2.0, publicada el 25 de mayo de 2026, en sustitución de la 1.2.</li>
+          <li>Plazo para adaptar los sistemas de transmisión: 1 de diciembre de 2026.</li>
+          <li>Nuevo Evento de Retorno (ERET) para ajustar facturas electrónicas, de exportación y de sujeto excluido.</li>
+          <li>Código de Generación al estándar <code>UUID v4</code>.</li>
+          <li>Catálogos actualizados: distritos, recintos fiscales y regímenes de exportación.</li>
+          <li>Notificación automática del evento y del archivo de invalidación al receptor.</li>
+          <li>Comprobantes de control interno para operaciones especiales y venta simplificada.</li>
+          <li>Entrega obligatoria del <code>JSON</code> firmado, que es el documento con validez jurídica.</li>
+        </ul>
         <div class="hero-cta">
           <a class="btn btn-wa" data-wa="dte20" href="#">Quiero quedar cubierto</a>
         </div>
-
-        <details class="tecnico">
-          <summary>El detalle técnico, para tu contador o tu programador</summary>
-          <div class="cuerpo">
-            <ul>
-              <li>Normativa de Cumplimiento DTE versión 2.0, publicada el 25 de mayo de 2026, en sustitución de la 1.2.</li>
-              <li>Plazo para adaptar los sistemas de transmisión: 1 de diciembre de 2026.</li>
-              <li>Nuevo Evento de Retorno (ERET) para ajustar facturas electrónicas, de exportación y de sujeto excluido.</li>
-              <li>Código de Generación al estándar <code>UUID v4</code>.</li>
-              <li>Catálogos actualizados: distritos, recintos fiscales y regímenes de exportación.</li>
-              <li>Notificación automática del evento y del archivo de invalidación al receptor.</li>
-              <li>Comprobantes de control interno para operaciones especiales y venta simplificada.</li>
-              <li>Entrega obligatoria del <code>JSON</code> firmado, que es el documento con validez jurídica.</li>
-            </ul>
-          </div>
-        </details>
       </div>
 
       <div class="rv center">
@@ -895,26 +908,28 @@ footer a:hover{color:#fff}
 <!-- ================= 7. MIGRACIÓN ================= -->
 <section class="migra" id="cambiar">
   <div class="wrap">
-    <span class="eyebrow rv">¿Ya facturás con otro proveedor?</span>
+    <span class="eyebrow rv">¿Ya factura con otro proveedor?</span>
     <h2 class="rv">Cambiarse ya es un trámite normal</h2>
     <p class="lede rv">
       Desde mayo de 2026 el portal de Hacienda tiene habilitada la opción de
-      <b>Cambio de Plataforma</b>. No estás amarrado a tu proveedor actual.
+      <b>Cambio de Plataforma</b>. No está amarrado a su proveedor actual.
     </p>
     <div class="migra-card rv">
       <div>
         <h3>Hacemos el cambio completo, sin costo de migración</h3>
         <ul class="pasos-migra">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Gestionamos el trámite de cambio en el portal de Hacienda.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Migramos tu catálogo de productos, clientes y proveedores.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Conservás tus documentos históricos y quedás cubierto para la 2.0.</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>No dejás de facturar ni un día.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Migramos su catálogo de productos, clientes y proveedores.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Conserva sus documentos históricos y queda cubierto para la 2.0.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>No deja de facturar ni un día.</li>
         </ul>
+        <!-- Micro-banda: prueba que cambiarse es rutina. Los [X] los cierra Rafa. NO PUBLICAR con .rev. -->
+        <p class="micro-cifras"><b><span class="rev">[X]</span> migraciones</b> completadas desde otro proveedor · <b><span class="rev">[X]</span> horas</b> de puesta en marcha promedio · <b>0 días</b> sin facturar</p>
       </div>
       <div>
         <a class="btn btn-v" data-wa="migracion" href="#" style="width:100%">Quiero cambiarme</a>
         <p style="font-size:.84rem;color:var(--gris);margin-top:13px;text-align:center;line-height:1.5">
-          Contanos con quién estás y te decimos exactamente qué implica.
+          Cuéntenos con quién está y le decimos exactamente qué implica.
         </p>
       </div>
     </div>
@@ -925,16 +940,16 @@ footer a:hover{color:#fff}
 <section>
   <div class="wrap">
     <span class="eyebrow rv">Cómo arranca</span>
-    <h2 class="rv">Alguien con nombre te acompaña desde el primer día</h2>
+    <h2 class="rv">Alguien con nombre lo acompaña desde el primer día</h2>
     <p class="lede rv">
-      No te mandamos un manual y suerte. Te asignamos un gestor de cuenta que configura con vos,
-      te capacita y queda como tu contacto.
+      No le mandamos un manual y suerte. Le asignamos un gestor de cuenta que configura con usted,
+      lo capacita y queda como su contacto.
     </p>
     <div class="pasos rv">
-      <div class="paso"><div class="num">PASO 01</div><h3>Nos escribís</h3><p>Por WhatsApp. Definimos juntos el plan según cuántas facturas hacés.</p></div>
+      <div class="paso"><div class="num">PASO 01</div><h3>Nos escribe</h3><p>Por WhatsApp. Definimos juntos el plan según cuántas facturas hace.</p></div>
       <div class="paso"><div class="num">PASO 02</div><h3>Lo dejamos listo</h3><p>En menos de 24 horas, con la gestión ante Hacienda incluida.</p></div>
-      <div class="paso"><div class="num">PASO 03</div><h3>Te enseñamos</h3><p>Capacitación en vivo sin costo y dos cursos grabados que te quedan.</p></div>
-      <div class="paso"><div class="num">PASO 04</div><h3>Facturás tranquilo</h3><p>Con soporte gratis y la normativa siempre al día de nuestro lado.</p></div>
+      <div class="paso"><div class="num">PASO 03</div><h3>Lo capacitamos</h3><p>Capacitación en vivo sin costo y dos cursos grabados que le quedan.</p></div>
+      <div class="paso"><div class="num">PASO 04</div><h3>Factura tranquilo</h3><p>Con soporte gratis y la normativa siempre al día de nuestro lado.</p></div>
     </div>
   </div>
 </section>
@@ -945,7 +960,7 @@ footer a:hover{color:#fff}
     <span class="eyebrow rv">El detalle completo</span>
     <h2 class="rv">Qué incluye cada plan</h2>
     <p class="lede rv">
-      Si ya sabés lo que buscás, acá está todo. Si no, usá
+      Si ya sabe lo que busca, acá está todo. Si no, use
       <a href="#precio" style="color:var(--violeta);font-weight:600">la calculadora de arriba</a>.
     </p>
 
@@ -999,7 +1014,7 @@ footer a:hover{color:#fff}
             <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
           </tr>
           <tr>
-            <th>Tu logo en la factura</th>
+            <th>Su logo en la factura</th>
             <td class="no">—</td><td class="si">✓</td><td class="reco si">✓</td><td class="si">✓</td><td class="si">✓</td>
           </tr>
           <tr>
@@ -1019,7 +1034,7 @@ footer a:hover{color:#fff}
             <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="si">✓</td><td class="si">✓</td>
           </tr>
           <tr>
-            <th>Una persona asignada a tu sistema</th>
+            <th>Una persona asignada a su sistema</th>
             <td class="no">—</td><td class="no">—</td><td class="reco no">—</td><td class="no">—</td><td class="si">✓</td>
           </tr>
           <tr>
@@ -1045,17 +1060,14 @@ footer a:hover{color:#fff}
         </tbody>
       </table>
     </div>
-    <p class="scroll-hint">← Deslizá la tabla para ver todos los planes →</p>
+    <p class="scroll-hint">← Deslice la tabla para ver todos los planes →</p>
 
     <div class="nota-planes rv">
-      <b>Si te pasás de las facturas incluidas</b> no te suspendemos el servicio: cada factura
-      adicional se cobra según tu plan (ver la fila "Factura adicional" en la tabla), y baja
-      mientras más alto sea el plan — <b>desde $0.25 + IVA en Starter hasta $0.05 + IVA en Deluxe</b>.
-      El plan Enterprise es sin límite. Si mes con mes te estás pasando, te avisamos y te movemos
-      al plan que te salga más barato.<br><br>
-      <b>Todos nuestros precios son + IVA</b> — cada pago te genera crédito fiscal.
-      La implementación se paga una sola vez. Módulo adicional del ERP: $30 + IVA de activación,
-      y la configuración se cotiza aparte. Sin permanencia forzada: si te querés ir, te vas.
+      <b>Si se pasa de las facturas incluidas</b> no lo suspendemos: cada factura extra se cobra
+      según su plan (fila "Factura adicional"), desde $0.25 en Starter hasta $0.05 en Deluxe.
+      Si el exceso se vuelve constante, le avisamos y lo movemos al plan más barato para usted.<br><br>
+      <b>Todos los precios son + IVA</b> y le generan crédito fiscal. Implementación, un solo pago.
+      Sin permanencia forzada.
     </div>
   </div>
 </section>
@@ -1089,55 +1101,33 @@ footer a:hover{color:#fff}
     <div class="faq rv">
       <details open>
         <summary>¿Es difícil de usar? Yo no soy de sistemas</summary>
-        <p>No. Emitir una factura son tres pasos: elegís el cliente, elegís el producto y le das a
-        "Emitir". Además te capacitamos en vivo sin costo y te quedan dos cursos grabados para
-        cuando se te olvide algo. Y si te trabás, nos escribís por WhatsApp.</p>
+        <p>Emitir una factura son tres pasos. Lo capacitamos en vivo y le quedan dos cursos
+        grabados. Si se traba, nos escribe por WhatsApp.</p>
       </details>
       <details>
         <summary>¿Están autorizados por el Ministerio de Hacienda?</summary>
-        <p>Nuestro sistema opera en producción con el Sistema de Transmisión DTE de Hacienda y
-        transmite tus documentos en tiempo real, con firma electrónica incluida. La autorización
-        como emisor electrónico la otorga Hacienda al contribuyente, es decir a tu empresa: ese
-        trámite lo gestionamos nosotros como parte de la implementación.</p>
+        <p>Nuestro sistema opera en producción con el Sistema de Transmisión DTE y transmite en
+        tiempo real, con firma electrónica. La autorización como emisor la otorga Hacienda al
+        contribuyente —a su empresa—, y ese trámite lo gestionamos nosotros.</p>
       </details>
       <details>
-        <summary>¿Ya están listos para la Normativa DTE 2.0?</summary>
-        <p>La actualización está en ejecución. El plazo que fijó Hacienda es el 1 de diciembre de
-        2026 y nuestro compromiso es tenerte actualizado antes de esa fecha, sin trámites de tu
-        parte y sin costo adicional en ningún plan. Te avisamos cuando ya esté aplicada.</p>
+        <summary>¿Cómo y cuándo se paga?</summary>
+        <p>Mensual, por transferencia o depósito. Le facturamos con crédito fiscal. La
+        implementación se paga una sola vez, al inicio.</p>
       </details>
       <details>
-        <summary>Estoy con otro proveedor, ¿puedo cambiarme?</summary>
-        <p>Sí. Desde mayo de 2026 el portal de Hacienda habilitó la opción de Cambio de Plataforma.
-        Gestionamos el trámite, migramos tu catálogo de productos, clientes y proveedores, y
-        coordinamos el cambio para que no dejés de facturar ningún día.</p>
-      </details>
-      <details>
-        <summary>¿En cuánto tiempo queda funcionando?</summary>
-        <p>En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda.</p>
+        <summary>¿Qué necesito tener a mano para arrancar?</summary>
+        <p>NIT y NRC de la empresa, su logo, y la lista de productos o servicios que factura.
+        Nada más: el resto del papeleo ante Hacienda lo hacemos nosotros.</p>
       </details>
       <details>
         <summary>¿Qué pasa si se me daña la computadora?</summary>
-        <p>No se pierde nada. Tu información se respalda de forma continua en Google Cloud. El
-        sistema no vive en tu computadora, así que entrás desde otra y seguís trabajando.</p>
-      </details>
-      <details>
-        <summary>¿La capacitación y el soporte tienen costo?</summary>
-        <p>No. Gestor de cuenta asignado, capacitación en vivo y dos cursos grabados de 15 capítulos
-        cada uno. El soporte de dudas es siempre gratuito y respondemos el mismo día en horario de
-        oficina.</p>
-      </details>
-      <details>
-        <summary>¿Y si emito más facturas de las que incluye mi plan?</summary>
-        <p>No te suspendemos el servicio. Cada factura adicional se cobra según tu plan: $0.25 + IVA
-        en Starter, $0.15 en Professional, $0.10 en Advanced y $0.05 en Deluxe. El plan Enterprise
-        es sin límite. Si el exceso se vuelve constante, te avisamos y te movemos al plan que te
-        resulte más económico.</p>
+        <p>Nada. Su información vive en Google Cloud con respaldo continuo. Entra desde otra
+        máquina y sigue trabajando.</p>
       </details>
       <details>
         <summary>¿Me amarran con un contrato largo?</summary>
-        <p>No hay permanencia forzada. Si te querés ir, te vas, y tus documentos históricos son
-        tuyos.</p>
+        <p>No hay permanencia. Si se quiere ir, se va, y sus documentos históricos son suyos.</p>
       </details>
     </div>
   </div>
@@ -1146,10 +1136,10 @@ footer a:hover{color:#fff}
 <!-- ================= CIERRE ================= -->
 <section class="cierre dark">
   <div class="wrap">
-    <h2 class="rv">Empezá a facturar en menos de 24 horas</h2>
-    <p class="lede rv">Escribinos, vemos juntos qué plan te toca y el papeleo ante Hacienda queda de nuestro lado.</p>
+    <h2 class="rv">Empiece a facturar en menos de 24 horas</h2>
+    <p class="lede rv">Escríbanos, vemos juntos qué plan le toca y el papeleo ante Hacienda queda de nuestro lado.</p>
     <div class="cierre-cta rv">
-      <a class="btn btn-wa" data-wa="cierre" href="#">Escribinos por WhatsApp</a>
+      <a class="btn btn-wa" data-wa="cierre" href="#">Escríbanos por WhatsApp</a>
       <a class="btn btn-ghost" href="#precio">Ver precios</a>
     </div>
     <p class="horario rv">Lunes a viernes, 8:00 a.m. a 5:00 p.m. · Respondemos el mismo día</p>
@@ -1196,9 +1186,9 @@ footer a:hover{color:#fff}
   </div>
 </footer>
 
-<a class="wa-float" data-wa="flotante" href="#" aria-label="Escribinos por WhatsApp">
+<a class="wa-float" data-wa="flotante" href="#" aria-label="Escríbanos por WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#04371A"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.7-.9-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4 0 1.4 1 2.8 1.2 3 .1.2 1.9 3 4.7 4.1 2.3.9 2.8.8 3.3.7.5-.1 1.6-.6 1.8-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2"/></svg>
-  <span>Escribinos</span>
+  <span>Escríbanos</span>
 </a>
 
 <script type="application/ld+json">
@@ -1206,12 +1196,12 @@ footer a:hover{color:#fff}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"¿Es difícil de usar la facturación electrónica?","acceptedAnswer":{"@type":"Answer","text":"Emitir una factura son tres pasos: elegir el cliente, elegir el producto y presionar Emitir. Incluye capacitación en vivo sin costo y dos cursos grabados."}},
+{"@type":"Question","name":"¿Es difícil de usar la facturación electrónica?","acceptedAnswer":{"@type":"Answer","text":"Emitir una factura son tres pasos. Incluye capacitación en vivo y dos cursos grabados, y el soporte por WhatsApp resuelve dudas."}},
 {"@type":"Question","name":"¿Están autorizados por el Ministerio de Hacienda?","acceptedAnswer":{"@type":"Answer","text":"El sistema opera en producción con el Sistema de Transmisión DTE del Ministerio de Hacienda y transmite los documentos en tiempo real con firma electrónica. La autorización como emisor electrónico la otorga Hacienda al contribuyente y Grupo Consiti gestiona ese trámite como parte de la implementación."}},
-{"@type":"Question","name":"¿Ya están listos para la Normativa DTE 2.0?","acceptedAnswer":{"@type":"Answer","text":"La actualización está en ejecución. El plazo fijado por Hacienda es el 1 de diciembre de 2026 y la actualización está incluida en todos los planes sin costo adicional."}},
-{"@type":"Question","name":"Estoy con otro proveedor, ¿puedo cambiarme?","acceptedAnswer":{"@type":"Answer","text":"Sí. Desde mayo de 2026 el portal de Hacienda habilitó el Cambio de Plataforma para emisores de DTE. Grupo Consiti gestiona el trámite y migra el catálogo de productos, clientes y proveedores sin interrumpir la facturación."}},
-{"@type":"Question","name":"¿En cuánto tiempo queda funcionando?","acceptedAnswer":{"@type":"Answer","text":"En menos de 24 horas, incluyendo la configuración y la gestión ante Hacienda."}},
-{"@type":"Question","name":"¿Qué pasa si emito más facturas de las que incluye mi plan?","acceptedAnswer":{"@type":"Answer","text":"El servicio no se suspende. Cada factura adicional se cobra según el plan: 0.25 dólares en Starter, 0.15 en Professional, 0.10 en Advanced y 0.05 en Deluxe, más IVA. El plan Enterprise no tiene límite. Se recomienda el cambio de plan cuando el exceso es constante."}}]}
+{"@type":"Question","name":"¿Cómo y cuándo se paga?","acceptedAnswer":{"@type":"Answer","text":"El pago es mensual por transferencia o depósito y se factura con crédito fiscal. La implementación se paga una sola vez, al inicio."}},
+{"@type":"Question","name":"¿Qué necesito para empezar a facturar?","acceptedAnswer":{"@type":"Answer","text":"El NIT y el NRC de la empresa, el logo y la lista de productos o servicios que se facturan. El resto del trámite ante Hacienda lo gestiona Grupo Consiti."}},
+{"@type":"Question","name":"¿Qué pasa si se daña la computadora?","acceptedAnswer":{"@type":"Answer","text":"La información se respalda de forma continua en Google Cloud. Se puede ingresar desde otro equipo y seguir trabajando sin pérdida de datos."}},
+{"@type":"Question","name":"¿Me amarran con un contrato largo?","acceptedAnswer":{"@type":"Answer","text":"No hay permanencia forzada. El cliente puede darse de baja cuando quiera y conserva sus documentos históricos."}}]}
 </script>
 
 <script>
@@ -1247,21 +1237,24 @@ var VALOR_CTA = {
 
 /* ============ WhatsApp con mensaje distinto por CTA (atribución) ============ */
 var WA = "50372559059";
+/* Mensajes precargados: los envia el cliente, no Consiti, por eso van en
+   neutro (no en usted). Llevan el plan y el volumen adentro para que el
+   prospecto no tenga que volver a explicar lo que ya eligio en la pagina. */
 var MENSAJES = {
-  nav:"Hola, vengo de la página de Factura IA y quiero información.",
-  "menu-movil":"Hola, vengo de la página de Factura IA y quiero información.",
-  hero:"Hola, vi la página de Factura IA y quiero empezar a facturar electrónico. ¿Me ayudan?",
-  contadores:"Hola, soy contador y llevo la contabilidad de varias empresas. Quiero saber cómo funciona el multi-empresa.",
-  dte20:"Hola, quiero asegurarme de quedar cubierto con la Normativa DTE 2.0 antes del 1 de diciembre.",
-  migracion:"Hola, hoy facturo con otro proveedor y me quiero cambiar. ¿Cómo funciona?",
-  "plan-starter":"Hola, me interesa el plan Starter de Factura IA.",
-  "plan-professional":"Hola, me interesa el plan Professional de Factura IA.",
-  "plan-advanced":"Hola, me interesa el plan Advanced, el de carga automática de compras.",
-  "plan-deluxe":"Hola, me interesa el plan Deluxe y quiero saber de los módulos.",
-  "plan-enterprise":"Hola, quiero hablar del plan Enterprise para mi empresa.",
-  cierre:"Hola, quiero empezar a facturar con Factura IA.",
-  footer:"Hola, quiero información sobre Factura IA.",
-  flotante:"Hola, tengo una consulta sobre Factura IA."
+  nav:"Buen día. Vengo de la página de Factura IA y quiero información sobre los planes.",
+  "menu-movil":"Buen día. Vengo de la página de Factura IA y quiero información sobre los planes.",
+  hero:"Buen día. Vengo de la página de Factura IA y quiero información sobre los planes.",
+  contadores:"Buen día. Soy contador y llevo la contabilidad de ______ empresas. Quiero ver la cuenta de despacho.",
+  dte20:"Buen día. Quiero quedar cubierto para la Normativa DTE 2.0 antes del 1 de diciembre.",
+  migracion:"Buen día. Actualmente facturo con ______ y quiero saber qué implica cambiarme a Factura IA.",
+  "plan-starter":"Buen día. Emito unas 30 facturas al mes y quiero contratar el plan Starter de $14.99 + IVA.",
+  "plan-professional":"Buen día. Emito unas 100 facturas al mes y quiero contratar el plan Professional de $24.99 + IVA.",
+  "plan-advanced":"Buen día. Emito unas 500 facturas al mes y quiero contratar el plan Advanced de $34.99 + IVA.",
+  "plan-deluxe":"Buen día. Emito unas 1,000 facturas al mes y quiero contratar el plan Deluxe de $59.99 + IVA.",
+  "plan-enterprise":"Buen día. Emito más de 1,000 facturas al mes y quiero conocer el plan Enterprise.",
+  cierre:"Buen día. Quiero empezar a facturar con Factura IA.",
+  footer:"Buen día. Quiero información sobre Factura IA.",
+  flotante:"Buen día. Tengo una consulta sobre Factura IA."
 };
 function waURL(t){ return "https://wa.me/"+WA+"?text="+encodeURIComponent(t); }
 document.querySelectorAll("[data-wa]").forEach(function(a){
@@ -1304,28 +1297,48 @@ document.querySelectorAll("[data-wa]").forEach(function(a){
 
 /* ============ Calculadora de plan ============ */
 var PLANES=[
-  {n:"Starter",p:"$14.99",impl:"Implementación $40 + IVA",d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito.",wa:"Hola, hice la calculadora y me sale el plan Starter (1 o 2 facturas al día). Quiero contratarlo."},
-  {n:"Professional",p:"$24.99",impl:"Implementación $50 + IVA",d:"Hasta 100 facturas al mes. Agrega los anexos de IVA y los libros en PDF y Excel, tu logo en la factura, exportación, sujeto excluido y retención.",wa:"Hola, hice la calculadora y me sale el plan Professional (3 a 5 facturas al día). Quiero contratarlo."},
-  {n:"Advanced",p:"$34.99",impl:"Implementación $60 + IVA",d:"Hasta 500 facturas al mes. Incluye la carga automática de tus facturas de compra, que es lo que te ahorra la digitación.",wa:"Hola, hice la calculadora y me sale el plan Advanced (hasta 20 facturas al día). Quiero contratarlo."},
-  {n:"Deluxe",p:"$59.99",impl:"Implementación $70 + IVA",d:"Hasta 1,000 facturas al mes y un módulo del ERP a elección: punto de venta, inventario, compras, cotizaciones o CRM.",wa:"Hola, hice la calculadora y me sale el plan Deluxe (hasta 40 facturas al día). Quiero contratarlo."},
-  {n:"Enterprise",p:"$150",impl:"Implementación $100 + IVA",d:"Facturas sin límite y una persona de nuestro equipo asignada a tu sistema, disponible en horario de oficina.",wa:"Hola, hice la calculadora y me sale el plan Enterprise (más de 40 facturas al día). Quiero que me contacten."}
+  {n:"Starter",p:"$14.99",impl_num:40,d:"Hasta 30 facturas al mes. Consumidor final, crédito fiscal y notas de crédito y débito.",wa:"Buen día. Emito unas 30 facturas al mes y quiero contratar el plan Starter de $14.99 + IVA."},
+  {n:"Professional",p:"$24.99",impl_num:50,d:"Hasta 100 facturas al mes. Agrega los anexos de IVA y los libros en PDF y Excel, su logo en la factura, exportación, sujeto excluido y retención.",wa:"Buen día. Emito unas 100 facturas al mes y quiero contratar el plan Professional de $24.99 + IVA."},
+  {n:"Advanced",p:"$34.99",impl_num:60,d:"Hasta 500 facturas al mes. Incluye la carga automática de sus facturas de compra, que le ahorra la digitación.",wa:"Buen día. Emito unas 500 facturas al mes y quiero contratar el plan Advanced de $34.99 + IVA."},
+  {n:"Deluxe",p:"$59.99",impl_num:70,d:"Hasta 1,000 facturas al mes y un módulo del ERP a elección: punto de venta, inventario, compras, cotizaciones o CRM.",wa:"Buen día. Emito unas 1,000 facturas al mes y quiero contratar el plan Deluxe de $59.99 + IVA."},
+  {n:"Enterprise",p:"$150",impl_num:100,d:"Facturas sin límite y una persona de nuestro equipo asignada a su sistema, disponible en horario de oficina.",wa:"Buen día. Emito más de 1,000 facturas al mes y quiero conocer el plan Enterprise."}
 ];
 (function(){
   var cont=document.getElementById("opciones"); if(!cont) return;
   var res=document.getElementById("resultado");
-  cont.querySelectorAll("button").forEach(function(b){
+  var aviso=document.getElementById("r-aviso");
+  var primer=document.getElementById("r-primer");
+  var botones=cont.querySelectorAll("button");
+
+  /* Pinta el resultado de un plan SIN analitica. Se reusa en el clic y en la
+     preseleccion inicial, para no mandar un select_item falso al cargar. */
+  function pintar(idx){
+    var pl=PLANES[idx];
+    botones.forEach(function(x){ x.classList.toggle("on", +x.getAttribute("data-plan")===idx); });
+    document.getElementById("r-nombre").textContent=pl.n;
+    document.getElementById("r-detalle").textContent=pl.d;
+    document.getElementById("r-precio").textContent=pl.p;
+    /* Desglose del primer mes: mensualidad + implementacion (un solo pago).
+       Decir el costo real primero convierte una objecion en prueba de honestidad. */
+    var mensual=Number(String(pl.p).replace(/[^0-9.]/g,""))||0;
+    var total=mensual+pl.impl_num;
+    var fmt=function(v){ return "$"+(v%1===0 ? v : v.toFixed(2)); };
+    primer.innerHTML="<b>Primer mes:</b> "+pl.p+" + $"+pl.impl_num+
+      " de implementación (un solo pago) = "+fmt(total)+" + IVA. "+
+      "Desde el segundo mes, "+pl.p+" + IVA.";
+    /* Aviso solo para Starter: no genera anexos de IVA ni libros. */
+    aviso.classList.toggle("ver", pl.n==="Starter");
+    var cta=document.getElementById("r-cta");
+    cta.href=waURL(pl.wa); cta.target="_blank"; cta.rel="noopener";
+    cta.textContent="Contratar "+pl.n+" por WhatsApp";
+    cta.setAttribute("data-plan-calc", pl.n);
+    res.classList.add("ver");
+    return pl;
+  }
+
+  botones.forEach(function(b){
     b.addEventListener("click",function(){
-      cont.querySelectorAll("button").forEach(function(x){x.classList.toggle("on",x===b);});
-      var pl=PLANES[+b.getAttribute("data-plan")];
-      document.getElementById("r-nombre").textContent=pl.n;
-      document.getElementById("r-detalle").textContent=pl.d;
-      document.getElementById("r-precio").textContent=pl.p;
-      document.getElementById("r-impl").textContent=pl.impl+" (una sola vez)";
-      var cta=document.getElementById("r-cta");
-      cta.href=waURL(pl.wa); cta.target="_blank"; cta.rel="noopener";
-      cta.textContent="Contratar "+pl.n+" por WhatsApp";
-      cta.setAttribute("data-plan-calc", pl.n);
-      res.classList.add("ver");
+      var pl=pintar(+b.getAttribute("data-plan"));
       /* GA4: select_item marca qué plan le calzó a cada visitante.
          Es el dato que dice si la calculadora está bien calibrada. */
       trackGA("select_item", {
@@ -1338,6 +1351,10 @@ var PLANES=[
       window.dataLayer.push({event:"calculadora_plan",plan:pl.n});
     });
   });
+
+  /* Preseleccion: Professional (~100 al mes). El visitante ve una cifra
+     concreta sin trabajo. Sin analitica porque no es una eleccion suya. */
+  pintar(1);
 
   /* El CTA del resultado también es un Lead, con el plan que salió en la calculadora */
   var ctaRes=document.getElementById("r-cta");
@@ -1394,9 +1411,9 @@ var PLANES=[
     }else{
       /* plazo vencido: el mensaje cambia a que ya es obligatoria y que ayudamos a cumplir */
       set("cuenta","Ya en vigencia");
-      set("cuenta-txt","La Normativa DTE 2.0 ya es obligatoria. Nosotros te ayudamos a cumplir sin que dejes de facturar.");
+      set("cuenta-txt","La Normativa DTE 2.0 ya es obligatoria. Nosotros le ayudamos a cumplir sin que deje de facturar.");
       set("cuenta-2","Vigente");
-      set("cuenta-2-txt","La Normativa DTE 2.0 ya es obligatoria — te ayudamos a cumplir.");
+      set("cuenta-2-txt","La Normativa DTE 2.0 ya es obligatoria — le ayudamos a cumplir.");
     }
   }
   tick(); setInterval(tick,3600000);
