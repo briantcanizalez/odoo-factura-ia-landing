@@ -425,13 +425,30 @@ details.tecnico code{font-family:var(--mono);font-size:.84rem;color:var(--violet
 .pie-cifra{margin-top:20px;font-size:.9rem;color:var(--gris-2);line-height:1.6}
 
 /* ============ PASOS ============ */
-.pasos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:40px;border-top:1px solid var(--linea)}
-@media(max-width:860px){.pasos{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.pasos{grid-template-columns:1fr}}
-.paso{padding:24px 22px 24px 0;border-right:1px solid var(--linea)}
-.paso:last-child{border-right:none}
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);margin-top:44px;border-top:1px solid var(--linea)}
+/* Gutters simetricos: cada divisor respira igual a ambos lados. La 1a columna
+   alinea con el borde izquierdo de la seccion (sin padding-left) y la ultima
+   con el derecho, para mantener el mismo eje vertical que el titulo y la lede. */
+.paso{padding:28px 30px;border-right:1px solid var(--linea)}
+.paso:first-child{padding-left:0}
+.paso:last-child{border-right:none;padding-right:0}
+/* 2 columnas: el divisor solo va entre la pareja; filas nuevas llevan borde arriba */
+@media(max-width:860px){
+  .pasos{grid-template-columns:1fr 1fr}
+  .paso{padding:26px 26px}
+  .paso:nth-child(2n+1){padding-left:0;border-right:1px solid var(--linea)}
+  .paso:nth-child(2n){padding-right:0;border-right:none}
+  .paso:nth-child(n+3){border-top:1px solid var(--linea)}
+}
+/* 1 columna: sin divisores verticales, separacion por borde horizontal */
+@media(max-width:520px){
+  .pasos{grid-template-columns:1fr}
+  .paso{padding:24px 0;border-right:none}
+  .paso:nth-child(n+2){border-top:1px solid var(--linea)}
+}
 .paso .num{font-family:var(--mono);font-size:.7rem;color:var(--violeta);letter-spacing:.14em;margin-bottom:12px}
-.paso p{font-size:.92rem;color:var(--gris);margin-top:7px;line-height:1.5}
+.paso h3{line-height:1.2}
+.paso p{font-size:.92rem;color:var(--gris);margin-top:8px;line-height:1.55}
 
 /* ============ TABLA DE PLANES ============ */
 .tabla-wrap{margin-top:32px;border:1px solid var(--linea);border-radius:18px;overflow:auto;background:var(--papel);-webkit-overflow-scrolling:touch}
