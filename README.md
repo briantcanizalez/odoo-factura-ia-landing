@@ -151,4 +151,4 @@ un dato sin confirmar, se marca de nuevo antes de publicarlo como un hecho.
 - **Contenido legal incompleto** — 17 puntos sin resolver en privacidad, términos y SLA. Estaban escritos dentro de las páginas como recuadros visibles al público; se movieron a [`docs/PENDIENTES-LEGAL.md`](docs/PENDIENTES-LEGAL.md). **Bloquean la publicación en el dominio definitivo.**
 - `canonical` y `og:url` están comentados en las 4 páginas, a la espera de confirmar el dominio definitivo.
 - **Resuelto:** `assets/og-facturaia.jpg` (1200×630, ~67 KB) ya existe — imagen de marca con el mensaje raíz, para la vista previa al compartir.
-- **Asset 06** (selector multi-empresa) — pendiente de captura. La función existe, así que aplica el asset normal y no el reemplazo por foto del equipo que preveía el brief.
+- **Asset 06** (selector multi-empresa) — **entregado:** `assets/multiempresa.webp`, colocado en la sección de contadores con nombres de empresa de ejemplo. Ya no hay placeholders de asset en la página.

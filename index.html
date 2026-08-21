@@ -94,24 +94,9 @@ section{padding:82px 0}
 .center{text-align:center}
 .center .lede{margin-left:auto;margin-right:auto}
 
-/* ============ MARCADOR DE ASSET PARA EL DISEÑADOR ============ */
-.asset{
-  border:2px dashed var(--alerta-vivo);border-radius:16px;background:
-    repeating-linear-gradient(45deg,rgba(255,138,0,.07),rgba(255,138,0,.07) 10px,transparent 10px,transparent 20px);
-  padding:24px;position:relative
-}
-.asset-tag{
-  display:inline-block;background:var(--alerta-vivo);color:#2B1500;
-  font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.13em;
-  text-transform:uppercase;padding:5px 10px;border-radius:5px;margin-bottom:14px
-}
-.asset h4{font-family:var(--mono);font-size:.86rem;letter-spacing:0;color:#7C3E00;margin-bottom:10px;font-weight:700}
-.asset ul{margin:0;padding-left:18px;font-family:var(--mono);font-size:.76rem;line-height:1.85;color:#7C3E00}
-.asset.ratio-43{aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:center}
-.asset.ratio-169{aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center}
-.dark .asset h4,.dark .asset ul{color:#FFC781}
-.dark .asset{background:repeating-linear-gradient(45deg,rgba(255,138,0,.1),rgba(255,138,0,.1) 10px,transparent 10px,transparent 20px)}
-@media(max-width:600px){.asset{padding:18px}.asset ul{font-size:.7rem}.asset.ratio-43,.asset.ratio-169{aspect-ratio:auto}}
+/* Los estilos .asset (recuadros naranja de placeholder para el disenador) se
+   retiraron: los 9 assets del brief ya estan entregados, incluido el 06
+   (selector multi-empresa, assets/multiempresa.webp). */
 /* .rev marca los datos sin confirmar. Se reactivo para el rediseno v2:
    las cifras que debe cerrar Rafa ([X] DTE, % aceptados, migraciones,
    horas, primera respuesta) van marcadas hasta tener el numero real.
@@ -815,16 +800,13 @@ footer a:hover{color:#fff}
         <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:24px">Quiero una cuenta de despacho</a>
       </div>
 
-      <div class="asset ratio-43 rv">
-        <span class="asset-tag">Asset 06 · prioridad alta</span>
-        <h4>Pantalla del selector de empresas</h4>
-        <ul>
-          <li>Vista del contador con su lista de empresas y el cambio entre una y otra</li>
-          <li>1200 × 900 px · PNG o WebP</li>
-          <li>Nombres de empresa inventados</li>
-          <li>Idealmente mostrar el clic que descarga los anexos/libros de todas las empresas a la vez</li>
-        </ul>
-      </div>
+      <figure class="shot rv">
+        <img src="assets/multiempresa.webp" width="1600" height="628" loading="lazy" decoding="async"
+             alt="Vista del contador en el sistema: el selector de empresas abierto con la cartera de empresas (nombres de ejemplo), y el menú lateral de Facturas, Anexos y Libros.">
+        <figcaption><span class="ok" aria-hidden="true">✓</span>
+          Un contador cambia entre todas las empresas de su cartera desde un solo lugar. Nombres de ejemplo.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
