@@ -1,3 +1,10 @@
 .vercel
 .env*
 .claude
+
+# Archivos locales ajenos a la landing (no van al repo del handoff)
+1.pdf
+_canvas_logo.html
+Retroalimentación sobre logos/
+assets/consiti-isotipo-morado.svg
+assets/factura-ia-logo-dark.svg
