@@ -20,28 +20,19 @@ Ya quedó puesto en el código (`index.html` y `terminos.html`). **Faltan dos co
 
 ---
 
-## 2) Crear la propiedad GA4 y pegar el Measurement ID
+## 2) GA4 — ✅ Resuelto (falta 1 sub-paso)
 
-**Por qué:** el código de Google Analytics 4 ya está instalado y probado, pero **falta el ID** para que funcione. Sin él, GA no carga (el sitio funciona igual).
+Se creó la propiedad GA4 **"Factura IA"** (cuenta *Grupo Consiti*, zona horaria El Salvador, moneda USD) con el flujo web **Landing Factura IA**. El Measurement ID quedó puesto en el código (index y `/terminos`):
 
-**Pasos:**
-1. Entrá a **Google Analytics** → https://analytics.google.com
-2. **Administrar** (engranaje, abajo a la izquierda) → **Crear propiedad** (si no existe una para Factura IA).
-3. Dentro de la propiedad: **Flujos de datos** → **Web** → creá el flujo con la URL del sitio.
-4. Copiá el **Measurement ID**, que tiene el formato **`G-XXXXXXXXXX`**.
-5. Pegalo en `index.html`, en esta línea del `<head>`:
-   ```js
-   var GA4_ID = "";   // <- pegar aquí el G-XXXXXXXXXX
-   ```
-   Queda `var GA4_ID = "G-XXXXXXXXXX";`
-6. **Marcar los eventos como conversión:** en GA4 → **Administrar** → **Eventos** (o *Eventos clave*), marcá como conversión:
-   - `generate_lead` (clic en cualquier CTA de WhatsApp)
-   - `select_item` (cuando la calculadora devuelve un plan)
+> **Measurement ID: `G-BTME51TFEN`**
 
-> El Measurement ID **no es secreto**: viaja en el HTML público y así debe ser.
-> Nota: el ID solo se pega en `index.html` (la landing). Si algún día querés medir también `/terminos`, se pone su `CONSENT_CFG.ga4Id` — avisame.
+**Falta un solo paso (lo hacés vos en GA4):** marcar los eventos como **evento clave / conversión**:
+- En GA4 → **Administrar** → **Eventos clave** → **Crear evento clave** y escribí exactamente:
+  - `generate_lead` (clic en cualquier CTA de WhatsApp)
+  - `select_item` (cuando la calculadora devuelve un plan)
+- *(Si preferís, esperá a que aparezcan solos en la lista de Eventos tras las primeras visitas y ahí los marcás. Decime y también te lo puedo dejar creado.)*
 
-**Cómo verificar:** abrí el sitio, **aceptá las cookies**, y en GA4 → **Informes** → **Tiempo real** deberías verte como usuario activo.
+**Cómo verificar:** abrí el sitio, **aceptá las cookies**, y en GA4 → **Informes** → **Tiempo real** deberías verte como usuario activo (puede tardar hasta ~48 h en consolidar los informes normales, pero el tiempo real es inmediato).
 
 ---
 
@@ -100,7 +91,7 @@ Ya quedó puesto en el código (`index.html` y `terminos.html`). **Faltan dos co
 ## Checklist rápido
 
 - [x] **1.** Pixel creado (`2238963863532324`) y puesto en el código — falta conectarlo a la cuenta publicitaria y ponerlo en Vercel
-- [ ] **2.** Measurement ID `G-XXXXXXXXXX` pegado en `index.html` + `generate_lead` y `select_item` marcados como conversión en GA4
+- [x] **2.** GA4 creado y `G-BTME51TFEN` pegado en el código — falta marcar `generate_lead` y `select_item` como evento clave en GA4
 - [ ] **3.** `META_PIXEL_ID` + `META_CAPI_TOKEN` en Vercel + **redeploy** + probado con Test Events
 - [ ] **4.** `assets/og-facturaia.jpg` (1200×630) existe y la vista previa se ve en el Sharing Debugger
 

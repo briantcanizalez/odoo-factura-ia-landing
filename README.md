@@ -91,7 +91,7 @@ Sin estas variables `api/capi.js` responde no-op y el sitio sigue funcionando co
 
 ## Google Analytics 4
 
-Instalado en el `<head>` de `index.html`, justo debajo del Pixel. **Falta pegar el Measurement ID** en la constante `GA4_ID` (formato `G-XXXXXXXXXX`).
+Instalado y **configurado**: el Measurement ID **`G-BTME51TFEN`** (propiedad GA4 "Factura IA") está en `GA4_ID` de `index.html` y en `CONSENT_CFG.ga4Id` de `terminos.html`. GA4 se carga vía `assets/consent.js` **solo con consentimiento**.
 
 Con `GA4_ID` vacío no se carga la librería de Google ni se dispara ningún evento: la página funciona igual. Mismo criterio defensivo que `api/capi.js`.
 
