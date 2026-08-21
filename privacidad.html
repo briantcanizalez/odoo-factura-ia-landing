@@ -11,22 +11,14 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <!-- ============================================================
-     META PIXEL  ·  Odoo Factura IA
+     ANALITICA CON CONSENTIMIENTO PREVIO
+     El Meta Pixel ya no se carga al entrar; lo carga assets/consent.js
+     solo si la persona acepta las cookies (aviso de privacidad, §5).
      ============================================================ -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '27890392917235121');
-fbq('track', 'PageView');
+  window.CONSENT_CFG = { pixelId: "27890392917235121", ga4Id: "" };
 </script>
-<noscript><img height="1" width="1" style="display:none" alt=""
-src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
+<script src="assets/consent.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -146,9 +138,27 @@ src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" />
       <section id="s5">
         <h2><span class="n">5</span>Cookies y tecnologías de seguimiento</h2>
         <p>
-          El sitio web utiliza cookies propias y de terceros con fines de funcionamiento y de
-          analítica —por ejemplo, herramientas de medición como Google Analytics y Meta Pixel—, que
-          permiten entender el uso del sitio y mejorar la experiencia.
+          Al entrar al sitio <strong>no se activa ninguna cookie de medición</strong>. Se muestra un
+          aviso donde la persona puede <strong>aceptar</strong> o <strong>rechazar</strong> las
+          cookies no esenciales. Solo si acepta se cargan las herramientas de analítica descritas
+          abajo; si rechaza, no se instala ninguna. La elección puede cambiarse cuando quiera desde
+          <a href="#s5" onclick="if(window.openCookiePrefs)openCookiePrefs();return false;">Preferencias de cookies</a>.
+        </p>
+        <div class="tabla-wrap">
+          <table>
+            <thead>
+              <tr><th>Tipo</th><th>Proveedor</th><th>Finalidad</th><th>Duración</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Preferencia de consentimiento <span class="mut">(esencial)</span></td><td>Grupo Consiti (propia)</td><td>Recordar si aceptó o rechazó las cookies</td><td>Almacenamiento local, hasta que se borre</td></tr>
+              <tr><td>Analítica de campañas</td><td>Meta Platforms — Meta Pixel</td><td>Medir visitas y el rendimiento de la publicidad</td><td><code>_fbp</code>, <code>_fbc</code> · ~3 meses</td></tr>
+              <tr><td>Analítica de uso</td><td>Google — Analytics 4</td><td>Estadísticas agregadas de uso del sitio</td><td><code>_ga</code>, <code>_ga_*</code> · ~2 años</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="mut">
+          Las cookies de analítica se cargan únicamente tras el consentimiento. La medición del lado
+          del servidor (Conversions API de Meta) tampoco se ejecuta sin consentimiento.
         </p>
       </section>
 

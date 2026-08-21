@@ -20,60 +20,32 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 
 <!-- ============================================================
-     META PIXEL  ·  Factura IA de Grupo Consiti
-     init + PageView aquí. Lead y ViewContent se disparan al final
-     del documento, junto con el envío a CAPI.
+     ANALITICA CON CONSENTIMIENTO PREVIO
+     El Meta Pixel y GA4 ya NO se cargan al entrar. Los carga
+     assets/consent.js SOLO si la persona acepta las cookies, para
+     cumplir con el consentimiento previo (aviso de privacidad, §5).
+
+     - Pixel de Meta: el ID va en CONSENT_CFG.pixelId.
+     - GA4: pegar el Measurement ID (G-XXXXXXXXXX) en GA4_ID; vacio = no carga.
+       Se saca en GA4 -> Administrar -> Flujos de datos -> (el flujo web).
+     - CAPI (server-side): el token vive en variables de entorno de Vercel;
+       ademas sendCAPI (al final del documento) no envia sin consentimiento.
+     El Measurement ID no es secreto; el token de CAPI si, y nunca va en el repo.
      ============================================================ -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '27890392917235121');
-fbq('track', 'PageView');
+  var GA4_ID = "";                 /* <- pegar aquí el G-XXXXXXXXXX */
+  window.GA4_ID = GA4_ID;
+  window.CONSENT_CFG = { pixelId: "27890392917235121", ga4Id: GA4_ID };
+  window.dataLayer = window.dataLayer || [];
+
+  /* Un solo punto de entrada para eventos GA4. No dispara sin consentimiento,
+     sin Measurement ID, ni sin la librería cargada. El dataLayer.push se
+     mantiene por si algún día entra un contenedor de GTM. */
+  function trackGA(evento, params){
+    try{ if (window.__consentGranted && window.gtag && GA4_ID) window.gtag("event", evento, params || {}); }catch(e){}
+  }
 </script>
-<noscript><img height="1" width="1" style="display:none" alt=""
-src="https://www.facebook.com/tr?id=27890392917235121&ev=PageView&noscript=1" /></noscript>
-
-<!-- ============================================================
-     GOOGLE ANALYTICS 4  ·  Factura IA de Grupo Consiti
-
-     PARA ACTIVARLO: poné el Measurement ID de la propiedad GA4 en
-     GA4_ID, con el formato "G-XXXXXXXXXX". Se saca en GA4 →
-     Administrar → Flujos de datos → (el flujo web).
-
-     El Measurement ID NO es un secreto: viaja en el HTML público y
-     así debe ser. El que nunca va en el repo es el token de CAPI.
-
-     Con GA4_ID vacío no se carga la librería ni se dispara nada: la
-     página funciona igual. Mismo criterio que /api/capi.
-     ============================================================ -->
-<script>
-var GA4_ID = "";   /* <- pegar aquí el G-XXXXXXXXXX */
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){ dataLayer.push(arguments); }
-
-if (GA4_ID) {
-  var _ga = document.createElement("script");
-  _ga.async = true;
-  _ga.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4_ID;
-  document.head.appendChild(_ga);
-  gtag("js", new Date());
-  gtag("config", GA4_ID);
-}
-
-/* Un solo punto de entrada para los eventos. Si GA4 no está configurado
-   no hace nada, pero el dataLayer.push se mantiene por si más adelante
-   entra un contenedor de GTM. */
-function trackGA(evento, params){
-  try{ if (GA4_ID) gtag("event", evento, params || {}); }catch(e){}
-}
-</script>
+<script src="assets/consent.js" defer></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1259,6 +1231,7 @@ footer a:hover{color:#fff}
         <a href="/terminos">Términos del servicio</a>
         <a href="/privacidad">Aviso de privacidad</a>
         <a href="/sla">Niveles de servicio</a>
+        <a href="#" onclick="if(window.openCookiePrefs)openCookiePrefs();return false;">Preferencias de cookies</a>
       </div>
     </div>
     <p class="legal">
@@ -1297,6 +1270,7 @@ footer a:hover{color:#fff}
 function getCookie(n){ var m=document.cookie.match('(^|;)\\s*'+n+'=([^;]+)'); return m?decodeURIComponent(m.pop()):''; }
 function newEventId(){ try{ return crypto.randomUUID(); }catch(e){ return 'ev-'+Date.now()+'-'+Math.random().toString(16).slice(2); } }
 function sendCAPI(eventName, eventId, customData){
+  if(!window.__consentGranted) return;   /* sin consentimiento no se envia a Meta */
   try{
     fetch('/api/capi', { method:'POST', keepalive:true, headers:{'content-type':'application/json'},
       body: JSON.stringify({ event_name:eventName, event_id:eventId, event_source_url:location.href,
