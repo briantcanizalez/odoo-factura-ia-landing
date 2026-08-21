@@ -876,7 +876,7 @@ footer a:hover{color:#fff}
       <div><div class="n">12</div><div class="l">años de operación continua en El Salvador</div></div>
       <div><div class="n">+500</div><div class="l">empresas facturan con nosotros todos los días</div></div>
       <div><div class="n">+333,000</div><div class="l">DTE transmitidos a Hacienda</div></div>
-      <div><div class="n"><span class="rev">[X]%</span></div><div class="l">aceptados por Hacienda en el primer intento</div></div>
+      <div><div class="n">98.7%</div><div class="l">aceptados por Hacienda en el primer intento</div></div>
     </div>
     <p class="pie-cifra rv">Grupo Consiti ha atendido +3,500 empresas en 12 años en consultoría, software y nube.</p>
 
@@ -974,8 +974,9 @@ footer a:hover{color:#fff}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>Conserva sus documentos históricos y queda cubierto para la 2.0.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M20 6 9 17l-5-5"/></svg>No deja de facturar ni un día.</li>
         </ul>
-        <!-- Micro-banda: prueba que cambiarse es rutina. Los [X] los cierra Rafa. NO PUBLICAR con .rev. -->
-        <p class="micro-cifras"><b><span class="rev">[X]</span> migraciones</b> completadas desde otro proveedor · <b><span class="rev">[X]</span> horas</b> de puesta en marcha promedio · <b>0 días</b> sin facturar</p>
+        <!-- Micro-banda con datos reales. Ojo: las 8 h son RECORD (mejor caso),
+             no promedio; por eso va etiquetado asi y no contradice el "menos de 24 h". -->
+        <p class="micro-cifras"><b>215 migraciones</b> completadas desde otro proveedor · puesta en marcha en <b>8 h</b> (nuestro récord) · <b>0 días</b> sin facturar</p>
       </div>
       <div>
         <a class="btn btn-v" data-wa="migracion" href="#" style="width:100%">Quiero cambiarme</a>
@@ -1529,16 +1530,22 @@ document.getElementById("anio").textContent=new Date().getFullYear();
   function run(el){
     var m=el.textContent.trim().match(/^(\D*)([\d.,]+)(\D*)$/);
     if(!m) return;
-    var pre=m[1], target=parseInt(m[2].replace(/[.,]/g,""),10), post=m[3];
+    var pre=m[1], numstr=m[2], post=m[3];
+    /* coma = separador de miles; punto = decimal (convencion es-SV/US).
+       Detecta 1-2 decimales al final para animar 98.7 sin volverlo 987. */
+    var decm=numstr.match(/[.,](\d{1,2})$/);
+    var decimals=decm?decm[1].length:0;
+    var target=parseFloat(numstr.replace(/,/g,""));
     if(isNaN(target)||reduce) return;
+    var opt={minimumFractionDigits:decimals,maximumFractionDigits:decimals};
     var dur=1200,start=null;
-    el.textContent=pre+"0"+post;
+    el.textContent=pre+(0).toLocaleString("es-SV",opt)+post;
     function step(ts){
       if(!start)start=ts;
       var p=Math.min((ts-start)/dur,1), e=1-Math.pow(1-p,3);
-      el.textContent=pre+Math.round(target*e).toLocaleString("es-SV")+post;
+      el.textContent=pre+(target*e).toLocaleString("es-SV",opt)+post;
       if(p<1) requestAnimationFrame(step);
-      else el.textContent=pre+target.toLocaleString("es-SV")+post;
+      else el.textContent=pre+target.toLocaleString("es-SV",opt)+post;
     }
     requestAnimationFrame(step);
   }
