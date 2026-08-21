@@ -444,7 +444,7 @@ td.reco{background:rgba(82,22,231,.05);font-weight:600}
 .rubros{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 .rubro{display:inline-flex;align-items:center;gap:10px;font-family:var(--texto);font-size:.95rem;font-weight:600;color:var(--tinta);background:var(--papel);border:1px solid var(--linea);border-radius:999px;padding:11px 18px;transition:border-color .15s,transform .15s}
 .rubro:hover{border-color:var(--violeta);transform:translateY(-1px)}
-.rubro i{width:7px;height:7px;border-radius:50%;background:var(--violeta);flex:none}
+.rubro b{color:var(--violeta);font-family:var(--mono);font-weight:700;font-size:.98rem;letter-spacing:-.02em}
 .confianza-cierre{margin-top:28px;font-size:1rem;color:var(--gris);line-height:1.6}
 .confianza-cierre a{color:var(--violeta);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(82,22,231,.3)}
 .confianza-cierre a:hover{border-bottom-color:var(--violeta)}
@@ -794,9 +794,6 @@ footer a:hover{color:#fff}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg>
             <span><b>La Normativa 2.0 la actualizamos nosotros</b>, en todas sus empresas a la vez.</span></li>
         </ul>
-        <!-- Decision pendiente de Rafa: si se define comision por referido para
-             contadores, va un bullet aca. El briefing lo marca como el que mas
-             contratos trae, pero es modelo comercial, no copy. -->
         <a class="btn btn-wa btn-sm" data-wa="contadores" href="#" style="margin-top:24px">Quiero una cuenta de despacho</a>
       </div>
 
@@ -1100,30 +1097,30 @@ footer a:hover{color:#fff}
      ===================================================================== -->
 
 <!-- ================= 10b. FRANJA DE CONFIANZA (rubros reales) =================
-     Reemplaza a los testimonios mientras no haya firmados. Los rubros salen del
-     export real de contactos (Odoo res.partner): son categorias verdaderas. NO se
-     publica el conteo por rubro porque el export puede incluir prospectos/proveedores.
-     Cuando lleguen testimonios firmados, pueden ir encima de esta franja o sustituirla. -->
+     Reemplaza a los testimonios mientras no haya firmados. Los rubros y conteos
+     salen del export real de contactos (Odoo res.partner), confirmados por Briant
+     como CLIENTES ACTIVOS. Los numeros van redondeados hacia abajo para que sigan
+     siendo verdaderos aunque la cartera crezca (regla del brief). Al actualizar la
+     cartera, revisar estos conteos. Cuando lleguen testimonios firmados, pueden ir
+     encima de esta franja o sustituirla. -->
 <section id="confianza">
   <div class="wrap">
     <span class="eyebrow rv">Quiénes facturan con nosotros</span>
     <h2 class="rv">Su rubro, seguramente ya lo atendemos</h2>
     <p class="lede rv">
-      Entre las empresas que facturan con nosotros hay comercios, clínicas y consultorios,
-      transportistas, despachos contables y muchos giros más. Si el suyo está en esta lista,
-      su caso ya lo hemos resuelto antes.
+      Estos son algunos de los rubros que ya facturan con nosotros, con la cantidad de
+      empresas de cada uno. Si el suyo está en la lista, su caso ya lo hemos resuelto antes.
     </p>
     <div class="rubros rv">
-      <span class="rubro"><i aria-hidden="true"></i>Comercio y tiendas</span>
-      <span class="rubro"><i aria-hidden="true"></i>Clínicas y consultorios</span>
-      <span class="rubro"><i aria-hidden="true"></i>Transporte y logística</span>
-      <span class="rubro"><i aria-hidden="true"></i>Despachos contables</span>
-      <span class="rubro"><i aria-hidden="true"></i>Restaurantes</span>
-      <span class="rubro"><i aria-hidden="true"></i>Farmacias</span>
-      <span class="rubro"><i aria-hidden="true"></i>Automotriz y talleres</span>
-      <span class="rubro"><i aria-hidden="true"></i>Industria y manufactura</span>
-      <span class="rubro"><i aria-hidden="true"></i>Inmobiliarias</span>
-      <span class="rubro"><i aria-hidden="true"></i>Construcción</span>
+      <span class="rubro"><b>+130</b> Comercio y tiendas</span>
+      <span class="rubro"><b>+85</b> Clínicas y consultorios</span>
+      <span class="rubro"><b>+60</b> Transporte y logística</span>
+      <span class="rubro"><b>+55</b> Despachos y servicios profesionales</span>
+      <span class="rubro"><b>+35</b> Industria y manufactura</span>
+      <span class="rubro"><b>+30</b> Automotriz y talleres</span>
+      <span class="rubro"><b>+20</b> Inmobiliarias</span>
+      <span class="rubro"><b>+15</b> Restaurantes</span>
+      <span class="rubro"><b>+15</b> Construcción</span>
     </div>
     <p class="confianza-cierre rv">
       ¿No ve su rubro? Igual lo atendemos. <a href="#respaldo">Hágale a cualquier proveedor las cinco preguntas</a> y compare las respuestas.
