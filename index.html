@@ -278,13 +278,17 @@ header.nav{position:sticky;top:0;z-index:70;background:rgba(10,6,22,.9);backdrop
 @media(max-width:1000px){.movil img{max-height:430px}}
 
 /* ============ FRANJA DE CAMPANA (caduca dic 2026) ============ */
-.campana{background:#FFF4E6;border-bottom:1px solid rgba(255,138,0,.32)}
-.campana-in{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:15px 22px;font-size:.93rem;line-height:1.5;color:var(--tinta)}
-.campana .ahora{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;color:var(--alerta)}
-.campana .ahora svg{width:15px;height:15px;flex:none}
-.campana a{margin-left:auto;color:var(--violeta);font-weight:700;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-.campana a:hover{text-decoration:underline}
-@media(max-width:640px){.campana a{margin-left:0}}
+.campana{background:linear-gradient(180deg,#FFF7EC,#FFF0DC);border-top:1px solid rgba(255,138,0,.28);border-bottom:1px solid rgba(255,138,0,.28)}
+.campana-in{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:14px 22px}
+.campana .ahora{flex:none;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#7C3E00;background:rgba(255,138,0,.16);border:1px solid rgba(255,138,0,.36);padding:7px 13px;border-radius:999px}
+.campana .ahora .dot{width:7px;height:7px;border-radius:50%;background:var(--alerta-vivo);box-shadow:0 0 0 0 rgba(255,138,0,.5);animation:pulso 2.2s ease-out infinite}
+@keyframes pulso{0%{box-shadow:0 0 0 0 rgba(255,138,0,.5)}70%{box-shadow:0 0 0 8px rgba(255,138,0,0)}100%{box-shadow:0 0 0 0 rgba(255,138,0,0)}}
+.campana p{flex:1 1 300px;margin:0;font-size:.93rem;line-height:1.5;color:var(--tinta)}
+.campana p b{color:#7C3E00;font-weight:700}
+.campana .dias{flex:none;font-family:var(--mono);font-weight:700;font-size:.76rem;color:var(--alerta);letter-spacing:.02em;white-space:nowrap}
+.campana .ver{flex:none;display:inline-flex;align-items:center;gap:6px;background:var(--violeta);color:#fff;font-family:var(--display);font-weight:700;font-size:.85rem;padding:9px 17px;border-radius:999px;text-decoration:none;white-space:nowrap;box-shadow:0 6px 16px rgba(82,22,231,.24);transition:transform .15s,background .15s,box-shadow .15s}
+.campana .ver:hover{background:#4712C7;transform:translateY(-1px);box-shadow:0 8px 20px rgba(82,22,231,.3)}
+@media(max-width:640px){.campana .ver{width:100%;justify-content:center}.campana .dias{order:1}}
 
 /* ============ FRANJA ============ */
 .franja{border-bottom:1px solid var(--linea);background:var(--nube)}
@@ -576,9 +580,10 @@ footer a:hover{color:#fff}
      en el hero, no en esta fecha. -->
 <div class="campana">
   <div class="wrap campana-in">
-    <span class="ahora"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ahora mismo</span>
-    <span>Hacienda fijó el <b>1 de diciembre de 2026</b> para la Normativa DTE 2.0. Ya la estamos aplicando en todas las cuentas, sin costo y sin trámite de su parte.</span>
-    <a href="#normativa">Ver el detalle →</a>
+    <span class="ahora"><span class="dot" aria-hidden="true"></span>Ahora mismo</span>
+    <p>Hacienda fijó el <b>1 de diciembre de 2026</b> para la Normativa DTE 2.0. Ya la estamos aplicando en todas las cuentas, sin costo y sin trámite de su parte.</p>
+    <span class="dias" id="cuenta-campana" aria-hidden="true"></span>
+    <a class="ver" href="#normativa">Ver el detalle →</a>
   </div>
 </div>
 
@@ -1408,9 +1413,11 @@ var PLANES=[
     var d=Math.ceil((META-new Date())/86400000);
     if(d>0){
       set("cuenta",d+" días"); set("cuenta-2",d+" días");
+      set("cuenta-campana","Faltan "+d+" días");
     }else{
       /* plazo vencido: el mensaje cambia a que ya es obligatoria y que ayudamos a cumplir */
       set("cuenta","Ya en vigencia");
+      set("cuenta-campana","Ya en vigencia");
       set("cuenta-txt","La Normativa DTE 2.0 ya es obligatoria. Nosotros le ayudamos a cumplir sin que deje de facturar.");
       set("cuenta-2","Vigente");
       set("cuenta-2-txt","La Normativa DTE 2.0 ya es obligatoria — le ayudamos a cumplir.");
