@@ -2,7 +2,8 @@
 
 Sitio de marketing de **Factura IA** (Grupo Consiti S.A. de C.V.), facturación electrónica DTE para El Salvador.
 
-**Producción:** https://odoo-factura-ia-landing.vercel.app
+**Despliegue:** se publicará en **Google Cloud (GCP)**. La guía paso a paso para quien despliega está en **[`docs/DESPLIEGUE-GCP.md`](docs/DESPLIEGUE-GCP.md)**.
+**Preview privado (temporal):** https://odoo-factura-ia-landing.vercel.app — solo para revisar; **no** es el destino final.
 
 ## Páginas
 
@@ -79,15 +80,15 @@ Eventos que se disparan:
 | `Lead` | Clic en cualquier CTA a WhatsApp, con `content_name`, `value` y `currency` |
 | `ViewContent` | Cuando la sección de precios entra en pantalla (30% visible, una sola vez) |
 
-Se activa con variables de entorno en Vercel (Settings → Environment Variables). **Nunca en el repo:**
+Se activa con **variables de entorno en el entorno de despliegue** (en GCP: Cloud Functions/Cloud Run + **Secret Manager** para el token). **Nunca en el repo:**
 
 | Variable | Valor |
 |----------|-------|
 | `META_PIXEL_ID` | `2238963863532324` |
-| `META_CAPI_TOKEN` | Token de acceso de Meta (secreto) |
+| `META_CAPI_TOKEN` | Token de acceso de Meta (**secreto** · ver nota de rotación en la guía de despliegue) |
 | `META_TEST_EVENT_CODE` | *(opcional)* código de "Probar eventos" |
 
-Sin estas variables `api/capi.js` responde no-op y el sitio sigue funcionando con el Pixel del navegador. Tras configurarlas hay que hacer **redeploy**.
+Sin estas variables `api/capi.js` responde no-op y el sitio sigue funcionando con el Pixel del navegador. El detalle de cómo desplegar el endpoint en GCP está en [`docs/DESPLIEGUE-GCP.md`](docs/DESPLIEGUE-GCP.md) (§5 y §6).
 
 ## Google Analytics 4
 
@@ -95,7 +96,7 @@ Instalado y **configurado**: el Measurement ID **`G-BTME51TFEN`** (propiedad GA4
 
 Con `GA4_ID` vacío no se carga la librería de Google ni se dispara ningún evento: la página funciona igual. Mismo criterio defensivo que `api/capi.js`.
 
-El Measurement ID **no es un secreto** — viaja en el HTML público y así debe ser. El único secreto del proyecto es el token de CAPI, que va en Vercel y nunca en el repo.
+El Measurement ID **no es un secreto** — viaja en el HTML público y así debe ser. El único secreto del proyecto es el token de CAPI, que va en el entorno de despliegue (Secret Manager en GCP) y nunca en el repo.
 
 Eventos que se envían a GA4:
 
@@ -108,11 +109,13 @@ Eventos que se envían a GA4:
 
 Los `dataLayer.push` originales (`clic_whatsapp`, `calculadora_plan`) se mantienen: no estorban y sirven si algún día entra un contenedor de GTM.
 
-`generate_lead` y `select_item` conviene marcarlos como **conversión** en GA4 → Administrar → Eventos.
+`generate_lead` y `select_item` conviene marcarlos como **evento clave** en GA4 → Administrar → Eventos clave (se hace con la estrella una vez que llega el primer tráfico real).
 
 ## Deploy
 
-Sitio estático en **Vercel**, conectado a este repo de GitHub. **Push a `main` → deploy de producción automático.** No requiere build.
+**Destino definitivo: Google Cloud (GCP).** El sitio es estático + un endpoint opcional (`api/capi.js`); no requiere build. La guía completa de despliegue —opciones en GCP, clean URLs y redirects, el endpoint de CAPI, secretos y dominio— está en **[`docs/DESPLIEGUE-GCP.md`](docs/DESPLIEGUE-GCP.md)**.
+
+> `vercel.json` y la carpeta `.vercel/` quedan en el repo solo como **referencia** (alimentaban el preview privado de Vercel). En GCP hay que replicar sus reglas de rutas (ver la guía). El push a `main` puede seguir disparando ese preview de Vercel mientras exista la conexión, pero **no** es el despliegue de producción.
 
 ## Los cuatro datos que bloqueaban la publicación
 

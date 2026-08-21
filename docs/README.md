@@ -6,9 +6,12 @@ Todo lo que no es código de la landing vive acá.
 
 | Archivo | Qué es |
 |---|---|
-| [`TAREAS-PENDIENTES.xlsx`](TAREAS-PENDIENTES.xlsx) | **El tablero de trabajo.** Todo lo que falta, con responsable, prioridad y estado. Es el archivo que hay que mantener al día |
-| [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md) | Los 17 puntos de contenido legal sin resolver, agrupados por responsable |
-| [`brief/`](brief/) | El material de origen del rediseño. No se edita: es la referencia de por qué la página es como es |
+| [`DESPLIEGUE-GCP.md`](DESPLIEGUE-GCP.md) | **Guía de despliegue en GCP (para Duvan).** Cómo publicar el sitio, rutas/redirects, el endpoint de CAPI, secretos y dominio |
+| [`GUIA-CONFIG-BRIANT.md`](GUIA-CONFIG-BRIANT.md) | Puesta en marcha de la analítica: Pixel, GA4, CAPI y og:image. Qué está hecho y qué falta |
+| [`BORRADORES-LEGAL.md`](BORRADORES-LEGAL.md) | Texto propuesto para los puntos legales (fundamento para un abogado). Complementa a `PENDIENTES-LEGAL.md` |
+| [`TAREAS-PENDIENTES.xlsx`](TAREAS-PENDIENTES.xlsx) | El tablero de trabajo original (estado por tarea, responsable, prioridad) |
+| [`PENDIENTES-LEGAL.md`](PENDIENTES-LEGAL.md) | Los 17 puntos legales originales, agrupados por responsable |
+| [`brief/`](brief/) | Material de origen del rediseño (`brief/` = v1, `brief/v2/` = estrategia y copy v2). Referencia, no se edita |
 
 ## El Excel, hoja por hoja
 

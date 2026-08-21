@@ -14,9 +14,7 @@ Resultó que **no existía un pixel real**: el `27890392917235121` era un placeh
 
 > **Pixel de Factura IA: `2238963863532324`**
 
-Ya quedó puesto en el código (`index.html` y `terminos.html`). **Faltan dos cosas, que hacés vos en Meta/Vercel:**
-1. **Conectar el pixel a la cuenta publicitaria** para que los anuncios lo usen: config del dataset → **Socios / Cuentas publicitarias**, o asignarlo desde la cuenta publicitaria.
-2. **Poner el mismo ID en Vercel** como `META_PIXEL_ID` (ver tarea 3).
+Ya quedó puesto en el código (`index.html` y `terminos.html`), y **ya se conectó a la cuenta publicitaria** (Grupo Consiti ADS) ✅. El `META_PIXEL_ID` para CAPI se configura en el despliegue de GCP (ver tarea 3).
 
 ---
 
@@ -36,34 +34,25 @@ Se creó la propiedad GA4 **"Factura IA"** (cuenta *Grupo Consiti*, zona horaria
 
 ---
 
-## 3) Generar el token de CAPI y configurarlo en Vercel
+## 3) Token de CAPI — se configura en el despliegue (GCP, con Duvan)
 
-**Por qué:** además del Pixel del navegador, los eventos se envían **desde el servidor** (Conversions API), con deduplicación por `event_id`. Mejora la señal frente a iOS, bloqueadores y cookies. Ya está todo programado (`api/capi.js`); solo faltan las credenciales.
+**Por qué:** además del Pixel del navegador, los eventos se envían **desde el servidor** (Conversions API), con deduplicación por `event_id`. Ya está todo programado (`api/capi.js`); solo faltan las credenciales, que van en el **entorno de despliegue**.
 
-> 🔒 **El token es una credencial secreta.** Se pega **directo en Vercel**, nunca en el repo ni por chat.
+> ⚠️ **Cambio de plan:** el despliegue es en **GCP**, no en Vercel. El token y el `META_PIXEL_ID` van en las variables de la función/servicio de CAPI (token en **Secret Manager**). El paso a paso está en **[`DESPLIEGUE-GCP.md`](DESPLIEGUE-GCP.md)** (§5 y §6).
 
-**Paso A — generar el token en Meta:**
-1. **Meta Events Manager** → seleccioná el dataset de Factura IA.
-2. **Configuración** (Settings) → sección **Conversions API** → **Generar token de acceso**.
-3. Copiá el token (es largo).
+> 🔒🚨 **Rotar el token:** el token que se generó se compartió por chat, así que está **expuesto**. Antes de usarlo, **generá uno nuevo** (Meta Events Manager → dataset FACTURA_IA → Configuración → API de conversiones → **Generar token de acceso**) y **revocá el anterior**. El token nunca va en el repo ni por chat — solo en Secret Manager de GCP.
 
-**Paso B — configurar Vercel:**
-1. Entrá a **Vercel** → tu proyecto → **Settings** → **Environment Variables**.
-2. Agregá estas variables (Environment: **Production**, y si querés también Preview):
+**Valores (para quien despliegue):**
 
-   | Variable | Valor |
-   |---|---|
-   | `META_PIXEL_ID` | `2238963863532324` |
-   | `META_CAPI_TOKEN` | *(el token secreto que copiaste)* |
-   | `META_TEST_EVENT_CODE` | *(opcional)* el código de "Probar eventos" |
+| Variable | Valor |
+|---|---|
+| `META_PIXEL_ID` | `2238963863532324` |
+| `META_CAPI_TOKEN` | *(token NUEVO, en Secret Manager)* |
+| `META_TEST_EVENT_CODE` | *(opcional)* el código de "Probar eventos" |
 
-3. **Guardá** y hacé **Redeploy** (Deployments → el último deploy → **Redeploy**). Las variables solo aplican tras un redeploy.
+**Cómo verificar (tras desplegar):** Meta Events Manager → **Probar eventos**, abrir el sitio, **aceptar cookies**, clic en un CTA de WhatsApp → el evento `Lead` llega **por navegador (Pixel) y por servidor (CAPI)**, marcado como **deduplicado**.
 
-**Cómo verificar:**
-- En Meta Events Manager → **Probar eventos** (Test Events), ingresá el `META_TEST_EVENT_CODE`, abrí el sitio, **aceptá cookies**, hacé clic en un CTA de WhatsApp.
-- Deberías ver el evento `Lead` llegando **por navegador (Pixel) y por servidor (CAPI)**, marcado como **deduplicado** (no cuenta doble).
-
-> Si nunca configurás el token, no pasa nada malo: `api/capi.js` responde "no-op" y el sitio sigue con el Pixel del navegador.
+> Si no se configura el token, no pasa nada malo: `api/capi.js` responde "no-op" y el sitio sigue con el Pixel del navegador.
 
 ---
 
@@ -77,9 +66,9 @@ Se creó **`assets/og-facturaia.jpg`** (1200 × 630, ~67 KB): imagen de marca co
 
 ## Checklist rápido
 
-- [x] **1.** Pixel creado (`2238963863532324`) y puesto en el código — falta conectarlo a la cuenta publicitaria y ponerlo en Vercel
+- [x] **1.** Pixel creado (`2238963863532324`), en el código y **conectado a la cuenta publicitaria** — el `META_PIXEL_ID` se pone en el entorno de GCP (tarea 3)
 - [x] **2.** GA4 creado y `G-BTME51TFEN` pegado en el código — falta marcar `generate_lead` y `select_item` como evento clave en GA4
-- [ ] **3.** `META_PIXEL_ID` + `META_CAPI_TOKEN` en Vercel + **redeploy** + probado con Test Events
+- [ ] **3.** Token de CAPI **nuevo** (el anterior quedó expuesto) + `META_PIXEL_ID`/`META_CAPI_TOKEN` en el entorno de GCP (Secret Manager) + probado con Test Events — ver [`DESPLIEGUE-GCP.md`](DESPLIEGUE-GCP.md)
 - [x] **4.** `assets/og-facturaia.jpg` (1200×630) creado — verificar la vista previa en el Sharing Debugger tras publicar
 
-> Estado: **1, 2 y 4 hechas** (falta que Briant conecte el pixel a la cuenta publicitaria, ponga las variables de Vercel y marque los 2 eventos clave cuando lleguen datos). La **3 (token de CAPI)** la hacés vos, porque es una credencial.
+> Estado: **1, 2 y 4 hechas** (pixel creado + conectado a la cuenta publicitaria, GA4 con ID en código, og:image listo). Queda: **marcar los 2 eventos clave** en GA4 cuando lleguen datos, y la **tarea 3 (token de CAPI)** que se hace en el despliegue de GCP con un token nuevo. Todo el despliegue está en [`DESPLIEGUE-GCP.md`](DESPLIEGUE-GCP.md).
