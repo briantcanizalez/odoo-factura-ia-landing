@@ -529,6 +529,18 @@ footer a:hover{color:#fff}
 .pasos.rv.in .paso:nth-child(3){transition-delay:.24s}
 .pasos.rv.in .paso:nth-child(4){transition-delay:.36s}
 @media(prefers-reduced-motion:reduce){.simple li,.pasos.rv .paso{opacity:1!important;transform:none!important}}
+
+/* ============ POLISH MOVIL ============ */
+@media(max-width:700px){
+  /* el hero traia 66/72; en movil sobra aire arriba y abajo */
+  .hero{padding:46px 0 54px}
+}
+@media(max-width:600px){
+  /* CTAs apilados a ancho completo: se acaban los botones escalonados,
+     el objetivo tactil crece y todo comparte el mismo eje. */
+  .hero-cta,.res-cta,.cierre-cta{flex-direction:column;align-items:stretch}
+  .hero-cta .btn,.res-cta .btn,.cierre-cta .btn{width:100%}
+}
 </style>
 </head>
 <body>
